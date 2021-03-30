@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author Ajin
  */
-public class LeeMayCode {
+public class CodeGenerator {
     public static void main(String[] args) {
         // 构建代码生成器对象
         AutoGenerator ag = new AutoGenerator();
