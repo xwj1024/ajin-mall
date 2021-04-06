@@ -6,10 +6,9 @@
 
     <modules>
         <module>mall-common</module>
-        <module>mall-common-db</module>
         <module>mall-gateway</module>
         <module>mall-service</module>
-        <module>mall-service-api</module>
+        <module>mall-api</module>
     </modules>
 
     <parent>

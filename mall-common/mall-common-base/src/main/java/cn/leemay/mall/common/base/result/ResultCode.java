@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.result;
+package cn.leemay.mall.common.base.result;
 
 
 import java.io.Serializable;

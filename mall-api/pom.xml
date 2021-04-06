@@ -13,12 +13,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>mall-service-goods-api</module>
-        <module>mall-service-user-api</module>
-        <module>mall-service-order-api</module>
-        <module>mall-service-search-api</module>
-        <module>mall-service-system-api</module>
-        <module>mall-service-common-api</module>
+        <module>mall-api-goods</module>
+        <module>mall-api-user</module>
+        <module>mall-api-order</module>
+        <module>mall-api-search</module>
+        <module>mall-api-system</module>
+        <module>mall-api-common</module>
     </modules>
 
 

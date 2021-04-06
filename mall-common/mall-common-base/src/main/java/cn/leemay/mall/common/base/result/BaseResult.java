@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.result;
+package cn.leemay.mall.common.base.result;
 
 import lombok.Data;
 
@@ -18,6 +18,12 @@ public class BaseResult<T> implements Serializable {
     public BaseResult() {
         this.code = ResultCode.OK;
         this.desc = "成功";
+    }
+
+    public BaseResult(T data) {
+        this.code = ResultCode.OK;
+        this.desc = "成功";
+        this.data = data;
     }
 
     public BaseResult(Integer code, String desc) {
