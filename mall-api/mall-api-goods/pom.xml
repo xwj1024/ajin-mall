@@ -3,13 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>mall-service-api</artifactId>
+        <artifactId>mall-api</artifactId>
         <groupId>cn.leemay.mall</groupId>
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mall-service-goods-api</artifactId>
+    <artifactId>mall-api-goods</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>cn.leemay.mall</groupId>
+            <artifactId>mall-common-base</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.leemay.mall</groupId>
+            <artifactId>mall-common-db</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 </project>

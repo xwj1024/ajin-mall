@@ -76,10 +76,17 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
             <version>${springboot.version}</version>
         </dependency>
+        <!--dubbo-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-dubbo</artifactId>
             <version>${springboot.version}</version>
+        </dependency>
+        <!--自定义配置-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>

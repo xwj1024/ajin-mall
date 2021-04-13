@@ -36,13 +36,13 @@ public class CodeGenerator {
         gc.setOpen(false);
         gc.setFileOverride(false);
         gc.setServiceName("%sService");
-        gc.setIdType(IdType.ID_WORKER);
+        gc.setIdType(IdType.ASSIGN_ID);
         gc.setDateType(DateType.ONLY_DATE);
         gc.setSwagger2(true);
         ag.setGlobalConfig(gc);
         // 设置数据源
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://leemay.cn:3306/mall_goods?characterEncoding=UTF8&serverTimezone=Asia/Shanghai&useSSL=false");
+        dsc.setUrl("jdbc:mysql://leemay.cn:3306/leemay_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai&useSSL=false");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("ajin");
         dsc.setPassword("Spring.222");

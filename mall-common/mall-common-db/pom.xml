@@ -32,6 +32,7 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
             <version>2.1</version>
+            <scope>test</scope>
         </dependency>
         <!--mysql-->
         <dependency>
