@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.leemay.mall</groupId>
-            <artifactId>mall-common-base</artifactId>
+            <artifactId>mall-api-file</artifactId>
             <version>0.0.1</version>
         </dependency>
         <!--阿里云存储-->

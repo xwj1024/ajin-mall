@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "swagger",
+      "type": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "swagger.description",
+      "type": "java.lang.String",
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "defaultValue": "生命如此美好"
+    },
+    {
+      "name": "swagger.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "swagger.group",
+      "type": "java.lang.String",
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "defaultValue": "Ajin"
+    },
+    {
+      "name": "swagger.title",
+      "type": "java.lang.String",
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "defaultValue": ""
+    },
+    {
+      "name": "swagger.version",
+      "type": "java.lang.String",
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "defaultValue": "0.0.1"
+    }
+  ],
+  "hints": []
+}

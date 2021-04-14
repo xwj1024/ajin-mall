@@ -13,6 +13,7 @@
 
     <properties>
         <mybatisplus.version>3.3.0</mybatisplus.version>
+        <druid.version>1.2.5</druid.version>
     </properties>
 
     <dependencies>
@@ -42,8 +43,8 @@
         <!--druid-->
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.1.21</version>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
         </dependency>
     </dependencies>
 </project>
