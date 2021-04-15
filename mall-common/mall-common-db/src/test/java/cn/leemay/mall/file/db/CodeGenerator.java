@@ -62,11 +62,19 @@ public class CodeGenerator {
         sc.setRestControllerStyle(true);
         sc.setLogicDeleteFieldName("is_delete");
         // 自动填充配置
+        TableFill addTime = new TableFill("add_time", FieldFill.INSERT);
         TableFill createTime = new TableFill("create_time", FieldFill.INSERT);
         TableFill updateTime = new TableFill("update_time", FieldFill.INSERT_UPDATE);
+        TableFill addDate = new TableFill("add_date", FieldFill.INSERT);
+        TableFill createDate = new TableFill("create_date", FieldFill.INSERT);
+        TableFill updateDate = new TableFill("update_date", FieldFill.INSERT_UPDATE);
         List<TableFill> tableFills = new ArrayList<>();
+        tableFills.add(addTime);
         tableFills.add(createTime);
         tableFills.add(updateTime);
+        tableFills.add(addDate);
+        tableFills.add(createDate);
+        tableFills.add(updateDate);
         sc.setTableFillList(tableFills);
         sc.setVersionFieldName("version"); // 乐观锁
         sc.setControllerMappingHyphenStyle(true);
