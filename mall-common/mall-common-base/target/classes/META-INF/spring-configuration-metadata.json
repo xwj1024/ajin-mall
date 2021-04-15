@@ -8,7 +8,7 @@
   ],
   "properties": [
     {
-      "name": "swagger.description",
+      "name": "swagger.desc",
       "type": "java.lang.String",
       "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
       "defaultValue": "生命如此美好"
@@ -17,7 +17,7 @@
       "name": "swagger.enable",
       "type": "java.lang.Boolean",
       "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "swagger.group",

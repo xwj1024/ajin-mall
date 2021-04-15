@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.db;
+package cn.leemay.mall.file.db;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -5,6 +5,3 @@ es:
   port: 9200
   scheme: http
   index: index-test
-swagger:
-  enable: true
-  title: ${spring.application.name}

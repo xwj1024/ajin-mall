@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.util;
+package cn.leemay.mall.file.util;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
@@ -24,7 +24,7 @@ public class OssUtils {
         OSS ossClient = new OSSClientBuilder().build(domain, key, secret);
 
         // 上传Byte数组。
-        // PutObjectRequest putObjectRequest = new PutObjectRequest("<yourBucketName>", "<yourObjectName>", new ByteArrayInputStream(common));
+        // PutObjectRequest putObjectRequest = new PutObjectRequest("<yourBucketName>", "<yourObjectName>", new ByteArrayInputStream(file));
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, fileName, new ByteArrayInputStream(file));
 
         // 如果需要上传时设置存储类型与访问权限，请参考以下示例代码。

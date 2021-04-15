@@ -56,7 +56,7 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfo(swaggerProperties.getTitle() + " api文档",
-                swaggerProperties.getDescription(),
+                swaggerProperties.getDesc(),
                 swaggerProperties.getVersion(),
                 "https://github.com/xwj1024/leemay-mall",
                 contact(),

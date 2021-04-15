@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.service;
+package cn.leemay.mall.file.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

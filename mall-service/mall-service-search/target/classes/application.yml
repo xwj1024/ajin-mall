@@ -3,3 +3,5 @@ spring:
     active: dev
   application:
     name: search
+swagger:
+  title: ${spring.application.name}

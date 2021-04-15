@@ -1,10 +1,10 @@
-package cn.leemay.mall.common.service.impl;
+package cn.leemay.mall.file.service.impl;
 
 import cn.leemay.mall.common.base.exception.BusException;
 import cn.leemay.mall.common.base.util.DateTimeUtils;
-import cn.leemay.mall.common.property.OssProperties;
-import cn.leemay.mall.common.service.UploadFileService;
-import cn.leemay.mall.common.util.OssUtils;
+import cn.leemay.mall.file.property.OssProperties;
+import cn.leemay.mall.file.service.UploadFileService;
+import cn.leemay.mall.file.util.OssUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

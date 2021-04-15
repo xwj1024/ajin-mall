@@ -16,10 +16,10 @@ import java.io.Serializable;
 public class SwaggerProperties implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    Boolean enable = false;
+    Boolean enable = true;
     String group = "Ajin";
     String title = "";
-    String description = "生命如此美好";
+    String desc = "生命如此美好";
     String version = "0.0.1";
 
 }

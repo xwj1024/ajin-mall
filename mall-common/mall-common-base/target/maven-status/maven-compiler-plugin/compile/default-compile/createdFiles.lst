@@ -1,5 +1,6 @@
 cn\leemay\mall\common\base\config\SwaggerConfig.class
 cn\leemay\mall\common\base\exception\BusException.class
+cn\leemay\mall\common\base\anno\EnableApi.class
 cn\leemay\mall\common\base\result\BaseResult.class
 cn\leemay\mall\common\base\util\JsonFormatUtils.class
 META-INF\spring-configuration-metadata.json

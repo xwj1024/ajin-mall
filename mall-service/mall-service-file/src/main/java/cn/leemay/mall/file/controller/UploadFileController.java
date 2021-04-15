@@ -1,8 +1,8 @@
-package cn.leemay.mall.common.controller;
+package cn.leemay.mall.file.controller;
 
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
-import cn.leemay.mall.common.service.UploadFileService;
+import cn.leemay.mall.file.service.UploadFileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.List;
  * @author Ajin
  */
 @RestController
-@RequestMapping("/common/uploadFile")
+@RequestMapping("/file/uploadFile")
 @Api(tags = "文件上传")
 public class UploadFileController {
 
