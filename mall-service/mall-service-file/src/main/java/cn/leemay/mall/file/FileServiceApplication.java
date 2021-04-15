@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @create 2021/4/14
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class FileApplication {
+public class FileServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(FileApplication.class, args);
+        SpringApplication.run(FileServiceApplication.class, args);
     }
 }

@@ -1,5 +1,10 @@
 server:
   port: 9010
+spring:
+  application:
+    name: fileService
+  swagger:
+    title: ${spring.application.name}
 oss:
   url: "http"
   key: "abc"

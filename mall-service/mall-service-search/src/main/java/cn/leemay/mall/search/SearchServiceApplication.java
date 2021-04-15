@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableSwagger
-public class SearchApplication {
+public class SearchServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SearchApplication.class, args);
+        SpringApplication.run(SearchServiceApplication.class, args);
     }
 }

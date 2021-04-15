@@ -4,6 +4,7 @@ spring:
   application:
     name: searchService
 swagger:
+  desc: "fjdkls"
   title: ${spring.application.name}
 es:
   host: 121.43.140.160
