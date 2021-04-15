@@ -1,3 +1,3 @@
 # leemay-mall
 
-![logo](document/img/logo.jpg)
+![logo](document/img/logo.png)

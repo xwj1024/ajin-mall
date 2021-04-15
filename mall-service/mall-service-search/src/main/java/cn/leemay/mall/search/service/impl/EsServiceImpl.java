@@ -30,9 +30,6 @@ import java.util.List;
  */
 public class EsServiceImpl implements EsService {
 
-    // todo 学习autowired和resource 区别! 深入学习elasticsearch!
-    // todo 学习日志!
-
     @Autowired
     private RestHighLevelClient restHighLevelClient;
 

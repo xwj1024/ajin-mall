@@ -22,9 +22,6 @@ import java.util.UUID;
 @Service
 public class UploadFileServiceImpl implements UploadFileService {
 
-    // todo 将图片存入redis把多余图片用定时任务进行删除,redis中的key也要加入定时任务,设置过期时间
-    //  学习redis使用注解怎么配置!深入学习redis原理
-
     @Autowired
     private OssProperties ossProperties;
 

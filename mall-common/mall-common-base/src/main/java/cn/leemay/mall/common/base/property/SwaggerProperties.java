@@ -19,7 +19,7 @@ public class SwaggerProperties implements Serializable {
     Boolean enable = true;
     String group = "Ajin";
     String title = "";
-    String desc = "生命如此美好";
+    String desc = "生活如此美好,学习永无止境!";
     String version = "0.0.1";
 
 }
