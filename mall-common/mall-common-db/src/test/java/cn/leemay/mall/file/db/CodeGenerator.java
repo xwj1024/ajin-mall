@@ -82,14 +82,5 @@ public class CodeGenerator {
          * 需要添加依赖 'org.apache.velocity:velocity-engine-core:2.0'
          */
 
-
-        /**
-         * todo
-         * 将图片存入redis把多余图片用定时任务进行删除,redis中的key也要加入定时任务,设置过期时间
-         * 学习redis使用注解怎么配置!深入学习redis原理
-         * 学习autowired和resource 区别! 深入学习elasticsearch!
-         * 学习日志!
-         */
-
     }
 }
