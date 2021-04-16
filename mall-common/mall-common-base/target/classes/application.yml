@@ -1,0 +1,5 @@
+# swagger3
+springfox:
+  documentation:
+    auto-startup: false
+    enabled: false
