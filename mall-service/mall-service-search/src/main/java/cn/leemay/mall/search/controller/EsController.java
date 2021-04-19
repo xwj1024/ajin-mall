@@ -15,11 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "es索引库")
 public class EsController {
 
-    @GetMapping
-    @ApiOperation("上传单个图片")
-    public BaseResult<String> uploadImgFile() {
-        return new BaseResult<>(ResultCode.OK, "hello");
-    }
 
 
 }

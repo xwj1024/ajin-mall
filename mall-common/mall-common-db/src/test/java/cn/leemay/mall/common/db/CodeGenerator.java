@@ -1,4 +1,4 @@
-package cn.leemay.mall.file.db;
+package cn.leemay.mall.common.db;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
