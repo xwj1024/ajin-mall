@@ -1,5 +1,5 @@
 # swagger3
 springfox:
   documentation:
-    auto-startup: false
-    enabled: false
+    auto-startup: true  # 是否自动启用swagger,swagger3中默认为true
+    enabled: true       # 是否能够使用swagger,swagger3中默认为true

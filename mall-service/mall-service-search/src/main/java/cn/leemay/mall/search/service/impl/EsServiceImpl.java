@@ -20,6 +20,7 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.rest.RestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,6 +29,7 @@ import java.util.List;
  * @author Ajin
  * @create 2021/4/14
  */
+@Service
 public class EsServiceImpl implements EsService {
 
     @Autowired

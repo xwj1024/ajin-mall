@@ -13,8 +13,10 @@ import org.springframework.stereotype.Component;
 @Data
 public class EsProperties {
 
-    private String host;
-    private Integer port;
-    private String scheme;
-    private String index;
+    private String host = "localhost";
+    private Integer port = 9200;
+    private String scheme = "http";
+    private String index = "";
+    private Integer shards = 5;
+    private Integer replicas = 1;
 }
