@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * @author Ajin
- * @create 2021/4/13
+ * @since 2021-04-13
  * 自定义系统异常
  */
 @Data

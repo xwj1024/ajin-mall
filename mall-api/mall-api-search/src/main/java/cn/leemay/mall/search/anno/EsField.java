@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  * ES索引字段映射，用于代码创建索引
  *
  * @author Ajin
- * @create 2021/4/14
+ * @since 2021-04-14
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * @author Ajin
+ * @since 2021-04-12
  */
 @Data
 public class ResultPage<T> implements Serializable {

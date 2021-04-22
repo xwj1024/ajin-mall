@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 /**
  * @author Ajin
+ * @since 2021-04-12
  */
 public class ResultCode implements Serializable {
     private static final long serialVersionUID = 1L;

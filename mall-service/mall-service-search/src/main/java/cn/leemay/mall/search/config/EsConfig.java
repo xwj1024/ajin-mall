@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Ajin
- * @create 2021/4/14
+ * @since 2021-04-14
  */
 @Configuration
 public class EsConfig {

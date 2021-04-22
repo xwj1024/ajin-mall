@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * @author Ajin
- * @create 2021/4/14
+ * @since 2021-04-14
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableSwagger

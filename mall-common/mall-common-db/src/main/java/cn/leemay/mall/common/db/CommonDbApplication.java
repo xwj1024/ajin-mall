@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Ajin
- * @create 2021/4/14
+ * @since 2021-04-14
  */
 @SpringBootApplication
 public class CommonDbApplication {

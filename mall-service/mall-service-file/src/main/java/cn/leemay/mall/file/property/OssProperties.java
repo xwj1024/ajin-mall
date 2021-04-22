@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Ajin
- * @create 2021/4/13
+ * @since 2021-04-13
  */
 @Component
 @ConfigurationProperties(prefix = "oss")

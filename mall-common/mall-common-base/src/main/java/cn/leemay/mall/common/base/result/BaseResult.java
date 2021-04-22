@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 /**
  * @author Ajin
+ * @since 2021-04-12
  */
 @Data
 public class BaseResult<T> implements Serializable {

@@ -12,7 +12,7 @@ import java.util.Map;
  * 用于代码创建索引
  *
  * @author Ajin
- * @create 2021/4/14
+ * @since 2021-04-14
  */
 @Data
 public class EsMapping implements Serializable {

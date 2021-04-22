@@ -10,7 +10,7 @@ import java.util.List;
  * 封装ES通用API
  *
  * @author Ajin
- * @create 2021/4/14
+ * @since 2021-04-14
  */
 public interface EsService {
 

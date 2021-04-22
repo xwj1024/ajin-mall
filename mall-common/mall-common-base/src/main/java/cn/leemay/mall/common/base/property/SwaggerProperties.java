@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * @author Ajin
- * @create 2021/4/14
+ * @since 2021-04-14
  */
 @Component
 @ConfigurationProperties(prefix = "swagger")

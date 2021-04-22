@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 /**
  * @author Ajin
- * @create 2021/4/14
+ * @since 2021-04-14
  * swagger自定义配置信息
  */
 @Configuration

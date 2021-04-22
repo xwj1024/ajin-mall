@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Ajin
- * @create 2021/4/14
+ * @since 2021-04-14
  */
 @Component
 @ConfigurationProperties(prefix = "es")
