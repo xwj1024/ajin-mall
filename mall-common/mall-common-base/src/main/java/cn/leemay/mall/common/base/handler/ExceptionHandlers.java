@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Ajin
  * @since 2021-04-13
  */
-@ControllerAdvice
+// todo 不加值 看看该处理类是否生效
+
+@ControllerAdvice("cn.leemay.mall")
 public class ExceptionHandlers {
 
     @ExceptionHandler(value = BusException.class)

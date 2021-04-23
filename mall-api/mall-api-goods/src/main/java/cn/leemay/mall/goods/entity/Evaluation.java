@@ -1,12 +1,8 @@
 package cn.leemay.mall.goods.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.Version;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 
 import java.io.Serializable;
 
@@ -60,15 +56,16 @@ public class Evaluation implements Serializable {
     @ApiModelProperty(value = "物流分")
     private Integer logisticsScore;
 
-    @ApiModelProperty(value = "创建时间")
-    private Date createDate;
-
-    @ApiModelProperty(value = "更新时间")
-    private Date updateDate;
-
     @ApiModelProperty(value = "是否删除")
     @TableLogic
     private Integer isDelete;
 
+    @ApiModelProperty(value = "创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+
+    @ApiModelProperty(value = "修改时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
 }

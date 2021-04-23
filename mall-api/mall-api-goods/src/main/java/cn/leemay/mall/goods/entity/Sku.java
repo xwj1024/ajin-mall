@@ -82,14 +82,6 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "评论数")
     private Integer commentNum;
 
-    @ApiModelProperty(value = "创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
-
     @ApiModelProperty(value = "是否审核")
     private Integer isCheck;
 
@@ -99,6 +91,14 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "是否删除")
     @TableLogic
     private Integer isDelete;
+
+    @ApiModelProperty(value = "创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+
+    @ApiModelProperty(value = "修改时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
 
 }

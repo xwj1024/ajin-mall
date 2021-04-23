@@ -16,7 +16,7 @@ public @interface EsField {
     /**
      * 字段类型
      */
-    String type() default "text";
+    String type() default "";
 
     /**
      * 是否索引
