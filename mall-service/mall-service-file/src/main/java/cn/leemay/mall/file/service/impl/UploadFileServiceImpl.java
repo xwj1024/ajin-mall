@@ -53,9 +53,9 @@ public class UploadFileServiceImpl implements UploadFileService {
     private String saveFile(MultipartFile imgFile, String originalFilename) throws IOException {
         int index = originalFilename.lastIndexOf(".");
         // 获取原文件扩展名
-        String extension = originalFilename.substring(index - 1);
+        String extension = originalFilename.substring(index);
         // 随机生成新文件名
-        String fileName = UUID.randomUUID().toString() + extension;
+        String fileName = UUID.randomUUID() + extension;
         // 获取文件字节数组
         byte[] bytes = imgFile.getBytes();
         // 根据日期设置文件夹名称
