@@ -65,7 +65,7 @@
             <version>${swagger.version}</version>
         </dependency>
         <!--nacos-->
-        <!--<dependency>
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <version>${springboot.version}</version>
@@ -74,13 +74,13 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
             <version>${springboot.version}</version>
-        </dependency>-->
+        </dependency>
         <!--dubbo-->
-        <!--<dependency>
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-dubbo</artifactId>
             <version>${springboot.version}</version>
-        </dependency>-->
+        </dependency>
         <!--自定义配置-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

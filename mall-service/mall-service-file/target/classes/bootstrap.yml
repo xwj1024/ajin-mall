@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: file
+  cloud:
+    nacos:
+      config:
+        refresh-enabled: true
+        server-addr: 192.168.1.128:8848
+        file-extension: yaml
+        namespace: file
+        group: DEV_GROUP
+        enabled: true
+      discovery:
+        server-addr: 192.168.1.128:8848
+        namespace: file
+        group: DEV_GROUP
+dubbo:
+  registry:
+    address: spring-cloud://localhost # 注册中心
+  cloud:
+    subscribed-services: goods # 已订阅的服务提供者名称

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/goods/spu-para")
+@RequestMapping("/goods/spuPara")
 public class SpuParaController {
 
 }

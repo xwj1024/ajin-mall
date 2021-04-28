@@ -12,7 +12,7 @@
     <artifactId>mall-common-db</artifactId>
 
     <properties>
-        <mybatisplus.version>3.3.0</mybatisplus.version>
+        <mybatisplus.version>3.4.0</mybatisplus.version>
         <druid.version>1.2.5</druid.version>
     </properties>
 
