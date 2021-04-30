@@ -56,9 +56,16 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
         return brandMapper.selectList(queryWrapper);
     }
 
+    /**
+     * 构建条件查询对象
+     *
+     * @param brand 条件
+     * @return 对象
+     */
     private QueryWrapper<Brand> queryWrapper(Brand brand) {
         QueryWrapper<Brand> queryWrapper = new QueryWrapper<>();
         queryWrapper.allEq(ObjectUtils.obj2Map(brand));
+        queryWrapper.orderByAsc("sort");
         return queryWrapper;
     }
 }

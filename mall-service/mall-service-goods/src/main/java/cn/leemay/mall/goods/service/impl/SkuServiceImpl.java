@@ -57,6 +57,12 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
         return skuMapper.selectList(queryWrapper);
     }
 
+    /**
+     * 构建条件查询对象
+     *
+     * @param sku 条件
+     * @return 对象
+     */
     private QueryWrapper<Sku> queryWrapper(Sku sku) {
         QueryWrapper<Sku> queryWrapper = new QueryWrapper<>();
         queryWrapper.allEq(ObjectUtils.obj2Map(sku));

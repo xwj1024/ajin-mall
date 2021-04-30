@@ -6,9 +6,10 @@ import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.goods.entity.Brand;
 import cn.leemay.mall.goods.service.BrandService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/goods/brand")
+@Api(tags = "品牌")
 public class BrandController {
 
     @Autowired
@@ -38,7 +40,7 @@ public class BrandController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation("删除品牌")
+    @ApiOperation(value = "删除品牌", notes = "根据主键id删除")
     public BaseResult<String> delete(@PathVariable("id") Long id) {
         if (id == null) {
             return new BaseResult<>(ResultCode.ERR, "数据错误");
@@ -48,7 +50,7 @@ public class BrandController {
     }
 
     @PutMapping
-    @ApiOperation("修改品牌")
+    @ApiOperation(value = "修改品牌", notes = "根据主键id修改")
     public BaseResult<String> update(@RequestBody Brand brand) {
         if (brand == null) {
             return new BaseResult<>(ResultCode.ERR, "数据错误");
@@ -60,8 +62,8 @@ public class BrandController {
     @PostMapping("/selectPageByCondition/{index}/{size}")
     @ApiOperation("根据条件分页查询品牌")
     public BaseResult<Page<Brand>> selectPageByCondition(@RequestBody Brand brand,
-                                                       @PathVariable("index") Integer index,
-                                                       @PathVariable("size") Integer size) {
+                                                         @PathVariable("index") Integer index,
+                                                         @PathVariable("size") Integer size) {
         if (brand == null) {
             return new BaseResult<>(ResultCode.ERR, "数据错误");
         }
