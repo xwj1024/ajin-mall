@@ -1,6 +1,7 @@
 package cn.leemay.mall.common.db.anno;
 
 import cn.leemay.mall.common.db.config.MybatisPlusConfig;
+import cn.leemay.mall.common.db.handler.MyMetaObjectHandler;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -13,6 +14,6 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({MybatisPlusConfig.class})
+@Import({MybatisPlusConfig.class, MyMetaObjectHandler.class})
 public @interface EnableMybatisPlus {
 }

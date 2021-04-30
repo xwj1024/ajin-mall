@@ -9,6 +9,7 @@
         <module>mall-gateway</module>
         <module>mall-service</module>
         <module>mall-api</module>
+        <module>mall-oauth</module>
     </modules>
 
     <parent>

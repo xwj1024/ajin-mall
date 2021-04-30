@@ -37,6 +37,12 @@ public class Brand implements Serializable {
     @ApiModelProperty(value = "品牌图片")
     private String image;
 
+    @ApiModelProperty(value = "首字母")
+    private String initials;
+
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
+
     @ApiModelProperty(value = "是否删除")
     @TableLogic
     private Integer isDelete;

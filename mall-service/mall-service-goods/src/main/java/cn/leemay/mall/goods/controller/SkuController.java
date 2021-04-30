@@ -30,7 +30,7 @@ public class SkuController {
     @Autowired
     private SkuService skuService;
 
-    @PostMapping("/insert")
+    @PostMapping
     @ApiOperation("添加sku")
     public BaseResult<String> insert(@RequestBody Sku sku) {
         if (sku == null) {
@@ -40,9 +40,9 @@ public class SkuController {
         return new BaseResult<>(ResultCode.OK, "添加成功");
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation("删除sku")
-    public BaseResult<String> delete(@PathVariable("id") Integer id) {
+    public BaseResult<String> delete(@PathVariable("id") Long id) {
         if (id == null) {
             return new BaseResult<>(ResultCode.ERR, "数据错误");
         }
@@ -50,7 +50,7 @@ public class SkuController {
         return new BaseResult<>(ResultCode.OK, "删除成功");
     }
 
-    @PostMapping("/update")
+    @PutMapping
     @ApiOperation("修改sku")
     public BaseResult<String> update(@RequestBody Sku sku) {
         if (sku == null) {

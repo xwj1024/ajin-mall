@@ -37,7 +37,7 @@ public class CodeGenerator {
         gc.setOpen(false);
         gc.setFileOverride(false);
         gc.setServiceName("%sService");
-        gc.setIdType(IdType.ASSIGN_ID);
+        gc.setIdType(IdType.ASSIGN_ID); // 3.0.0版本中 ui界面传入的Long还是会转为Integer ❄id无需填入id,如果填入则不会生成雪花id
         gc.setDateType(DateType.ONLY_DATE);
         gc.setSwagger2(true);
         ag.setGlobalConfig(gc);

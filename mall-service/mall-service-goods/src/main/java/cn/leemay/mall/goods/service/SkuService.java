@@ -27,7 +27,7 @@ public interface SkuService extends IService<Sku> {
      *
      * @param id id
      */
-    void delete(Integer id);
+    void delete(Long id);
 
     /**
      * 修改sku

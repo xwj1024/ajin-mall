@@ -16,6 +16,7 @@ import java.util.List;
  * <p>
  * 商品sku表 服务实现类
  * </p>
+ * d
  *
  * @author Ajin
  * @since 2021-04-13
@@ -29,17 +30,18 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
 
     @Override
     public void insert(Sku sku) {
-
+        sku.setId(null);
+        skuMapper.insert(sku);
     }
 
     @Override
-    public void delete(Integer id) {
-
+    public void delete(Long id) {
+        skuMapper.deleteById(id);
     }
 
     @Override
     public void update(Sku sku) {
-
+        skuMapper.updateById(sku);
     }
 
     @Override
