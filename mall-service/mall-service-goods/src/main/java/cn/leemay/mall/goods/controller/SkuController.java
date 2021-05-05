@@ -25,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/goods/sku")
 @Api(tags = "商品sku")
+@CrossOrigin
 public class SkuController {
 
     @Autowired

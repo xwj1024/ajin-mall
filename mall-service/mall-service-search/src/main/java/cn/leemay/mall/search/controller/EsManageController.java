@@ -18,6 +18,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/search/es")
 @Api(tags = "es管理")
+@CrossOrigin
 public class EsManageController {
 
     @Autowired

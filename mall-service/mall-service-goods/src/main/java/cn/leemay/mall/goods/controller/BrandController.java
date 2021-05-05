@@ -9,7 +9,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -24,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/goods/brand")
 @Api(tags = "品牌")
+@CrossOrigin
 public class BrandController {
 
     @Autowired

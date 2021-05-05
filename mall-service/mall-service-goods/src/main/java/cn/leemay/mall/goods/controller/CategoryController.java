@@ -24,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/goods/category")
 @Api(tags = "分类")
+@CrossOrigin
 public class CategoryController {
 
 

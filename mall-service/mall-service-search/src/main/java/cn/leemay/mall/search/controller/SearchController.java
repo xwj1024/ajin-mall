@@ -1,6 +1,7 @@
 package cn.leemay.mall.search.controller;
 
 import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/search/search")
 @Api(tags = "商品搜索")
+@CrossOrigin
 public class SearchController {
 
 }
