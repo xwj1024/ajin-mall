@@ -2,7 +2,6 @@ package cn.leemay.mall.tool.controller;
 
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
-import cn.leemay.mall.tool.service.SmsService;
 import com.aliyuncs.exceptions.ClientException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

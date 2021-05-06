@@ -9,6 +9,8 @@ import java.io.IOException;
 public interface EsManageService {
     /**
      * 创建索引
+     *
+     * @throws IOException 异常
      */
     void createIndex() throws IOException;
 
