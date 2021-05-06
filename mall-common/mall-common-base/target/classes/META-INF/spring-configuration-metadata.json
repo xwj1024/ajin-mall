@@ -10,32 +10,27 @@
     {
       "name": "swagger.desc",
       "type": "java.lang.String",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
-      "defaultValue": "生活如此美好,学习永无止境!"
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties"
     },
     {
       "name": "swagger.enable",
       "type": "java.lang.Boolean",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
-      "defaultValue": true
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties"
     },
     {
       "name": "swagger.group",
       "type": "java.lang.String",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
-      "defaultValue": "Ajin"
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties"
     },
     {
       "name": "swagger.title",
       "type": "java.lang.String",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
-      "defaultValue": ""
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties"
     },
     {
       "name": "swagger.version",
       "type": "java.lang.String",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
-      "defaultValue": "0.0.1"
+      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties"
     }
   ],
   "hints": []
