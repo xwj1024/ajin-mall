@@ -8,3 +8,16 @@ oss:
   domain: "http"
   bucket: "abc"
   secret: "abc"
+sms:
+  key: "abc"
+  secret: "abc"
+  sign: "http"
+  template: "abc"
+
+logging:
+  level: info # 指定自定义logger对象日志级别
+  pattern:
+    console: [ %-5level ] %d{yyyy-MM-dd HH:mm:ss} %c [%thread] *_*_* %msg %n # 指定控制台输出日志消息的格式
+    file: [ %5level ] %d{yyyy-MM-dd HH:mm:ss} %c [%thread] *_*_* %msg %n # 指定日志文件消息格式
+  file:
+    name: /www/logs/${spring.application.name} %d{yyyy-MM-dd HH:mm:ss}.log # 指定存放日志文件的具体路径
