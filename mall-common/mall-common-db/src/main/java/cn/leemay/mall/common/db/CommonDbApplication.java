@@ -13,11 +13,3 @@ public class CommonDbApplication {
         SpringApplication.run(CommonDbApplication.class, args);
     }
 }
-
-/**
- *todo
- * 学习gradle
- * 学习redis
- * 学习es
- *
- */

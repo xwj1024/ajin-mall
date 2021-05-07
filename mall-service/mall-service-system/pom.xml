@@ -11,5 +11,12 @@
 
     <artifactId>mall-service-system</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.leemay.mall</groupId>
+            <artifactId>mall-api-system</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 
 </project>

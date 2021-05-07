@@ -32,7 +32,7 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/mall-service/mall-service-goods/src/main/java");
+        gc.setOutputDir(projectPath + "/mall-service/mall-service-system/src/main/java");
         gc.setAuthor("Ajin");
         gc.setOpen(false);
         gc.setFileOverride(false);
@@ -43,20 +43,20 @@ public class CodeGenerator {
         ag.setGlobalConfig(gc);
         // 设置数据源
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/leemay_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai&useSSL=false");
+        dsc.setUrl("jdbc:mysql://leemay.cn:3306/leemay_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai&useSSL=false");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("1024");
+        dsc.setUsername("ajin");
+        dsc.setPassword("Spring.222");
         dsc.setDbType(DbType.MYSQL);
         ag.setDataSource(dsc);
         // 包的配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("cn.leemay.mall");
-        pc.setModuleName("goods");
+        pc.setModuleName("system");
         ag.setPackageInfo(pc);
         // 策略配置
         StrategyConfig sc = new StrategyConfig();
-        sc.setInclude("template"); // 设置要映射的表名
+        sc.setInclude("admin"); // 设置要映射的表名
         sc.setNaming(NamingStrategy.underline_to_camel);
         sc.setColumnNaming(NamingStrategy.underline_to_camel);
         sc.setEntityLombokModel(true);

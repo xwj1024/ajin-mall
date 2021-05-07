@@ -24,3 +24,5 @@ spring:
                 key-resolver: "#{@ipKeyResolver}" # 引用bean
                 redis-rate-limiter.replenishRate: 1 # 令牌桶每秒填充平均速率
                 redis-rate-limiter.burstCapacity: 1 # 令牌桶总容量
+  redis:
+    host: 127.0.0.1
