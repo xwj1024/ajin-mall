@@ -5,9 +5,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
+ * 自定义业务异常
+ *
  * @author Ajin
  * @since 2021-04-13
- * 自定义业务异常
  */
 @Data
 public class BusException extends RuntimeException implements Serializable {

@@ -7,10 +7,11 @@ import org.springframework.context.annotation.Import;
 import java.lang.annotation.*;
 
 /**
- * @author Ajin
- * @since 2021-04-15
  * swagger3只要引入依赖默认自动启用swagger
  * 此注解用于是否启用自定义swagger配置信息
+ *
+ * @author Ajin
+ * @since 2021-04-15
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

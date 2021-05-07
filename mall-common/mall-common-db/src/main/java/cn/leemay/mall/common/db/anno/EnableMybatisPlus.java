@@ -7,9 +7,10 @@ import org.springframework.context.annotation.Import;
 import java.lang.annotation.*;
 
 /**
+ * 此注解用于是否启用mybatis-plus自定义配置
+ *
  * @author Ajin
  * @since 2021-04-27
- * 此注解用于是否启用mybatis-plus自定义配置
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

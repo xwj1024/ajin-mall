@@ -17,9 +17,10 @@ import java.util.ArrayList;
 
 
 /**
+ * swagger自定义配置信息
+ *
  * @author Ajin
  * @since 2021-04-14
- * swagger自定义配置信息
  */
 @Configuration
 @EnableOpenApi
@@ -62,7 +63,7 @@ public class SwaggerConfig {
                 "https://github.com/xwj1024/leemay-mall",
                 contact(),
                 "Apache 2.0",
-                "http://www.apache.org/licenses/LICENSE-2.0",
+                "https://www.apache.org/licenses/LICENSE-2.0",
                 new ArrayList());
 
     }
