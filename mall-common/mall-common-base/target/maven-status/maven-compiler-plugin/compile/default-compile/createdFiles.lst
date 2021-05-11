@@ -9,6 +9,7 @@ cn\leemay\mall\common\base\exception\SysException.class
 cn\leemay\mall\common\base\handler\ExceptionHandlers.class
 cn\leemay\mall\common\base\result\ResultPage.class
 cn\leemay\mall\common\base\anno\EnableHandler.class
+cn\leemay\mall\common\base\util\JwtUtils.class
 cn\leemay\mall\common\base\result\ResultCode.class
 cn\leemay\mall\common\base\util\DateTimeUtils.class
 cn\leemay\mall\common\base\property\SwaggerProperties.class
