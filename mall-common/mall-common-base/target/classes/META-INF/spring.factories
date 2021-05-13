@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.leemay.mall.common.base.config.SwaggerConfig,\
+  cn.leemay.mall.common.base.handler.ExceptionHandlers
