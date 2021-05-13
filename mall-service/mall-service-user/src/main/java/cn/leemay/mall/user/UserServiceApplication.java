@@ -1,18 +1,17 @@
-package cn.leemay.mall.goods;
+package cn.leemay.mall.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-
 /**
  * @author Ajin
- * @create 2021-04-13
+ * @since 2021-05-13
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class GoodsServiceApplication {
+public class UserServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(GoodsServiceApplication.class, args);
+        SpringApplication.run(UserServiceApplication.class, args);
     }
 }

@@ -11,5 +11,16 @@
 
     <artifactId>mall-service-user</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>cn.leemay.mall</groupId>
+            <artifactId>mall-api-user</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.leemay.mall</groupId>
+            <artifactId>mall-common-db</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 </project>
