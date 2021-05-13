@@ -3,7 +3,6 @@ package cn.leemay.mall.goods.controller;
 
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
-import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Sku;
 import cn.leemay.mall.goods.service.SkuService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -60,6 +59,30 @@ public class SkuController {
         skuService.update(sku);
         return new BaseResult<>(ResultCode.OK, "修改成功");
     }
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询sku")
+    public BaseResult<Sku> selectOneById(@PathVariable("id") Long id) {
+        if (id == null) {
+            return new BaseResult<>(ResultCode.ERR, "数据错误");
+        }
+        Sku result = skuService.selectOneById(id);
+        if (result == null) {
+            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+        }
+        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+    }
+    @PostMapping("/selectListByCondition")
+    @ApiOperation("根据条件查询Sku")
+    public BaseResult<List<Sku>> selectListByCondition(@RequestBody Sku sku) {
+        if (sku == null) {
+            return new BaseResult<>(ResultCode.ERR, "数据错误");
+        }
+        List<Sku> result = skuService.selectListByCondition(sku);
+        if (result == null || result.size() <= 0) {
+            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+        }
+        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+    }
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
     @ApiOperation("根据条件分页查询Sku")
@@ -71,19 +94,6 @@ public class SkuController {
         }
         Page<Sku> result = skuService.selectPageByCondition(sku, index, size);
         if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
-        }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
-    }
-
-    @PostMapping("/selectListByCondition")
-    @ApiOperation("根据条件查询Sku")
-    public BaseResult<List<Sku>> selectListByCondition(@RequestBody Sku sku) {
-        if (sku == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
-        List<Sku> result = skuService.selectListByCondition(sku);
-        if (result == null || result.size() <= 0) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
         }
         return new BaseResult<>(ResultCode.OK, "查询成功", result);

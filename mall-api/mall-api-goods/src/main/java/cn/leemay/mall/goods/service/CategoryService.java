@@ -38,14 +38,12 @@ public interface CategoryService extends IService<Category> {
     void update(Category category);
 
     /**
-     * 根据条件分页查询分类
+     * 根据id查询分类
      *
-     * @param category 分类条件
-     * @param index    当前页
-     * @param size     每页数
-     * @return 分页分类
+     * @param id id
+     * @return 分类
      */
-    Page<Category> selectPageByCondition(Category category, Integer index, Integer size);
+    Category selectOneById(Long id);
 
     /**
      * 根据条件查询分类
@@ -54,6 +52,16 @@ public interface CategoryService extends IService<Category> {
      * @return 分类列表
      */
     List<Category> selectListByCondition(Category category);
+
+    /**
+     * 根据条件分页查询分类
+     *
+     * @param category 分类条件
+     * @param index    当前页
+     * @param size     每页数
+     * @return 分页分类
+     */
+    Page<Category> selectPageByCondition(Category category, Integer index, Integer size);
 
     /**
      * 树形结构查询

@@ -7,6 +7,7 @@ import java.lang.annotation.*;
 
 /**
  * 此注解用于是否启用自定义处理
+ * 在spring.factories中配置无需此注解
  *
  * @author Ajin
  * @since 2021-04-27

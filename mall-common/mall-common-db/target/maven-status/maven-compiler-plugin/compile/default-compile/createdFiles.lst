@@ -1,0 +1,4 @@
+cn\leemay\mall\common\db\anno\EnableMybatisPlus.class
+cn\leemay\mall\common\db\config\MybatisPlusConfig.class
+cn\leemay\mall\common\db\handler\MyMetaObjectHandler.class
+cn\leemay\mall\common\db\CommonDbApplication.class

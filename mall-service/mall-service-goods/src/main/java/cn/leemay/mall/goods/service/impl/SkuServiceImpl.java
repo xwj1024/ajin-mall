@@ -31,6 +31,7 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @Override
     public void insert(Sku sku) {
         sku.setId(null);
+        sku.setIsDelete(0);
         skuMapper.insert(sku);
     }
 
@@ -45,16 +46,21 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     }
 
     @Override
-    public Page<Sku> selectPageByCondition(Sku sku, Integer index, Integer size) {
-        Page<Sku> page = new Page<>(index, size);
-        QueryWrapper<Sku> queryWrapper = queryWrapper(sku);
-        return skuMapper.selectPage(page, queryWrapper);
+    public Sku selectOneById(Long id) {
+        return skuMapper.selectById(id);
     }
 
     @Override
     public List<Sku> selectListByCondition(Sku sku) {
         QueryWrapper<Sku> queryWrapper = queryWrapper(sku);
         return skuMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public Page<Sku> selectPageByCondition(Sku sku, Integer index, Integer size) {
+        Page<Sku> page = new Page<>(index, size);
+        QueryWrapper<Sku> queryWrapper = queryWrapper(sku);
+        return skuMapper.selectPage(page, queryWrapper);
     }
 
     /**

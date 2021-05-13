@@ -37,14 +37,12 @@ public interface SkuService extends IService<Sku> {
     void update(Sku sku);
 
     /**
-     * 根据条件分页查询sku
+     * 根据id查询sku
      *
-     * @param sku   sku
-     * @param index 当前页码
-     * @param size  每页条数
-     * @return sku分页数据
+     * @param id id
+     * @return sku
      */
-    Page<Sku> selectPageByCondition(Sku sku, Integer index, Integer size);
+    Sku selectOneById(Long id);
 
     /**
      * 根据条件查询sku
@@ -53,4 +51,14 @@ public interface SkuService extends IService<Sku> {
      * @return sku列表
      */
     List<Sku> selectListByCondition(Sku sku);
+
+    /**
+     * 根据条件分页查询sku
+     *
+     * @param sku   sku
+     * @param index 当前页码
+     * @param size  每页条数
+     * @return sku分页数据
+     */
+    Page<Sku> selectPageByCondition(Sku sku, Integer index, Integer size);
 }

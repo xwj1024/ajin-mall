@@ -30,6 +30,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     public void insert(Category category) {
         category.setId(null);
+        category.setIsDelete(0);
         categoryMapper.insert(category);
     }
 
@@ -44,16 +45,21 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     }
 
     @Override
-    public Page<Category> selectPageByCondition(Category category, Integer index, Integer size) {
-        Page<Category> page = new Page<>(index, size);
-        QueryWrapper<Category> queryWrapper = queryWrapper(category);
-        return categoryMapper.selectPage(page, queryWrapper);
+    public Category selectOneById(Long id) {
+        return categoryMapper.selectById(id);
     }
 
     @Override
     public List<Category> selectListByCondition(Category category) {
         QueryWrapper<Category> queryWrapper = queryWrapper(category);
         return categoryMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public Page<Category> selectPageByCondition(Category category, Integer index, Integer size) {
+        Page<Category> page = new Page<>(index, size);
+        QueryWrapper<Category> queryWrapper = queryWrapper(category);
+        return categoryMapper.selectPage(page, queryWrapper);
     }
 
     @Override

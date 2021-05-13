@@ -1,6 +1,6 @@
 mybatis-plus:
   global-config:
     db-config:
-      logic-delete-field: is_delete  # Е┘╗Е╠─И─╩Х╬▒Е┬═И≥╓Г └Е╝·Д╫⌠Е╜≈Ф╝╣Е░█(since 3.3.0,И┘█Г╫╝Е░▌Е▐╞Д╩╔Е©╫Г∙╔Д╦█И┘█Г╫╝@TableLogic)
-      logic-delete-value: 1 # И─╩Х╬▒Е╥╡Е┬═И≥╓Е─╪(И╩≤Х╝╓Д╦╨ 1)
-      logic-not-delete-value: 0 # И─╩Х╬▒Ф°╙Е┬═И≥╓Е─╪(И╩≤Х╝╓Д╦╨ 0)
+      logic-delete-field: is_delete  # х╚╬жбъ╪╜и╬ЁЩ╣дй╣лЕвж╤нцШ(since 3.3.0,еДжц╨С©ирт╨Жбт╡╩еДжц@TableLogic)
+      logic-delete-value: 1 # бъ╪╜ряи╬ЁЩж╣(д╛хон╙ 1)
+      logic-not-delete-value: 0 # бъ╪╜н╢и╬ЁЩж╣(д╛хон╙ 0)

@@ -8,6 +8,7 @@ import java.lang.annotation.*;
 
 /**
  * 此注解用于是否启用mybatis-plus自定义配置
+ * 在spring.factories中配置无需此注解
  *
  * @author Ajin
  * @since 2021-04-27

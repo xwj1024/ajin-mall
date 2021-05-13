@@ -61,16 +61,14 @@ public class CategoryController {
         return new BaseResult<>(ResultCode.OK, "修改成功");
     }
 
-    @PostMapping("/selectPageByCondition/{index}/{size}")
-    @ApiOperation("根据条件分页查询分类")
-    public BaseResult<Page<Category>> selectPageByCondition(@RequestBody Category category,
-                                                            @PathVariable("index") Integer index,
-                                                            @PathVariable("size") Integer size) {
-        if (category == null) {
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询品牌")
+    public BaseResult<Category> selectOneById(@PathVariable("id") Long id) {
+        if (id == null) {
             return new BaseResult<>(ResultCode.ERR, "数据错误");
         }
-        Page<Category> result = categoryService.selectPageByCondition(category, index, size);
-        if (result == null || result.getTotal() <= 0) {
+        Category result = categoryService.selectOneById(id);
+        if (result == null) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
         }
         return new BaseResult<>(ResultCode.OK, "查询成功", result);
@@ -84,6 +82,21 @@ public class CategoryController {
         }
         List<Category> result = categoryService.selectListByCondition(category);
         if (result == null || result.size() <= 0) {
+            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+        }
+        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+    }
+
+    @PostMapping("/selectPageByCondition/{index}/{size}")
+    @ApiOperation("根据条件分页查询分类")
+    public BaseResult<Page<Category>> selectPageByCondition(@RequestBody Category category,
+                                                            @PathVariable("index") Integer index,
+                                                            @PathVariable("size") Integer size) {
+        if (category == null) {
+            return new BaseResult<>(ResultCode.ERR, "数据错误");
+        }
+        Page<Category> result = categoryService.selectPageByCondition(category, index, size);
+        if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
         }
         return new BaseResult<>(ResultCode.OK, "查询成功", result);

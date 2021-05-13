@@ -59,16 +59,14 @@ public class BrandController {
         return new BaseResult<>(ResultCode.OK, "修改成功");
     }
 
-    @PostMapping("/selectPageByCondition/{index}/{size}")
-    @ApiOperation("根据条件分页查询品牌")
-    public BaseResult<Page<Brand>> selectPageByCondition(@RequestBody Brand brand,
-                                                         @PathVariable("index") Integer index,
-                                                         @PathVariable("size") Integer size) {
-        if (brand == null) {
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询品牌")
+    public BaseResult<Brand> selectOneById(@PathVariable("id") Long id) {
+        if (id == null) {
             return new BaseResult<>(ResultCode.ERR, "数据错误");
         }
-        Page<Brand> result = brandService.selectPageByCondition(brand, index, size);
-        if (result == null || result.getTotal() <= 0) {
+        Brand result = brandService.selectOneById(id);
+        if (result == null) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
         }
         return new BaseResult<>(ResultCode.OK, "查询成功", result);
@@ -82,6 +80,21 @@ public class BrandController {
         }
         List<Brand> result = brandService.selectListByCondition(brand);
         if (result == null || result.size() <= 0) {
+            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+        }
+        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+    }
+
+    @PostMapping("/selectPageByCondition/{index}/{size}")
+    @ApiOperation("根据条件分页查询品牌")
+    public BaseResult<Page<Brand>> selectPageByCondition(@RequestBody Brand brand,
+                                                         @PathVariable("index") Integer index,
+                                                         @PathVariable("size") Integer size) {
+        if (brand == null) {
+            return new BaseResult<>(ResultCode.ERR, "数据错误");
+        }
+        Page<Brand> result = brandService.selectPageByCondition(brand, index, size);
+        if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
         }
         return new BaseResult<>(ResultCode.OK, "查询成功", result);

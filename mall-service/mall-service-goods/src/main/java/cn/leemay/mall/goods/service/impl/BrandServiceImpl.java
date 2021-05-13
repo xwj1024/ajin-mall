@@ -30,6 +30,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     @Override
     public void insert(Brand brand) {
         brand.setId(null);
+        brand.setIsDelete(0);
         brandMapper.insert(brand);
     }
 
@@ -44,16 +45,21 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     }
 
     @Override
-    public Page<Brand> selectPageByCondition(Brand brand, Integer index, Integer size) {
-        Page<Brand> page = new Page<>(index, size);
-        QueryWrapper<Brand> queryWrapper = queryWrapper(brand);
-        return brandMapper.selectPage(page, queryWrapper);
+    public Brand selectOneById(Long id) {
+        return brandMapper.selectById(id);
     }
 
     @Override
     public List<Brand> selectListByCondition(Brand brand) {
         QueryWrapper<Brand> queryWrapper = queryWrapper(brand);
         return brandMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public Page<Brand> selectPageByCondition(Brand brand, Integer index, Integer size) {
+        Page<Brand> page = new Page<>(index, size);
+        QueryWrapper<Brand> queryWrapper = queryWrapper(brand);
+        return brandMapper.selectPage(page, queryWrapper);
     }
 
     /**

@@ -5,9 +5,9 @@ spring:
     gateway:
       globalcors:
         cors-configurations:
-          '[/**]': # åŒ¹é…æ‰€æœ‰è¯·æ±‚
-            allowedOrigins: "*" # è·¨åŸŸå¤„ç†,å…è®¸æ‰€æœ‰çš„åŸŸ
-            allowedMethods: # æ”¯æŒçš„æ–¹æ³•
+          '[/**]': # Æ¥ÅäËùÓĞÇëÇó
+            allowedOrigins: "*" # ¿çÓò´¦Àí,ÔÊĞíËùÓĞµÄÓò
+            allowedMethods: # Ö§³ÖµÄ·½·¨
               - GET
               - POST
               - PUT
@@ -19,10 +19,10 @@ spring:
             - Path=/goods/**
           filters:
             - StripPrefix: 1
-            - name: RequestRateLimiter # è¯·æ±‚æ•°é™æµ,åå­—ä¸èƒ½éšä¾¿å†™
+            - name: RequestRateLimiter # ÇëÇóÊıÏŞÁ÷,Ãû×Ö²»ÄÜËæ±ãĞ´
               args:
-                key-resolver: "#{@ipKeyResolver}" # å¼•ç”¨bean
-                redis-rate-limiter.replenishRate: 1 # ä»¤ç‰Œæ¡¶æ¯ç§’å¡«å……å¹³å‡é€Ÿç‡
-                redis-rate-limiter.burstCapacity: 1 # ä»¤ç‰Œæ¡¶æ€»å®¹é‡
+                key-resolver: "#{@ipKeyResolver}" # ÒıÓÃbean
+                redis-rate-limiter.replenishRate: 1 # ÁîÅÆÍ°Ã¿ÃëÌî³äÆ½¾ùËÙÂÊ
+                redis-rate-limiter.burstCapacity: 1 # ÁîÅÆÍ°×ÜÈİÁ¿
   redis:
     host: 127.0.0.1

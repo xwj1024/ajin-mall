@@ -38,14 +38,12 @@ public interface BrandService extends IService<Brand> {
     void update(Brand brand);
 
     /**
-     * 根据条件分页查询品牌
+     * 根据id查询品牌
      *
-     * @param brand 品牌条件
-     * @param index 当前页
-     * @param size  每页数
-     * @return 分页品牌
+     * @param id id
+     * @return 品牌
      */
-    Page<Brand> selectPageByCondition(Brand brand, Integer index, Integer size);
+    Brand selectOneById(Long id);
 
     /**
      * 根据条件查询品牌
@@ -54,4 +52,14 @@ public interface BrandService extends IService<Brand> {
      * @return 品牌列表
      */
     List<Brand> selectListByCondition(Brand brand);
+
+    /**
+     * 根据条件分页查询品牌
+     *
+     * @param brand 品牌条件
+     * @param index 当前页
+     * @param size  每页数
+     * @return 分页品牌
+     */
+    Page<Brand> selectPageByCondition(Brand brand, Integer index, Integer size);
 }
