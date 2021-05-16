@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="CategoryBrand对象", description="分类,品牌 关联表")
+@ApiModel(value="CategoryBrand对象", description="分类，品牌  关联表")
 public class CategoryBrand implements Serializable {
 
     private static final long serialVersionUID = 1L;

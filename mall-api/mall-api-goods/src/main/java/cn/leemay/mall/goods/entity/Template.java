@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "Template对象", description = "规格,参数 模板表")
+@ApiModel(value = "Template对象", description = "规格，参数  模板表")
 public class Template implements Serializable {
 
     private static final long serialVersionUID = 1L;

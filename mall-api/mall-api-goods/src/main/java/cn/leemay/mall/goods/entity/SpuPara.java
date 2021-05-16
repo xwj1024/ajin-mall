@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "SpuPara对象", description = "商品,参数 关联表")
+@ApiModel(value = "SpuPara对象", description = "商品，参数  关联表")
 public class SpuPara implements Serializable {
 
     private static final long serialVersionUID = 1L;
