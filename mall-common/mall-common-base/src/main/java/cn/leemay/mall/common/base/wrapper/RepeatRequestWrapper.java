@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * 构建可重复读取inputStream的request
  *
  * @author ruoyi
+ * @since 2021-05-18
  */
 public class RepeatRequestWrapper extends HttpServletRequestWrapper {
     private final byte[] body;

@@ -16,6 +16,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * 通用http工具封装
  *
  * @author ruoyi
+ * @since 2021-05-18
  */
 public class HttpUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpUtils.class);
