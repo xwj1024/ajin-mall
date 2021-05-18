@@ -1,40 +1,80 @@
 {
   "groups": [
     {
+      "name": "repeat",
+      "type": "cn.leemay.mall.common.base.interceptor.impl.SameUriDataInterceptor",
+      "sourceType": "cn.leemay.mall.common.base.interceptor.impl.SameUriDataInterceptor"
+    },
+    {
       "name": "swagger",
-      "type": "cn.leemay.mall.common.base.property.SwaggerProperties",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties"
+      "type": "cn.leemay.mall.common.base.config.property.SwaggerProperties",
+      "sourceType": "cn.leemay.mall.common.base.config.property.SwaggerProperties"
     }
   ],
   "properties": [
     {
+      "name": "repeat.header",
+      "type": "java.lang.String",
+      "sourceType": "cn.leemay.mall.common.base.interceptor.impl.SameUriDataInterceptor",
+      "defaultValue": "Authorization"
+    },
+    {
+      "name": "repeat.interval-time",
+      "type": "java.lang.Integer",
+      "sourceType": "cn.leemay.mall.common.base.interceptor.impl.SameUriDataInterceptor",
+      "defaultValue": 10000
+    },
+    {
+      "name": "repeat.repeat-key",
+      "type": "java.lang.String",
+      "sourceType": "cn.leemay.mall.common.base.interceptor.impl.SameUriDataInterceptor",
+      "defaultValue": "repeatKey"
+    },
+    {
+      "name": "repeat.repeat-param",
+      "type": "java.lang.String",
+      "sourceType": "cn.leemay.mall.common.base.interceptor.impl.SameUriDataInterceptor",
+      "defaultValue": "repeatParam"
+    },
+    {
+      "name": "repeat.repeat-time",
+      "type": "java.lang.String",
+      "sourceType": "cn.leemay.mall.common.base.interceptor.impl.SameUriDataInterceptor",
+      "defaultValue": "repeatTime"
+    },
+    {
+      "name": "repeat.string-redis-template",
+      "type": "org.springframework.data.redis.core.StringRedisTemplate",
+      "sourceType": "cn.leemay.mall.common.base.interceptor.impl.SameUriDataInterceptor"
+    },
+    {
       "name": "swagger.desc",
       "type": "java.lang.String",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "sourceType": "cn.leemay.mall.common.base.config.property.SwaggerProperties",
       "defaultValue": "生活如此美好,学习永无止境!"
     },
     {
       "name": "swagger.enable",
       "type": "java.lang.Boolean",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "sourceType": "cn.leemay.mall.common.base.config.property.SwaggerProperties",
       "defaultValue": true
     },
     {
       "name": "swagger.group",
       "type": "java.lang.String",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "sourceType": "cn.leemay.mall.common.base.config.property.SwaggerProperties",
       "defaultValue": "Ajin"
     },
     {
       "name": "swagger.title",
       "type": "java.lang.String",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "sourceType": "cn.leemay.mall.common.base.config.property.SwaggerProperties",
       "defaultValue": ""
     },
     {
       "name": "swagger.version",
       "type": "java.lang.String",
-      "sourceType": "cn.leemay.mall.common.base.property.SwaggerProperties",
+      "sourceType": "cn.leemay.mall.common.base.config.property.SwaggerProperties",
       "defaultValue": "0.0.1"
     }
   ],

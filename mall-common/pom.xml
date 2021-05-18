@@ -14,7 +14,7 @@
 
     <modules>
         <module>mall-common-base</module>
-        <module>mall-common-db</module>
+        <module>mall-common-data</module>
     </modules>
 
 </project>

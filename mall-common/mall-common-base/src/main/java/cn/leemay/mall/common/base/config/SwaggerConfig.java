@@ -1,6 +1,6 @@
 package cn.leemay.mall.common.base.config;
 
-import cn.leemay.mall.common.base.property.SwaggerProperties;
+import cn.leemay.mall.common.base.config.property.SwaggerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

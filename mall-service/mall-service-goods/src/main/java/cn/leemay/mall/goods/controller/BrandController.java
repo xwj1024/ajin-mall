@@ -3,6 +3,7 @@ package cn.leemay.mall.goods.controller;
 
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
+import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.goods.entity.Brand;
 import cn.leemay.mall.goods.service.BrandService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -29,6 +30,7 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
+    @RepeatSubmit
     @PostMapping
     @ApiOperation("添加品牌")
     public BaseResult<String> insert(@RequestBody Brand brand) {
