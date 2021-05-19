@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>cn.leemay.mall</groupId>
-            <artifactId>mall-common-db</artifactId>
+            <artifactId>mall-common-data</artifactId>
             <version>0.0.1</version>
         </dependency>
     </dependencies>
