@@ -17,5 +17,5 @@ public class SmsProperties {
     private String secret;
     private String sign;
     private String template;
-    private Long expire;
+    private Long expire = 600L;
 }

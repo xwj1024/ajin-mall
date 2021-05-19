@@ -60,9 +60,7 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
             }
 
             @Override
-            public void setReadListener(ReadListener readListener) {
-
-            }
+            public void setReadListener(ReadListener readListener) {}
         };
     }
 }
