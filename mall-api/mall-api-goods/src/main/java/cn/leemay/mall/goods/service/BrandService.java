@@ -1,7 +1,11 @@
 package cn.leemay.mall.goods.service;
 
+import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Brand;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import cn.leemay.mall.goods.entity.dto.BrandDTO;
+import cn.leemay.mall.goods.entity.vo.BrandInsertVO;
+import cn.leemay.mall.goods.entity.vo.BrandSelectVO;
+import cn.leemay.mall.goods.entity.vo.BrandUpdateVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -19,23 +23,23 @@ public interface BrandService extends IService<Brand> {
     /**
      * 添加品牌
      *
-     * @param brand 品牌
+     * @param brandInsertVO 品牌
      */
-    void insert(Brand brand);
+    void insertBrand(BrandInsertVO brandInsertVO);
 
     /**
      * 根据id删除品牌
      *
      * @param id 主键id
      */
-    void delete(Long id);
+    void deleteBrand(Long id);
 
     /**
      * 修改品牌
      *
-     * @param brand 品牌
+     * @param brandUpdateVO 品牌
      */
-    void update(Brand brand);
+    void updateBrand(BrandUpdateVO brandUpdateVO);
 
     /**
      * 根据id查询品牌
@@ -43,23 +47,23 @@ public interface BrandService extends IService<Brand> {
      * @param id id
      * @return 品牌
      */
-    Brand selectOneById(Long id);
+    BrandDTO selectOneById(Long id);
 
     /**
      * 根据条件查询品牌
      *
-     * @param brand 品牌条件
+     * @param brandSelectVO 品牌条件
      * @return 品牌列表
      */
-    List<Brand> selectListByCondition(Brand brand);
+    List<BrandDTO> selectListByCondition(BrandSelectVO brandSelectVO);
 
     /**
      * 根据条件分页查询品牌
      *
-     * @param brand 品牌条件
-     * @param index 当前页
-     * @param size  每页数
+     * @param brandSelectVO 品牌条件
+     * @param index         当前页
+     * @param size          每页数
      * @return 分页品牌
      */
-    Page<Brand> selectPageByCondition(Brand brand, Integer index, Integer size);
+    ResultPage<BrandDTO> selectPageByCondition(BrandSelectVO brandSelectVO, Integer index, Integer size);
 }

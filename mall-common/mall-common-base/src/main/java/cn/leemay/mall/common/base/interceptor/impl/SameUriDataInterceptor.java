@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 判断请求url和数据是否和上一次相同，如果和上次相同，则是重复提交表单。 有效时间为 x 秒内。
+ * 判断请求url和数据是否和上一次相同，如果和上次相同，则是重复提交表单。有效时间为 x 秒内。
  *
  * @author ruoyi
  * @since 2021-05-17

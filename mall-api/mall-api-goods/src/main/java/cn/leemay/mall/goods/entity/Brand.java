@@ -49,15 +49,14 @@ public class Brand implements Serializable {
     @TableLogic
     private Integer isDelete;
 
-    @ApiModelProperty(value = "创建时间", hidden = true)
+    @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "修改时间", hidden = true)
+    @ApiModelProperty(value = "修改时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
-
 
 }

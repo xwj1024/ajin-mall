@@ -27,6 +27,11 @@ public class ResultPage<T> implements Serializable {
     public ResultPage() {
     }
 
+    public ResultPage(long total, List<T> data) {
+        this.total = total;
+        this.data = data;
+    }
+
     public ResultPage(PageInfo<T> pageInfo) {
         this.total = pageInfo.getTotal();
         this.data = pageInfo.getList();

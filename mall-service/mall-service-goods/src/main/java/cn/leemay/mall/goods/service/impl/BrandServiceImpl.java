@@ -1,15 +1,23 @@
 package cn.leemay.mall.goods.service.impl;
 
-import cn.leemay.mall.common.base.util.ObjectUtils;
+import cn.leemay.mall.common.base.exception.BusException;
+import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Brand;
+import cn.leemay.mall.goods.entity.dto.BrandDTO;
+import cn.leemay.mall.goods.entity.vo.BrandInsertVO;
+import cn.leemay.mall.goods.entity.vo.BrandSelectVO;
+import cn.leemay.mall.goods.entity.vo.BrandUpdateVO;
 import cn.leemay.mall.goods.mapper.BrandMapper;
 import cn.leemay.mall.goods.service.BrandService;
+import cn.leemay.mall.goods.wrapper.BrandWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,50 +36,79 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     private BrandMapper brandMapper;
 
     @Override
-    public void insert(Brand brand) {
-        brand.setId(null);
-        brand.setIsDelete(0);
+    public void insertBrand(BrandInsertVO brandInsertVO) {
+        BrandSelectVO brandSelectVO = new BrandSelectVO();
+        brandSelectVO.setName(brandInsertVO.getName());
+        Integer count = brandMapper.selectCount(BrandWrapper.queryWrapper(brandSelectVO));
+        if (count > 0) {
+            throw new BusException("已有该品牌");
+        }
+        Brand brand = new Brand();
+        BeanUtils.copyProperties(brandInsertVO, brand);
         brandMapper.insert(brand);
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteBrand(Long id) {
         brandMapper.deleteById(id);
     }
 
     @Override
-    public void update(Brand brand) {
+    public void updateBrand(BrandUpdateVO brandUpdateVO) {
+        BrandSelectVO brandSelectVO = new BrandSelectVO();
+        brandSelectVO.setName(brandUpdateVO.getName());
+        Integer count = brandMapper.selectCount(BrandWrapper.queryWrapper(brandSelectVO));
+        if (count > 0) {
+            throw new BusException("已有该品牌");
+        }
+        Brand brand = new Brand();
+        BeanUtils.copyProperties(brandUpdateVO, brand);
         brandMapper.updateById(brand);
     }
 
     @Override
-    public Brand selectOneById(Long id) {
-        return brandMapper.selectById(id);
+    public BrandDTO selectOneById(Long id) {
+        Brand brand = brandMapper.selectById(id);
+        BrandDTO brandDTO = new BrandDTO();
+        BeanUtils.copyProperties(brand, brandDTO);
+        return brandDTO;
     }
 
     @Override
-    public List<Brand> selectListByCondition(Brand brand) {
-        QueryWrapper<Brand> queryWrapper = queryWrapper(brand);
-        return brandMapper.selectList(queryWrapper);
+    public List<BrandDTO> selectListByCondition(BrandSelectVO brandSelectVO) {
+        QueryWrapper<Brand> queryWrapper = BrandWrapper.queryWrapper(brandSelectVO);
+        List<Brand> brandList = brandMapper.selectList(queryWrapper);
+
+        if (brandList == null || brandList.size() <= 0) {
+            return null;
+        }
+        List<BrandDTO> brandDTOList = new ArrayList<>();
+        for (Brand brand : brandList) {
+            BrandDTO brandDTO = new BrandDTO();
+            BeanUtils.copyProperties(brand, brandDTO);
+            brandDTOList.add(brandDTO);
+        }
+        return brandDTOList;
     }
 
     @Override
-    public Page<Brand> selectPageByCondition(Brand brand, Integer index, Integer size) {
+    public ResultPage<BrandDTO> selectPageByCondition(BrandSelectVO brandSelectVO, Integer index, Integer size) {
         Page<Brand> page = new Page<>(index, size);
-        QueryWrapper<Brand> queryWrapper = queryWrapper(brand);
-        return brandMapper.selectPage(page, queryWrapper);
+        QueryWrapper<Brand> queryWrapper = BrandWrapper.queryWrapper(brandSelectVO);
+        Page<Brand> brandPage = brandMapper.selectPage(page, queryWrapper);
+        if (brandPage == null || brandPage.getRecords() == null) {
+            return null;
+        }
+        List<BrandDTO> brandDTOList = new ArrayList<>();
+        for (Brand brand : brandPage.getRecords()) {
+            BrandDTO brandDTO = new BrandDTO();
+            BeanUtils.copyProperties(brand, brandDTO);
+            brandDTOList.add(brandDTO);
+        }
+        ResultPage<BrandDTO> resultPage = new ResultPage<>(brandPage.getTotal(), brandDTOList);
+        resultPage.setTotal(brandPage.getTotal());
+        resultPage.setData(brandDTOList);
+        return resultPage;
     }
 
-    /**
-     * 构建条件查询对象
-     *
-     * @param brand 条件
-     * @return 对象
-     */
-    private QueryWrapper<Brand> queryWrapper(Brand brand) {
-        QueryWrapper<Brand> queryWrapper = new QueryWrapper<>();
-        queryWrapper.allEq(ObjectUtils.obj2Map(brand));
-        queryWrapper.orderByAsc("sort");
-        return queryWrapper;
-    }
 }
