@@ -1,6 +1,9 @@
 package cn.leemay.mall.goods.service;
 
 import cn.leemay.mall.goods.entity.Category;
+import cn.leemay.mall.goods.entity.dto.CategoryDTO;
+import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
+import cn.leemay.mall.goods.entity.vo.CategoryUpdateVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -19,23 +22,23 @@ public interface CategoryService extends IService<Category> {
     /**
      * 添加分类
      *
-     * @param category 分类
+     * @param categoryInsertVO 分类
      */
-    void insert(Category category);
+    void insertCategory(CategoryInsertVO categoryInsertVO);
 
     /**
      * 根据id删除分类
      *
      * @param id 主键id
      */
-    void delete(Long id);
+    void deleteCategory(Long id);
 
     /**
      * 修改分类
      *
-     * @param category 分类
+     * @param categoryUpdateVO 分类
      */
-    void update(Category category);
+    void updateCategory(CategoryUpdateVO categoryUpdateVO);
 
     /**
      * 根据id查询分类
@@ -68,5 +71,5 @@ public interface CategoryService extends IService<Category> {
      *
      * @return 所有显示分类以树形结构
      */
-    List<Category> selectWithTree();
+    List<CategoryDTO> selectWithTree();
 }

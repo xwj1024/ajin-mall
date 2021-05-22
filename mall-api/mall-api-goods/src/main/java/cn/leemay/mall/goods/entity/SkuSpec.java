@@ -21,24 +21,24 @@ import lombok.experimental.Accessors;
  * @since 2021-04-13
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 @Accessors(chain = true)
 @ApiModel(value = "SkuSpec对象", description = "商品，规格  关联表")
 public class SkuSpec implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty(value = "sku id")
+    @ApiModelProperty("sku id")
     private Long skuId;
 
-    @ApiModelProperty(value = "规格名")
+    @ApiModelProperty("规格名")
     private String name;
 
-    @ApiModelProperty(value = "规格值")
+    @ApiModelProperty("规格值")
     private String value;
 
 

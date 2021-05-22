@@ -15,6 +15,7 @@ import java.util.List;
  * @since 2021-04-13
  */
 public interface SkuService extends IService<Sku> {
+
     /**
      * 添加sku
      *

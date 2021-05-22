@@ -11,30 +11,35 @@ import java.io.Serializable;
 
 /**
  * @author Ajin
- * @since 2021-05-20
+ * @since 2021-05-21
  */
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("品牌修改对象")
-public class BrandUpdateVO implements Serializable {
+@ApiModel("分类修改对象")
+public class CategoryUpdateVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "品牌id不能为空")
-    @ApiModelProperty("品牌id")
+    @NotNull(message = "分类id不能为空")
+    @ApiModelProperty("分类id")
     private Long id;
 
-    @ApiModelProperty("品牌名称")
+    @ApiModelProperty("上级id")
+    private Long parentId;
+
+    @ApiModelProperty("分类名称")
     private String name;
 
-    @ApiModelProperty("品牌图片")
+    @ApiModelProperty("分类图片")
     private String image;
 
-    @ApiModelProperty("首字母")
-    private String initials;
+    @ApiModelProperty("分类级别")
+    private Integer level;
 
-    @ApiModelProperty("排序")
+    @ApiModelProperty("分类排序")
     private Integer sort;
 
+    @ApiModelProperty("是否显示")
+    private Integer isShow;
 }

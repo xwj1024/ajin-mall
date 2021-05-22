@@ -31,75 +31,75 @@ import lombok.experimental.Accessors;
  * @since 2021-04-13
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 @Accessors(chain = true)
 @ApiModel(value = "Sku对象", description = "商品sku表")
 public class Sku implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty(value = "spu id")
+    @ApiModelProperty("spu id")
     private Long spuId;
 
-    @ApiModelProperty(value = "商品条码")
+    @ApiModelProperty("商品条码")
     private String sn;
 
-    @ApiModelProperty(value = "商品编号")
+    @ApiModelProperty("商品编号")
     private String code;
 
-    @ApiModelProperty(value = "sku名称")
+    @ApiModelProperty("sku名称")
     private String name;
 
-    @ApiModelProperty(value = "商品图片")
+    @ApiModelProperty("商品图片")
     private String images;
 
-    @ApiModelProperty(value = "商品重量,克")
+    @ApiModelProperty("商品重量,克")
     private BigDecimal weight;
 
-    @ApiModelProperty(value = "市场价,元")
+    @ApiModelProperty("市场价,元")
     private BigDecimal marketPrice;
 
-    @ApiModelProperty(value = "优惠价,元")
+    @ApiModelProperty("优惠价,元")
     private BigDecimal cheapPrice;
 
-    @ApiModelProperty(value = "成本价,元")
+    @ApiModelProperty("成本价,元")
     private BigDecimal costPrice;
 
-    @ApiModelProperty(value = "二维码")
+    @ApiModelProperty("二维码")
     private String qrcode;
 
-    @ApiModelProperty(value = "库存数量")
+    @ApiModelProperty("库存数量")
     private Integer sumNum;
 
-    @ApiModelProperty(value = "库存预警数")
+    @ApiModelProperty("库存预警数")
     private Integer alertNum;
 
-    @ApiModelProperty(value = "商品销量")
+    @ApiModelProperty("商品销量")
     private Integer saleNum;
 
-    @ApiModelProperty(value = "评论数")
+    @ApiModelProperty("评论数")
     private Integer commentNum;
 
-    @ApiModelProperty(value = "是否审核")
+    @ApiModelProperty("是否审核")
     private Integer isCheck;
 
-    @ApiModelProperty(value = "是否上架")
+    @ApiModelProperty("是否上架")
     private Integer isMarket;
 
-    @ApiModelProperty(value = "是否删除")
+    @ApiModelProperty("是否删除")
     @TableLogic
     private Integer isDelete;
 
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "修改时间")
+    @ApiModelProperty("修改时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;

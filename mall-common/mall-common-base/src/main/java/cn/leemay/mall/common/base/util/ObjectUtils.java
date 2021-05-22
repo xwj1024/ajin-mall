@@ -80,4 +80,19 @@ public class ObjectUtils {
         return JSON.parseObject(JSON.toJSONString(obj), Map.class);
     }
 
+    /**
+     * 将对象转换为Map，将key驼峰转为下划线
+     *
+     * @param obj 对象
+     * @return map
+     */
+    public static Map obj2LineMap(Object obj) {
+        Map<String, Object> map = ObjectUtils.obj2Map(obj);
+        String[] newKeys = ClassUtils.getColumns(obj.getClass());
+        for (String newKey : newKeys) {
+            System.out.println(newKey);
+            map.put(newKey, map.remove(StringUtils.line2Hump(newKey)));
+        }
+        return map;
+    }
 }

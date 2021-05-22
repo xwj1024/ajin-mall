@@ -3,13 +3,17 @@ package cn.leemay.mall.goods.service.impl;
 import cn.leemay.mall.common.base.exception.BusException;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Brand;
+import cn.leemay.mall.goods.entity.Spu;
 import cn.leemay.mall.goods.entity.dto.BrandDTO;
 import cn.leemay.mall.goods.entity.vo.BrandInsertVO;
 import cn.leemay.mall.goods.entity.vo.BrandSelectVO;
 import cn.leemay.mall.goods.entity.vo.BrandUpdateVO;
+import cn.leemay.mall.goods.entity.vo.SpuSelectVO;
 import cn.leemay.mall.goods.mapper.BrandMapper;
+import cn.leemay.mall.goods.mapper.SpuMapper;
 import cn.leemay.mall.goods.service.BrandService;
 import cn.leemay.mall.goods.wrapper.BrandWrapper;
+import cn.leemay.mall.goods.wrapper.SpuWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -35,12 +39,15 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     @Autowired
     private BrandMapper brandMapper;
 
+    @Autowired
+    private SpuMapper spuMapper;
+
     @Override
     public void insertBrand(BrandInsertVO brandInsertVO) {
         BrandSelectVO brandSelectVO = new BrandSelectVO();
         brandSelectVO.setName(brandInsertVO.getName());
-        Integer count = brandMapper.selectCount(BrandWrapper.queryWrapper(brandSelectVO));
-        if (count > 0) {
+        Integer brandCount = brandMapper.selectCount(BrandWrapper.queryCountWrapper(brandSelectVO));
+        if (brandCount > 0) {
             throw new BusException("已有该品牌");
         }
         Brand brand = new Brand();
@@ -50,6 +57,12 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 
     @Override
     public void deleteBrand(Long id) {
+        SpuSelectVO spuSelectVO = new SpuSelectVO();
+        spuSelectVO.setBrandId(id);
+        Integer spuCount = spuMapper.selectCount(SpuWrapper.queryCountWrapper(spuSelectVO));
+        if (spuCount > 0) {
+            throw new BusException("该品牌已关联商品");
+        }
         brandMapper.deleteById(id);
     }
 
@@ -57,8 +70,8 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     public void updateBrand(BrandUpdateVO brandUpdateVO) {
         BrandSelectVO brandSelectVO = new BrandSelectVO();
         brandSelectVO.setName(brandUpdateVO.getName());
-        Integer count = brandMapper.selectCount(BrandWrapper.queryWrapper(brandSelectVO));
-        if (count > 0) {
+        Integer brandCount = brandMapper.selectCount(BrandWrapper.queryCountWrapper(brandSelectVO));
+        if (brandCount > 0) {
             throw new BusException("已有该品牌");
         }
         Brand brand = new Brand();
@@ -78,7 +91,6 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     public List<BrandDTO> selectListByCondition(BrandSelectVO brandSelectVO) {
         QueryWrapper<Brand> queryWrapper = BrandWrapper.queryWrapper(brandSelectVO);
         List<Brand> brandList = brandMapper.selectList(queryWrapper);
-
         if (brandList == null || brandList.size() <= 0) {
             return null;
         }

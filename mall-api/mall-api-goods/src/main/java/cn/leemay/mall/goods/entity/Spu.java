@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -22,48 +21,48 @@ import lombok.experimental.Accessors;
  * @since 2021-04-13
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 @Accessors(chain = true)
 @ApiModel(value = "Spu对象", description = "商品spu表")
 public class Spu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty(value = "spu名称")
+    @ApiModelProperty("spu名称")
     private String name;
 
-    @ApiModelProperty(value = "商品标题")
+    @ApiModelProperty("商品标题")
     private String caption;
 
-    @ApiModelProperty(value = "商品详情")
+    @ApiModelProperty("商品详情")
     private String details;
 
-    @ApiModelProperty(value = "品牌id")
+    @ApiModelProperty("品牌id")
     private Long brandId;
 
-    @ApiModelProperty(value = "一级分类")
+    @ApiModelProperty("一级分类")
     private Long category1Id;
 
-    @ApiModelProperty(value = "二级分类")
+    @ApiModelProperty("二级分类")
     private Long category2Id;
 
-    @ApiModelProperty(value = "三级分类")
+    @ApiModelProperty("三级分类")
     private Long category3Id;
 
-    @ApiModelProperty(value = "是否删除")
+    @ApiModelProperty("是否删除")
     @TableLogic
     private Integer isDelete;
 
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "修改时间")
+    @ApiModelProperty("修改时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;

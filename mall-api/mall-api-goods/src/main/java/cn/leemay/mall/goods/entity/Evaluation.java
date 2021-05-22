@@ -23,51 +23,51 @@ import lombok.experimental.Accessors;
  * @since 2021-04-13
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 @Accessors(chain = true)
 @ApiModel(value = "Evaluation对象", description = "商品评价表")
 public class Evaluation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty(value = "sku id")
+    @ApiModelProperty("sku id")
     private Long skuId;
 
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty("用户id")
     private Long userId;
 
-    @ApiModelProperty(value = "订单id")
+    @ApiModelProperty("订单id")
     private Long orderId;
 
-    @ApiModelProperty(value = "图片路径")
+    @ApiModelProperty("图片路径")
     private String images;
 
-    @ApiModelProperty(value = "商品描述")
+    @ApiModelProperty("商品描述")
     private String description;
 
-    @ApiModelProperty(value = "商品分")
+    @ApiModelProperty("商品分")
     private Integer goodsScore;
 
-    @ApiModelProperty(value = "服务分")
+    @ApiModelProperty("服务分")
     private Integer serviceScore;
 
-    @ApiModelProperty(value = "物流分")
+    @ApiModelProperty("物流分")
     private Integer logisticsScore;
 
-    @ApiModelProperty(value = "是否删除")
+    @ApiModelProperty("是否删除")
     @TableLogic
     private Integer isDelete;
 
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "修改时间")
+    @ApiModelProperty("修改时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;

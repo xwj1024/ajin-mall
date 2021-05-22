@@ -1,6 +1,7 @@
 package cn.leemay.mall.goods.controller;
 
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/goods/template")
 @CrossOrigin
+@Api(tags = "规格参数，模板")
 public class TemplateController {
 
 }

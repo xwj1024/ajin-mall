@@ -7,32 +7,38 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Ajin
- * @since 2021-05-20
+ * @since 2021-05-21
  */
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("品牌结果对象")
-public class BrandDTO implements Serializable {
+@ApiModel("分类结果对象")
+public class CategoryDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("品牌id")
+    @ApiModelProperty("分类id")
     private Long id;
 
-    @ApiModelProperty("品牌名称")
+    @ApiModelProperty("上级id")
+    private Long parentId;
+
+    @ApiModelProperty("分类名称")
     private String name;
 
-    @ApiModelProperty("品牌图片")
+    @ApiModelProperty("分类图片")
     private String image;
 
-    @ApiModelProperty("首字母")
-    private String initials;
+    @ApiModelProperty("分类级别")
+    private Integer level;
 
-    @ApiModelProperty("排序")
+    @ApiModelProperty("分类排序")
     private Integer sort;
 
+    @ApiModelProperty(hidden = true)
+    private List<CategoryDTO> child;
 }

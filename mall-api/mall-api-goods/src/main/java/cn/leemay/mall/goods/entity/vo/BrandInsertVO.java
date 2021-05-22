@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @since 2021-05-20
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 @Accessors(chain = true)
 @ApiModel("品牌添加对象")
 public class BrandInsertVO implements Serializable {

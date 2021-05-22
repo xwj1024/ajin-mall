@@ -32,7 +32,7 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/mall-service/mall-service-system/src/main/java");
+        gc.setOutputDir(projectPath + "/mall-service/mall-service-goods/src/main/java");
         gc.setAuthor("Ajin");
         gc.setOpen(false);
         gc.setFileOverride(false);
@@ -52,11 +52,11 @@ public class CodeGenerator {
         // 包的配置
         PackageConfig pc = new PackageConfig();
         pc.setParent("cn.leemay.mall");
-        pc.setModuleName("system");
+        pc.setModuleName("goods");
         ag.setPackageInfo(pc);
         // 策略配置
         StrategyConfig sc = new StrategyConfig();
-        sc.setInclude("admin"); // 设置要映射的表名
+        sc.setInclude("spec"); // 设置要映射的表名
         sc.setNaming(NamingStrategy.underline_to_camel);
         sc.setColumnNaming(NamingStrategy.underline_to_camel);
         sc.setEntityLombokModel(true);

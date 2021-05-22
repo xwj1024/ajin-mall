@@ -3,15 +3,22 @@ package cn.leemay.mall.goods.controller;
 
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
+import cn.leemay.mall.common.base.util.ValidateUtils;
 import cn.leemay.mall.goods.entity.Category;
+import cn.leemay.mall.goods.entity.dto.CategoryDTO;
+import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
+import cn.leemay.mall.goods.entity.vo.CategoryUpdateVO;
 import cn.leemay.mall.goods.service.CategoryService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 /**
  * <p>
@@ -27,46 +34,34 @@ import java.util.List;
 @CrossOrigin
 public class CategoryController {
 
-
     @Autowired
     private CategoryService categoryService;
 
     @PostMapping
     @ApiOperation("添加分类")
-    public BaseResult<String> insert(@RequestBody Category category) {
-        if (category == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
-        categoryService.insert(category);
+    public BaseResult<String> insertCategory(@RequestBody @Validated CategoryInsertVO categoryInsertVO, BindingResult bindingResult) {
+        ValidateUtils.validate(bindingResult);
+        categoryService.insertCategory(categoryInsertVO);
         return new BaseResult<>(ResultCode.OK, "添加成功");
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除分类", notes = "根据主键id删除")
-    public BaseResult<String> delete(@PathVariable("id") Long id) {
-        if (id == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
-        categoryService.delete(id);
+    public BaseResult<String> deleteCategory(@PathVariable("id") Long id) {
+        categoryService.deleteCategory(id);
         return new BaseResult<>(ResultCode.OK, "删除成功");
     }
 
     @PutMapping
     @ApiOperation(value = "修改分类", notes = "根据主键id修改")
-    public BaseResult<String> update(@RequestBody Category category) {
-        if (category == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
-        categoryService.update(category);
+    public BaseResult<String> updateCategory(@RequestBody CategoryUpdateVO categoryUpdateVO) {
+        categoryService.updateCategory(categoryUpdateVO);
         return new BaseResult<>(ResultCode.OK, "修改成功");
     }
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询品牌")
     public BaseResult<Category> selectOneById(@PathVariable("id") Long id) {
-        if (id == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
         Category result = categoryService.selectOneById(id);
         if (result == null) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
@@ -104,8 +99,8 @@ public class CategoryController {
 
     @PostMapping("/selectWithTree")
     @ApiOperation("树形查询所有显示分类")
-    public BaseResult<List<Category>> selectWithTree() {
-        List<Category> result = categoryService.selectWithTree();
+    public BaseResult<List<CategoryDTO>> selectWithTree() {
+        List<CategoryDTO> result = categoryService.selectWithTree();
         if (result == null || result.size() <= 0) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
         }

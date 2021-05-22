@@ -17,7 +17,7 @@ public class ExceptionHandlers {
 
     @ExceptionHandler(value = BusException.class)
     @ResponseBody
-    public BaseResult<String> business(SystemException e) {
+    public BaseResult<String> business(BusException e) {
         e.printStackTrace();
         return new BaseResult<>(ResultCode.ERR, e.getMessage());
     }
