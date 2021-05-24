@@ -3,13 +3,17 @@ package cn.leemay.mall.goods.controller;
 
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
+import cn.leemay.mall.common.base.util.ValidateUtils;
 import cn.leemay.mall.goods.entity.Spu;
+import cn.leemay.mall.goods.entity.vo.SpuInsertVO;
 import cn.leemay.mall.goods.entity.vo.SpuSelectVO;
 import cn.leemay.mall.goods.service.SpuService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,20 +37,15 @@ public class SpuController {
 
     @PostMapping
     @ApiOperation("添加spu")
-    public BaseResult<String> insertSpu(@RequestBody Spu spu) {
-        if (spu == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
-        spuService.insertSpu(spu);
+    public BaseResult<String> insertSpu(@RequestBody @Validated SpuInsertVO spuInsertVO, BindingResult bindingResult) {
+        ValidateUtils.validate(bindingResult);
+        spuService.insertSpu(spuInsertVO);
         return new BaseResult<>(ResultCode.OK, "添加成功");
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除spu")
     public BaseResult<String> deleteSpu(@PathVariable("id") Long id) {
-        if (id == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
         spuService.deleteSpu(id);
         return new BaseResult<>(ResultCode.OK, "删除成功");
     }
@@ -60,6 +59,7 @@ public class SpuController {
         spuService.updateSpu(spu);
         return new BaseResult<>(ResultCode.OK, "修改成功");
     }
+
     @GetMapping("/{id}")
     @ApiOperation("根据id查询spu")
     public BaseResult<Spu> selectOneById(@PathVariable("id") Long id) {
@@ -72,6 +72,7 @@ public class SpuController {
         }
         return new BaseResult<>(ResultCode.OK, "查询成功", result);
     }
+
     @PostMapping("/selectListByCondition")
     @ApiOperation("根据条件查询Spu")
     public BaseResult<List<Spu>> selectListByCondition(@RequestBody SpuSelectVO spuSelectVO) {

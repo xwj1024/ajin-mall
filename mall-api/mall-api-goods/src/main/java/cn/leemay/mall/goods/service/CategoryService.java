@@ -1,8 +1,10 @@
 package cn.leemay.mall.goods.service;
 
+import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Category;
 import cn.leemay.mall.goods.entity.dto.CategoryDTO;
 import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
+import cn.leemay.mall.goods.entity.vo.CategorySelectVO;
 import cn.leemay.mall.goods.entity.vo.CategoryUpdateVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -46,25 +48,25 @@ public interface CategoryService extends IService<Category> {
      * @param id id
      * @return 分类
      */
-    Category selectOneById(Long id);
+    CategoryDTO selectOneById(Long id);
 
     /**
      * 根据条件查询分类
      *
-     * @param category 分类条件
+     * @param categorySelectVO 分类条件
      * @return 分类列表
      */
-    List<Category> selectListByCondition(Category category);
+    List<CategoryDTO> selectListByCondition(CategorySelectVO categorySelectVO);
 
     /**
      * 根据条件分页查询分类
      *
-     * @param category 分类条件
+     * @param categorySelectVO 分类条件
      * @param index    当前页
      * @param size     每页数
      * @return 分页分类
      */
-    Page<Category> selectPageByCondition(Category category, Integer index, Integer size);
+    ResultPage<CategoryDTO> selectPageByCondition(CategorySelectVO categorySelectVO, Integer index, Integer size);
 
     /**
      * 树形结构查询

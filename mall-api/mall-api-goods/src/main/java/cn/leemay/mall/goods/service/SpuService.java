@@ -2,6 +2,7 @@ package cn.leemay.mall.goods.service;
 
 import cn.leemay.mall.goods.entity.Spu;
 import cn.leemay.mall.goods.entity.Spu;
+import cn.leemay.mall.goods.entity.vo.SpuInsertVO;
 import cn.leemay.mall.goods.entity.vo.SpuSelectVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -21,9 +22,9 @@ public interface SpuService extends IService<Spu> {
     /**
      * 添加spu
      *
-     * @param spu spu
+     * @param spuInsertVO spu
      */
-    void insertSpu(Spu spu);
+    void insertSpu(SpuInsertVO spuInsertVO);
 
     /**
      * 根据id删除spu

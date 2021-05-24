@@ -3,10 +3,12 @@ package cn.leemay.mall.goods.controller;
 
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
+import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.common.base.util.ValidateUtils;
 import cn.leemay.mall.goods.entity.Category;
 import cn.leemay.mall.goods.entity.dto.CategoryDTO;
 import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
+import cn.leemay.mall.goods.entity.vo.CategorySelectVO;
 import cn.leemay.mall.goods.entity.vo.CategoryUpdateVO;
 import cn.leemay.mall.goods.service.CategoryService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -61,8 +63,8 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询品牌")
-    public BaseResult<Category> selectOneById(@PathVariable("id") Long id) {
-        Category result = categoryService.selectOneById(id);
+    public BaseResult<CategoryDTO> selectOneById(@PathVariable("id") Long id) {
+        CategoryDTO result = categoryService.selectOneById(id);
         if (result == null) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
         }
@@ -71,11 +73,8 @@ public class CategoryController {
 
     @PostMapping("/selectListByCondition")
     @ApiOperation("根据条件查询分类")
-    public BaseResult<List<Category>> selectListByCondition(@RequestBody Category category) {
-        if (category == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
-        List<Category> result = categoryService.selectListByCondition(category);
+    public BaseResult<List<CategoryDTO>> selectListByCondition(@RequestBody CategorySelectVO categorySelectVO) {
+        List<CategoryDTO> result = categoryService.selectListByCondition(categorySelectVO);
         if (result == null || result.size() <= 0) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
         }
@@ -84,13 +83,10 @@ public class CategoryController {
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
     @ApiOperation("根据条件分页查询分类")
-    public BaseResult<Page<Category>> selectPageByCondition(@RequestBody Category category,
-                                                            @PathVariable("index") Integer index,
-                                                            @PathVariable("size") Integer size) {
-        if (category == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
-        Page<Category> result = categoryService.selectPageByCondition(category, index, size);
+    public BaseResult<ResultPage<CategoryDTO>> selectPageByCondition(@RequestBody CategorySelectVO categorySelectVO,
+                                                                     @PathVariable("index") Integer index,
+                                                                     @PathVariable("size") Integer size) {
+        ResultPage<CategoryDTO> result = categoryService.selectPageByCondition(categorySelectVO, index, size);
         if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultCode.ERR, "暂无数据");
         }

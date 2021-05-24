@@ -1,9 +1,11 @@
 package cn.leemay.mall.goods.service.impl;
 
 import cn.leemay.mall.common.base.exception.BusException;
-import cn.leemay.mall.common.base.util.ObjectUtils;
+import cn.leemay.mall.common.base.result.ResultPage;
+import cn.leemay.mall.goods.entity.Brand;
 import cn.leemay.mall.goods.entity.Category;
 import cn.leemay.mall.goods.entity.Spu;
+import cn.leemay.mall.goods.entity.dto.BrandDTO;
 import cn.leemay.mall.goods.entity.dto.CategoryDTO;
 import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
 import cn.leemay.mall.goods.entity.vo.CategorySelectVO;
@@ -20,6 +22,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -80,21 +84,44 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     }
 
     @Override
-    public Category selectOneById(Long id) {
-        return categoryMapper.selectById(id);
+    public CategoryDTO selectOneById(Long id) {
+        Category category = categoryMapper.selectById(id);
+        CategoryDTO categoryDTO = new CategoryDTO();
+        BeanUtils.copyProperties(category, categoryDTO);
+        return categoryDTO;
     }
 
     @Override
-    public List<Category> selectListByCondition(Category category) {
-        QueryWrapper<Category> queryWrapper = queryWrapper(category);
-        return categoryMapper.selectList(queryWrapper);
+    public List<CategoryDTO> selectListByCondition(CategorySelectVO categorySelectVO) {
+        QueryWrapper<Category> queryWrapper = CategoryWrapper.queryWrapper(categorySelectVO);
+        List<Category> categoryList = categoryMapper.selectList(queryWrapper);
+        if (ObjectUtils.isEmpty(categoryList)) {
+            return null;
+        }
+        List<CategoryDTO> categoryDTOList = new ArrayList<>();
+        for (Category category : categoryList) {
+            CategoryDTO categoryDTO = new CategoryDTO();
+            BeanUtils.copyProperties(category, categoryDTO);
+            categoryDTOList.add(categoryDTO);
+        }
+        return categoryDTOList;
     }
 
     @Override
-    public Page<Category> selectPageByCondition(Category category, Integer index, Integer size) {
+    public ResultPage<CategoryDTO> selectPageByCondition(CategorySelectVO categorySelectVO, Integer index, Integer size) {
         Page<Category> page = new Page<>(index, size);
-        QueryWrapper<Category> queryWrapper = queryWrapper(category);
-        return categoryMapper.selectPage(page, queryWrapper);
+        QueryWrapper<Category> queryWrapper = CategoryWrapper.queryWrapper(categorySelectVO);
+        Page<Category> categoryPage = categoryMapper.selectPage(page, queryWrapper);
+        if (categoryPage == null || categoryPage.getRecords() == null) {
+            return null;
+        }
+        List<CategoryDTO> categoryDTOList = new ArrayList<>();
+        for (Category category : categoryPage.getRecords()) {
+            CategoryDTO categoryDTO = new CategoryDTO();
+            BeanUtils.copyProperties(category, categoryDTO);
+            categoryDTOList.add(categoryDTO);
+        }
+        return new ResultPage<>(categoryPage.getTotal(), categoryDTOList);
     }
 
     @Override
@@ -103,6 +130,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         map.put("is_show", 1);
         // 查询所有要显示的分类
         List<Category> categoryList = categoryMapper.selectByMap(map);
+        if (ObjectUtils.isEmpty(categoryList)) {
+            return null;
+        }
         List<CategoryDTO> categoryDTOList = new ArrayList<>();
         for (Category category : categoryList) {
             CategoryDTO categoryDTO = new CategoryDTO();
@@ -134,16 +164,4 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
                 .collect(Collectors.toList());
     }
 
-    /**
-     * 构建条件查询对象
-     *
-     * @param category 条件
-     * @return 对象
-     */
-    private QueryWrapper<Category> queryWrapper(Category category) {
-        QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
-        queryWrapper.allEq(ObjectUtils.obj2Map(category));
-        queryWrapper.orderByAsc("sort");
-        return queryWrapper;
-    }
 }

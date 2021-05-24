@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     public List<BrandDTO> selectListByCondition(BrandSelectVO brandSelectVO) {
         QueryWrapper<Brand> queryWrapper = BrandWrapper.queryWrapper(brandSelectVO);
         List<Brand> brandList = brandMapper.selectList(queryWrapper);
-        if (brandList == null || brandList.size() <= 0) {
+        if (ObjectUtils.isEmpty(brandList)) {
             return null;
         }
         List<BrandDTO> brandDTOList = new ArrayList<>();
@@ -117,10 +118,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
             BeanUtils.copyProperties(brand, brandDTO);
             brandDTOList.add(brandDTO);
         }
-        ResultPage<BrandDTO> resultPage = new ResultPage<>(brandPage.getTotal(), brandDTOList);
-        resultPage.setTotal(brandPage.getTotal());
-        resultPage.setData(brandDTOList);
-        return resultPage;
+        return new ResultPage<>(brandPage.getTotal(), brandDTOList);
     }
 
 }
