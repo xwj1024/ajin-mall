@@ -1,7 +1,6 @@
 package cn.leemay.mall.common.base.util;
 
 import cn.leemay.mall.common.base.exception.BusException;
-import cn.leemay.mall.common.base.result.BaseResult;
 import com.alibaba.fastjson.JSON;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.BindingResult;

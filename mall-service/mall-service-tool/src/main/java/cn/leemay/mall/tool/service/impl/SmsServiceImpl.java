@@ -35,7 +35,7 @@ public class SmsServiceImpl implements SmsService {
                 throw new BusException("验证码请求频繁，请一分钟后重试");
             }
         }
-        String code = CodeUtils.generateCode4Str(4);
+        String code = CodeUtils.generateCode4Int(4).toString();
         redisCode = code + System.currentTimeMillis();
         stringRedisTemplate.opsForValue()
                 .set(RedisConstants.CHECK_CODE + phone, redisCode, smsProperties.getExpire(), TimeUnit.SECONDS);
