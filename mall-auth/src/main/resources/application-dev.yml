@@ -4,7 +4,7 @@ spring:
   application:
     name: auth
   redis:
-    host: 192.168.200.128
+    host: 192.168.1.128
     port: 6379
     password:
     jedis:
@@ -13,8 +13,8 @@ spring:
         max-idle: 8
         min-idle: 0
   datasource:
-    url: jdbc:mysql://leemay.cn:3306/leemay-mall?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-    username: ajin
-    password: Spring.222
+    url: jdbc:mysql://localhost:3306/leemay-mall?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 1024
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
