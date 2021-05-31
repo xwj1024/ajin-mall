@@ -9,23 +9,28 @@ import java.util.Date;
  */
 public class DateTimeUtils {
 
-    public static String formatDate(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    public static String formatDate2Str(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
         return simpleDateFormat.format(date);
     }
 
-    public static String formatDate(Date date, String pattern) {
+    public static String formatDate2Str(Date date, String pattern) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         return simpleDateFormat.format(date);
     }
 
-    public static String formatDateTime(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static String formatDateTime2Str(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATETIME_FORMAT);
         return simpleDateFormat.format(date);
     }
 
-    public static String formatDateTime(Date date, String pattern) {
+    public static String formatDateTime2Str(Date date, String pattern) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         return simpleDateFormat.format(date);
     }
+
+
 }

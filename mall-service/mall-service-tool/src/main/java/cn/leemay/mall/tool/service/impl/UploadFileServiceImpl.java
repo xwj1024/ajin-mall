@@ -59,7 +59,7 @@ public class UploadFileServiceImpl implements UploadFileService {
         // 获取文件字节数组
         byte[] bytes = imgFile.getBytes();
         // 根据日期设置文件夹名称
-        String date = DateTimeUtils.formatDate(new Date());
+        String date = DateTimeUtils.formatDate2Str(new Date());
         String folderFileName = date + "/" + fileName;
         // 将文件上传到云服务器
         OssUtils.upload(folderFileName, bytes, ossProperties.getDomain(), ossProperties.getBucket(),
