@@ -18,6 +18,7 @@
 *.zip
 *.tar.gz
 *.rar
+# 所有目录及其子目录下的target文件都排除
 **/target/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
