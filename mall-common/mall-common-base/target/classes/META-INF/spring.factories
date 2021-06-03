@@ -1,5 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  cn.leemay.mall.common.base.config.SwaggerConfig,\
-  cn.leemay.mall.common.base.handler.ExceptionHandlers,\
-  cn.leemay.mall.common.base.config.WebMvcConfig,\
-  cn.leemay.mall.common.base.filter.RepeatRequestFilter
