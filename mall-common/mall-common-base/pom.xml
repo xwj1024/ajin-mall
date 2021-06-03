@@ -103,7 +103,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${springboot.version}</version>
                 <configuration>
-                    <mainClass>cn.leemay.mall.common.db.CommonDbApplication</mainClass>
+                    <mainClass>cn.leemay.mall.common.data.CommonDataApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

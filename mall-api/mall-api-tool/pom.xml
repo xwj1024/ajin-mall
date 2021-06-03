@@ -37,7 +37,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.leemay.mall.common.db.CommonDbApplication</mainClass>
+                    <mainClass>cn.leemay.mall.common.data.CommonDataApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
