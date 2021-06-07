@@ -35,6 +35,7 @@ public class SpuController {
     @Autowired
     private SpuService spuService;
 
+    @RepeatSubmit
     @PostMapping
     @ApiOperation("添加spu")
     public BaseResult<String> insertSpu(@RequestBody @Validated SpuInsertVO spuInsertVO, BindingResult bindingResult) {
@@ -50,6 +51,7 @@ public class SpuController {
         return new BaseResult<>(ResultCode.OK, "删除成功");
     }
 
+    @RepeatSubmit
     @PutMapping
     @ApiOperation("修改spu")
     public BaseResult<String> updateSpu(@RequestBody Spu spu) {

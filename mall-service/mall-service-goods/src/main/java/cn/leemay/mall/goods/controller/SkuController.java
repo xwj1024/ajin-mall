@@ -30,6 +30,7 @@ public class SkuController {
     @Autowired
     private SkuService skuService;
 
+    @RepeatSubmit
     @PostMapping
     @ApiOperation("添加sku")
     public BaseResult<String> insert(@RequestBody Sku sku) {
@@ -50,6 +51,7 @@ public class SkuController {
         return new BaseResult<>(ResultCode.OK, "删除成功");
     }
 
+    @RepeatSubmit
     @PutMapping
     @ApiOperation("修改sku")
     public BaseResult<String> update(@RequestBody Sku sku) {
@@ -59,6 +61,7 @@ public class SkuController {
         skuService.update(sku);
         return new BaseResult<>(ResultCode.OK, "修改成功");
     }
+
     @GetMapping("/{id}")
     @ApiOperation("根据id查询sku")
     public BaseResult<Sku> selectOneById(@PathVariable("id") Long id) {
@@ -71,6 +74,7 @@ public class SkuController {
         }
         return new BaseResult<>(ResultCode.OK, "查询成功", result);
     }
+
     @PostMapping("/selectListByCondition")
     @ApiOperation("根据条件查询Sku")
     public BaseResult<List<Sku>> selectListByCondition(@RequestBody Sku sku) {

@@ -52,6 +52,7 @@ public class BrandController {
         return new BaseResult<>(ResultCode.OK, "删除成功");
     }
 
+    @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改品牌", notes = "根据主键id修改")
     public BaseResult<String> updateBrand(@RequestBody @Validated BrandUpdateVO brandUpdateVO, BindingResult bindingResult) {

@@ -1,6 +1,7 @@
 package cn.leemay.mall.goods.controller;
 
 
+import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.common.base.result.ResultPage;
@@ -39,6 +40,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @RepeatSubmit
     @PostMapping
     @ApiOperation("添加分类")
     public BaseResult<String> insertCategory(@RequestBody @Validated CategoryInsertVO categoryInsertVO, BindingResult bindingResult) {
@@ -54,6 +56,7 @@ public class CategoryController {
         return new BaseResult<>(ResultCode.OK, "删除成功");
     }
 
+    @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改分类", notes = "根据主键id修改")
     public BaseResult<String> updateCategory(@RequestBody CategoryUpdateVO categoryUpdateVO) {
