@@ -27,6 +27,12 @@ public class BaseResult<T> implements Serializable {
         this.data = data;
     }
 
+    public BaseResult(ResultEnum resultEnum, T data) {
+        this.code = resultEnum.getCode();
+        this.desc = resultEnum.getDesc();
+        this.data = data;
+    }
+
     public BaseResult(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
