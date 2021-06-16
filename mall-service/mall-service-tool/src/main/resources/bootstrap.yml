@@ -1,6 +1,6 @@
 spring:
   application:
-    name: tool
+    name: @artifactId@
   cloud:
     nacos:
       config:
