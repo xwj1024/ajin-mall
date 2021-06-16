@@ -2,10 +2,7 @@ package cn.leemay.mall.common.base.util;
 
 import com.alibaba.fastjson.JSON;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Map;
 
 /**
@@ -20,19 +17,12 @@ public class ObjectUtils {
      * @param obj 对象
      * @return 字节数组
      */
-    public static byte[] obj2Byte(Object obj) {
-        byte[] bytes = null;
-        try {
-            ByteArrayOutputStream bo = new ByteArrayOutputStream();
-            ObjectOutputStream oo = new ObjectOutputStream(bo);
+    public static byte[] obj2Byte(Object obj) throws IOException {
+        byte[] bytes;
+        try (ByteArrayOutputStream bo = new ByteArrayOutputStream(); ObjectOutputStream oo = new ObjectOutputStream(bo)) {
+
             oo.writeObject(obj);
-
             bytes = bo.toByteArray();
-
-            bo.close();
-            oo.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return bytes;
     }
@@ -43,18 +33,11 @@ public class ObjectUtils {
      * @param bytes 字节数组
      * @return 对象
      */
-    public static Object byte2Obj(byte[] bytes) {
-        Object obj = null;
-        try {
-            ByteArrayInputStream bi = new ByteArrayInputStream(bytes);
-            ObjectInputStream oi = new ObjectInputStream(bi);
+    public static Object byte2Obj(byte[] bytes) throws IOException, ClassNotFoundException {
+        Object obj;
+        try (ByteArrayInputStream bi = new ByteArrayInputStream(bytes); ObjectInputStream oi = new ObjectInputStream(bi)) {
 
             obj = oi.readObject();
-
-            bi.close();
-            oi.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return obj;
     }
@@ -90,9 +73,9 @@ public class ObjectUtils {
         Map<String, Object> map = ObjectUtils.obj2Map(obj);
         String[] newKeys = ClassUtils.getColumns(obj.getClass());
         for (String newKey : newKeys) {
-            System.out.println(newKey);
             map.put(newKey, map.remove(StringUtils.line2Hump(newKey)));
         }
         return map;
     }
+
 }

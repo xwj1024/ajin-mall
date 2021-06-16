@@ -3,7 +3,6 @@ package cn.leemay.mall.goods.service.impl;
 import cn.leemay.mall.common.base.exception.BusException;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Brand;
-import cn.leemay.mall.goods.entity.Spu;
 import cn.leemay.mall.goods.entity.dto.BrandDTO;
 import cn.leemay.mall.goods.entity.vo.BrandInsertVO;
 import cn.leemay.mall.goods.entity.vo.BrandSelectVO;

@@ -1,8 +1,10 @@
 package cn.leemay.mall.goods.controller;
 
 
+import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
+import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.util.ValidateUtils;
 import cn.leemay.mall.goods.entity.Spu;
 import cn.leemay.mall.goods.entity.vo.SpuInsertVO;
@@ -41,14 +43,14 @@ public class SpuController {
     public BaseResult<String> insertSpu(@RequestBody @Validated SpuInsertVO spuInsertVO, BindingResult bindingResult) {
         ValidateUtils.validate(bindingResult);
         spuService.insertSpu(spuInsertVO);
-        return new BaseResult<>(ResultCode.OK, "添加成功");
+        return new BaseResult<>(ResultEnum.INSERT_OK);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除spu")
     public BaseResult<String> deleteSpu(@PathVariable("id") Long id) {
         spuService.deleteSpu(id);
-        return new BaseResult<>(ResultCode.OK, "删除成功");
+        return new BaseResult<>(ResultEnum.DELETE_OK);
     }
 
     @RepeatSubmit
@@ -59,7 +61,7 @@ public class SpuController {
             return new BaseResult<>(ResultCode.ERR, "数据错误");
         }
         spuService.updateSpu(spu);
-        return new BaseResult<>(ResultCode.OK, "修改成功");
+        return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
@@ -70,9 +72,9 @@ public class SpuController {
         }
         Spu result = spuService.selectOneById(id);
         if (result == null) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
     @PostMapping("/selectListByCondition")
@@ -83,9 +85,9 @@ public class SpuController {
         }
         List<Spu> result = spuService.selectListByCondition(spuSelectVO);
         if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
@@ -98,9 +100,9 @@ public class SpuController {
         }
         Page<Spu> result = spuService.selectPageByCondition(spuSelectVO, index, size);
         if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 }
 

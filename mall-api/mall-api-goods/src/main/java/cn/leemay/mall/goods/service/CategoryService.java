@@ -6,7 +6,6 @@ import cn.leemay.mall.goods.entity.dto.CategoryDTO;
 import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
 import cn.leemay.mall.goods.entity.vo.CategorySelectVO;
 import cn.leemay.mall.goods.entity.vo.CategoryUpdateVO;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

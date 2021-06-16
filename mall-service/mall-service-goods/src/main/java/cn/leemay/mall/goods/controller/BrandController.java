@@ -2,8 +2,8 @@ package cn.leemay.mall.goods.controller;
 
 
 import cn.leemay.mall.common.base.result.BaseResult;
-import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.common.base.anno.RepeatSubmit;
+import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.common.base.util.ValidateUtils;
 import cn.leemay.mall.goods.entity.dto.BrandDTO;
@@ -42,14 +42,14 @@ public class BrandController {
     public BaseResult<String> insertBrand(@RequestBody @Validated BrandInsertVO brandInsertVO, BindingResult bindingResult) {
         ValidateUtils.validate(bindingResult);
         brandService.insertBrand(brandInsertVO);
-        return new BaseResult<>(ResultCode.OK, "添加成功");
+        return new BaseResult<>(ResultEnum.INSERT_OK);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除品牌", notes = "根据主键id删除")
     public BaseResult<String> deleteBrand(@PathVariable("id") Long id) {
         brandService.deleteBrand(id);
-        return new BaseResult<>(ResultCode.OK, "删除成功");
+        return new BaseResult<>(ResultEnum.DELETE_OK);
     }
 
     @RepeatSubmit
@@ -58,7 +58,7 @@ public class BrandController {
     public BaseResult<String> updateBrand(@RequestBody @Validated BrandUpdateVO brandUpdateVO, BindingResult bindingResult) {
         ValidateUtils.validate(bindingResult);
         brandService.updateBrand(brandUpdateVO);
-        return new BaseResult<>(ResultCode.OK, "修改成功");
+        return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
@@ -66,9 +66,9 @@ public class BrandController {
     public BaseResult<BrandDTO> selectOneById(@PathVariable("id") Long id) {
         BrandDTO result = brandService.selectOneById(id);
         if (result == null) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
     @PostMapping("/selectListByCondition")
@@ -76,9 +76,9 @@ public class BrandController {
     public BaseResult<List<BrandDTO>> selectListByCondition(@RequestBody BrandSelectVO brandSelectVO) {
         List<BrandDTO> result = brandService.selectListByCondition(brandSelectVO);
         if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
@@ -88,9 +88,9 @@ public class BrandController {
                                                                   @PathVariable("size") Integer size) {
         ResultPage<BrandDTO> result = brandService.selectPageByCondition(brandSelectVO, index, size);
         if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 }
 

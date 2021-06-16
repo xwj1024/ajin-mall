@@ -3,16 +3,14 @@ package cn.leemay.mall.goods.controller;
 
 import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
-import cn.leemay.mall.common.base.result.ResultCode;
+import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.common.base.util.ValidateUtils;
-import cn.leemay.mall.goods.entity.Category;
 import cn.leemay.mall.goods.entity.dto.CategoryDTO;
 import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
 import cn.leemay.mall.goods.entity.vo.CategorySelectVO;
 import cn.leemay.mall.goods.entity.vo.CategoryUpdateVO;
 import cn.leemay.mall.goods.service.CategoryService;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,22 +44,23 @@ public class CategoryController {
     public BaseResult<String> insertCategory(@RequestBody @Validated CategoryInsertVO categoryInsertVO, BindingResult bindingResult) {
         ValidateUtils.validate(bindingResult);
         categoryService.insertCategory(categoryInsertVO);
-        return new BaseResult<>(ResultCode.OK, "添加成功");
+        return new BaseResult<>(ResultEnum.INSERT_OK);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除分类", notes = "根据主键id删除")
     public BaseResult<String> deleteCategory(@PathVariable("id") Long id) {
         categoryService.deleteCategory(id);
-        return new BaseResult<>(ResultCode.OK, "删除成功");
+        return new BaseResult<>(ResultEnum.DELETE_OK);
     }
 
     @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改分类", notes = "根据主键id修改")
-    public BaseResult<String> updateCategory(@RequestBody CategoryUpdateVO categoryUpdateVO) {
+    public BaseResult<String> updateCategory(@RequestBody @Validated CategoryUpdateVO categoryUpdateVO, BindingResult bindingResult) {
+        ValidateUtils.validate(bindingResult);
         categoryService.updateCategory(categoryUpdateVO);
-        return new BaseResult<>(ResultCode.OK, "修改成功");
+        return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
@@ -69,9 +68,9 @@ public class CategoryController {
     public BaseResult<CategoryDTO> selectOneById(@PathVariable("id") Long id) {
         CategoryDTO result = categoryService.selectOneById(id);
         if (result == null) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
     @PostMapping("/selectListByCondition")
@@ -79,9 +78,9 @@ public class CategoryController {
     public BaseResult<List<CategoryDTO>> selectListByCondition(@RequestBody CategorySelectVO categorySelectVO) {
         List<CategoryDTO> result = categoryService.selectListByCondition(categorySelectVO);
         if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
@@ -91,9 +90,9 @@ public class CategoryController {
                                                                      @PathVariable("size") Integer size) {
         ResultPage<CategoryDTO> result = categoryService.selectPageByCondition(categorySelectVO, index, size);
         if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
     @PostMapping("/selectWithTree")
@@ -101,9 +100,9 @@ public class CategoryController {
     public BaseResult<List<CategoryDTO>> selectWithTree() {
         List<CategoryDTO> result = categoryService.selectWithTree();
         if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultCode.ERR, "暂无数据");
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
-        return new BaseResult<>(ResultCode.OK, "查询成功", result);
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 }
 
