@@ -36,7 +36,7 @@ public class SmsServiceImpl implements SmsService {
             }
         }
         String code = CodeUtils.generateCode4Int(4).toString();
-        redisCode = code + System.currentTimeMillis();
+        redisCode = code + "," + System.currentTimeMillis();
         stringRedisTemplate.opsForValue()
                 .set(RedisConstants.CHECK_CODE + phone, redisCode, smsProperties.getExpire(), TimeUnit.SECONDS);
         SmsUtils.sendCheckCode(smsProperties.getKey(), smsProperties.getSecret(), smsProperties.getSign(), smsProperties.getTemplate(), phone, code);

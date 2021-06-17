@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author Ajin
  * @since 2021-05-22
  */
-@Repository
 @Mapper
 public interface SpecMapper extends BaseMapper<Spec> {
 

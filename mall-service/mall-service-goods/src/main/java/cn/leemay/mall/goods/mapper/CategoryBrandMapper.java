@@ -7,13 +7,12 @@ import org.springframework.stereotype.Repository;
 
 /**
  * <p>
- * 分类,品牌 关联表 Mapper 接口
+ * 分类，品牌 关联表 Mapper 接口
  * </p>
  *
  * @author Ajin
  * @since 2021-04-13
  */
-@Repository
 @Mapper
 public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
 

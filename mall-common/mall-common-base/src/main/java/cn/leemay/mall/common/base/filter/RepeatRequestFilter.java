@@ -24,6 +24,8 @@ public class RepeatRequestFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         ServletRequest servletRequest = null;
         if (request instanceof HttpServletRequest && StringUtils.startsWithIgnoreCase(request.getContentType(), MediaType.APPLICATION_JSON_VALUE)) {
             servletRequest = new RepeatRequestWrapper((HttpServletRequest) request, response);

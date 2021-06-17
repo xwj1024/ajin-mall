@@ -4,16 +4,16 @@ swagger:
   title: ${spring.application.name}
 spring:
   redis:
-    port: 6379 # Redis·şÎñÆ÷Á¬½Ó¶Ë¿Ú
-    host: 127.0.0.1 # Redis·şÎñÆ÷µØÖ·
-    database: 0 # RedisÊı¾İ¿âË÷Òı£¨Ä¬ÈÏÎª0£©
+    port: 6379 # RedisæœåŠ¡å™¨è¿æ¥ç«¯å£
+    host: 192.168.1.128 # RedisæœåŠ¡å™¨åœ°å€
+    database: 0 # Redisæ•°æ®åº“ç´¢å¼•ï¼ˆé»˜è®¤ä¸º0ï¼‰
     jedis:
       pool:
-        max-active: 8 # Á¬½Ó³Ø×î´óÁ¬½ÓÊı£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓĞÏŞÖÆ£©
-        max-wait: -1ms # Á¬½Ó³Ø×î´ó×èÈûµÈ´ıÊ±¼ä£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓĞÏŞÖÆ£©
-        max-idle: 8 # Á¬½Ó³ØÖĞµÄ×î´ó¿ÕÏĞÁ¬½Ó
-        min-idle: 0 # Á¬½Ó³ØÖĞµÄ×îĞ¡¿ÕÏĞÁ¬½Ó
-    timeout: 5000ms # Á¬½Ó³¬Ê±Ê±¼ä£¨ºÁÃë£©
+        max-active: 8 # è¿æ¥æ± æœ€å¤§è¿æ¥æ•°ï¼ˆä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ²¡æœ‰é™åˆ¶ï¼‰
+        max-wait: -1ms # è¿æ¥æ± æœ€å¤§é˜»å¡ç­‰å¾…æ—¶é—´ï¼ˆä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ²¡æœ‰é™åˆ¶ï¼‰
+        max-idle: 8 # è¿æ¥æ± ä¸­çš„æœ€å¤§ç©ºé—²è¿æ¥
+        min-idle: 0 # è¿æ¥æ± ä¸­çš„æœ€å°ç©ºé—²è¿æ¥
+    timeout: 5000ms # è¿æ¥è¶…æ—¶æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
 
 oss:
   url: "http"
@@ -22,16 +22,16 @@ oss:
   bucket: "abc"
   secret: "abc"
 sms:
-  key: "abc"
-  secret: "abc"
-  sign: "http"
-  template: "abc"
+  key: LTAI5tNaX365X78WhowNoksd
+  secret: 9JmVkqWJH85Ww7OiZECmf1I2Zt7Pxu
+  sign: LEEMAY
+  template: SMS_204276083
   expire: 300
 
-logging:
-  level: info # Ö¸¶¨×Ô¶¨Òålogger¶ÔÏóÈÕÖ¾¼¶±ğ
-  pattern:
-    console: [ %-5level ] %d{yyyy-MM-dd HH:mm:ss} %c [%thread] *_*_* %msg %n # Ö¸¶¨¿ØÖÆÌ¨Êä³öÈÕÖ¾ÏûÏ¢µÄ¸ñÊ½
-    file: [ %5level ] %d{yyyy-MM-dd HH:mm:ss} %c [%thread] *_*_* %msg %n # Ö¸¶¨ÈÕÖ¾ÎÄ¼şÏûÏ¢¸ñÊ½
-  file:
-    name: /www/logs/${spring.application.name} %d{yyyy-MM-dd HH:mm:ss}.log # Ö¸¶¨´æ·ÅÈÕÖ¾ÎÄ¼şµÄ¾ßÌåÂ·¾¶
+#logging:
+#  level: info # æŒ‡å®šè‡ªå®šä¹‰loggerå¯¹è±¡æ—¥å¿—çº§åˆ«
+#  pattern:
+#    console: [ %-5level ] %d{yyyy-MM-dd HH:mm:ss} %c [%thread] *_*_* %msg %n # æŒ‡å®šæ§åˆ¶å°è¾“å‡ºæ—¥å¿—æ¶ˆæ¯çš„æ ¼å¼
+#    file: [ %5level ] %d{yyyy-MM-dd HH:mm:ss} %c [%thread] *_*_* %msg %n # æŒ‡å®šæ—¥å¿—æ–‡ä»¶æ¶ˆæ¯æ ¼å¼
+#  file:
+#    name: /www/logs/${spring.application.name} %d{yyyy-MM-dd HH:mm:ss}.log # æŒ‡å®šå­˜æ”¾æ—¥å¿—æ–‡ä»¶çš„å…·ä½“è·¯å¾„

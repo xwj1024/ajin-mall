@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
- * 规格,参数 模板表 Mapper 接口
+ * 规格，参数 模板表 Mapper 接口
  * </p>
  *
  * @author Ajin

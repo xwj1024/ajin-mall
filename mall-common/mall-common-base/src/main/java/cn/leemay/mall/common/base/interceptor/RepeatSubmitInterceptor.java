@@ -29,7 +29,7 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter 
             RepeatSubmit annotation = method.getAnnotation(RepeatSubmit.class);
             if (annotation != null) {
                 if (this.isRepeatSubmit(request)) {
-                    BaseResult<Object> result = new BaseResult<>(ResultCode.ERR, "不允许重复提交，请稍后再试");
+                    BaseResult<Object> result = new BaseResult<>(ResultCode.ERR, "不允许重复操作，请稍后再试");
                     response.setContentType("application/json");
                     String json = JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
                     response.getWriter().print(json);

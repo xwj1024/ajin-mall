@@ -1,6 +1,6 @@
 spring:
   application:
-    name: tool
+    name: mall-service-tool
   cloud:
     nacos:
       config:

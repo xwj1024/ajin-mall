@@ -25,8 +25,8 @@ public class RepeatRequestWrapper extends HttpServletRequestWrapper {
 
     public RepeatRequestWrapper(HttpServletRequest request, ServletResponse response) throws IOException {
         super(request);
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+        // request.setCharacterEncoding("UTF-8");
+        // response.setCharacterEncoding("UTF-8");
         body = HttpUtils.getBodyString(request).getBytes(UTF_8);
     }
 

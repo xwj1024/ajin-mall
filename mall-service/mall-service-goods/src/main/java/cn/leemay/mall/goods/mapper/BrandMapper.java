@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author Ajin
  * @since 2021-04-13
  */
-@Repository
 @Mapper
 public interface BrandMapper extends BaseMapper<Brand> {
 
