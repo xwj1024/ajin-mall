@@ -24,10 +24,10 @@ spring:
       stat-view-servlet:
         login-username: root # 后台监控登录账号
         login-password: 1024 # 后台监控登录密码
+        enabled: true # 是否开启后台监控，默认false
       test-while-idle: true # 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
       test-on-borrow: false # 申请连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
       test-on-return: false # 归还连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
-
   redis:
     host: 192.168.1.128
 mybatis-plus:

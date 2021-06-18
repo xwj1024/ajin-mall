@@ -1,4 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   cn.leemay.mall.common.data.config.MybatisPlusConfig,\
-  cn.leemay.mall.common.data.handler.MyMetaObjectHandler,\
-  cn.leemay.mall.common.data.config.DruidConfig
+  cn.leemay.mall.common.data.handler.MyMetaObjectHandler
