@@ -1,4 +1,4 @@
-package cn.leemay.mall.gateway.system.filter;
+package cn.leemay.mall.gateway.sys.filter;
 
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

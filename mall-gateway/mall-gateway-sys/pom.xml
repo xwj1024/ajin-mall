@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mall-gateway-system</artifactId>
+    <artifactId>mall-gateway-sys</artifactId>
 
     <dependencies>
         <dependency>
@@ -21,6 +21,12 @@
             <groupId>cn.leemay.mall</groupId>
             <artifactId>mall-common-base</artifactId>
             <version>0.0.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

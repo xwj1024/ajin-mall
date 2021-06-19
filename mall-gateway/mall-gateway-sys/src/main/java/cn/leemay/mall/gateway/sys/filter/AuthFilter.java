@@ -1,4 +1,4 @@
-package cn.leemay.mall.gateway.system.filter;
+package cn.leemay.mall.gateway.sys.filter;
 
 import cn.leemay.mall.common.base.util.JwtUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -28,7 +28,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         ServerHttpResponse response = exchange.getResponse();
 
         // 判断当前的请求时否为登录请求,如果是 直接放行
-        if (request.getURI().getPath().contains("/system/admin/login")) {
+        if (request.getURI().getPath().contains("/sys/admin/login")) {
             // 放行
             return chain.filter(exchange);
         }

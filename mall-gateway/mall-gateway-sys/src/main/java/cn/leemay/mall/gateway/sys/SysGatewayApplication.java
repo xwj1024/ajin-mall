@@ -1,4 +1,4 @@
-package cn.leemay.mall.gateway.system;
+package cn.leemay.mall.gateway.sys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +13,9 @@ import java.util.Objects;
  * @since 2021-04-15
  */
 @SpringBootApplication
-public class SystemGatewayApplication {
+public class SysGatewayApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SystemGatewayApplication.class, args);
+        SpringApplication.run(SysGatewayApplication.class, args);
     }
 
     @Bean

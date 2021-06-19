@@ -14,12 +14,9 @@ spring:
         server-addr: 192.168.1.128:8848
         namespace: dev
         group: DEV_GROUP
+
 dubbo:
-  scan:
-    base-packages: cn.leemay.mall.goods.service.impl # 开启包扫描
-  protocols:
-    dubbo:
-      name: dubbo # 服务协议
-      port: -1 # 服务端口
   registry:
     address: spring-cloud://localhost # 注册中心
+  cloud:
+    subscribed-services: goods # 已订阅的服务提供者名称
