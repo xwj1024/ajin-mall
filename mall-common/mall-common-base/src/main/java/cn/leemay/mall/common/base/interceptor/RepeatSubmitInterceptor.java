@@ -3,8 +3,7 @@ package cn.leemay.mall.common.base.interceptor;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.common.base.anno.RepeatSubmit;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import cn.leemay.mall.common.base.util.ResponseUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -30,9 +29,7 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter 
             if (annotation != null) {
                 if (this.isRepeatSubmit(request)) {
                     BaseResult<Object> result = new BaseResult<>(ResultCode.ERR, "不允许重复操作，请稍后再试");
-                    response.setContentType("application/json");
-                    String json = JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
-                    response.getWriter().print(json);
+                    ResponseUtils.printJson(response, result);
                     return false;
                 }
             }

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  * @author Ajin
- * @create 2021-04-15
+ * @since 2021-04-15
  */
 @SpringBootApplication
 public class SystemGatewayApplication {

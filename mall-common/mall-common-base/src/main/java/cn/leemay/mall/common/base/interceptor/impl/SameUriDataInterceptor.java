@@ -37,7 +37,7 @@ public class SameUriDataInterceptor extends RepeatSubmitInterceptor implements S
 
     private String header = "Authorization";
 
-    private int intervalTime = 10000;
+    private int intervalTime = 3000;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
