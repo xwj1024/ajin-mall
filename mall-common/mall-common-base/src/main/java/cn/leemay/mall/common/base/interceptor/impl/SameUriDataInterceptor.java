@@ -82,7 +82,7 @@ public class SameUriDataInterceptor extends RepeatSubmitInterceptor implements S
                 }
             }
         }
-        Map<String, Object> newDataMap = new HashMap<>(2);
+        Map<String, Object> newDataMap = new HashMap<>(1);
         newDataMap.put(uri, nowDataMap);
         stringRedisTemplate.opsForValue().set(repeatSubmitKey, JSON.toJSONString(newDataMap), intervalTime, TimeUnit.MILLISECONDS);
         return false;
