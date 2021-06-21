@@ -1,18 +1,18 @@
 spring:
   application:
-    name: auth
+    name: @artifactId@
   cloud:
     nacos:
       config:
         refresh-enabled: true
         server-addr: 192.168.1.128:8848
         file-extension: yaml
-        namespace: auth
+        namespace: dev
         group: DEV_GROUP
         enabled: true
       discovery:
         server-addr: 192.168.1.128:8848
-        namespace: auth
+        namespace: dev
         group: DEV_GROUP
 dubbo:
   scan:
@@ -22,4 +22,4 @@ dubbo:
       name: dubbo # 服务协议
       port: -1 # 服务端口
   registry:
-    address: spring-cloud://localhost # 注册中心
+    address: nacos://192.168.1.128:8848 # 注册中心

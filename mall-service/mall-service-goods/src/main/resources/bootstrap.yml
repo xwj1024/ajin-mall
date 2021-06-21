@@ -22,4 +22,4 @@ dubbo:
       name: dubbo # 服务协议
       port: -1 # 服务端口
   registry:
-    address: spring-cloud://localhost # 注册中心
+    address: spring-cloud://192.168.1.128 # 注册中心

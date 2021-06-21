@@ -3,6 +3,7 @@ package cn.leemay.mall.auth.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 
 import javax.sql.DataSource;
+import java.util.UUID;
 
 /**
  * 授权服务配置
@@ -38,7 +40,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource).clients(clientDetails());
+        //clients.jdbc(dataSource).clients(clientDetails());
+        clients.inMemory()
+                .withClient("root")
+                .secret(BCrypt.hashpw("1024", BCrypt.gensalt()))
+                .redirectUris("leemay.cn")
+                .scopes("all")
+                .authorizedGrantTypes("authorization_code");
     }
 
     /***
@@ -60,4 +68,5 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 
     }
+
 }
