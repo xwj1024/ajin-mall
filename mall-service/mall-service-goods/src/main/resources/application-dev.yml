@@ -35,3 +35,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 repeat:
   interval-time: 2000 # 重复提交，间隔时间
+springfox:
+  documentation:
+    auto-startup: true
+    enabled: true

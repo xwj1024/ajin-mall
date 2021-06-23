@@ -32,19 +32,12 @@ public class SwaggerConfig {
     private SwaggerProperties swaggerProperties;
 
     @Bean
-    public Docket docket(Environment environment) {
-
-        // 设置swagger要显示的环境
-        Profiles profiles = Profiles.of("dev", "tes");
-
-        // 判断是否属于要显示的环境
-        boolean flag = environment.acceptsProfiles(profiles);
+    public Docket docket() {
 
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 // 是否启用swagger
                 //.enable(flag)
-                .enable(swaggerProperties.getEnable())
                 // 设置组名
                 .groupName(swaggerProperties.getGroup())
                 // 选择条件
@@ -60,12 +53,12 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfo(swaggerProperties.getTitle() + " api文档",
-                swaggerProperties.getDesc(),
+                swaggerProperties.getDescription(),
                 swaggerProperties.getVersion(),
-                "https://github.com/xwj1024/leemay-mall",
+                swaggerProperties.getTermsOfServiceUrl(),
                 contact(),
-                "Apache 2.0",
-                "https://www.apache.org/licenses/LICENSE-2.0",
+                swaggerProperties.getLicense(),
+                swaggerProperties.getLicenseUrl(),
                 new ArrayList());
 
     }
@@ -76,6 +69,6 @@ public class SwaggerConfig {
      * @return 作者信息
      */
     private Contact contact() {
-        return new Contact("Ajin", "https://github.com/xwj1024/leemay-mall", "xwj1024@yeah.net");
+        return new Contact(swaggerProperties.getContactName(), swaggerProperties.getContactUrl(), swaggerProperties.getContactEmail());
     }
 }
