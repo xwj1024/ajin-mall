@@ -19,6 +19,7 @@ public class ResponseUtils {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             String json = JSON.toJSONString(obj, SerializerFeature.WriteMapNullValue);
             writer.print(json);
+            writer.flush();
         }
     }
 }
