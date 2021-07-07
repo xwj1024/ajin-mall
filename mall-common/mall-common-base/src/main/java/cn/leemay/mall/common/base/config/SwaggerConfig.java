@@ -53,7 +53,7 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfo(swaggerProperties.getTitle() + " api文档",
-                swaggerProperties.getDescription(),
+                "<font color='green'>" + swaggerProperties.getDescription() + "</font>",
                 swaggerProperties.getVersion(),
                 swaggerProperties.getTermsOfServiceUrl(),
                 contact(),
