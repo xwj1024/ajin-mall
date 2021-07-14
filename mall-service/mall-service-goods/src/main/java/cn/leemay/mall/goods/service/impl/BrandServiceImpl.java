@@ -1,6 +1,6 @@
 package cn.leemay.mall.goods.service.impl;
 
-import cn.leemay.mall.common.base.exception.BusException;
+import cn.leemay.mall.common.base.exception.BizException;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Brand;
 import cn.leemay.mall.goods.entity.dto.BrandDTO;
@@ -48,7 +48,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
         brandSelectVO.setName(brandInsertVO.getName());
         Integer brandCount = brandMapper.selectCount(BrandWrapper.queryCountWrapper(brandSelectVO));
         if (brandCount > 0) {
-            throw new BusException("已有该品牌");
+            throw new BizException("已有该品牌");
         }
         Brand brand = new Brand();
         BeanUtils.copyProperties(brandInsertVO, brand);
@@ -61,7 +61,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
         spuSelectVO.setBrandId(id);
         Integer spuCount = spuMapper.selectCount(SpuWrapper.queryCountWrapper(spuSelectVO));
         if (spuCount > 0) {
-            throw new BusException("该品牌已关联商品");
+            throw new BizException("该品牌已关联商品");
         }
         brandMapper.deleteById(id);
     }
@@ -72,7 +72,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
         brandSelectVO.setName(brandUpdateVO.getName());
         Integer brandCount = brandMapper.selectCount(BrandWrapper.queryCountWrapper(brandSelectVO));
         if (brandCount > 0) {
-            throw new BusException("已有该品牌");
+            throw new BizException("已有该品牌");
         }
         Brand brand = new Brand();
         BeanUtils.copyProperties(brandUpdateVO, brand);

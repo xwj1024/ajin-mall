@@ -1,6 +1,6 @@
 package cn.leemay.mall.common.base.util;
 
-import cn.leemay.mall.common.base.exception.BusException;
+import cn.leemay.mall.common.base.exception.BizException;
 import com.alibaba.fastjson.JSON;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.BindingResult;
@@ -21,7 +21,7 @@ public class ValidateUtils {
             Map<String, String> errMap = bindingResult.getFieldErrors().stream()
                     .collect(Collectors.toMap(FieldError::getField, DefaultMessageSourceResolvable::getDefaultMessage));
             String err = JSON.toJSONString(errMap);
-            throw new BusException(err);
+            throw new BizException(err);
         }
     }
 
@@ -30,7 +30,7 @@ public class ValidateUtils {
             Map<String, String> errMap = errors.getFieldErrors().stream()
                     .collect(Collectors.toMap(FieldError::getField, DefaultMessageSourceResolvable::getDefaultMessage));
             String err = JSON.toJSONString(errMap);
-            throw new BusException(err);
+            throw new BizException(err);
         }
     }
 }

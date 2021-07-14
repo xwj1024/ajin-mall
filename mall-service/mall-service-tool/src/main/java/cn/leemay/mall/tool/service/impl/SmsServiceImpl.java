@@ -1,7 +1,7 @@
 package cn.leemay.mall.tool.service.impl;
 
 import cn.leemay.mall.common.base.constant.RedisConstants;
-import cn.leemay.mall.common.base.exception.BusException;
+import cn.leemay.mall.common.base.exception.BizException;
 import cn.leemay.mall.tool.property.SmsProperties;
 import cn.leemay.mall.tool.service.SmsService;
 import cn.leemay.mall.tool.util.CodeUtils;
@@ -32,7 +32,7 @@ public class SmsServiceImpl implements SmsService {
         if (redisCode != null) {
             long time = Long.parseLong(redisCode.split(",")[1]);
             if (System.currentTimeMillis() - time < 60000) {
-                throw new BusException("验证码请求频繁，请一分钟后重试");
+                throw new BizException("验证码请求频繁，请一分钟后重试");
             }
         }
         String code = CodeUtils.generateCode4Int(4).toString();

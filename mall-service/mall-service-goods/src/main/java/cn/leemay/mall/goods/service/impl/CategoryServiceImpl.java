@@ -1,11 +1,8 @@
 package cn.leemay.mall.goods.service.impl;
 
-import cn.leemay.mall.common.base.exception.BusException;
+import cn.leemay.mall.common.base.exception.BizException;
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.goods.entity.Brand;
 import cn.leemay.mall.goods.entity.Category;
-import cn.leemay.mall.goods.entity.Spu;
-import cn.leemay.mall.goods.entity.dto.BrandDTO;
 import cn.leemay.mall.goods.entity.dto.CategoryDTO;
 import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
 import cn.leemay.mall.goods.entity.vo.CategorySelectVO;
@@ -23,7 +20,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -52,7 +48,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         categorySelectVO.setParentId(categoryInsertVO.getParentId());
         Integer categoryCount = categoryMapper.selectCount(CategoryWrapper.queryCountWrapper(categorySelectVO));
         if (categoryCount > 0) {
-            throw new BusException("已有该分类");
+            throw new BizException("已有该分类");
         }
         Category category = new Category();
         BeanUtils.copyProperties(categoryInsertVO, category);
@@ -65,13 +61,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         categorySelectVO.setParentId(id);
         Integer categoryCount = categoryMapper.selectCount(CategoryWrapper.queryCountWrapper(categorySelectVO));
         if (categoryCount > 0) {
-            throw new BusException("该分类已关联下级分类");
+            throw new BizException("该分类已关联下级分类");
         }
         SpuSelectVO spuSelectVO = new SpuSelectVO();
         spuSelectVO.setCategory3Id(id);
         Integer spuCount = spuMapper.selectCount(SpuWrapper.queryCountWrapper(spuSelectVO));
         if (spuCount > 0) {
-            throw new BusException("该分类已关联商品");
+            throw new BizException("该分类已关联商品");
         }
         categoryMapper.deleteById(id);
     }

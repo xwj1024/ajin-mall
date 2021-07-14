@@ -1,6 +1,6 @@
 package cn.leemay.mall.tool.service.impl;
 
-import cn.leemay.mall.common.base.exception.BusException;
+import cn.leemay.mall.common.base.exception.BizException;
 import cn.leemay.mall.common.base.util.DateTimeUtils;
 import cn.leemay.mall.tool.property.OssProperties;
 import cn.leemay.mall.tool.service.UploadFileService;
@@ -31,7 +31,7 @@ public class UploadFileServiceImpl implements UploadFileService {
         String originalFilename = imgFile.getOriginalFilename();
         // 判断文件是否为空
         if (originalFilename == null) {
-            throw new BusException("文件错误");
+            throw new BizException("文件错误");
         }
         String folderFileName = saveFile(imgFile, originalFilename);
         return ossProperties.getUrl() + folderFileName;

@@ -1,6 +1,6 @@
 package cn.leemay.mall.common.base.handler;
 
-import cn.leemay.mall.common.base.exception.BusException;
+import cn.leemay.mall.common.base.exception.BizException;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
 import org.omg.CORBA.SystemException;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice("cn.leemay.mall")
 public class ExceptionHandlers {
 
-    @ExceptionHandler(value = BusException.class)
+    @ExceptionHandler(value = BizException.class)
     @ResponseBody
-    public BaseResult<String> business(BusException e) {
+    public BaseResult<String> business(BizException e) {
         e.printStackTrace();
         return new BaseResult<>(ResultCode.ERR, e.getMessage());
     }
