@@ -5,7 +5,6 @@ import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.common.base.util.ValidateUtils;
 import cn.leemay.mall.goods.entity.dto.CategoryDTO;
 import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
 import cn.leemay.mall.goods.entity.vo.CategorySelectVO;
@@ -14,10 +13,10 @@ import cn.leemay.mall.goods.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
@@ -33,6 +32,7 @@ import java.util.List;
 @RequestMapping("/goods/category")
 @Api(tags = "分类")
 @CrossOrigin
+@Validated
 public class CategoryController {
 
     @Autowired
@@ -41,15 +41,14 @@ public class CategoryController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加分类")
-    public BaseResult<String> insertCategory(@RequestBody @Validated CategoryInsertVO categoryInsertVO, BindingResult bindingResult) {
-        ValidateUtils.validate(bindingResult);
+    public BaseResult<String> insertCategory(@RequestBody @Validated CategoryInsertVO categoryInsertVO) {
         categoryService.insertCategory(categoryInsertVO);
         return new BaseResult<>(ResultEnum.INSERT_OK);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除分类", notes = "根据主键id删除")
-    public BaseResult<String> deleteCategory(@PathVariable("id") Long id) {
+    public BaseResult<String> deleteCategory(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
         categoryService.deleteCategory(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
@@ -57,15 +56,14 @@ public class CategoryController {
     @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改分类", notes = "根据主键id修改")
-    public BaseResult<String> updateCategory(@RequestBody @Validated CategoryUpdateVO categoryUpdateVO, BindingResult bindingResult) {
-        ValidateUtils.validate(bindingResult);
+    public BaseResult<String> updateCategory(@RequestBody @Validated CategoryUpdateVO categoryUpdateVO) {
         categoryService.updateCategory(categoryUpdateVO);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询品牌")
-    public BaseResult<CategoryDTO> selectOneById(@PathVariable("id") Long id) {
+    public BaseResult<CategoryDTO> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
         CategoryDTO result = categoryService.selectOneById(id);
         if (result == null) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
@@ -95,7 +93,7 @@ public class CategoryController {
         return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
-    @PostMapping("/selectWithTree")
+    @GetMapping("/selectWithTree")
     @ApiOperation("树形查询所有显示分类")
     public BaseResult<List<CategoryDTO>> selectWithTree() {
         List<CategoryDTO> result = categoryService.selectWithTree();

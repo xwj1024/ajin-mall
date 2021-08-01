@@ -3,9 +3,7 @@ package cn.leemay.mall.goods.controller;
 
 import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
-import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.common.base.result.ResultEnum;
-import cn.leemay.mall.common.base.util.ValidateUtils;
 import cn.leemay.mall.goods.entity.Spu;
 import cn.leemay.mall.goods.entity.vo.SpuInsertVO;
 import cn.leemay.mall.goods.entity.vo.SpuSelectVO;
@@ -14,10 +12,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -32,6 +30,7 @@ import java.util.List;
 @RequestMapping("/goods/spu")
 @CrossOrigin
 @Api(tags = "商品spu")
+@Validated
 public class SpuController {
 
     @Autowired
@@ -40,15 +39,14 @@ public class SpuController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加spu")
-    public BaseResult<String> insertSpu(@RequestBody @Validated SpuInsertVO spuInsertVO, BindingResult bindingResult) {
-        ValidateUtils.validate(bindingResult);
+    public BaseResult<String> insertSpu(@RequestBody @Validated SpuInsertVO spuInsertVO) {
         spuService.insertSpu(spuInsertVO);
         return new BaseResult<>(ResultEnum.INSERT_OK);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除spu")
-    public BaseResult<String> deleteSpu(@PathVariable("id") Long id) {
+    public BaseResult<String> deleteSpu(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
         spuService.deleteSpu(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
@@ -56,20 +54,14 @@ public class SpuController {
     @RepeatSubmit
     @PutMapping
     @ApiOperation("修改spu")
-    public BaseResult<String> updateSpu(@RequestBody Spu spu) {
-        if (spu == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
+    public BaseResult<String> updateSpu(@Validated @RequestBody Spu spu) {
         spuService.updateSpu(spu);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询spu")
-    public BaseResult<Spu> selectOneById(@PathVariable("id") Long id) {
-        if (id == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
+    public BaseResult<Spu> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
         Spu result = spuService.selectOneById(id);
         if (result == null) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
@@ -80,9 +72,6 @@ public class SpuController {
     @PostMapping("/selectListByCondition")
     @ApiOperation("根据条件查询Spu")
     public BaseResult<List<Spu>> selectListByCondition(@RequestBody SpuSelectVO spuSelectVO) {
-        if (spuSelectVO == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
         List<Spu> result = spuService.selectListByCondition(spuSelectVO);
         if (result == null || result.size() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
@@ -95,9 +84,6 @@ public class SpuController {
     public BaseResult<Page<Spu>> selectPageByCondition(@RequestBody SpuSelectVO spuSelectVO,
                                                        @PathVariable("index") Integer index,
                                                        @PathVariable("size") Integer size) {
-        if (spuSelectVO == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
         Page<Spu> result = spuService.selectPageByCondition(spuSelectVO, index, size);
         if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
