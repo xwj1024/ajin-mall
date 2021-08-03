@@ -62,7 +62,7 @@ public class BrandController {
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询品牌")
-    public BaseResult<BrandDTO> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
+    public BaseResult<BrandDTO> selectOneById(@PathVariable("id") Long id) {
         BrandDTO result = brandService.selectOneById(id);
         if (result == null) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);

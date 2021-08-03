@@ -14,7 +14,8 @@ public enum ResultEnum {
     UPDATE_ERR(ResultCode.ERR, "修改失败"),
     SELECT_OK(ResultCode.OK, "查询成功"),
     SELECT_ERR(ResultCode.ERR, "查询失败"),
-    SELECT_INFO(ResultCode.INFO, "暂无数据");
+    SELECT_INFO(ResultCode.INFO, "暂无数据"),
+    PARAM_ERR(ResultCode.ERR, "参数有误");
 
     private final int code;
     private final String desc;

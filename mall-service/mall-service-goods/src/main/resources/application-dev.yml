@@ -5,7 +5,7 @@ swagger:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource # 数据源类型
-    url: jdbc:mysql://localhost:3306/leemay_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.3.3:3306/leemay_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai
     username: root
     password: 1024
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -29,7 +29,7 @@ spring:
       test-on-borrow: false # 申请连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
       test-on-return: false # 归还连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
   redis:
-    host: 192.168.1.128
+    host: 192.168.3.123
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
