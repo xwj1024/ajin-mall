@@ -28,13 +28,13 @@ public class ExceptionHandlers {
 
     @ExceptionHandler(BizException.class)
     public BaseResult<String> handleBizException(BizException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(), e);
         return new BaseResult<>(ResultCode.ERR, e.getMessage());
     }
 
     @ExceptionHandler(SysException.class)
     public BaseResult<String> handleSysException(SysException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(), e);
         return new BaseResult<>(ResultCode.ERR, e.getMessage());
     }
 
@@ -45,10 +45,10 @@ public class ExceptionHandlers {
             Map<String, String> errMap = new HashMap<>(1);
             bindingResult.getFieldErrors().forEach(fieldError ->
                     errMap.put(fieldError.getField(), fieldError.getDefaultMessage()));
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
             return new BaseResult<>(ResultEnum.PARAM_ERR, errMap);
         }
-        log.error(e.getMessage());
+        log.error(e.getMessage(), e);
         return new BaseResult<>(ResultEnum.PARAM_ERR);
     }
 
@@ -64,16 +64,16 @@ public class ExceptionHandlers {
                 String message = constraintViolation.getMessage();
                 errMap.put(mp[1], message);
             }
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
             return new BaseResult<>(ResultEnum.PARAM_ERR, errMap);
         }
-        log.error(e.getMessage());
+        log.error(e.getMessage(), e);
         return new BaseResult<>(ResultEnum.PARAM_ERR);
     }
 
     @ExceptionHandler(RuntimeException.class)
     public BaseResult<String> handleRuntimeException(Exception e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(), e);
         return new BaseResult<>(ResultCode.ERR, e.getMessage());
     }
 
