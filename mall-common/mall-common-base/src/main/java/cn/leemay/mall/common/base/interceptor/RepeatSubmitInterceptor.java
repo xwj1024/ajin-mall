@@ -1,9 +1,7 @@
 package cn.leemay.mall.common.base.interceptor;
 
-import cn.leemay.mall.common.base.result.BaseResult;
-import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.common.base.anno.RepeatSubmit;
-import cn.leemay.mall.common.base.util.ResponseUtils;
+import cn.leemay.mall.common.base.exception.BizException;
 import org.springframework.lang.NonNull;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -28,9 +26,7 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter 
             RepeatSubmit annotation = method.getAnnotation(RepeatSubmit.class);
             if (annotation != null) {
                 if (this.isRepeatSubmit(request)) {
-                    BaseResult<Object> result = new BaseResult<>(ResultCode.ERR, "不允许重复操作，请稍后再试");
-                    ResponseUtils.printJson(response, result);
-                    return false;
+                    throw new BizException("不允许重复操作，请稍后再试");
                 }
             }
         }

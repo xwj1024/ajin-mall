@@ -33,7 +33,6 @@ public class BrandInsertVO implements Serializable {
     @ApiModelProperty("首字母")
     private String initials;
 
-    @NotNull(message = "品牌排序不能为空")
     @ApiModelProperty("排序")
     private Integer sort;
 
