@@ -16,7 +16,7 @@ import java.io.IOException;
  * @since 2021-04-14
  */
 @RestController
-@RequestMapping("/search/es")
+@RequestMapping("/api/search/es")
 @Api(tags = "es管理")
 @CrossOrigin
 public class EsManageController {

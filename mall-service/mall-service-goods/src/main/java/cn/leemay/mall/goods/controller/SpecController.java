@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-05-22
  */
 @RestController
-@RequestMapping("/goods/spec")
+@RequestMapping("/api/goods/spec")
 @Api(tags = "商品规格")
 @CrossOrigin
 public class SpecController {

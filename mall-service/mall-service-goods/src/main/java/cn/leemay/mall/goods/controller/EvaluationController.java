@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/goods/evaluation")
+@RequestMapping("/api/goods/evaluation")
 @CrossOrigin
 @Api(tags = "商品评价")
 public class EvaluationController {

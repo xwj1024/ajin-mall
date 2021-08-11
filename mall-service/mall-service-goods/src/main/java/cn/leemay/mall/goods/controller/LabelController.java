@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/goods/label")
+@RequestMapping("/api/goods/label")
 @CrossOrigin
 @Api(tags = "标签")
 public class LabelController {

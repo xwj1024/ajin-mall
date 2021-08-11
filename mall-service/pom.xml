@@ -19,6 +19,7 @@
         <module>mall-service-search</module>
         <module>mall-service-system</module>
         <module>mall-service-tool</module>
+        <module>mall-service-monitor</module>
     </modules>
 
 </project>

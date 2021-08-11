@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-04-26
  */
 @RestController
-@RequestMapping("/search/search")
+@RequestMapping("/api/search/search")
 @Api(tags = "商品搜索")
 @CrossOrigin
 public class SearchController {

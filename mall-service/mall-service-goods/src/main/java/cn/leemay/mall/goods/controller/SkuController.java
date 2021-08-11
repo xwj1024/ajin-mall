@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/goods/sku")
+@RequestMapping("/api/goods/sku")
 @Api(tags = "商品sku")
 @CrossOrigin
 public class SkuController {

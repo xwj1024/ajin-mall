@@ -28,7 +28,7 @@ import java.util.List;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/goods/brand")
+@RequestMapping("/api/goods/brand")
 @Api(tags = "品牌")
 @CrossOrigin
 @Validated

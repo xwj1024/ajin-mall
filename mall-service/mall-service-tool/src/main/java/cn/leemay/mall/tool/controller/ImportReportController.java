@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-05-26
  */
 @RestController
-@RequestMapping("/tool/importReport")
+@RequestMapping("/api/tool/importReport")
 @Api(tags = "导入报表")
 @CrossOrigin
 public class ImportReportController {

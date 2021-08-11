@@ -29,7 +29,7 @@ import java.util.List;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/goods/category")
+@RequestMapping("/api/goods/category")
 @Api(tags = "分类")
 @CrossOrigin
 @Validated

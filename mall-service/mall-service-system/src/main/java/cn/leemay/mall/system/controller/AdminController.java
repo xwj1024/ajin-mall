@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021-05-07
  */
 @RestController
-@RequestMapping("/system/admin")
+@RequestMapping("/api/system/admin")
 @Api(tags = "管理员")
 @CrossOrigin
 public class AdminController {

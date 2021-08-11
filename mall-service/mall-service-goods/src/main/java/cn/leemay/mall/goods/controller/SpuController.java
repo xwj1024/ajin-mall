@@ -27,7 +27,7 @@ import java.util.List;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/goods/spu")
+@RequestMapping("/api/goods/spu")
 @CrossOrigin
 @Api(tags = "商品spu")
 @Validated
