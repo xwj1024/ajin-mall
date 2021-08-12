@@ -10,7 +10,6 @@ import java.math.BigDecimal;
  * @author Ajin
  * @since 2021-04-20
  */
-
 @Data
 public class GoodsInfo implements Serializable {
     private static final long serialVersionUID = 1L;
