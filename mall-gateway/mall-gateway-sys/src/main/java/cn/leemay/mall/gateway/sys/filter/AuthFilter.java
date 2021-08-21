@@ -1,6 +1,5 @@
 package cn.leemay.mall.gateway.sys.filter;
 
-import cn.leemay.mall.common.base.util.JwtUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -45,7 +44,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         // 如果令牌存在,解析jwt令牌,判断该令牌是否合法,如果令牌不合法,则向客户端返回错误提示信息
         try {
             // 解析令牌
-            JwtUtils.parseJwt(token);
+            //JwtUtils.parseJwt(token);
         } catch (Exception e) {
             e.printStackTrace();
             // 令牌解析失败

@@ -9,6 +9,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -24,22 +25,22 @@ public class JwtUtils {
      */
     public static final String JWT_KEY = "leemay";
     /**
-     * 过期时间
+     * 有效时长
      */
-    public static final Long JWT_TTL = 3600000L;
+    public static final Long JWT_TTL = 7200000L;
 
     /**
      * 创建token
      *
      * @param subject   主题
      * @param issuer    签发者
-     * @param ttlMillis 过期时间
+     * @param ttlMillis 有效时长
      * @return jwt
      */
-    public static String generateJwt(String subject, String issuer, Long ttlMillis) {
+    public static String generateJwt(String subject, String issuer, Long ttlMillis, Map<String, Object> claims) {
 
         if (ttlMillis == null || ttlMillis < 0) {
-            // 默认1小时
+            // 默认2小时
             ttlMillis = JwtUtils.JWT_TTL;
         }
         long nowMillis = System.currentTimeMillis();
@@ -51,7 +52,8 @@ public class JwtUtils {
                 .setIssuer(issuer)
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, generateKey())
-                .setExpiration(new Date(expireMillis));
+                .setExpiration(new Date(expireMillis))
+                .setClaims(claims);
         return builder.compact();
     }
 

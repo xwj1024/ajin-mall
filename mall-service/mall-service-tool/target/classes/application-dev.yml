@@ -22,10 +22,10 @@ oss:
   bucket: "abc"
   secret: "abc"
 sms:
-  key: LTAI5tNaX365X78WhowNoksd
-  secret: 9JmVkqWJH85Ww7OiZECmf1I2Zt7Pxu
-  sign: LEEMAY
-  template: SMS_204276083
+  key: ""
+  secret: ""
+  sign: ""
+  template: ""
   expire: 300
 
 #logging:
