@@ -16,7 +16,7 @@ spring:
         - id: mall-service-goods
           uri: lb://mall-service-goods
           predicates:
-            - Path=/api/goods/**
+            - Path=/goods/**
           filters:
             - StripPrefix= 1
 #            - name: RequestRateLimiter # 请求数限流,名字不能随便写

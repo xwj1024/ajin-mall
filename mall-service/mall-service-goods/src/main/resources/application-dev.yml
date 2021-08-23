@@ -5,9 +5,9 @@ swagger:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource # 数据源类型
-    url: jdbc:mysql://192.168.3.122:3306/leemay_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/leemay_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai
     username: root
-    password: 1024
+    password: leemay.cn
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       filters: stat,wall,log4j2

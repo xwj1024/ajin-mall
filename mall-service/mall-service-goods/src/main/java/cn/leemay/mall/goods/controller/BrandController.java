@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -47,7 +46,7 @@ public class BrandController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除品牌", notes = "根据主键id删除")
-    public BaseResult<String> deleteBrand(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
+    public BaseResult<String> deleteBrand(@PathVariable("id") Long id) {
         brandService.deleteBrand(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
