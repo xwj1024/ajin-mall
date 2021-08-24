@@ -42,4 +42,16 @@ public class PageHelpUtils {
         }
     }
 
+    public static void startPage(Integer pageIndex, Integer pageSize) {
+        if (pageIndex != null || pageSize != null) {
+            if (pageIndex == null || pageIndex <= 0) {
+                pageIndex = 1;
+            }
+            if (pageSize == null || pageSize <= 0) {
+                pageSize = 10;
+            }
+            PageHelper.startPage(pageIndex, pageSize);
+        }
+    }
+
 }
