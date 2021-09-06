@@ -16,6 +16,7 @@ import cn.leemay.mall.goods.wrapper.SpuWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ import java.util.List;
  */
 @Service
 @org.apache.dubbo.config.annotation.Service
+@Slf4j
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
 
     @Autowired
@@ -81,6 +83,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 
     @Override
     public BrandDTO selectOneById(Long id) {
+        log.error("日志！！@@##");
         Brand brand = brandMapper.selectById(id);
         BrandDTO brandDTO = new BrandDTO();
         BeanUtils.copyProperties(brand, brandDTO);
