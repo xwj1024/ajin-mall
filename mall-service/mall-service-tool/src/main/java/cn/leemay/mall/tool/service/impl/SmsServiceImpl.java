@@ -29,7 +29,9 @@ public class SmsServiceImpl implements SmsService {
     @Override
     public void getCheckCode(String phone) throws ClientException {
         String redisCode = stringRedisTemplate.opsForValue().get(RedisConstants.CHECK_CODE + phone);
+        // 判断redis中是否有验证码
         if (redisCode != null) {
+            // 如果有验证码，判断验证码请求是否超过1分钟
             long time = Long.parseLong(redisCode.split(",")[1]);
             if (System.currentTimeMillis() - time < 60000) {
                 throw new BizException("验证码请求频繁，请一分钟后重试");

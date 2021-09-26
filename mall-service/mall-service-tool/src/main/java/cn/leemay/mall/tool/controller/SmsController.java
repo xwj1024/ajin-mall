@@ -27,9 +27,6 @@ public class SmsController {
     @GetMapping("/getCheckCode/{phone}")
     @ApiOperation("获取短信验证码")
     public BaseResult<String> getCheckCode(@PathVariable("phone") String phone) throws ClientException {
-        if (phone == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
         smsService.getCheckCode(phone);
         return new BaseResult<>(ResultCode.OK, "获取成功");
     }
