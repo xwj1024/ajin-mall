@@ -11,10 +11,6 @@
 
     <artifactId>mall-service-search</artifactId>
 
-    <properties>
-        <elasticsearch.version>7.13.3</elasticsearch.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>cn.leemay.mall</groupId>
@@ -25,34 +21,6 @@
             <groupId>cn.leemay.mall</groupId>
             <artifactId>mall-api-search</artifactId>
             <version>0.0.1</version>
-        </dependency>
-        <!--es-->
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>${elasticsearch.version}</version>
-            <exclusions>
-                <!-- 默认引入的低版本 所以要排除重新依赖 -->
-                <exclusion>
-                    <groupId>org.elasticsearch</groupId>
-                    <artifactId>elasticsearch</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.elasticsearch.client</groupId>
-                    <artifactId>elasticsearch-rest-client</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- 重新依赖 -->
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-client</artifactId>
-            <version>${elasticsearch.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <version>${elasticsearch.version}</version>
         </dependency>
     </dependencies>
 </project>
