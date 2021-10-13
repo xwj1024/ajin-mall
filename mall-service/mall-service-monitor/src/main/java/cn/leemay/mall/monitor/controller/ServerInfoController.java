@@ -1,6 +1,8 @@
 package cn.leemay.mall.monitor.controller;
 
 import cn.leemay.mall.common.base.result.BaseResult;
+import cn.leemay.mall.common.base.result.ResultEnum;
+import cn.leemay.mall.monitor.entity.ServerInfo;
 import cn.leemay.mall.monitor.service.ServerInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,17 +25,13 @@ public class ServerInfoController {
     @Autowired
     private ServerInfoService serverInfoService;
 
-    @GetMapping("/hardwareInfo")
-    @ApiOperation("获取服务器硬件信息")
-    public BaseResult<String> getHardwareInfo() throws Exception {
-        serverInfoService.getHardwareInfo();
-        return new BaseResult<>();
-    }
-
-    @GetMapping("/systemInfo")
-    @ApiOperation("获取操作系统信息")
-    public BaseResult<String> getSystemInfo() throws Exception {
-        serverInfoService.getSystemInfo();
-        return new BaseResult<>();
+    @GetMapping
+    @ApiOperation("获取服务器信息")
+    public BaseResult<ServerInfo> getHardwareInfo() {
+        ServerInfo result = serverInfoService.getServerInfo();
+        if (result == null) {
+            return new BaseResult<>(ResultEnum.SELECT_INFO);
+        }
+        return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 }

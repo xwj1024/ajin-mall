@@ -5,6 +5,7 @@ import cn.leemay.mall.common.base.util.HttpUtils;
 import cn.leemay.mall.common.base.wrapper.RepeatRequestWrapper;
 import com.alibaba.fastjson.JSON;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -20,9 +21,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * 判断请求url和数据是否和上一次相同，如果和上次相同，则是重复提交表单。有效时间为 x 秒内。
  *
- * @author ruoyi
+ * @author Ajin
  * @since 2021-05-17
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Component
 @ConfigurationProperties(prefix = "repeat")

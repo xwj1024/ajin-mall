@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 /**
  * 防止重复提交拦截器
  *
- * @author ruoyi
+ * @author Ajin
  * @since 2021-05-17
  */
 public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter {

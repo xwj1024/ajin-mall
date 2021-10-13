@@ -1,19 +1,18 @@
 package cn.leemay.mall.monitor.service;
 
+import cn.leemay.mall.monitor.entity.ServerInfo;
+
 /**
  * @author Ajin
  * @since 2021-8-11
  */
-public interface  ServerInfoService {
+public interface ServerInfoService {
 
     /**
-     * 获取服务器硬件信息
+     * 获取服务器信息
+     *
+     * @return 服务器信息
      */
-    void getHardwareInfo();
-
-    /**
-     * 获取操作系统信息
-     */
-    void getSystemInfo();
+    ServerInfo getServerInfo();
 
 }

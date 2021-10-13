@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 构建可重复读取inputStream的request
  *
- * @author ruoyi
+ * @author Ajin
  * @since 2021-05-18
  */
 public class RepeatRequestWrapper extends HttpServletRequestWrapper {
