@@ -4,7 +4,7 @@ package cn.leemay.mall.monitor.service;
  * @author Ajin
  * @since 2021-8-11
  */
-public interface ServerInfoService {
+public interface  ServerInfoService {
 
     /**
      * 获取服务器硬件信息
