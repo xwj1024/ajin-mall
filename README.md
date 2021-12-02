@@ -1,3 +1,1 @@
-# leemay-mall
-
-![logo](document/img/logo.png)
+电商项目
