@@ -1,6 +1,7 @@
 package cn.leemay.mall.common.base.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @author Ajin
  * @since 2021-04-13
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class SysException extends RuntimeException implements Serializable {
     private static final long serialVersionUID = 1L;
