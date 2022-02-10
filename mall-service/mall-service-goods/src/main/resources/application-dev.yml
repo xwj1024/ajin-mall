@@ -7,7 +7,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource # 数据源类型
     url: jdbc:mysql://localhost:3306/leemay_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai
     username: root
-    password: mysql1024
+    password: root1024
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       filters: stat,wall,log4j2
