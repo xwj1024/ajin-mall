@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.base.util;
+package cn.leemay.mall.common.base.asserts;
 
 import cn.leemay.mall.common.base.exception.BizException;
 
@@ -6,7 +6,7 @@ import cn.leemay.mall.common.base.exception.BizException;
  * @author Ajin
  * @since 2022-2-19
  */
-public class AssertUtils {
+public class BizAssert {
 
     public static void isTrue(boolean expression, String message) {
         if (!expression) {
