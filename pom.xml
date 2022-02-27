@@ -7,10 +7,10 @@
     <modules>
         <module>mall-common</module>
         <module>mall-gateway</module>
-        <module>mall-service</module>
+        <module>mall-sys</module>
         <module>mall-api</module>
         <module>mall-auth</module>
-        <module>mall-application</module>
+        <module>mall-web</module>
     </modules>
 
     <parent>
