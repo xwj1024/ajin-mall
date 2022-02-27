@@ -2,10 +2,10 @@ package cn.leemay.mall.goods.service;
 
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Category;
-import cn.leemay.mall.goods.entity.dto.CategoryDTO;
-import cn.leemay.mall.goods.entity.vo.CategoryInsertVO;
-import cn.leemay.mall.goods.entity.vo.CategorySelectVO;
-import cn.leemay.mall.goods.entity.vo.CategoryUpdateVO;
+import cn.leemay.mall.goods.entity.view.CategoryDTO;
+import cn.leemay.mall.goods.entity.form.CategoryInsertVO;
+import cn.leemay.mall.goods.entity.form.CategorySelectVO;
+import cn.leemay.mall.goods.entity.form.CategoryUpdateVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

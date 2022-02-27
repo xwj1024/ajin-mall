@@ -1,8 +1,8 @@
 package cn.leemay.mall.goods.service.impl;
 
 import cn.leemay.mall.goods.entity.Spu;
-import cn.leemay.mall.goods.entity.vo.SpuInsertVO;
-import cn.leemay.mall.goods.entity.vo.SpuSelectVO;
+import cn.leemay.mall.goods.entity.form.SpuInsertVO;
+import cn.leemay.mall.goods.entity.form.SpuSelectVO;
 import cn.leemay.mall.goods.mapper.SkuMapper;
 import cn.leemay.mall.goods.mapper.SpuMapper;
 import cn.leemay.mall.goods.service.SpuService;

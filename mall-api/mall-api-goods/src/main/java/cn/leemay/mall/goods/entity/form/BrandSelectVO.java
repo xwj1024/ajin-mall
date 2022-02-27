@@ -1,4 +1,4 @@
-package cn.leemay.mall.goods.entity.vo;
+package cn.leemay.mall.goods.entity.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

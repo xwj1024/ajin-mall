@@ -1,4 +1,4 @@
-package cn.leemay.mall.goods.entity.vo;
+package cn.leemay.mall.goods.entity.view;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -16,12 +15,11 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("品牌修改对象")
-public class BrandUpdateVO implements Serializable {
+@ApiModel("品牌结果对象")
+public class BrandDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "品牌id不能为空")
     @ApiModelProperty("品牌id")
     private Long id;
 

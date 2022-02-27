@@ -1,4 +1,4 @@
-package cn.leemay.mall.goods.entity.dto;
+package cn.leemay.mall.goods.entity.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author Ajin
@@ -16,8 +15,8 @@ import java.util.List;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("分类结果对象")
-public class CategoryDTO implements Serializable {
+@ApiModel("分类查询对象")
+public class CategorySelectVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,15 +29,10 @@ public class CategoryDTO implements Serializable {
     @ApiModelProperty("分类名称")
     private String name;
 
-    @ApiModelProperty("分类图片")
-    private String image;
-
     @ApiModelProperty("分类级别")
     private Integer level;
 
-    @ApiModelProperty("分类排序")
-    private Integer sort;
+    @ApiModelProperty("是否显示")
+    private Integer isShow;
 
-    @ApiModelProperty(hidden = true)
-    private List<CategoryDTO> child;
 }

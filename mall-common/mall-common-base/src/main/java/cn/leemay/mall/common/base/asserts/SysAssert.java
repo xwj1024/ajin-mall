@@ -14,6 +14,12 @@ public class SysAssert {
         }
     }
 
+    public static void notTrue(boolean expression, String message) {
+        if (expression) {
+            throw new SysException(message);
+        }
+    }
+
     public static void isNull(Object object, String message) {
         if (object != null) {
             throw new SysException(message);

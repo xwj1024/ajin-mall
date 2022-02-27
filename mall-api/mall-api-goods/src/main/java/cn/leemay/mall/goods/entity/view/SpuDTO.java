@@ -1,4 +1,4 @@
-package cn.leemay.mall.goods.entity.vo;
+package cn.leemay.mall.goods.entity.view;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,13 +10,13 @@ import java.io.Serializable;
 
 /**
  * @author Ajin
- * @since 2021-05-22
+ * @since 2021-05-21
  */
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("Spu修改对象")
-public class SpuUpdateVO implements Serializable {
+@ApiModel("Spu结果对象")
+public class SpuDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

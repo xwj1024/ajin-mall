@@ -1,4 +1,4 @@
-package cn.leemay.mall.goods.entity.dto;
+package cn.leemay.mall.goods.entity.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,8 +15,8 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("Spu结果对象")
-public class SpuDTO implements Serializable {
+@ApiModel("Spu查询对象")
+public class SpuSelectVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,9 +28,6 @@ public class SpuDTO implements Serializable {
 
     @ApiModelProperty("商品标题")
     private String caption;
-
-    @ApiModelProperty("商品详情")
-    private String details;
 
     @ApiModelProperty("品牌id")
     private Long brandId;

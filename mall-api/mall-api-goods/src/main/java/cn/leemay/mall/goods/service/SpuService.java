@@ -1,9 +1,8 @@
 package cn.leemay.mall.goods.service;
 
 import cn.leemay.mall.goods.entity.Spu;
-import cn.leemay.mall.goods.entity.Spu;
-import cn.leemay.mall.goods.entity.vo.SpuInsertVO;
-import cn.leemay.mall.goods.entity.vo.SpuSelectVO;
+import cn.leemay.mall.goods.entity.form.SpuInsertVO;
+import cn.leemay.mall.goods.entity.form.SpuSelectVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 

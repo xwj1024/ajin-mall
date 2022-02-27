@@ -2,10 +2,10 @@ package cn.leemay.mall.goods.service;
 
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Brand;
-import cn.leemay.mall.goods.entity.dto.BrandDTO;
-import cn.leemay.mall.goods.entity.vo.BrandInsertVO;
-import cn.leemay.mall.goods.entity.vo.BrandSelectVO;
-import cn.leemay.mall.goods.entity.vo.BrandUpdateVO;
+import cn.leemay.mall.goods.entity.view.BrandDTO;
+import cn.leemay.mall.goods.entity.form.BrandInsertVO;
+import cn.leemay.mall.goods.entity.form.BrandSelectVO;
+import cn.leemay.mall.goods.entity.form.BrandUpdateVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

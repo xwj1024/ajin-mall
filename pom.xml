@@ -10,6 +10,7 @@
         <module>mall-service</module>
         <module>mall-api</module>
         <module>mall-auth</module>
+        <module>mall-application</module>
     </modules>
 
     <parent>

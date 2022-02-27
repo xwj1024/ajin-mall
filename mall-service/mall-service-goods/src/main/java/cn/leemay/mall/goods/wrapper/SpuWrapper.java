@@ -3,8 +3,8 @@ package cn.leemay.mall.goods.wrapper;
 import cn.leemay.mall.common.base.util.ClassUtils;
 import cn.leemay.mall.common.base.util.ObjectUtils;
 import cn.leemay.mall.goods.entity.Spu;
-import cn.leemay.mall.goods.entity.dto.SpuDTO;
-import cn.leemay.mall.goods.entity.vo.SpuSelectVO;
+import cn.leemay.mall.goods.entity.view.SpuDTO;
+import cn.leemay.mall.goods.entity.form.SpuSelectVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import java.util.Map;

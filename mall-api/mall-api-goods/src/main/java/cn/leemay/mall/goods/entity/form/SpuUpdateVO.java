@@ -1,4 +1,4 @@
-package cn.leemay.mall.goods.entity.vo;
+package cn.leemay.mall.goods.entity.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,10 +15,13 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("Spu添加对象")
-public class SpuInsertVO implements Serializable {
+@ApiModel("Spu修改对象")
+public class SpuUpdateVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty("主键id")
+    private Long id;
 
     @ApiModelProperty("spu名称")
     private String name;
