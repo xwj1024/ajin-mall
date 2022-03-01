@@ -1,6 +1,6 @@
 package cn.leemay.mall.common.base.config;
 
-import cn.leemay.mall.common.base.interceptor.impl.SameUriDataInterceptor;
+import cn.leemay.mall.common.base.interceptor.SameUriDataInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

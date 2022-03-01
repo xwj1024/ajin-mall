@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.base.interceptor.impl;
+package cn.leemay.mall.common.base.interceptor;
 
 import cn.leemay.mall.common.base.interceptor.RepeatSubmitInterceptor;
 import cn.leemay.mall.common.base.util.HttpUtils;
