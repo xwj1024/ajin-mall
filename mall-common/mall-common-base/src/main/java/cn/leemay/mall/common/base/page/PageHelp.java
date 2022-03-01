@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.base.util;
+package cn.leemay.mall.common.base.page;
 
 import com.github.pagehelper.PageHelper;
 
@@ -6,7 +6,7 @@ import com.github.pagehelper.PageHelper;
  * @author Ajin
  * @since 2021-04-13
  */
-public class PageHelpUtils {
+public class PageHelp {
 
     public static int pageIndexFormat(String pageIndex) {
         int index;
