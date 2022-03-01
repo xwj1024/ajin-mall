@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.base.config.property;
+package cn.leemay.mall.common.base.property;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

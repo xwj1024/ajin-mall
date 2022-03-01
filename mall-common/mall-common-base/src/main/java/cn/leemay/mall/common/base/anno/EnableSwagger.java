@@ -1,7 +1,7 @@
 package cn.leemay.mall.common.base.anno;
 
 import cn.leemay.mall.common.base.config.SwaggerConfig;
-import cn.leemay.mall.common.base.config.property.SwaggerProperties;
+import cn.leemay.mall.common.base.property.SwaggerProperties;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
