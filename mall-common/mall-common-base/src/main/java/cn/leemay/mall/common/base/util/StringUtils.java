@@ -15,7 +15,7 @@ public class StringUtils {
     /**
      * 空字符串
      */
-    private static final String NULLSTR = "";
+    private static final String EMPTY_STRING = "";
 
     /**
      * 下划线
@@ -60,7 +60,7 @@ public class StringUtils {
      * @return true：为空 false：非空
      */
     public static boolean isEmpty(String str) {
-        return isNull(str) || NULLSTR.equals(str.trim());
+        return isNull(str) || EMPTY_STRING.equals(str.trim());
     }
 
     /**
