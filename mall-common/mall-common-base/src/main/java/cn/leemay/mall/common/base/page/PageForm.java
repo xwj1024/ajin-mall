@@ -24,9 +24,9 @@ public class PageForm implements Serializable {
     @ApiModelProperty("关键字")
     protected String keyword;
 
-    @ApiModelProperty("每页条数")
+    @ApiModelProperty("排序根据")
     protected String orderBy;
 
-    @ApiModelProperty("每页条数")
+    @ApiModelProperty("排序规则：asc/desc")
     protected String sortType;
 }
