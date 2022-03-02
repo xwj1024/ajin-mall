@@ -12,7 +12,6 @@ import cn.leemay.mall.goods.entity.view.BrandView;
 import cn.leemay.mall.goods.service.BrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +26,7 @@ import javax.annotation.Resource;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/api/goods/brand")
+@RequestMapping("/goods/brand")
 @Api(tags = "品牌")
 @CrossOrigin
 @Validated // todo 不知道需不需要 待测

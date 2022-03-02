@@ -5,17 +5,17 @@ import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.goods.entity.view.CategoryView;
 import cn.leemay.mall.goods.entity.form.CategoryInsertForm;
 import cn.leemay.mall.goods.entity.form.CategorySelectForm;
 import cn.leemay.mall.goods.entity.form.CategoryUpdateForm;
+import cn.leemay.mall.goods.entity.view.CategoryView;
 import cn.leemay.mall.goods.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -29,13 +29,13 @@ import java.util.List;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/api/goods/category")
+@RequestMapping("/goods/category")
 @Api(tags = "分类")
 @CrossOrigin
-@Validated
+@Validated// todo
 public class CategoryController {
 
-    @Autowired
+    @Resource
     private CategoryService categoryService;
 
     @RepeatSubmit
@@ -48,7 +48,7 @@ public class CategoryController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除分类", notes = "根据主键id删除")
-    public BaseResult<String> deleteCategory(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
+    public BaseResult<String> deleteCategory(@PathVariable("id") Long id) {
         categoryService.deleteCategory(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }

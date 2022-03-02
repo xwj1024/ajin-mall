@@ -3,7 +3,6 @@ package cn.leemay.mall.goods.mapper;
 import cn.leemay.mall.goods.entity.CategoryBrand;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -16,4 +15,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
 
+    void deleteByCategoryId(Long categoryId);
 }

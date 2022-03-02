@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/api/goods/categoryBrand")
+@RequestMapping("/goods/categoryBrand")
 @CrossOrigin
 @Api(tags = "分类，品牌")
 public class CategoryBrandController {

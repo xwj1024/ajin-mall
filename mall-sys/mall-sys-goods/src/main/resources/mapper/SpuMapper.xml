@@ -7,4 +7,11 @@
         where brand_id = #{brandId}
           and is_delete = 0
     </select>
+
+    <select id="selectCountByCategoryId" resultType="java.lang.Integer">
+        select count(id)
+        from spu
+        where is_delete = 0
+          and (category1_id = #{categoryId} or category2_id = #{categoryId} or category3_id = #{categoryId})
+    </select>
 </mapper>

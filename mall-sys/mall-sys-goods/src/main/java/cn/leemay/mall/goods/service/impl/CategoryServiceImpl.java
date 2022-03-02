@@ -1,24 +1,22 @@
 package cn.leemay.mall.goods.service.impl;
 
-import cn.leemay.mall.common.base.exception.BizException;
+import cn.leemay.mall.common.base.asserts.BizAssert;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Category;
-import cn.leemay.mall.goods.entity.form.SpuSelectForm;
-import cn.leemay.mall.goods.entity.view.CategoryView;
 import cn.leemay.mall.goods.entity.form.CategoryInsertForm;
 import cn.leemay.mall.goods.entity.form.CategorySelectForm;
 import cn.leemay.mall.goods.entity.form.CategoryUpdateForm;
+import cn.leemay.mall.goods.entity.view.CategoryView;
+import cn.leemay.mall.goods.mapper.CategoryBrandMapper;
 import cn.leemay.mall.goods.mapper.CategoryMapper;
 import cn.leemay.mall.goods.mapper.SpuMapper;
 import cn.leemay.mall.goods.service.CategoryService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,43 +29,44 @@ import java.util.stream.Collectors;
  * @since 2021-04-13
  */
 @Service
-public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
+    @Resource
     private CategoryMapper categoryMapper;
 
-    @Autowired
+    @Resource
     private SpuMapper spuMapper;
+
+    @Resource
+    private CategoryBrandMapper categoryBrandMapper;
 
     @Override
     public void insertCategory(CategoryInsertForm categoryInsertForm) {
-//        CategorySelectForm categorySelectForm = new CategorySelectForm();
-//        categorySelectForm.setName(categoryInsertForm.getName());
-//        categorySelectForm.setParentId(categoryInsertForm.getParentId());
-//        Integer categoryCount = categoryMapper.selectCount(CategoryWrapper.queryCountWrapper(categorySelectForm));
-//        if (categoryCount > 0) {
-//            throw new BizException("已有该分类");
-//        }
-//        Category category = new Category();
-//        BeanUtils.copyProperties(categoryInsertForm, category);
-//        categoryMapper.insert(category);
+        Integer categoryCount = categoryMapper.selectCountByNameAndParentId(categoryInsertForm.getName(), categoryInsertForm.getParentId());
+        BizAssert.isTrue(categoryCount <= 0, "已有该分类");
+
+        Category category = new Category();
+        BeanUtils.copyProperties(categoryInsertForm, category);
+        int row = categoryMapper.insert(category);
+        BizAssert.isTrue(row == 1, "添加失败");
     }
 
+    @Transactional
     @Override
     public void deleteCategory(Long id) {
-//        CategorySelectForm categorySelectForm = new CategorySelectForm();
-//        categorySelectForm.setParentId(id);
-//        Integer categoryCount = categoryMapper.selectCount(CategoryWrapper.queryCountWrapper(categorySelectForm));
-//        if (categoryCount > 0) {
-//            throw new BizException("该分类已关联下级分类");
-//        }
-//        SpuSelectForm spuSelectForm = new SpuSelectForm();
-//        spuSelectForm.setCategory3Id(id);
-//        Integer spuCount = spuMapper.selectCount(SpuWrapper.queryCountWrapper(spuSelectForm));
-//        if (spuCount > 0) {
-//            throw new BizException("该分类已关联商品");
-//        }
-//        categoryMapper.deleteById(id);
+        Category existCategory = categoryMapper.selectById(id);
+        BizAssert.notNull(existCategory, "分类不存在");
+
+        Integer categoryCount = categoryMapper.selectCountByParentId(id);
+        BizAssert.isTrue(categoryCount <= 0, "该分类已关联下级分类");
+
+        Integer spuCount = spuMapper.selectCountByCategoryId(id);
+        BizAssert.isTrue(spuCount <= 0, "该分类已关联商品");
+
+        int row = categoryMapper.deleteById(id);
+        BizAssert.isTrue(row == 1, "删除失败");
+
+        categoryBrandMapper.deleteByCategoryId(id);
     }
 
     @Override

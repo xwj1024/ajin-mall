@@ -1,12 +1,10 @@
 package cn.leemay.mall.goods.service;
 
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.goods.entity.Category;
-import cn.leemay.mall.goods.entity.view.CategoryView;
 import cn.leemay.mall.goods.entity.form.CategoryInsertForm;
 import cn.leemay.mall.goods.entity.form.CategorySelectForm;
 import cn.leemay.mall.goods.entity.form.CategoryUpdateForm;
-import com.baomidou.mybatisplus.extension.service.IService;
+import cn.leemay.mall.goods.entity.view.CategoryView;
 
 import java.util.List;
 
@@ -18,7 +16,7 @@ import java.util.List;
  * @author Ajin
  * @since 2021-04-13
  */
-public interface CategoryService extends IService<Category> {
+public interface CategoryService {
 
     /**
      * 添加分类
@@ -61,8 +59,8 @@ public interface CategoryService extends IService<Category> {
      * 根据条件分页查询分类
      *
      * @param categorySelectForm 分类条件
-     * @param index    当前页
-     * @param size     每页数
+     * @param index              当前页
+     * @param size               每页数
      * @return 分页分类
      */
     ResultPage<CategoryView> selectPageByCondition(CategorySelectForm categorySelectForm, Integer index, Integer size);
