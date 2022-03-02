@@ -1,10 +1,13 @@
 package cn.leemay.mall.goods.mapper;
 
 import cn.leemay.mall.goods.entity.Brand;
+import cn.leemay.mall.goods.entity.form.BrandSelectForm;
+import cn.leemay.mall.goods.entity.view.BrandView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,4 +27,12 @@ public interface BrandMapper extends BaseMapper<Brand> {
      * @return 数量
      */
     Integer selectCountByName(@Param("name") String name);
+
+    /**
+     * 根据条件查询品牌列表
+     *
+     * @param brandSelectForm 查询条件
+     * @return 品牌列表
+     */
+    List<BrandView> selectListByCondition(BrandSelectForm brandSelectForm);
 }

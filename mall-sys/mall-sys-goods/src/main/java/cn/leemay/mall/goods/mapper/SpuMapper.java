@@ -3,7 +3,7 @@ package cn.leemay.mall.goods.mapper;
 import cn.leemay.mall.goods.entity.Spu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -15,5 +15,11 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 public interface SpuMapper extends BaseMapper<Spu> {
-
+    /**
+     * 根据品牌id查询spu
+     *
+     * @param brandId 品牌id
+     * @return spu数量
+     */
+    Integer selectCountByBrandId(@Param("brandId") Long brandId);
 }

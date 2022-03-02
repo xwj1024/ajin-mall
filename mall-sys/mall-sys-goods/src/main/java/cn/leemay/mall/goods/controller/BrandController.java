@@ -5,18 +5,16 @@ import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.goods.entity.view.BrandView;
 import cn.leemay.mall.goods.entity.form.BrandInsertForm;
 import cn.leemay.mall.goods.entity.form.BrandSelectForm;
 import cn.leemay.mall.goods.entity.form.BrandUpdateForm;
+import cn.leemay.mall.goods.entity.view.BrandView;
 import cn.leemay.mall.goods.service.BrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <p>
@@ -30,7 +28,7 @@ import java.util.List;
 @RequestMapping("/api/goods/brand")
 @Api(tags = "品牌")
 @CrossOrigin
-@Validated
+@Validated // todo 不知道需不需要 待测
 public class BrandController {
 
     @Autowired
@@ -61,30 +59,18 @@ public class BrandController {
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询品牌")
-    public BaseResult<BrandView> selectOneById(@PathVariable("id") Long id) {
-        BrandView result = brandService.selectOneById(id);
+    public BaseResult<BrandView> selectOne(@PathVariable("id") Long id) {
+        BrandView result = brandService.selectOne(id);
         if (result == null) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
         return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
-    @PostMapping("/selectListByCondition")
+    @PostMapping("/list")
     @ApiOperation("根据条件查询品牌")
-    public BaseResult<List<BrandView>> selectListByCondition(@RequestBody BrandSelectForm brandSelectForm) {
-        List<BrandView> result = brandService.selectListByCondition(brandSelectForm);
-        if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
-        }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
-    }
-
-    @PostMapping("/selectPageByCondition/{index}/{size}")
-    @ApiOperation("根据条件分页查询品牌")
-    public BaseResult<ResultPage<BrandView>> selectPageByCondition(@Validated @RequestBody BrandSelectForm brandSelectForm,
-                                                                   @PathVariable("index") Integer index,
-                                                                   @PathVariable("size") Integer size) {
-        ResultPage<BrandView> result = brandService.selectPageByCondition(brandSelectForm, index, size);
+    public BaseResult<ResultPage<BrandView>> selectList(@RequestBody BrandSelectForm brandSelectForm) {
+        ResultPage<BrandView> result = brandService.selectList(brandSelectForm);
         if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }

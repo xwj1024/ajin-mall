@@ -1,5 +1,6 @@
 package cn.leemay.mall.goods.entity.form;
 
+import cn.leemay.mall.common.base.page.PageForm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,15 +15,12 @@ import java.io.Serializable;
  * @since 2021-05-20
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @ApiModel("品牌查询对象")
-public class BrandSelectForm implements Serializable {
+public class BrandSelectForm extends PageForm implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty("品牌id")
-    private Long id;
 
     @ApiModelProperty("品牌名称")
     private String name;

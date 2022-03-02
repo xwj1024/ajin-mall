@@ -1,14 +1,10 @@
 package cn.leemay.mall.goods.service;
 
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.goods.entity.Brand;
-import cn.leemay.mall.goods.entity.view.BrandView;
 import cn.leemay.mall.goods.entity.form.BrandInsertForm;
 import cn.leemay.mall.goods.entity.form.BrandSelectForm;
 import cn.leemay.mall.goods.entity.form.BrandUpdateForm;
-import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
+import cn.leemay.mall.goods.entity.view.BrandView;
 
 /**
  * <p>
@@ -47,7 +43,7 @@ public interface BrandService {
      * @param id id
      * @return 品牌
      */
-    BrandView selectOneById(Long id);
+    BrandView selectOne(Long id);
 
     /**
      * 根据条件查询品牌
@@ -55,15 +51,6 @@ public interface BrandService {
      * @param brandSelectForm 品牌条件
      * @return 品牌列表
      */
-    List<BrandView> selectListByCondition(BrandSelectForm brandSelectForm);
+    ResultPage<BrandView> selectList(BrandSelectForm brandSelectForm);
 
-    /**
-     * 根据条件分页查询品牌
-     *
-     * @param brandSelectForm 品牌条件
-     * @param index           当前页
-     * @param size            每页数
-     * @return 分页品牌
-     */
-    ResultPage<BrandView> selectPageByCondition(BrandSelectForm brandSelectForm, Integer index, Integer size);
 }

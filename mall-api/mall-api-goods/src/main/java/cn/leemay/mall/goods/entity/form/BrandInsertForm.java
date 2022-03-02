@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -22,15 +22,15 @@ public class BrandInsertForm implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "品牌名称不能为空")
+    @NotBlank(message = "品牌名称不能为空")
     @ApiModelProperty("品牌名称")
     private String name;
 
-    @NotNull(message = "品牌图片不能为空")
+    @NotBlank(message = "品牌图片不能为空")
     @ApiModelProperty("品牌图片")
     private String image;
 
-    @NotNull(message = "品牌首字母不能为空")
+    @NotBlank(message = "品牌首字母不能为空")
     @ApiModelProperty("首字母")
     private String initials;
 
