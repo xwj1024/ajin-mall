@@ -2,6 +2,7 @@ package cn.leemay.mall.goods.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 
+import java.io.Serial;
 import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -31,7 +32,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value = "Spec对象", description = "商品规格表")
 public class Spec implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")

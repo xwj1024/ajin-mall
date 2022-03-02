@@ -1,5 +1,6 @@
 package cn.leemay.mall.goods.entity;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -35,7 +36,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value = "Sku对象", description = "商品sku表")
 public class Sku implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")

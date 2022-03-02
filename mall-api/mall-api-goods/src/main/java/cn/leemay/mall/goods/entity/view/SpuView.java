@@ -1,4 +1,4 @@
-package cn.leemay.mall.goods.entity.form;
+package cn.leemay.mall.goods.entity.view;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,9 +16,9 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("Spu查询对象")
-public class SpuSelectVO implements Serializable {
-
+@ApiModel("Spu结果对象")
+public class SpuView implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")
@@ -28,6 +29,9 @@ public class SpuSelectVO implements Serializable {
 
     @ApiModelProperty("商品标题")
     private String caption;
+
+    @ApiModelProperty("商品详情")
+    private String details;
 
     @ApiModelProperty("品牌id")
     private Long brandId;

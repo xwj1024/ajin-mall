@@ -2,6 +2,7 @@ package cn.leemay.mall.goods.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -26,7 +27,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value = "Label对象", description = "标签表")
 public class Label implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")

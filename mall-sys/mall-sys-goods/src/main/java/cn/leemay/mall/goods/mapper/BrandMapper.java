@@ -3,6 +3,7 @@ package cn.leemay.mall.goods.mapper;
 import cn.leemay.mall.goods.entity.Brand;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,4 +17,11 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface BrandMapper extends BaseMapper<Brand> {
 
+    /**
+     * 根据名称查询数量
+     *
+     * @param name 名称
+     * @return 数量
+     */
+    Integer selectCountByName(@Param("name") String name);
 }

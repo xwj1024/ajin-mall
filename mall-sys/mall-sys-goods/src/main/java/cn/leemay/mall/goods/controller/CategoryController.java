@@ -5,10 +5,10 @@ import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.goods.entity.view.CategoryDTO;
-import cn.leemay.mall.goods.entity.form.CategoryInsertVO;
-import cn.leemay.mall.goods.entity.form.CategorySelectVO;
-import cn.leemay.mall.goods.entity.form.CategoryUpdateVO;
+import cn.leemay.mall.goods.entity.view.CategoryView;
+import cn.leemay.mall.goods.entity.form.CategoryInsertForm;
+import cn.leemay.mall.goods.entity.form.CategorySelectForm;
+import cn.leemay.mall.goods.entity.form.CategoryUpdateForm;
 import cn.leemay.mall.goods.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,8 +41,8 @@ public class CategoryController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加分类")
-    public BaseResult<String> insertCategory(@RequestBody @Validated CategoryInsertVO categoryInsertVO) {
-        categoryService.insertCategory(categoryInsertVO);
+    public BaseResult<String> insertCategory(@RequestBody @Validated CategoryInsertForm categoryInsertForm) {
+        categoryService.insertCategory(categoryInsertForm);
         return new BaseResult<>(ResultEnum.INSERT_OK);
     }
 
@@ -56,15 +56,15 @@ public class CategoryController {
     @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改分类", notes = "根据主键id修改")
-    public BaseResult<String> updateCategory(@RequestBody @Validated CategoryUpdateVO categoryUpdateVO) {
-        categoryService.updateCategory(categoryUpdateVO);
+    public BaseResult<String> updateCategory(@RequestBody @Validated CategoryUpdateForm categoryUpdateForm) {
+        categoryService.updateCategory(categoryUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询品牌")
-    public BaseResult<CategoryDTO> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
-        CategoryDTO result = categoryService.selectOneById(id);
+    public BaseResult<CategoryView> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
+        CategoryView result = categoryService.selectOneById(id);
         if (result == null) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
@@ -73,8 +73,8 @@ public class CategoryController {
 
     @PostMapping("/selectListByCondition")
     @ApiOperation("根据条件查询分类")
-    public BaseResult<List<CategoryDTO>> selectListByCondition(@RequestBody CategorySelectVO categorySelectVO) {
-        List<CategoryDTO> result = categoryService.selectListByCondition(categorySelectVO);
+    public BaseResult<List<CategoryView>> selectListByCondition(@RequestBody CategorySelectForm categorySelectForm) {
+        List<CategoryView> result = categoryService.selectListByCondition(categorySelectForm);
         if (result == null || result.size() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
@@ -83,10 +83,10 @@ public class CategoryController {
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
     @ApiOperation("根据条件分页查询分类")
-    public BaseResult<ResultPage<CategoryDTO>> selectPageByCondition(@RequestBody CategorySelectVO categorySelectVO,
-                                                                     @PathVariable("index") Integer index,
-                                                                     @PathVariable("size") Integer size) {
-        ResultPage<CategoryDTO> result = categoryService.selectPageByCondition(categorySelectVO, index, size);
+    public BaseResult<ResultPage<CategoryView>> selectPageByCondition(@RequestBody CategorySelectForm categorySelectForm,
+                                                                      @PathVariable("index") Integer index,
+                                                                      @PathVariable("size") Integer size) {
+        ResultPage<CategoryView> result = categoryService.selectPageByCondition(categorySelectForm, index, size);
         if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
@@ -95,8 +95,8 @@ public class CategoryController {
 
     @GetMapping("/selectWithTree")
     @ApiOperation("树形查询所有显示分类")
-    public BaseResult<List<CategoryDTO>> selectWithTree() {
-        List<CategoryDTO> result = categoryService.selectWithTree();
+    public BaseResult<List<CategoryView>> selectWithTree() {
+        List<CategoryView> result = categoryService.selectWithTree();
         if (result == null || result.size() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }

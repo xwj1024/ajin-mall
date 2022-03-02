@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,10 +16,13 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("Spu添加对象")
-public class SpuInsertVO implements Serializable {
-
+@ApiModel("Spu修改对象")
+public class SpuUpdateForm implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty("主键id")
+    private Long id;
 
     @ApiModelProperty("spu名称")
     private String name;

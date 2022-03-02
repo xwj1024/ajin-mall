@@ -1,4 +1,4 @@
-package cn.leemay.mall.goods.entity.view;
+package cn.leemay.mall.goods.entity.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -6,22 +6,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * @author Ajin
- * @since 2021-05-21
+ * @since 2021-05-22
  */
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("Spu结果对象")
-public class SpuDTO implements Serializable {
-
+@ApiModel("Spu添加对象")
+public class SpuInsertForm implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty("主键id")
-    private Long id;
 
     @ApiModelProperty("spu名称")
     private String name;

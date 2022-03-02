@@ -1,4 +1,4 @@
-package cn.leemay.mall.goods.entity.view;
+package cn.leemay.mall.goods.entity.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,20 +17,20 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("品牌结果对象")
-public class BrandDTO implements Serializable {
-
+@ApiModel("品牌添加对象")
+public class BrandInsertForm implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("品牌id")
-    private Long id;
-
+    @NotNull(message = "品牌名称不能为空")
     @ApiModelProperty("品牌名称")
     private String name;
 
+    @NotNull(message = "品牌图片不能为空")
     @ApiModelProperty("品牌图片")
     private String image;
 
+    @NotNull(message = "品牌首字母不能为空")
     @ApiModelProperty("首字母")
     private String initials;
 

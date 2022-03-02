@@ -1,18 +1,17 @@
 package cn.leemay.mall.goods.service.impl;
 
+import cn.leemay.mall.common.base.asserts.BizAssert;
 import cn.leemay.mall.common.base.exception.BizException;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Brand;
-import cn.leemay.mall.goods.entity.view.BrandDTO;
-import cn.leemay.mall.goods.entity.form.BrandInsertVO;
-import cn.leemay.mall.goods.entity.form.BrandSelectVO;
-import cn.leemay.mall.goods.entity.form.BrandUpdateVO;
-import cn.leemay.mall.goods.entity.form.SpuSelectVO;
+import cn.leemay.mall.goods.entity.view.BrandView;
+import cn.leemay.mall.goods.entity.form.BrandInsertForm;
+import cn.leemay.mall.goods.entity.form.BrandSelectForm;
+import cn.leemay.mall.goods.entity.form.BrandUpdateForm;
+import cn.leemay.mall.goods.entity.form.SpuSelectForm;
 import cn.leemay.mall.goods.mapper.BrandMapper;
 import cn.leemay.mall.goods.mapper.SpuMapper;
 import cn.leemay.mall.goods.service.BrandService;
-import cn.leemay.mall.goods.wrapper.BrandWrapper;
-import cn.leemay.mall.goods.wrapper.SpuWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -22,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,94 +33,94 @@ import java.util.List;
  * @author Ajin
  * @since 2021-04-13
  */
+@Slf4j
 @Service
 @org.apache.dubbo.config.annotation.Service
-@Slf4j
-public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
+public class BrandServiceImpl implements BrandService {
 
-    @Autowired
+    @Resource
     private BrandMapper brandMapper;
 
-    @Autowired
+    @Resource
     private SpuMapper spuMapper;
 
     @Override
-    public void insertBrand(BrandInsertVO brandInsertVO) {
-        BrandSelectVO brandSelectVO = new BrandSelectVO();
-        brandSelectVO.setName(brandInsertVO.getName());
-        Integer brandCount = brandMapper.selectCount(BrandWrapper.queryCountWrapper(brandSelectVO));
-        if (brandCount > 0) {
-            throw new BizException("已有该品牌");
-        }
+    public void insertBrand(BrandInsertForm brandInsertForm) {
+        Integer brandCount = brandMapper.selectCountByName(brandInsertForm.getName());
+        BizAssert.isTrue(brandCount <= 0, "已有该品牌");
+
         Brand brand = new Brand();
-        BeanUtils.copyProperties(brandInsertVO, brand);
-        brandMapper.insert(brand);
+        BeanUtils.copyProperties(brandInsertForm, brand);
+        int row = brandMapper.insert(brand);
+        BizAssert.isTrue(row == 1, "添加失败");
     }
 
     @Override
     public void deleteBrand(Long id) {
-        SpuSelectVO spuSelectVO = new SpuSelectVO();
-        spuSelectVO.setBrandId(id);
-        Integer spuCount = spuMapper.selectCount(SpuWrapper.queryCountWrapper(spuSelectVO));
-        if (spuCount > 0) {
-            throw new BizException("该品牌已关联商品");
-        }
+        SpuSelectForm spuSelectForm = new SpuSelectForm();
+        spuSelectForm.setBrandId(id);
+//        Integer spuCount = spuMapper.selectCount(SpuWrapper.queryCountWrapper(spuSelectForm));
+//        if (spuCount > 0) {
+//            throw new BizException("该品牌已关联商品");
+//        }
         brandMapper.deleteById(id);
     }
 
     @Override
-    public void updateBrand(BrandUpdateVO brandUpdateVO) {
-        BrandSelectVO brandSelectVO = new BrandSelectVO();
-        brandSelectVO.setName(brandUpdateVO.getName());
-        Integer brandCount = brandMapper.selectCount(BrandWrapper.queryCountWrapper(brandSelectVO));
-        if (brandCount > 0) {
-            throw new BizException("已有该品牌");
-        }
+    public void updateBrand(BrandUpdateForm brandUpdateForm) {
+        BrandSelectForm brandSelectForm = new BrandSelectForm();
+        brandSelectForm.setName(brandUpdateForm.getName());
+//        Integer brandCount = brandMapper.selectCount(BrandWrapper.queryCountWrapper(brandSelectForm));
+//        if (brandCount > 0) {
+//            throw new BizException("已有该品牌");
+//        }
         Brand brand = new Brand();
-        BeanUtils.copyProperties(brandUpdateVO, brand);
+        BeanUtils.copyProperties(brandUpdateForm, brand);
         brandMapper.updateById(brand);
     }
 
     @Override
-    public BrandDTO selectOneById(Long id) {
+    public BrandView selectOneById(Long id) {
         log.error("日志！！@@##");
-        Brand brand = brandMapper.selectById(id);
-        BrandDTO brandDTO = new BrandDTO();
-        BeanUtils.copyProperties(brand, brandDTO);
-        return brandDTO;
+        Brand     brand     = brandMapper.selectById(id);
+        BrandView brandView = new BrandView();
+        BeanUtils.copyProperties(brand, brandView);
+        return brandView;
     }
 
     @Override
-    public List<BrandDTO> selectListByCondition(BrandSelectVO brandSelectVO) {
-        QueryWrapper<Brand> queryWrapper = BrandWrapper.queryWrapper(brandSelectVO);
-        List<Brand> brandList = brandMapper.selectList(queryWrapper);
-        if (ObjectUtils.isEmpty(brandList)) {
-            return null;
-        }
-        List<BrandDTO> brandDTOList = new ArrayList<>();
-        for (Brand brand : brandList) {
-            BrandDTO brandDTO = new BrandDTO();
-            BeanUtils.copyProperties(brand, brandDTO);
-            brandDTOList.add(brandDTO);
-        }
-        return brandDTOList;
+    public List<BrandView> selectListByCondition(BrandSelectForm brandSelectForm) {
+//        QueryWrapper<Brand> queryWrapper = BrandWrapper.queryWrapper(brandSelectForm);
+//        List<Brand>         brandList    = brandMapper.selectList(queryWrapper);
+//        if (ObjectUtils.isEmpty(brandList)) {
+//            return null;
+//        }
+//        List<BrandView> brandViewList = new ArrayList<>();
+//        for (Brand brand : brandList) {
+//            BrandView brandView = new BrandView();
+//            BeanUtils.copyProperties(brand, brandView);
+//            brandViewList.add(brandView);
+//        }
+//        return brandViewList;
+        return null;
     }
 
     @Override
-    public ResultPage<BrandDTO> selectPageByCondition(BrandSelectVO brandSelectVO, Integer index, Integer size) {
-        Page<Brand> page = new Page<>(index, size);
-        QueryWrapper<Brand> queryWrapper = BrandWrapper.queryWrapper(brandSelectVO);
-        Page<Brand> brandPage = brandMapper.selectPage(page, queryWrapper);
-        if (brandPage == null || brandPage.getRecords() == null) {
-            return null;
-        }
-        List<BrandDTO> brandDTOList = new ArrayList<>();
-        for (Brand brand : brandPage.getRecords()) {
-            BrandDTO brandDTO = new BrandDTO();
-            BeanUtils.copyProperties(brand, brandDTO);
-            brandDTOList.add(brandDTO);
-        }
-        return new ResultPage<>(brandPage.getTotal(), brandDTOList);
+    public ResultPage<BrandView> selectPageByCondition(BrandSelectForm brandSelectForm, Integer index, Integer size) {
+//        Page<Brand>         page         = new Page<>(index, size);
+//        QueryWrapper<Brand> queryWrapper = BrandWrapper.queryWrapper(brandSelectForm);
+//        Page<Brand>         brandPage    = brandMapper.selectPage(page, queryWrapper);
+//        if (brandPage == null || brandPage.getRecords() == null) {
+//            return null;
+//        }
+//        List<BrandView> brandViewList = new ArrayList<>();
+//        for (Brand brand : brandPage.getRecords()) {
+//            BrandView brandView = new BrandView();
+//            BeanUtils.copyProperties(brand, brandView);
+//            brandViewList.add(brandView);
+//        }
+//        return new ResultPage<>(brandPage.getTotal(), brandViewList);
+        return null;
     }
 
 }

@@ -5,10 +5,10 @@ import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.goods.entity.view.BrandDTO;
-import cn.leemay.mall.goods.entity.form.BrandInsertVO;
-import cn.leemay.mall.goods.entity.form.BrandSelectVO;
-import cn.leemay.mall.goods.entity.form.BrandUpdateVO;
+import cn.leemay.mall.goods.entity.view.BrandView;
+import cn.leemay.mall.goods.entity.form.BrandInsertForm;
+import cn.leemay.mall.goods.entity.form.BrandSelectForm;
+import cn.leemay.mall.goods.entity.form.BrandUpdateForm;
 import cn.leemay.mall.goods.service.BrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,8 +39,8 @@ public class BrandController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加品牌")
-    public BaseResult<String> insertBrand(@RequestBody @Validated BrandInsertVO brandInsertVO) {
-        brandService.insertBrand(brandInsertVO);
+    public BaseResult<String> insertBrand(@RequestBody @Validated BrandInsertForm brandInsertForm) {
+        brandService.insertBrand(brandInsertForm);
         return new BaseResult<>(ResultEnum.INSERT_OK);
     }
 
@@ -54,15 +54,15 @@ public class BrandController {
     @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改品牌", notes = "根据主键id修改")
-    public BaseResult<String> updateBrand(@RequestBody @Validated BrandUpdateVO brandUpdateVO) {
-        brandService.updateBrand(brandUpdateVO);
+    public BaseResult<String> updateBrand(@RequestBody @Validated BrandUpdateForm brandUpdateForm) {
+        brandService.updateBrand(brandUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询品牌")
-    public BaseResult<BrandDTO> selectOneById(@PathVariable("id") Long id) {
-        BrandDTO result = brandService.selectOneById(id);
+    public BaseResult<BrandView> selectOneById(@PathVariable("id") Long id) {
+        BrandView result = brandService.selectOneById(id);
         if (result == null) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
@@ -71,8 +71,8 @@ public class BrandController {
 
     @PostMapping("/selectListByCondition")
     @ApiOperation("根据条件查询品牌")
-    public BaseResult<List<BrandDTO>> selectListByCondition(@RequestBody BrandSelectVO brandSelectVO) {
-        List<BrandDTO> result = brandService.selectListByCondition(brandSelectVO);
+    public BaseResult<List<BrandView>> selectListByCondition(@RequestBody BrandSelectForm brandSelectForm) {
+        List<BrandView> result = brandService.selectListByCondition(brandSelectForm);
         if (result == null || result.size() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
@@ -81,10 +81,10 @@ public class BrandController {
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
     @ApiOperation("根据条件分页查询品牌")
-    public BaseResult<ResultPage<BrandDTO>> selectPageByCondition(@Validated @RequestBody BrandSelectVO brandSelectVO,
-                                                                  @PathVariable("index") Integer index,
-                                                                  @PathVariable("size") Integer size) {
-        ResultPage<BrandDTO> result = brandService.selectPageByCondition(brandSelectVO, index, size);
+    public BaseResult<ResultPage<BrandView>> selectPageByCondition(@Validated @RequestBody BrandSelectForm brandSelectForm,
+                                                                   @PathVariable("index") Integer index,
+                                                                   @PathVariable("size") Integer size) {
+        ResultPage<BrandView> result = brandService.selectPageByCondition(brandSelectForm, index, size);
         if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }

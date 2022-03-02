@@ -6,18 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * @author Ajin
- * @since 2021-05-22
+ * @since 2021-05-21
  */
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("Spu修改对象")
-public class SpuUpdateVO implements Serializable {
-
+@ApiModel("Spu查询对象")
+public class SpuSelectForm implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")
@@ -28,9 +29,6 @@ public class SpuUpdateVO implements Serializable {
 
     @ApiModelProperty("商品标题")
     private String caption;
-
-    @ApiModelProperty("商品详情")
-    private String details;
 
     @ApiModelProperty("品牌id")
     private Long brandId;

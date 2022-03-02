@@ -2,10 +2,10 @@ package cn.leemay.mall.goods.service;
 
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Category;
-import cn.leemay.mall.goods.entity.view.CategoryDTO;
-import cn.leemay.mall.goods.entity.form.CategoryInsertVO;
-import cn.leemay.mall.goods.entity.form.CategorySelectVO;
-import cn.leemay.mall.goods.entity.form.CategoryUpdateVO;
+import cn.leemay.mall.goods.entity.view.CategoryView;
+import cn.leemay.mall.goods.entity.form.CategoryInsertForm;
+import cn.leemay.mall.goods.entity.form.CategorySelectForm;
+import cn.leemay.mall.goods.entity.form.CategoryUpdateForm;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -23,9 +23,9 @@ public interface CategoryService extends IService<Category> {
     /**
      * 添加分类
      *
-     * @param categoryInsertVO 分类
+     * @param categoryInsertForm 分类
      */
-    void insertCategory(CategoryInsertVO categoryInsertVO);
+    void insertCategory(CategoryInsertForm categoryInsertForm);
 
     /**
      * 根据id删除分类
@@ -37,9 +37,9 @@ public interface CategoryService extends IService<Category> {
     /**
      * 修改分类
      *
-     * @param categoryUpdateVO 分类
+     * @param categoryUpdateForm 分类
      */
-    void updateCategory(CategoryUpdateVO categoryUpdateVO);
+    void updateCategory(CategoryUpdateForm categoryUpdateForm);
 
     /**
      * 根据id查询分类
@@ -47,30 +47,30 @@ public interface CategoryService extends IService<Category> {
      * @param id id
      * @return 分类
      */
-    CategoryDTO selectOneById(Long id);
+    CategoryView selectOneById(Long id);
 
     /**
      * 根据条件查询分类
      *
-     * @param categorySelectVO 分类条件
+     * @param categorySelectForm 分类条件
      * @return 分类列表
      */
-    List<CategoryDTO> selectListByCondition(CategorySelectVO categorySelectVO);
+    List<CategoryView> selectListByCondition(CategorySelectForm categorySelectForm);
 
     /**
      * 根据条件分页查询分类
      *
-     * @param categorySelectVO 分类条件
+     * @param categorySelectForm 分类条件
      * @param index    当前页
      * @param size     每页数
      * @return 分页分类
      */
-    ResultPage<CategoryDTO> selectPageByCondition(CategorySelectVO categorySelectVO, Integer index, Integer size);
+    ResultPage<CategoryView> selectPageByCondition(CategorySelectForm categorySelectForm, Integer index, Integer size);
 
     /**
      * 树形结构查询
      *
      * @return 所有显示分类以树形结构
      */
-    List<CategoryDTO> selectWithTree();
+    List<CategoryView> selectWithTree();
 }

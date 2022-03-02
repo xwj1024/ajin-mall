@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -16,33 +17,30 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel("分类添加对象")
-public class CategoryInsertVO implements Serializable {
-
+@ApiModel("分类修改对象")
+public class CategoryUpdateForm implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "上级id不能为空")
+    @NotNull(message = "分类id不能为空")
+    @ApiModelProperty("分类id")
+    private Long id;
+
     @ApiModelProperty("上级id")
     private Long parentId;
 
-    @NotNull(message = "分类名称不能为空")
     @ApiModelProperty("分类名称")
     private String name;
 
-    @NotNull(message = "分类图片不能为空")
     @ApiModelProperty("分类图片")
     private String image;
 
-    @NotNull(message = "分类级别不能为空")
     @ApiModelProperty("分类级别")
     private Integer level;
 
-    @NotNull(message = "分类排序不能为空")
     @ApiModelProperty("分类排序")
     private Integer sort;
 
-    @NotNull(message = "是否显示不能为空")
     @ApiModelProperty("是否显示")
     private Integer isShow;
-
 }

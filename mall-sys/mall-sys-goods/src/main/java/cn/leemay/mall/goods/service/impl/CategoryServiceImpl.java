@@ -3,16 +3,14 @@ package cn.leemay.mall.goods.service.impl;
 import cn.leemay.mall.common.base.exception.BizException;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Category;
-import cn.leemay.mall.goods.entity.view.CategoryDTO;
-import cn.leemay.mall.goods.entity.form.CategoryInsertVO;
-import cn.leemay.mall.goods.entity.form.CategorySelectVO;
-import cn.leemay.mall.goods.entity.form.CategoryUpdateVO;
-import cn.leemay.mall.goods.entity.form.SpuSelectVO;
+import cn.leemay.mall.goods.entity.form.SpuSelectForm;
+import cn.leemay.mall.goods.entity.view.CategoryView;
+import cn.leemay.mall.goods.entity.form.CategoryInsertForm;
+import cn.leemay.mall.goods.entity.form.CategorySelectForm;
+import cn.leemay.mall.goods.entity.form.CategoryUpdateForm;
 import cn.leemay.mall.goods.mapper.CategoryMapper;
 import cn.leemay.mall.goods.mapper.SpuMapper;
 import cn.leemay.mall.goods.service.CategoryService;
-import cn.leemay.mall.goods.wrapper.CategoryWrapper;
-import cn.leemay.mall.goods.wrapper.SpuWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -42,86 +40,88 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     private SpuMapper spuMapper;
 
     @Override
-    public void insertCategory(CategoryInsertVO categoryInsertVO) {
-        CategorySelectVO categorySelectVO = new CategorySelectVO();
-        categorySelectVO.setName(categoryInsertVO.getName());
-        categorySelectVO.setParentId(categoryInsertVO.getParentId());
-        Integer categoryCount = categoryMapper.selectCount(CategoryWrapper.queryCountWrapper(categorySelectVO));
-        if (categoryCount > 0) {
-            throw new BizException("已有该分类");
-        }
-        Category category = new Category();
-        BeanUtils.copyProperties(categoryInsertVO, category);
-        categoryMapper.insert(category);
+    public void insertCategory(CategoryInsertForm categoryInsertForm) {
+//        CategorySelectForm categorySelectForm = new CategorySelectForm();
+//        categorySelectForm.setName(categoryInsertForm.getName());
+//        categorySelectForm.setParentId(categoryInsertForm.getParentId());
+//        Integer categoryCount = categoryMapper.selectCount(CategoryWrapper.queryCountWrapper(categorySelectForm));
+//        if (categoryCount > 0) {
+//            throw new BizException("已有该分类");
+//        }
+//        Category category = new Category();
+//        BeanUtils.copyProperties(categoryInsertForm, category);
+//        categoryMapper.insert(category);
     }
 
     @Override
     public void deleteCategory(Long id) {
-        CategorySelectVO categorySelectVO = new CategorySelectVO();
-        categorySelectVO.setParentId(id);
-        Integer categoryCount = categoryMapper.selectCount(CategoryWrapper.queryCountWrapper(categorySelectVO));
-        if (categoryCount > 0) {
-            throw new BizException("该分类已关联下级分类");
-        }
-        SpuSelectVO spuSelectVO = new SpuSelectVO();
-        spuSelectVO.setCategory3Id(id);
-        Integer spuCount = spuMapper.selectCount(SpuWrapper.queryCountWrapper(spuSelectVO));
-        if (spuCount > 0) {
-            throw new BizException("该分类已关联商品");
-        }
-        categoryMapper.deleteById(id);
+//        CategorySelectForm categorySelectForm = new CategorySelectForm();
+//        categorySelectForm.setParentId(id);
+//        Integer categoryCount = categoryMapper.selectCount(CategoryWrapper.queryCountWrapper(categorySelectForm));
+//        if (categoryCount > 0) {
+//            throw new BizException("该分类已关联下级分类");
+//        }
+//        SpuSelectForm spuSelectForm = new SpuSelectForm();
+//        spuSelectForm.setCategory3Id(id);
+//        Integer spuCount = spuMapper.selectCount(SpuWrapper.queryCountWrapper(spuSelectForm));
+//        if (spuCount > 0) {
+//            throw new BizException("该分类已关联商品");
+//        }
+//        categoryMapper.deleteById(id);
     }
 
     @Override
-    public void updateCategory(CategoryUpdateVO categoryUpdateVO) {
+    public void updateCategory(CategoryUpdateForm categoryUpdateForm) {
         Category category = new Category();
-        BeanUtils.copyProperties(categoryUpdateVO, category);
+        BeanUtils.copyProperties(categoryUpdateForm, category);
         categoryMapper.updateById(category);
     }
 
     @Override
-    public CategoryDTO selectOneById(Long id) {
-        Category category = categoryMapper.selectById(id);
-        CategoryDTO categoryDTO = new CategoryDTO();
-        BeanUtils.copyProperties(category, categoryDTO);
-        return categoryDTO;
+    public CategoryView selectOneById(Long id) {
+        Category     category     = categoryMapper.selectById(id);
+        CategoryView categoryView = new CategoryView();
+        BeanUtils.copyProperties(category, categoryView);
+        return categoryView;
     }
 
     @Override
-    public List<CategoryDTO> selectListByCondition(CategorySelectVO categorySelectVO) {
-        QueryWrapper<Category> queryWrapper = CategoryWrapper.queryWrapper(categorySelectVO);
-        List<Category> categoryList = categoryMapper.selectList(queryWrapper);
-        if (ObjectUtils.isEmpty(categoryList)) {
-            return null;
-        }
-        List<CategoryDTO> categoryDTOList = new ArrayList<>();
-        for (Category category : categoryList) {
-            CategoryDTO categoryDTO = new CategoryDTO();
-            BeanUtils.copyProperties(category, categoryDTO);
-            categoryDTOList.add(categoryDTO);
-        }
-        return categoryDTOList;
+    public List<CategoryView> selectListByCondition(CategorySelectForm categorySelectForm) {
+//        QueryWrapper<Category> queryWrapper = CategoryWrapper.queryWrapper(categorySelectForm);
+//        List<Category> categoryList = categoryMapper.selectList(queryWrapper);
+//        if (ObjectUtils.isEmpty(categoryList)) {
+//            return null;
+//        }
+//        List<CategoryView> categoryViewList = new ArrayList<>();
+//        for (Category category : categoryList) {
+//            CategoryView categoryView = new CategoryView();
+//            BeanUtils.copyProperties(category, categoryView);
+//            categoryViewList.add(categoryView);
+//        }
+//        return categoryViewList;
+        return null;
     }
 
     @Override
-    public ResultPage<CategoryDTO> selectPageByCondition(CategorySelectVO categorySelectVO, Integer index, Integer size) {
-        Page<Category> page = new Page<>(index, size);
-        QueryWrapper<Category> queryWrapper = CategoryWrapper.queryWrapper(categorySelectVO);
-        Page<Category> categoryPage = categoryMapper.selectPage(page, queryWrapper);
-        if (categoryPage == null || categoryPage.getRecords() == null) {
-            return null;
-        }
-        List<CategoryDTO> categoryDTOList = new ArrayList<>();
-        for (Category category : categoryPage.getRecords()) {
-            CategoryDTO categoryDTO = new CategoryDTO();
-            BeanUtils.copyProperties(category, categoryDTO);
-            categoryDTOList.add(categoryDTO);
-        }
-        return new ResultPage<>(categoryPage.getTotal(), categoryDTOList);
+    public ResultPage<CategoryView> selectPageByCondition(CategorySelectForm categorySelectForm, Integer index, Integer size) {
+//        Page<Category> page = new Page<>(index, size);
+//        QueryWrapper<Category> queryWrapper = CategoryWrapper.queryWrapper(categorySelectForm);
+//        Page<Category> categoryPage = categoryMapper.selectPage(page, queryWrapper);
+//        if (categoryPage == null || categoryPage.getRecords() == null) {
+//            return null;
+//        }
+//        List<CategoryView> categoryViewList = new ArrayList<>();
+//        for (Category category : categoryPage.getRecords()) {
+//            CategoryView categoryView = new CategoryView();
+//            BeanUtils.copyProperties(category, categoryView);
+//            categoryViewList.add(categoryView);
+//        }
+//        return new ResultPage<>(categoryPage.getTotal(), categoryViewList);
+        return null;
     }
 
     @Override
-    public List<CategoryDTO> selectWithTree() {
+    public List<CategoryView> selectWithTree() {
         Map<String, Object> map = new HashMap<>(2);
         map.put("is_show", 1);
         // 查询所有要显示的分类
@@ -129,17 +129,17 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         if (ObjectUtils.isEmpty(categoryList)) {
             return null;
         }
-        List<CategoryDTO> categoryDTOList = new ArrayList<>();
+        List<CategoryView> categoryViewList = new ArrayList<>();
         for (Category category : categoryList) {
-            CategoryDTO categoryDTO = new CategoryDTO();
-            BeanUtils.copyProperties(category, categoryDTO);
-            categoryDTOList.add(categoryDTO);
+            CategoryView categoryView = new CategoryView();
+            BeanUtils.copyProperties(category, categoryView);
+            categoryViewList.add(categoryView);
         }
         // 查询所有顶级分类
-        return categoryDTOList.stream()
-                .filter(categoryDTO -> categoryDTO.getParentId() == 0)
-                .peek(categoryDTO -> categoryDTO.setChild(getChild(categoryDTO, categoryDTOList)))
-                // .sorted(Comparator.comparingInt(CategoryDTO::getSort))
+        return categoryViewList.stream()
+                .filter(categoryView -> categoryView.getParentId() == 0)
+                .peek(categoryView -> categoryView.setChild(getChild(categoryView, categoryViewList)))
+                // .sorted(Comparator.comparingInt(CategoryView::getSort))
                 .sorted(Comparator.comparingInt(category -> (category.getSort() == null ? 0 : category.getSort())))
                 .collect(Collectors.toList());
     }
@@ -151,12 +151,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
      * @param all  所有分类
      * @return 分类列表
      */
-    private List<CategoryDTO> getChild(CategoryDTO root, List<CategoryDTO> all) {
+    private List<CategoryView> getChild(CategoryView root, List<CategoryView> all) {
         return all.stream()
-                .filter(categoryDTO -> root.getId().equals(categoryDTO.getParentId()))
-                .peek(categoryDTO -> categoryDTO.setChild(getChild(categoryDTO, all)))
-                // .sorted(Comparator.comparingInt(CategoryDTO::getSort))
-                .sorted(Comparator.comparingInt(categoryDTO -> (categoryDTO.getSort() == null ? 0 : categoryDTO.getSort())))
+                .filter(categoryView -> root.getId().equals(categoryView.getParentId()))
+                .peek(categoryView -> categoryView.setChild(getChild(categoryView, all)))
+                // .sorted(Comparator.comparingInt(CategoryView::getSort))
+                .sorted(Comparator.comparingInt(categoryView -> (categoryView.getSort() == null ? 0 : categoryView.getSort())))
                 .collect(Collectors.toList());
     }
 

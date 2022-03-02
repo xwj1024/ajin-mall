@@ -1,12 +1,11 @@
 package cn.leemay.mall.goods.service.impl;
 
 import cn.leemay.mall.goods.entity.Spu;
-import cn.leemay.mall.goods.entity.form.SpuInsertVO;
-import cn.leemay.mall.goods.entity.form.SpuSelectVO;
+import cn.leemay.mall.goods.entity.form.SpuInsertForm;
+import cn.leemay.mall.goods.entity.form.SpuSelectForm;
 import cn.leemay.mall.goods.mapper.SkuMapper;
 import cn.leemay.mall.goods.mapper.SpuMapper;
 import cn.leemay.mall.goods.service.SpuService;
-import cn.leemay.mall.goods.wrapper.SpuWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -36,9 +35,9 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
     private SkuMapper skuMapper;
 
     @Override
-    public void insertSpu(SpuInsertVO spuInsertVO) {
+    public void insertSpu(SpuInsertForm spuInsertForm) {
         Spu spu = new Spu();
-        BeanUtils.copyProperties(spuInsertVO, spu);
+        BeanUtils.copyProperties(spuInsertForm, spu);
         spuMapper.insert(spu);
     }
 
@@ -61,16 +60,18 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
     }
 
     @Override
-    public List<Spu> selectListByCondition(SpuSelectVO spuSelectVO) {
-        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuSelectVO);
-        return spuMapper.selectList(queryWrapper);
+    public List<Spu> selectListByCondition(SpuSelectForm spuSelectForm) {
+//        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuSelectForm);
+//        return spuMapper.selectList(queryWrapper);
+        return null;
     }
 
     @Override
-    public Page<Spu> selectPageByCondition(SpuSelectVO spuSelectVO, Integer index, Integer size) {
+    public Page<Spu> selectPageByCondition(SpuSelectForm spuSelectForm, Integer index, Integer size) {
         Page<Spu> page = new Page<>(index, size);
-        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuSelectVO);
-        return spuMapper.selectPage(page, queryWrapper);
+//        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuSelectForm);
+//        return spuMapper.selectPage(page, queryWrapper);
+        return null;
     }
 
 }

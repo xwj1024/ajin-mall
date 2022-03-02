@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import io.swagger.annotations.ApiModel;
@@ -25,7 +26,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value = "LabelGoods对象", description = "标签，商品  关联表")
 public class LabelGoods implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")

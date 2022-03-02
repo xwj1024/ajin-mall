@@ -5,8 +5,8 @@ import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.goods.entity.Spu;
-import cn.leemay.mall.goods.entity.form.SpuInsertVO;
-import cn.leemay.mall.goods.entity.form.SpuSelectVO;
+import cn.leemay.mall.goods.entity.form.SpuInsertForm;
+import cn.leemay.mall.goods.entity.form.SpuSelectForm;
 import cn.leemay.mall.goods.service.SpuService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -39,8 +39,8 @@ public class SpuController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加spu")
-    public BaseResult<String> insertSpu(@RequestBody @Validated SpuInsertVO spuInsertVO) {
-        spuService.insertSpu(spuInsertVO);
+    public BaseResult<String> insertSpu(@RequestBody @Validated SpuInsertForm spuInsertForm) {
+        spuService.insertSpu(spuInsertForm);
         return new BaseResult<>(ResultEnum.INSERT_OK);
     }
 
@@ -71,8 +71,8 @@ public class SpuController {
 
     @PostMapping("/selectListByCondition")
     @ApiOperation("根据条件查询Spu")
-    public BaseResult<List<Spu>> selectListByCondition(@RequestBody SpuSelectVO spuSelectVO) {
-        List<Spu> result = spuService.selectListByCondition(spuSelectVO);
+    public BaseResult<List<Spu>> selectListByCondition(@RequestBody SpuSelectForm spuSelectForm) {
+        List<Spu> result = spuService.selectListByCondition(spuSelectForm);
         if (result == null || result.size() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
@@ -81,10 +81,10 @@ public class SpuController {
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
     @ApiOperation("根据条件分页查询Spu")
-    public BaseResult<Page<Spu>> selectPageByCondition(@RequestBody SpuSelectVO spuSelectVO,
+    public BaseResult<Page<Spu>> selectPageByCondition(@RequestBody SpuSelectForm spuSelectForm,
                                                        @PathVariable("index") Integer index,
                                                        @PathVariable("size") Integer size) {
-        Page<Spu> result = spuService.selectPageByCondition(spuSelectVO, index, size);
+        Page<Spu> result = spuService.selectPageByCondition(spuSelectForm, index, size);
         if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
