@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * <p>
  * 品牌表 前端控制器
@@ -31,7 +33,7 @@ import org.springframework.web.bind.annotation.*;
 @Validated // todo 不知道需不需要 待测
 public class BrandController {
 
-    @Autowired
+    @Resource
     private BrandService brandService;
 
     @RepeatSubmit
