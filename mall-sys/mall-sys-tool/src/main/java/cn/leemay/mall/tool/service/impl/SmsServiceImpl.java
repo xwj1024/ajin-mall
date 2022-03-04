@@ -7,10 +7,10 @@ import cn.leemay.mall.tool.service.SmsService;
 import cn.leemay.mall.tool.util.CodeUtils;
 import cn.leemay.mall.tool.util.SmsUtils;
 import com.aliyuncs.exceptions.ClientException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,10 +20,10 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class SmsServiceImpl implements SmsService {
 
-    @Autowired
+    @Resource
     private SmsProperties smsProperties;
 
-    @Autowired
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
 
     @Override

@@ -5,10 +5,10 @@ import cn.leemay.mall.common.base.util.DateTimeUtils;
 import cn.leemay.mall.tool.property.OssProperties;
 import cn.leemay.mall.tool.service.UploadFileService;
 import cn.leemay.mall.tool.util.OssUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +22,7 @@ import java.util.UUID;
 @Service
 public class UploadFileServiceImpl implements UploadFileService {
 
-    @Autowired
+    @Resource
     private OssProperties ossProperties;
 
     @Override

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-06-16
  */
 @RestController
-@RequestMapping("/api/tool/downloadFile")
+@RequestMapping("/tool/downloadFile")
 @Api(tags = "文件下载")
 @CrossOrigin
 public class DownloadFileController {

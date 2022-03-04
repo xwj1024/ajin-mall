@@ -5,10 +5,10 @@ import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.tool.service.UploadFileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,12 +17,12 @@ import java.util.List;
  * @since 2021-04-14
  */
 @RestController
-@RequestMapping("/api/tool/uploadFile")
+@RequestMapping("/tool/uploadFile")
 @Api(tags = "文件上传")
 @CrossOrigin
 public class UploadFileController {
 
-    @Autowired
+    @Resource
     private UploadFileService uploadFileService;
 
     @PostMapping(value = "/uploadImgFile", headers = "content-type=multipart/form-data")

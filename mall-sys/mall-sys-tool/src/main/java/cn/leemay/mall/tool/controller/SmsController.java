@@ -10,17 +10,19 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * @author Ajin
  * @since 2021-05-06
  */
 @RestController
-@RequestMapping("/api/tool/sms")
+@RequestMapping("/tool/sms")
 @Api(tags = "短信服务")
 @CrossOrigin
 public class SmsController {
 
-    @Autowired
+    @Resource
     private SmsService smsService;
 
     @RepeatSubmit
