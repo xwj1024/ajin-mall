@@ -1,4 +1,4 @@
-package cn.leemay.mall.auth.service.impl;
+package cn.leemay.mall.auth.custom;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;

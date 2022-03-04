@@ -1,7 +1,6 @@
 package cn.leemay.mall.auth.custom;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @author Ajin
  * @since 2021-06-20
  */
-@Configuration
+//@Configuration // todo 下面注解包含了，是不是不需要，待测
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
