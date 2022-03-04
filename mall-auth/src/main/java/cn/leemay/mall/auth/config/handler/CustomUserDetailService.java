@@ -1,12 +1,14 @@
-package cn.leemay.mall.auth.custom;
+package cn.leemay.mall.auth.config.handler;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * 自定义授权认证
@@ -15,12 +17,14 @@ import org.springframework.stereotype.Service;
  * @since 2021-05-19
  */
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
 
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        String encode = new BCryptPasswordEncoder().encode("1024");
+        String encode = passwordEncoder.encode("1024");
         return new User("root", encode, AuthorityUtils.commaSeparatedStringToAuthorityList("root"));
     }
 }

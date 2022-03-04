@@ -1,4 +1,4 @@
-package cn.leemay.mall.auth.custom;
+package cn.leemay.mall.auth.config.handler;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
