@@ -45,7 +45,7 @@ public interface CategoryService {
      * @param id id
      * @return 分类
      */
-    CategoryView selectOneById(Long id);
+    CategoryView selectOne(Long id);
 
     /**
      * 根据条件查询分类
@@ -53,17 +53,7 @@ public interface CategoryService {
      * @param categorySelectForm 分类条件
      * @return 分类列表
      */
-    List<CategoryView> selectListByCondition(CategorySelectForm categorySelectForm);
-
-    /**
-     * 根据条件分页查询分类
-     *
-     * @param categorySelectForm 分类条件
-     * @param index              当前页
-     * @param size               每页数
-     * @return 分页分类
-     */
-    ResultPage<CategoryView> selectPageByCondition(CategorySelectForm categorySelectForm, Integer index, Integer size);
+    ResultPage<CategoryView> selectList(CategorySelectForm categorySelectForm);
 
     /**
      * 树形结构查询

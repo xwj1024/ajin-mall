@@ -1,5 +1,6 @@
 package cn.leemay.mall.goods.entity.form;
 
+import cn.leemay.mall.common.base.page.PageForm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,15 +15,12 @@ import java.io.Serializable;
  * @since 2021-05-21
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @ApiModel("分类查询对象")
-public class CategorySelectForm implements Serializable {
+public class CategorySelectForm extends PageForm implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty("分类id")
-    private Long id;
 
     @ApiModelProperty("上级id")
     private Long parentId;

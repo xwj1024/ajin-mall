@@ -1,6 +1,7 @@
 package cn.leemay.mall.goods.service.impl;
 
 import cn.leemay.mall.common.base.asserts.BizAssert;
+import cn.leemay.mall.common.base.page.PageHelp;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.goods.entity.Category;
 import cn.leemay.mall.goods.entity.form.CategoryInsertForm;
@@ -11,6 +12,7 @@ import cn.leemay.mall.goods.mapper.CategoryBrandMapper;
 import cn.leemay.mall.goods.mapper.CategoryMapper;
 import cn.leemay.mall.goods.mapper.SpuMapper;
 import cn.leemay.mall.goods.service.CategoryService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
         BizAssert.isTrue(row == 1, "添加失败");
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleteCategory(Long id) {
         Category existCategory = categoryMapper.selectById(id);
@@ -66,18 +68,27 @@ public class CategoryServiceImpl implements CategoryService {
         int row = categoryMapper.deleteById(id);
         BizAssert.isTrue(row == 1, "删除失败");
 
+        // 删除分类品牌中间表
         categoryBrandMapper.deleteByCategoryId(id);
     }
 
     @Override
     public void updateCategory(CategoryUpdateForm categoryUpdateForm) {
+        Category existCategory = categoryMapper.selectById(categoryUpdateForm.getId());
+        BizAssert.notNull(existCategory, "分类不存在");
+
+        Integer categoryCount = categoryMapper.selectCountByNameAndParentId(categoryUpdateForm.getName(), categoryUpdateForm.getParentId());
+        BizAssert.isTrue(categoryCount <= 0, "已有该分类");
+
         Category category = new Category();
         BeanUtils.copyProperties(categoryUpdateForm, category);
-        categoryMapper.updateById(category);
+
+        int row = categoryMapper.updateById(category);
+        BizAssert.isTrue(row == 1, "修改失败");
     }
 
     @Override
-    public CategoryView selectOneById(Long id) {
+    public CategoryView selectOne(Long id) {
         Category     category     = categoryMapper.selectById(id);
         CategoryView categoryView = new CategoryView();
         BeanUtils.copyProperties(category, categoryView);
@@ -85,55 +96,22 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryView> selectListByCondition(CategorySelectForm categorySelectForm) {
-//        QueryWrapper<Category> queryWrapper = CategoryWrapper.queryWrapper(categorySelectForm);
-//        List<Category> categoryList = categoryMapper.selectList(queryWrapper);
-//        if (ObjectUtils.isEmpty(categoryList)) {
-//            return null;
-//        }
-//        List<CategoryView> categoryViewList = new ArrayList<>();
-//        for (Category category : categoryList) {
-//            CategoryView categoryView = new CategoryView();
-//            BeanUtils.copyProperties(category, categoryView);
-//            categoryViewList.add(categoryView);
-//        }
-//        return categoryViewList;
-        return null;
-    }
-
-    @Override
-    public ResultPage<CategoryView> selectPageByCondition(CategorySelectForm categorySelectForm, Integer index, Integer size) {
-//        Page<Category> page = new Page<>(index, size);
-//        QueryWrapper<Category> queryWrapper = CategoryWrapper.queryWrapper(categorySelectForm);
-//        Page<Category> categoryPage = categoryMapper.selectPage(page, queryWrapper);
-//        if (categoryPage == null || categoryPage.getRecords() == null) {
-//            return null;
-//        }
-//        List<CategoryView> categoryViewList = new ArrayList<>();
-//        for (Category category : categoryPage.getRecords()) {
-//            CategoryView categoryView = new CategoryView();
-//            BeanUtils.copyProperties(category, categoryView);
-//            categoryViewList.add(categoryView);
-//        }
-//        return new ResultPage<>(categoryPage.getTotal(), categoryViewList);
-        return null;
+    public ResultPage<CategoryView> selectList(CategorySelectForm categorySelectForm) {
+        PageHelp.startPage(categorySelectForm.getPageIndex(), categorySelectForm.getPageSize());
+        List<CategoryView> list = categoryMapper.selectListByCondition(categorySelectForm);
+        return new ResultPage<>(new PageInfo<>(list));
     }
 
     @Override
     public List<CategoryView> selectWithTree() {
-        Map<String, Object> map = new HashMap<>(2);
-        map.put("is_show", 1);
         // 查询所有要显示的分类
-        List<Category> categoryList = categoryMapper.selectByMap(map);
-        if (ObjectUtils.isEmpty(categoryList)) {
-            return null;
+        CategorySelectForm categorySelectForm = new CategorySelectForm();
+        categorySelectForm.setIsShow(1);
+        List<CategoryView> categoryViewList = categoryMapper.selectListByCondition(categorySelectForm);
+        if (ObjectUtils.isEmpty(categoryViewList)) {
+            return categoryViewList;
         }
-        List<CategoryView> categoryViewList = new ArrayList<>();
-        for (Category category : categoryList) {
-            CategoryView categoryView = new CategoryView();
-            BeanUtils.copyProperties(category, categoryView);
-            categoryViewList.add(categoryView);
-        }
+
         // 查询所有顶级分类
         return categoryViewList.stream()
                 .filter(categoryView -> categoryView.getParentId() == 0)

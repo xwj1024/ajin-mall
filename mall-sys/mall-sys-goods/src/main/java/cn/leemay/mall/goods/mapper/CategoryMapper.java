@@ -1,9 +1,13 @@
 package cn.leemay.mall.goods.mapper;
 
 import cn.leemay.mall.goods.entity.Category;
+import cn.leemay.mall.goods.entity.form.CategorySelectForm;
+import cn.leemay.mall.goods.entity.view.CategoryView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -31,4 +35,13 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @return 分类数量
      */
     Integer selectCountByParentId(@Param("parentId") Long parentId);
+
+    /**
+     * 根据条件查询分类列表
+     *
+     * @param categorySelectForm 查询条件
+     * @return 分类列表
+     */
+    List<CategoryView> selectListByCondition(CategorySelectForm categorySelectForm);
+
 }

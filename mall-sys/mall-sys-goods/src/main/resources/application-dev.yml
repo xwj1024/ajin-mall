@@ -33,6 +33,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 repeat:
   interval-time: 2000 # 重复提交，间隔时间
 springfox:

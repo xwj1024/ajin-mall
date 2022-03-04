@@ -63,30 +63,18 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询品牌")
-    public BaseResult<CategoryView> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
-        CategoryView result = categoryService.selectOneById(id);
+    public BaseResult<CategoryView> selectOne(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
+        CategoryView result = categoryService.selectOne(id);
         if (result == null) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
         return new BaseResult<>(ResultEnum.SELECT_OK, result);
     }
 
-    @PostMapping("/selectListByCondition")
+    @PostMapping("/selectList")
     @ApiOperation("根据条件查询分类")
-    public BaseResult<List<CategoryView>> selectListByCondition(@RequestBody CategorySelectForm categorySelectForm) {
-        List<CategoryView> result = categoryService.selectListByCondition(categorySelectForm);
-        if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
-        }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
-    }
-
-    @PostMapping("/selectPageByCondition/{index}/{size}")
-    @ApiOperation("根据条件分页查询分类")
-    public BaseResult<ResultPage<CategoryView>> selectPageByCondition(@RequestBody CategorySelectForm categorySelectForm,
-                                                                      @PathVariable("index") Integer index,
-                                                                      @PathVariable("size") Integer size) {
-        ResultPage<CategoryView> result = categoryService.selectPageByCondition(categorySelectForm, index, size);
+    public BaseResult<ResultPage<CategoryView>> selectListByCondition(@RequestBody CategorySelectForm categorySelectForm) {
+        ResultPage<CategoryView> result = categoryService.selectList(categorySelectForm);
         if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultEnum.SELECT_INFO);
         }
