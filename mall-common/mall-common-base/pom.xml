@@ -14,8 +14,8 @@
     <properties>
         <springboot.version>2.2.1.RELEASE</springboot.version>
         <swagger.version>3.0.0</swagger.version>
-        <pagehelper.version>1.3.0</pagehelper.version>
-        <fastjson.version>1.2.75</fastjson.version>
+        <pagehelper.version>1.4.1</pagehelper.version>
+        <fastjson.version>1.2.79</fastjson.version>
         <jwt.version>0.9.1</jwt.version>
     </properties>
 
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
-            <version>3.3.4</version>
+            <version>3.4.4</version>
         </dependency>
         <!--log4j2-->
         <dependency>
@@ -71,10 +71,10 @@
             <version>${fastjson.version}</version>
         </dependency>
         <!--security-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-oauth2</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
         <!--web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -1,4 +1,4 @@
-package cn.leemay.mall.auth.config;
+package cn.leemay.mall.auth.custom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,6 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 
 import javax.sql.DataSource;
-import java.util.UUID;
 
 /**
  * 授权服务配置
