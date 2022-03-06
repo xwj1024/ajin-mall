@@ -35,6 +35,6 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 repeat:
-  intervalTime: 8000 # 重复提交，间隔时间
+  interval-time: 8000 # 重复提交，间隔时间
 logging:
-  config: classpath:log/log4j2-tes.xml
+  config: classpath:log/log4j2-test.xml

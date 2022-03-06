@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-8-11
  */
 @RestController
-@RequestMapping("/api/monitor/server")
+@RequestMapping("/monitor/server")
 @Api(tags = "服务器信息")
 @CrossOrigin
 public class ServerInfoController {
