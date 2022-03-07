@@ -6,11 +6,10 @@
 
     <modules>
         <module>mall-common</module>
-        <module>mall-gateway</module>
-        <module>mall-sys</module>
-        <module>mall-api</module>
-        <module>mall-auth</module>
-        <module>mall-web</module>
+        <module>mall-sys-app</module>
+        <module>mall-sys-api</module>
+        <module>mall-web-app</module>
+        <module>mall-web-api</module>
     </modules>
 
     <parent>

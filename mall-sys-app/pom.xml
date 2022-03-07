@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>leemay-mall</artifactId>
+        <groupId>cn.leemay.mall</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>mall-sys-app</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>mall-sys-app-goods</module>
+        <module>mall-sys-app-user</module>
+        <module>mall-sys-app-order</module>
+        <module>mall-sys-app-search</module>
+        <module>mall-sys-app-system</module>
+        <module>mall-sys-app-tool</module>
+        <module>mall-sys-app-monitor</module>
+        <module>mall-sys-app-auth</module>
+        <module>mall-sys-app-gateway</module>
+    </modules>
+
+</project>
