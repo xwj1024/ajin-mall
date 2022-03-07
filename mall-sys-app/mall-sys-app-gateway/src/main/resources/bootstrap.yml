@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      config:
+        refresh-enabled: true
+        server-addr: 192.168.3.123:8848
+        file-extension: yaml
+        namespace: dev
+        group: DEV_GROUP
+        enabled: true
+      discovery:
+        server-addr: 192.168.3.123:8848
+        namespace: dev
+        group: DEV_GROUP
+
+dubbo:
+  registry:
+    address: spring-cloud://192.168.3.123 # 注册中心
+  cloud:
+    subscribed-services: goods # 已订阅的服务提供者名称
