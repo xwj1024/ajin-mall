@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.leemay.mall.goods.mapper.CategoryMapper">
+<mapper namespace="cn.leemay.mall.sys.goods.mapper.CategoryMapper">
     <select id="selectCountByNameAndParentId" resultType="java.lang.Integer">
         select count(id)
         from category
@@ -16,7 +16,7 @@
           and parent_id = #{parentId}
     </select>
 
-    <select id="selectListByCondition" resultType="cn.leemay.mall.goods.entity.view.CategoryView">
+    <select id="selectListByCondition" resultType="cn.leemay.mall.sys.goods.view.CategoryView">
         select id, parent_id, name, image, level, sort
         from category
         <where>

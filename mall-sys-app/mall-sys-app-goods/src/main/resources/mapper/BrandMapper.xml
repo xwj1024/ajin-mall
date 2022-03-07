@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.leemay.mall.goods.mapper.BrandMapper">
+<mapper namespace="cn.leemay.mall.sys.goods.mapper.BrandMapper">
     <select id="selectCountByName" resultType="java.lang.Integer">
         select count(id)
         from brand
@@ -8,7 +8,7 @@
           and is_delete = 0
     </select>
 
-    <select id="selectListByCondition" resultType="cn.leemay.mall.goods.entity.view.BrandView">
+    <select id="selectListByCondition" resultType="cn.leemay.mall.sys.goods.view.BrandView">
         select id, name, image, initials, sort
         from brand
         <where>
