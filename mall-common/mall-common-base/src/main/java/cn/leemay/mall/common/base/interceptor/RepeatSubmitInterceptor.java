@@ -1,7 +1,7 @@
 package cn.leemay.mall.common.base.interceptor;
 
 import cn.leemay.mall.common.base.anno.RepeatSubmit;
-import cn.leemay.mall.common.base.exception.BizException;
+import cn.leemay.mall.common.base.asserts.BizAssert;
 import org.springframework.lang.NonNull;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -21,13 +21,9 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
         if (handler instanceof HandlerMethod handlerMethod) {
-            Method method = handlerMethod.getMethod();
+            Method       method     = handlerMethod.getMethod();
             RepeatSubmit annotation = method.getAnnotation(RepeatSubmit.class);
-            if (annotation != null) {
-                if (this.isRepeatSubmit(request)) {
-                    throw new BizException("不允许重复操作，请稍后再试");
-                }
-            }
+            BizAssert.isTrue(annotation == null || !this.isRepeatSubmit(request), "不允许重复操作，请稍后再试");
         }
         return super.preHandle(request, response, handler);
     }
