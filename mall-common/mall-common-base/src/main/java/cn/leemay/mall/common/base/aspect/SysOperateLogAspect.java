@@ -47,7 +47,7 @@ public class SysOperateLogAspect {
         handleLog(joinPoint, solAnno, e, null);
     }
 
-    protected void handleLog(final JoinPoint joinPoint, SysOperateLog solAnno, final Exception e, Object jsonResult) {
+    private void handleLog(final JoinPoint joinPoint, SysOperateLog solAnno, final Exception e, Object jsonResult) {
         // todo
     }
 
