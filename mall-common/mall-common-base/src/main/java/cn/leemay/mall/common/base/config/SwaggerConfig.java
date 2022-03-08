@@ -1,7 +1,6 @@
 package cn.leemay.mall.common.base.config;
 
 import cn.leemay.mall.common.base.property.SwaggerProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +11,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +27,7 @@ import java.util.List;
 @EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerConfig {
 
-    @Autowired
+    @Resource
     private SwaggerProperties swaggerProperties;
 
     @Bean
