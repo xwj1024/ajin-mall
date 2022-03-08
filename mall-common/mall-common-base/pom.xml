@@ -12,7 +12,7 @@
     <artifactId>mall-common-base</artifactId>
 
     <properties>
-        <springboot.version>2.2.1.RELEASE</springboot.version>
+        <springboot.version>2021.1</springboot.version>
         <swagger.version>3.0.0</swagger.version>
         <pagehelper.version>1.4.1</pagehelper.version>
         <fastjson.version>1.2.79</fastjson.version>
