@@ -3,7 +3,7 @@ package cn.leemay.mall.common.base.anno;
 import java.lang.annotation.*;
 
 /**
- * @author A
+ * @author Ajin
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -18,11 +18,11 @@ public @interface SysOperateLog {
     /**
      * 是否保存请求的参数
      */
-    boolean isSaveRequestData() default true;
+    boolean saveRequestData() default true;
 
     /**
      * 是否保存响应的参数
      */
-    boolean isSaveResponseData() default true;
+    boolean saveResponseData() default true;
 
 }
