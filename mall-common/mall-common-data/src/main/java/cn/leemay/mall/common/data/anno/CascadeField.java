@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.base.anno;
+package cn.leemay.mall.common.data.anno;
 
 
 import cn.leemay.mall.common.base.enums.TableInfo;

@@ -1,8 +1,8 @@
 package cn.leemay.mall.common.data.handler;
 
-import cn.leemay.mall.common.base.anno.CascadeDelete;
-import cn.leemay.mall.common.base.anno.CascadeField;
 import cn.leemay.mall.common.base.enums.TableInfo;
+import cn.leemay.mall.common.data.anno.CascadeDelete;
+import cn.leemay.mall.common.data.anno.CascadeField;
 import cn.leemay.mall.common.data.mapper.CascadeMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -25,7 +25,7 @@ import java.util.Set;
 @Aspect
 public class CascadeDeleteHandler {
 
-    @Pointcut("@annotation(cn.leemay.mall.common.base.anno.CascadeDelete)")
+    @Pointcut("@annotation(cn.leemay.mall.common.data.anno.CascadeDelete)")
     public void cascadeDeletePointCut() {
     }
 
