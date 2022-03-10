@@ -117,44 +117,6 @@ create table if not exists param
     )
     comment '商品参数表' charset = utf8;
 
-create table if not exists permission
-(
-    id          bigint            not null comment '主键id'
-    primary key,
-    name        varchar(255)      null comment '名称',
-    keyword     varchar(255)      null comment '关键字',
-    note        varchar(255)      null comment '备注',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '权限表';
-
-create table if not exists role
-(
-    id          bigint            not null comment '主键id'
-    primary key,
-    name        varchar(255)      null comment '名称',
-    keyword     varchar(255)      null comment '关键字',
-    note        varchar(255)      null comment '备注',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '角色表';
-
-create table if not exists role_permission
-(
-    id            bigint            not null comment '主键id'
-    primary key,
-    role_id       bigint            null comment '角色id',
-    permission_id bigint            null comment '权限id',
-    create_time   datetime          null comment '创建时间',
-    update_time   datetime          null comment '修改时间',
-    is_delete     tinyint default 0 null comment '是否删除'
-)
-    comment '角色，权限  关联表';
-
 create table if not exists sku
 (
     id           bigint                       not null comment '主键id'
@@ -242,6 +204,86 @@ create table if not exists spu_param
     )
     comment '商品，参数  关联表';
 
+create table if not exists sys_operate_log
+(
+    id             bigint       not null comment '主键id'
+    primary key,
+    description    varchar(255) null comment '操作描述',
+    request_info   text         null comment '请求信息',
+    response_info  text         null comment '响应信息',
+    exception_info text         null comment '异常信息',
+    create_time    datetime     null comment '创建时间',
+    update_time    datetime     null comment '修改时间',
+    is_delete      tinyint      null comment '是否删除'
+    )
+    comment '系统操作日志表' charset = utf8;
+
+create table if not exists sys_permission
+(
+    id          bigint            not null comment '主键id'
+    primary key,
+    name        varchar(255)      null comment '名称',
+    keyword     varchar(255)      null comment '关键字',
+    note        varchar(255)      null comment '备注',
+    create_time datetime          null comment '创建时间',
+    update_time datetime          null comment '修改时间',
+    is_delete   tinyint default 0 null comment '是否删除'
+    )
+    comment '系统权限表';
+
+create table if not exists sys_role
+(
+    id          bigint            not null comment '主键id'
+    primary key,
+    name        varchar(255)      null comment '名称',
+    keyword     varchar(255)      null comment '关键字',
+    description varchar(255)      null comment '备注，描述',
+    create_time datetime          null comment '创建时间',
+    update_time datetime          null comment '修改时间',
+    is_delete   tinyint default 0 null comment '是否删除'
+    )
+    comment '系统角色表';
+
+create table if not exists sys_role_permission
+(
+    id                bigint            not null comment '主键id'
+    primary key,
+    sys_role_id       bigint            null comment '系统角色id',
+    sys_permission_id bigint            null comment '系统权限id',
+    create_time       datetime          null comment '创建时间',
+    update_time       datetime          null comment '修改时间',
+    is_delete         tinyint default 0 null comment '是否删除'
+)
+    comment '系统角色，系统权限  关联表';
+
+create table if not exists sys_user
+(
+    id          bigint        not null comment '主键id'
+    primary key,
+    username    varchar(255)  null comment '账号',
+    password    varchar(255)  null comment '密码',
+    nickname    varchar(255)  null comment '昵称',
+    avatar      varchar(255)  null comment '头像',
+    description varchar(255)  null comment '备注，描述',
+    state       int default 0 null comment '状态信息',
+    create_time datetime      null comment '创建时间',
+    update_time datetime      null comment '修改时间',
+    is_delete   tinyint       null comment '是否删除'
+    )
+    comment '系统用户表' charset = utf8;
+
+create table if not exists sys_user_role
+(
+    id          bigint            not null comment '主键id'
+    primary key,
+    sys_user_id bigint            null comment '系统用户id',
+    sys_role_id bigint            null comment '系统角色id',
+    create_time datetime          null comment '创建时间',
+    update_time datetime          null comment '修改时间',
+    is_delete   tinyint default 0 null comment '是否删除'
+)
+    comment '系统用户，角色  关联表' charset = utf8;
+
 create table if not exists template
 (
     id          bigint            not null comment '主键id'
@@ -253,31 +295,4 @@ create table if not exists template
     is_delete   tinyint default 0 null comment '是否删除'
     )
     comment '规格，参数  模板表' charset = utf8;
-
-create table if not exists user
-(
-    id          bigint       not null comment '主键id'
-    primary key,
-    username    varchar(255) null comment '账号',
-    password    varchar(255) null comment '密码',
-    nickname    varchar(255) null comment '昵称',
-    avatar      varchar(255) null comment '头像',
-    note        varchar(255) null comment '备注',
-    create_time datetime     null comment '创建时间',
-    update_time datetime     null comment '修改时间',
-    is_delete   tinyint      null comment '是否删除'
-    )
-    comment '用户表' charset = utf8;
-
-create table if not exists user_role
-(
-    id          bigint            not null comment '主键id'
-    primary key,
-    admin_id    bigint            null comment '用户id',
-    role_id     bigint            null comment '角色id',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-)
-    comment '用户，角色  关联表' charset = utf8;
 
