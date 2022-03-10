@@ -265,7 +265,7 @@ create table if not exists sys_user
     nickname    varchar(255)  null comment '昵称',
     avatar      varchar(255)  null comment '头像',
     description varchar(255)  null comment '备注，描述',
-    state       int default 0 null comment '状态信息',
+    state       int default 0 null comment '状态信息：0全部，1正常，2禁用，4锁定，8过期',
     create_time datetime      null comment '创建时间',
     update_time datetime      null comment '修改时间',
     is_delete   tinyint       null comment '是否删除'

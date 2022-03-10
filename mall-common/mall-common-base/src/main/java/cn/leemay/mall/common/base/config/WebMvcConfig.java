@@ -1,11 +1,12 @@
 package cn.leemay.mall.common.base.config;
 
 import cn.leemay.mall.common.base.interceptor.SameUriDataInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.annotation.Resource;
 
 /**
  * @author Ajin
@@ -15,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableConfigurationProperties(SameUriDataInterceptor.class)
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Autowired
+    @Resource
     private SameUriDataInterceptor sameUriDataInterceptor;
 
     /**
