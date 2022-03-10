@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @since 2021-05-19
  */
 @Service
-public class CustomUserDetailService implements UserDetailsService {
+public class CustomUserDetailServiceImpl implements UserDetailsService {
 
     @Resource
     private PasswordEncoder passwordEncoder;
