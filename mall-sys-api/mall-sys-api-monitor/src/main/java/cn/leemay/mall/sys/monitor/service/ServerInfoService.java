@@ -1,6 +1,7 @@
 package cn.leemay.mall.sys.monitor.service;
 
-import cn.leemay.mall.monitor.entity.ServerInfo;
+
+import cn.leemay.mall.sys.monitor.entity.ServerInfo;
 
 /**
  * @author Ajin

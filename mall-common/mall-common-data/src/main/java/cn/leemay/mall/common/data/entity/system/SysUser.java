@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -25,7 +24,6 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 @ApiModel(value = "SysUser对象", description = "系统用户")
 public class SysUser implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键id")
@@ -46,6 +44,9 @@ public class SysUser implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String description;
+
+    @ApiModelProperty(value = "状态信息：0全部，1正常，2禁用，4锁定，8过期")
+    private Integer state;
 
     @ApiModelProperty(value = "登录时间", hidden = true)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")

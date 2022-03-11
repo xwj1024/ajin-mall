@@ -1,34 +1,9 @@
 server:
   port: 9020
 spring:
-  application:
-    name: auth
   datasource:
     url: jdbc:mysql://localhost:3306/a?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-  cloud:
-    nacos:
-      config:
-        refresh-enabled: true
-        server-addr: 172.16.91.128:8848
-        file-extension: yaml
-        namespace: dev
-        group: DEV_GROUP
-        enabled: true
-      discovery:
-        server-addr: 172.16.91.128:8848
-        namespace: dev
-        group: DEV_GROUP
-dubbo:
-  scan:
-    base-packages: cn.leemay.mall.auth.service.impl # 开启包扫描
-  protocols:
-    dubbo:
-      name: dubbo # 服务协议
-      port: -1 # 服务端口
-  registry:
-    address: nacos://172.16.91.128:8848 # 注册中心

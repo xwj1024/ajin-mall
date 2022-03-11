@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.data.entity.monitor;
+package cn.leemay.mall.sys.monitor.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

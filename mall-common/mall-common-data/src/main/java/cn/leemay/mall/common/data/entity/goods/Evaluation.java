@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -25,7 +24,6 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 @ApiModel(value = "Evaluation对象", description = "商品评价表")
 public class Evaluation implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")

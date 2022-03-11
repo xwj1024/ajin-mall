@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -24,7 +23,6 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @ApiModel(value = "SpuPara对象", description = "商品，参数  关联表")
 public class SpuPara implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")

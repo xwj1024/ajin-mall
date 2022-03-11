@@ -4,6 +4,7 @@ package cn.leemay.mall.sys.goods.controller;
 import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
+import cn.leemay.mall.common.data.entity.goods.Sku;
 import cn.leemay.mall.sys.goods.service.SkuService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;

@@ -12,7 +12,6 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 @ConfigurationProperties(prefix = "repeat")
 public class SameUriDataInterceptor extends RepeatSubmitInterceptor implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private static final String REPEAT_PARAM = "repeatParam";
@@ -49,7 +47,8 @@ public class SameUriDataInterceptor extends RepeatSubmitInterceptor implements S
     @Override
     public boolean isRepeatSubmit(HttpServletRequest request) {
         String nowParam = "";
-        if (request instanceof RepeatRequestWrapper repeatedlyRequest) {
+        if (request instanceof RepeatRequestWrapper) {
+            RepeatRequestWrapper repeatedlyRequest = (RepeatRequestWrapper) request;
             nowParam = HttpUtils.getBodyString(repeatedlyRequest);
         }
 

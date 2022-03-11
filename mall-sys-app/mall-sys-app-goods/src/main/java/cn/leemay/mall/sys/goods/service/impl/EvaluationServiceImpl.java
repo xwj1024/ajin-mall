@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.goods.service.impl;
 
+import cn.leemay.mall.common.data.entity.goods.Evaluation;
 import cn.leemay.mall.sys.goods.mapper.EvaluationMapper;
 import cn.leemay.mall.sys.goods.service.EvaluationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

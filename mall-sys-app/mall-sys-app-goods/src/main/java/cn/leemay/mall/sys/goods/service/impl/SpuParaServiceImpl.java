@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.goods.service.impl;
 
+import cn.leemay.mall.common.data.entity.goods.SpuPara;
 import cn.leemay.mall.sys.goods.mapper.SpuParaMapper;
 import cn.leemay.mall.sys.goods.service.SpuParaService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

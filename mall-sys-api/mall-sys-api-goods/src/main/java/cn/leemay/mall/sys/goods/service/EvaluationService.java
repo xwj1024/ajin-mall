@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.goods.service;
 
+import cn.leemay.mall.common.data.entity.goods.Evaluation;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

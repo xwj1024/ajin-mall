@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.goods.service.impl;
 
+import cn.leemay.mall.common.data.entity.goods.Para;
 import cn.leemay.mall.sys.goods.mapper.ParaMapper;
 import cn.leemay.mall.sys.goods.service.ParaService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

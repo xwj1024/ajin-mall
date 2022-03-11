@@ -1,6 +1,5 @@
 package cn.leemay.mall.common.base.constant;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -8,7 +7,6 @@ import java.io.Serializable;
  * @since 2021-04-13
  */
 public class RedisConstants implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     public static final String IMAGE_PREVIEW  = "imagePreview";

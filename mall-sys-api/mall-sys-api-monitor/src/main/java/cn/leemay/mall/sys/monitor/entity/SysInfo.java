@@ -1,9 +1,8 @@
-package cn.leemay.mall.common.data.entity.monitor;
+package cn.leemay.mall.sys.monitor.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -12,7 +11,6 @@ import java.io.Serializable;
  */
 @Data
 public class SysInfo implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("名称")

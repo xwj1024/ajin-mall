@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.goods.service.impl;
 
+import cn.leemay.mall.common.data.entity.goods.SkuSpec;
 import cn.leemay.mall.sys.goods.mapper.SkuSpecMapper;
 import cn.leemay.mall.sys.goods.service.SkuSpecService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

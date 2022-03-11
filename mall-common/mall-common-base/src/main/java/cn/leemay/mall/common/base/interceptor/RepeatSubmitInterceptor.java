@@ -20,9 +20,10 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter 
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
-        if (handler instanceof HandlerMethod handlerMethod) {
-            Method       method     = handlerMethod.getMethod();
-            RepeatSubmit annotation = method.getAnnotation(RepeatSubmit.class);
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            Method        method        = handlerMethod.getMethod();
+            RepeatSubmit  annotation    = method.getAnnotation(RepeatSubmit.class);
             BizAssert.isTrue(annotation == null || !this.isRepeatSubmit(request), "不允许重复操作，请稍后再试");
         }
         return super.preHandle(request, response, handler);

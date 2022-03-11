@@ -4,8 +4,8 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.io.Serial;
 import java.io.Serializable;
+
 
 /**
  * @author Ajin
@@ -15,7 +15,6 @@ import java.io.Serializable;
 @ConfigurationProperties(prefix = "swagger")
 @Data
 public class SwaggerProperties implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private String group             = "AGroup";

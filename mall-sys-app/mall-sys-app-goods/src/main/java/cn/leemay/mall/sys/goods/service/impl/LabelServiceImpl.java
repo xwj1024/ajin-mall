@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.goods.service.impl;
 
+import cn.leemay.mall.common.data.entity.goods.Label;
 import cn.leemay.mall.sys.goods.mapper.LabelMapper;
 import cn.leemay.mall.sys.goods.service.LabelService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

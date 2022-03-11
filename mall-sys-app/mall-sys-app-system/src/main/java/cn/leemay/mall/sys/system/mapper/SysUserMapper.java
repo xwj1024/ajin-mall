@@ -3,7 +3,6 @@ package cn.leemay.mall.sys.system.mapper;
 import cn.leemay.mall.common.data.entity.system.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Repository;
  * @author Ajin
  * @since 2021-05-07
  */
-@Repository
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
     /**

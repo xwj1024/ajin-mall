@@ -3,15 +3,17 @@ package cn.leemay.mall.sys.goods.service.impl;
 import cn.leemay.mall.common.base.asserts.BizAssert;
 import cn.leemay.mall.common.base.page.PageHelp;
 import cn.leemay.mall.common.base.result.ResultPage;
+import cn.leemay.mall.common.data.entity.goods.Brand;
 import cn.leemay.mall.sys.goods.form.BrandInsertForm;
 import cn.leemay.mall.sys.goods.form.BrandSelectForm;
 import cn.leemay.mall.sys.goods.form.BrandUpdateForm;
-import cn.leemay.mall.sys.goods.view.BrandView;
 import cn.leemay.mall.sys.goods.mapper.BrandMapper;
 import cn.leemay.mall.sys.goods.mapper.SpuMapper;
 import cn.leemay.mall.sys.goods.service.BrandService;
+import cn.leemay.mall.sys.goods.view.BrandView;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-@org.apache.dubbo.config.annotation.Service
+@DubboService
 public class BrandServiceImpl implements BrandService {
 
     @Resource

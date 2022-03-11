@@ -3,14 +3,15 @@ package cn.leemay.mall.sys.goods.service.impl;
 import cn.leemay.mall.common.base.asserts.BizAssert;
 import cn.leemay.mall.common.base.page.PageHelp;
 import cn.leemay.mall.common.base.result.ResultPage;
+import cn.leemay.mall.common.data.entity.goods.Category;
 import cn.leemay.mall.sys.goods.form.CategoryInsertForm;
 import cn.leemay.mall.sys.goods.form.CategorySelectForm;
 import cn.leemay.mall.sys.goods.form.CategoryUpdateForm;
 import cn.leemay.mall.sys.goods.mapper.CategoryBrandMapper;
 import cn.leemay.mall.sys.goods.mapper.CategoryMapper;
 import cn.leemay.mall.sys.goods.mapper.SpuMapper;
-import cn.leemay.mall.sys.goods.view.CategoryView;
 import cn.leemay.mall.sys.goods.service.CategoryService;
+import cn.leemay.mall.sys.goods.view.CategoryView;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**

@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.goods.service;
 
+import cn.leemay.mall.common.data.entity.goods.Spu;
 import cn.leemay.mall.sys.goods.form.SpuInsertForm;
 import cn.leemay.mall.sys.goods.form.SpuSelectForm;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

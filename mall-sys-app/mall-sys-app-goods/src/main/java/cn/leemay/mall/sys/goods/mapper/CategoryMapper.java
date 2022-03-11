@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.goods.mapper;
 
+import cn.leemay.mall.common.data.entity.goods.Category;
 import cn.leemay.mall.sys.goods.form.CategorySelectForm;
 import cn.leemay.mall.sys.goods.view.CategoryView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

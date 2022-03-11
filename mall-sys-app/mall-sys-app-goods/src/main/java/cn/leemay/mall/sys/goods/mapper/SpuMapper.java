@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.goods.mapper;
 
+import cn.leemay.mall.common.data.entity.goods.Spu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

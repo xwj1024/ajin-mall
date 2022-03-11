@@ -1,6 +1,7 @@
 package cn.leemay.mall.sys.goods.service.impl;
 
 import cn.leemay.mall.common.base.util.ObjectUtils;
+import cn.leemay.mall.common.data.entity.goods.Sku;
 import cn.leemay.mall.sys.goods.mapper.SkuMapper;
 import cn.leemay.mall.sys.goods.service.SkuService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

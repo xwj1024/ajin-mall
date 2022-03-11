@@ -4,7 +4,7 @@ import cn.leemay.mall.common.base.util.ArithmeticUtils;
 import cn.leemay.mall.common.base.util.ByteConvertUtils;
 import cn.leemay.mall.common.base.util.DateTimeUtils;
 import cn.leemay.mall.common.base.util.IpUtils;
-import cn.leemay.mall.monitor.entity.*;
+import cn.leemay.mall.sys.monitor.entity.*;
 import cn.leemay.mall.sys.monitor.service.ServerInfoService;
 import org.springframework.stereotype.Service;
 import oshi.SystemInfo;
@@ -32,13 +32,13 @@ public class ServerInfoServiceImpl implements ServerInfoService {
     public ServerInfo getServerInfo() {
         SystemInfo systemInfo = new SystemInfo();
         ServerInfo serverInfo = new ServerInfo();
-        OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
-        HardwareAbstractionLayer hardware = systemInfo.getHardware();
-        List<DiskInfo> diskInfoList = setDiskInfo(operatingSystem.getFileSystem());
-        CpuInfo cpuInfo = setCpuInfo(hardware.getProcessor());
-        MemInfo memInfo = setMemInfo(hardware.getMemory());
-        SysInfo sysInfo = setSysInfo();
-        JvmInfo jvmInfo = setJvmInfo();
+        OperatingSystem          operatingSystem = systemInfo.getOperatingSystem();
+        HardwareAbstractionLayer hardware        = systemInfo.getHardware();
+        List<DiskInfo>           diskInfoList    = setDiskInfo(operatingSystem.getFileSystem());
+        CpuInfo                  cpuInfo         = setCpuInfo(hardware.getProcessor());
+        MemInfo                  memInfo         = setMemInfo(hardware.getMemory());
+        SysInfo                  sysInfo         = setSysInfo();
+        JvmInfo                  jvmInfo         = setJvmInfo();
         serverInfo.setDiskInfoList(diskInfoList);
         serverInfo.setCpuInfo(cpuInfo);
         serverInfo.setMemInfo(memInfo);
@@ -54,12 +54,12 @@ public class ServerInfoServiceImpl implements ServerInfoService {
      * @return 磁盘信息
      */
     private List<DiskInfo> setDiskInfo(FileSystem fileSystem) {
-        List<OSFileStore> fileStores = fileSystem.getFileStores();
-        List<DiskInfo> diskInfoList = new LinkedList<>();
+        List<OSFileStore> fileStores   = fileSystem.getFileStores();
+        List<DiskInfo>    diskInfoList = new LinkedList<>();
         for (OSFileStore fileStore : fileStores) {
-            long total = fileStore.getTotalSpace();
-            long free = fileStore.getUsableSpace();
-            long used = total - free;
+            long     total    = fileStore.getTotalSpace();
+            long     free     = fileStore.getUsableSpace();
+            long     used     = total - free;
             DiskInfo diskInfo = new DiskInfo();
             diskInfo.setDirName(fileStore.getMount());
             diskInfo.setDirType(fileStore.getType());
@@ -82,17 +82,17 @@ public class ServerInfoServiceImpl implements ServerInfoService {
     private CpuInfo setCpuInfo(CentralProcessor processor) {
         long[] prevTicks = processor.getSystemCpuLoadTicks();
         Util.sleep(ServerInfo.OSHI_WAIT);
-        long[] ticks = processor.getSystemCpuLoadTicks();
-        long nice = ticks[TickType.NICE.getIndex()] - prevTicks[TickType.NICE.getIndex()];
-        long irq = ticks[TickType.IRQ.getIndex()] - prevTicks[TickType.IRQ.getIndex()];
-        long softirq = ticks[TickType.SOFTIRQ.getIndex()] - prevTicks[TickType.SOFTIRQ.getIndex()];
-        long steal = ticks[TickType.STEAL.getIndex()] - prevTicks[TickType.STEAL.getIndex()];
-        long cSys = ticks[TickType.SYSTEM.getIndex()] - prevTicks[TickType.SYSTEM.getIndex()];
-        long user = ticks[TickType.USER.getIndex()] - prevTicks[TickType.USER.getIndex()];
-        long iowait = ticks[TickType.IOWAIT.getIndex()] - prevTicks[TickType.IOWAIT.getIndex()];
-        long idle = ticks[TickType.IDLE.getIndex()] - prevTicks[TickType.IDLE.getIndex()];
-        long totalCpu = user + nice + cSys + idle + iowait + irq + softirq + steal;
-        CpuInfo cpuInfo = new CpuInfo();
+        long[]  ticks    = processor.getSystemCpuLoadTicks();
+        long    nice     = ticks[TickType.NICE.getIndex()] - prevTicks[TickType.NICE.getIndex()];
+        long    irq      = ticks[TickType.IRQ.getIndex()] - prevTicks[TickType.IRQ.getIndex()];
+        long    softirq  = ticks[TickType.SOFTIRQ.getIndex()] - prevTicks[TickType.SOFTIRQ.getIndex()];
+        long    steal    = ticks[TickType.STEAL.getIndex()] - prevTicks[TickType.STEAL.getIndex()];
+        long    cSys     = ticks[TickType.SYSTEM.getIndex()] - prevTicks[TickType.SYSTEM.getIndex()];
+        long    user     = ticks[TickType.USER.getIndex()] - prevTicks[TickType.USER.getIndex()];
+        long    iowait   = ticks[TickType.IOWAIT.getIndex()] - prevTicks[TickType.IOWAIT.getIndex()];
+        long    idle     = ticks[TickType.IDLE.getIndex()] - prevTicks[TickType.IDLE.getIndex()];
+        long    totalCpu = user + nice + cSys + idle + iowait + irq + softirq + steal;
+        CpuInfo cpuInfo  = new CpuInfo();
         cpuInfo.setCpuNum(processor.getLogicalProcessorCount());
         cpuInfo.setTotalRate(totalCpu);
         cpuInfo.setSysRate(cSys);
@@ -123,7 +123,7 @@ public class ServerInfoServiceImpl implements ServerInfoService {
      */
     private SysInfo setSysInfo() {
         Properties properties = System.getProperties();
-        SysInfo sysInfo = new SysInfo();
+        SysInfo    sysInfo    = new SysInfo();
         sysInfo.setComputerName(IpUtils.getHostName());
         sysInfo.setComputerIp(IpUtils.getHostName());
         sysInfo.setOsName(properties.getProperty("os.name"));
@@ -139,7 +139,7 @@ public class ServerInfoServiceImpl implements ServerInfoService {
      */
     private JvmInfo setJvmInfo() {
         Properties properties = System.getProperties();
-        JvmInfo jvmInfo = new JvmInfo();
+        JvmInfo    jvmInfo    = new JvmInfo();
         jvmInfo.setTotalMemory(Runtime.getRuntime().totalMemory());
         jvmInfo.setMaxMemory(Runtime.getRuntime().maxMemory());
         jvmInfo.setFreeMemory(Runtime.getRuntime().freeMemory());

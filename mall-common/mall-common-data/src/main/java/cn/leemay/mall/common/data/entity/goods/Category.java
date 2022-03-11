@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -25,7 +24,6 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 @ApiModel(value = "Category对象", description = "商品类目表")
 public class Category implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "分类id")
