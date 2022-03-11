@@ -3,12 +3,13 @@ package cn.leemay.mall.sys.system.controller;
 
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
-import cn.leemay.mall.common.data.entity.system.Admin;
-import cn.leemay.mall.sys.system.service.AdminService;
+import cn.leemay.mall.common.data.entity.system.SysUser;
+import cn.leemay.mall.sys.system.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -19,21 +20,21 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021-05-07
  */
 @RestController
-@RequestMapping("/api/system/admin")
-@Api(tags = "管理员")
+@RequestMapping("/system/admin")
+@Api(tags = "系统用户")
 @CrossOrigin
-public class AdminController {
+public class SysUserController {
 
-    @Autowired
-    private AdminService adminService;
+    @Resource
+    private SysUserService adminService;
 
     @PostMapping
     @ApiOperation("添加管理员")
-    public BaseResult<String> insert(@RequestBody Admin admin) {
-        if (admin == null) {
+    public BaseResult<String> insert(@RequestBody SysUser sysUser) {
+        if (sysUser == null) {
             return new BaseResult<>(ResultCode.ERR, "数据错误");
         }
-        adminService.insert(admin);
+        adminService.insert(sysUser);
         return new BaseResult<>(ResultCode.OK, "添加成功");
     }
 

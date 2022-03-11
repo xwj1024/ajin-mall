@@ -1,6 +1,6 @@
-spring:
-  application:
-    name: @artifactId@
+#spring:
+#  application:
+#    name: @artifactId@
 #  cloud:
 #    nacos:
 #      config:

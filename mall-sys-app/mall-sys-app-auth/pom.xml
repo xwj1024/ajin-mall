@@ -26,5 +26,10 @@
             <artifactId>mall-common-data</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>cn.leemay.mall</groupId>
+            <artifactId>mall-sys-api-system</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 </project>
