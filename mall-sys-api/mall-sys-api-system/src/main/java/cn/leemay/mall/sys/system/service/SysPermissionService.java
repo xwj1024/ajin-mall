@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @author A
+ * @author Ajin
  */
 public interface SysPermissionService extends IService<SysPermission> {
 

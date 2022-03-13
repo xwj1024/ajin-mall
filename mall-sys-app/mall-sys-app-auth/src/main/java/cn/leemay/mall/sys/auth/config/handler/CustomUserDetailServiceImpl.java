@@ -1,6 +1,7 @@
 package cn.leemay.mall.sys.auth.config.handler;
 
 import cn.leemay.mall.common.base.asserts.BizAssert;
+import cn.leemay.mall.common.base.constant.DubboConstants;
 import cn.leemay.mall.common.base.util.StringUtils;
 import cn.leemay.mall.common.data.entity.system.SysPermission;
 import cn.leemay.mall.common.data.entity.system.SysUser;
@@ -13,10 +14,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +28,10 @@ import java.util.List;
 @Service
 public class CustomUserDetailServiceImpl implements UserDetailsService {
 
-    @Resource
-    private PasswordEncoder passwordEncoder;
-
-    @DubboReference
+    @DubboReference(group = DubboConstants.GROUP, check = false)
     private SysUserService sysUserService;
 
-    @DubboReference
+    @DubboReference(group = DubboConstants.GROUP, check = false)
     private SysPermissionService sysPermissionService;
 
     @Override

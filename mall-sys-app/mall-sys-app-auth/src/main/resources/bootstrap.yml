@@ -4,15 +4,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 172.16.91.128:8848
+        server-addr: 192.168.3.19:8848
         namespace: public
         group: DEFAULT_GROUP
 dubbo:
-  scan:
-    base-packages: cn.leemay.mall.auth.service.impl # 开启包扫描
-  protocols:
-    dubbo:
-      name: dubbo # 服务协议
-      port: -1 # 服务端口
+  protocol:
+    name: dubbo # 服务协议
+    port: -1 # 服务端口
   registry:
-    address: nacos://172.16.91.128:8848 # 注册中心
+    address: nacos://192.168.3.19:8848 # 注册中心

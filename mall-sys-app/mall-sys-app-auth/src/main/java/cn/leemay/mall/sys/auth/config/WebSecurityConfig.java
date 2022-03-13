@@ -1,6 +1,6 @@
 package cn.leemay.mall.sys.auth.config;
 
-import cn.leemay.mall.sys.auth.config.handler.CustomUserDetailServiceImpl;
+import cn.leemay.mall.sys.auth.config.handler.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,35 +10,46 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.annotation.Resource;
+
 /**
  * @author Ajin
  * @since 2021-06-20
  */
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    //登录成功处理逻辑
-//    @Resource
-//    CustomizeAuthenticationSuccessHandler authenticationSuccessHandler;
-//
-//    //登录失败处理逻辑
-//    @Resource
-//    CustomizeAuthenticationFailureHandler authenticationFailureHandler;
-//
-//    //权限拒绝处理逻辑
+
+    /**
+     * 登录成功处理逻辑
+     */
+    @Resource
+    private CustomizeAuthenticationSuccessHandler authenticationSuccessHandler;
+
+    /**
+     * 登录失败处理逻辑
+     */
+    @Resource
+    private CustomizeAuthenticationFailureHandler authenticationFailureHandler;
+
+    //权限拒绝处理逻辑
 //    @Resource
 //    CustomizeAccessDeniedHandler accessDeniedHandler;
-//
-//    //匿名用户访问无权限资源时的异常
-//    @Resource
-//    CustomizeAuthenticationEntryPoint authenticationEntryPoint;
-//
+
+    /**
+     * 匿名用户访问无权限资源时的异常
+     */
+    @Resource
+    private CustomizeAuthenticationEntryPoint authenticationEntryPoint;
+
 //    //会话失效(账号被挤下线)处理逻辑
 //    @Resource
 //    CustomizeSessionInformationExpiredStrategy sessionInformationExpiredStrategy;
 //
-//    //登出成功处理逻辑
-//    @Resource
-//    CustomizeLogoutSuccessHandler logoutSuccessHandler;
+    /**
+     * 登出成功处理逻辑
+     */
+    @Resource
+    private CustomizeLogoutSuccessHandler logoutSuccessHandler;
 //
 //    //访问决策管理器
 //    @Resource
@@ -73,8 +84,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
-        http.authorizeRequests().
-                antMatchers("/getUser").hasAuthority("query_user");
+        http.authorizeRequests()
+                .antMatchers("/getUser").hasAuthority("select_user")
+                // 异常处理(权限拒绝、登录失效等)
+                .and().exceptionHandling()
+                // 匿名用户访问无权限资源时的异常处理
+                .authenticationEntryPoint(authenticationEntryPoint)
+                //登入
+                .and().formLogin().
+                permitAll().//允许所有用户
+                successHandler(authenticationSuccessHandler)//登录成功处理逻辑
+                .failureHandler(authenticationFailureHandler)//登录失败处理逻辑
+                //登出
+                .and().logout()
+                .permitAll().//允许所有用户
+                logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑
+                deleteCookies("JSESSIONID");//登出之后删除cookie
+
 
     }
 

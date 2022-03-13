@@ -1,12 +1,12 @@
 package cn.leemay.mall.sys.system.service.impl;
 
+import cn.leemay.mall.common.base.constant.DubboConstants;
 import cn.leemay.mall.common.data.entity.system.SysUser;
 import cn.leemay.mall.sys.system.mapper.SysUserMapper;
 import cn.leemay.mall.sys.system.service.SysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -18,8 +18,7 @@ import javax.annotation.Resource;
  * @author Ajin
  * @since 2021-05-07
  */
-@Service
-@DubboService
+@DubboService(group = DubboConstants.GROUP)
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
     @Resource

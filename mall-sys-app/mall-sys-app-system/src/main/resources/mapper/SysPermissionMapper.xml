@@ -20,10 +20,17 @@
         is_delete
     </sql>
     <select id="selectListByUser" resultMap="BaseResultMap">
-        select
+        SELECT
         <include refid="Base_Column_List"/>
-        from sys_permission
-        where is_delete = 0
-          and sys_user_id = #{sysUserId}
+        FROM sys_user AS u
+                     LEFT JOIN sys_user_role AS ur
+                ON u.id = ur.sys_user_id
+                     LEFT JOIN sys_role AS r
+                ON r.id = ur.sys_role_id
+                     LEFT JOIN sys_role_permission AS rp
+                ON r.id = rp.sys_role_id
+                     LEFT JOIN sys_permission AS p
+                ON p.id = rp.sys_permission_id
+        WHERE u.id = #{sysUserId}
     </select>
 </mapper>

@@ -20,21 +20,21 @@ import javax.annotation.Resource;
  * @since 2021-05-07
  */
 @RestController
-@RequestMapping("/system/admin")
+@RequestMapping("/system/sysUser")
 @Api(tags = "系统用户")
 @CrossOrigin
 public class SysUserController {
 
     @Resource
-    private SysUserService adminService;
+    private SysUserService sysUserService;
 
     @PostMapping
-    @ApiOperation("添加管理员")
+    @ApiOperation("添加系统用户")
     public BaseResult<String> insert(@RequestBody SysUser sysUser) {
         if (sysUser == null) {
             return new BaseResult<>(ResultCode.ERR, "数据错误");
         }
-        adminService.insert(sysUser);
+        sysUserService.insert(sysUser);
         return new BaseResult<>(ResultCode.OK, "添加成功");
     }
 
