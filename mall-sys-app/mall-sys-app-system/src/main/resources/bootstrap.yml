@@ -4,7 +4,9 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.3.19:8848
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
 dubbo:
   scan:
     base-packages: cn.leemay.mall.sys.system.service # 开启包扫描
@@ -12,4 +14,4 @@ dubbo:
     name: dubbo # 服务协议
     port: -1 # 服务端口
   registry:
-    address: nacos://192.168.3.19:8848 # 注册中心
+    address: nacos://localhost:8848 # 注册中心
