@@ -17,6 +17,7 @@
         <pagehelper.version>1.4.1</pagehelper.version>
         <fastjson.version>1.2.79</fastjson.version>
         <jwt.version>0.9.1</jwt.version>
+        <knife4j.version>3.0.3</knife4j.version>
     </properties>
 
     <dependencies>
@@ -75,7 +76,7 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
-<!--        &lt;!&ndash;security&ndash;&gt;-->
+        <!--security-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.cloud</groupId>-->
 <!--            <artifactId>spring-cloud-starter-oauth2</artifactId>-->
@@ -106,7 +107,7 @@
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
-            <version>3.0.3</version>
+            <version>${knife4j.version}</version>
         </dependency>
         <!--nacos-->
         <dependency>
@@ -114,11 +115,11 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <version>${alibaba.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
-<!--            <version>${alibaba.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <version>${alibaba.version}</version>
+        </dependency>
         <!--dubbo-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
