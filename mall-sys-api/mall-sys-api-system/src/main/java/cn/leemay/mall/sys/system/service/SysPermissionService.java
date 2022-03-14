@@ -1,6 +1,7 @@
 package cn.leemay.mall.sys.system.service;
 
 import cn.leemay.mall.common.data.entity.system.SysPermission;
+import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * @author Ajin
  */
-public interface SysPermissionService /*extends IService<SysPermission>*/ {
+public interface SysPermissionService extends IService<SysPermission> {
 
     /**
      * 根据用户id查询用户权限

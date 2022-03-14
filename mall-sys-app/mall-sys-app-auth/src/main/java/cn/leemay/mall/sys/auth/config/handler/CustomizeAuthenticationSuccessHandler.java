@@ -1,6 +1,5 @@
 package cn.leemay.mall.sys.auth.config.handler;
 
-import cn.leemay.mall.common.base.constant.DubboConstants;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.common.data.entity.system.SysUser;
@@ -28,7 +27,7 @@ import java.time.LocalDateTime;
 @Component
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    @Reference(group = DubboConstants.GROUP, check = false)
+    @Reference
     private SysUserService sysUserService;
 
     @Override

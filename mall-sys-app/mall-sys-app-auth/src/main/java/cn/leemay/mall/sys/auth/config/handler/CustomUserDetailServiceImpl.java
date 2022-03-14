@@ -1,7 +1,6 @@
 package cn.leemay.mall.sys.auth.config.handler;
 
 import cn.leemay.mall.common.base.asserts.BizAssert;
-import cn.leemay.mall.common.base.constant.DubboConstants;
 import cn.leemay.mall.common.base.util.StringUtils;
 import cn.leemay.mall.common.data.entity.system.SysPermission;
 import cn.leemay.mall.common.data.entity.system.SysUser;
@@ -28,10 +27,10 @@ import java.util.List;
 @Component
 public class CustomUserDetailServiceImpl implements UserDetailsService {
 
-    @Reference(group = DubboConstants.GROUP, check = false)
+    @Reference
     private SysUserService sysUserService;
 
-    @Reference(group = DubboConstants.GROUP, check = false)
+    @Reference
     private SysPermissionService sysPermissionService;
 
     @Override

@@ -1,6 +1,7 @@
 package cn.leemay.mall.sys.system.service;
 
 import cn.leemay.mall.common.data.entity.system.SysUser;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -10,7 +11,7 @@ import cn.leemay.mall.common.data.entity.system.SysUser;
  * @author Ajin
  * @since 2021-05-07
  */
-public interface SysUserService /*extends IService<SysUser>*/ {
+public interface SysUserService extends IService<SysUser> {
     /**
      * 添加系统用户
      *
