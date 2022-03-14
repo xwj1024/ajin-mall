@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -19,7 +18,6 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @ApiModel("分类添加对象")
 public class CategoryInsertForm implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @NotNull(message = "上级id不能为空")

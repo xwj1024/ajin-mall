@@ -2,7 +2,6 @@ package cn.leemay.mall.sys.system.service;
 
 import cn.leemay.mall.common.data.entity.system.SysPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +16,5 @@ public interface SysPermissionService extends IService<SysPermission> {
      * @param sysUserId 用户id
      * @return 权限列表
      */
-    List<SysPermission> selectListByUser(@Param("sysUserId") Long sysUserId);
+    List<SysPermission> selectListByUser(Long sysUserId);
 }

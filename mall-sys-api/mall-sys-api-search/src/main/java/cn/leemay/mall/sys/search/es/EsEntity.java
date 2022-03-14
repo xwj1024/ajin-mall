@@ -3,7 +3,6 @@ package cn.leemay.mall.sys.search.es;
 import com.alibaba.fastjson.JSON;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -12,12 +11,11 @@ import java.io.Serializable;
  */
 @Data
 public class EsEntity implements Serializable {
-    @Serial
-    private static final long   serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     /**
      * 索引的_id，不指定则使用es自动生成的
      */
-    private              String id;
+    private String id;
 
     /**
      * 不转中间对象，直接转为json字符串,避免批量插入浪费内存资源

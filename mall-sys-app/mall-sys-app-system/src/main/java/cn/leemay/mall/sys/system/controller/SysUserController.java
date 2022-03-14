@@ -31,9 +31,6 @@ public class SysUserController {
     @PostMapping
     @ApiOperation("添加系统用户")
     public BaseResult<String> insert(@RequestBody SysUser sysUser) {
-        if (sysUser == null) {
-            return new BaseResult<>(ResultCode.ERR, "数据错误");
-        }
         sysUserService.insert(sysUser);
         return new BaseResult<>(ResultCode.OK, "添加成功");
     }

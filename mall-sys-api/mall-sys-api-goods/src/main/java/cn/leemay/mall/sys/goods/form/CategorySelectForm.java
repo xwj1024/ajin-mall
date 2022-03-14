@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -19,7 +18,6 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @ApiModel("分类查询对象")
 public class CategorySelectForm extends PageForm implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("上级id")

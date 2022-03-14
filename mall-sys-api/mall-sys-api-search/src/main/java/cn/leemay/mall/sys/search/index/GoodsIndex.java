@@ -3,7 +3,6 @@ package cn.leemay.mall.sys.search.index;
 import cn.leemay.mall.sys.search.anno.EsField;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -13,7 +12,6 @@ import java.math.BigDecimal;
  */
 @Data
 public class GoodsIndex implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @EsField(type = "keyword")

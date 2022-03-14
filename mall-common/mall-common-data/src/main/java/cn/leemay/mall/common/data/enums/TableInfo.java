@@ -1,4 +1,4 @@
-package cn.leemay.mall.common.base.enums;
+package cn.leemay.mall.common.data.enums;
 
 /**
  * @author Ajin

@@ -3,7 +3,6 @@ package cn.leemay.mall.sys.search.es;
 import cn.leemay.mall.sys.search.anno.EsField;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -17,7 +16,6 @@ import java.util.Map;
  */
 @Data
 public class EsMapping implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private boolean                          dynamic = false;

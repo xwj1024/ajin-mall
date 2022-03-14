@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @author A
+ * @author Ajin
  */
 @Mapper
 public interface SysPermissionMapper extends BaseMapper<SysPermission> {

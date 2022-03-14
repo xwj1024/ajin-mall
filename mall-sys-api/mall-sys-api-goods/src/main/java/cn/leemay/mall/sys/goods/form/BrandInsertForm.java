@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -19,7 +18,6 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @ApiModel("品牌添加对象")
 public class BrandInsertForm implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @NotBlank(message = "品牌名称不能为空")

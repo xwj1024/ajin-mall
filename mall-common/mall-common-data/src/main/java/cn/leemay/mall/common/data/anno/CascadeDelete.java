@@ -1,7 +1,7 @@
 package cn.leemay.mall.common.data.anno;
 
 
-import cn.leemay.mall.common.base.enums.TableInfo;
+import cn.leemay.mall.common.data.enums.TableInfo;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.annotation.*;
