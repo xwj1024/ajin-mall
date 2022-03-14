@@ -4,6 +4,7 @@ package cn.leemay.mall.sys.auth.config.handler;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class CustomizeLogoutSuccessHandler implements LogoutSuccessHandler {
         BaseResult<String> result = new BaseResult<>(ResultCode.OK, "退出成功");
         httpServletResponse.setContentType("application/json;charset=utf-8");
         try (PrintWriter writer = httpServletResponse.getWriter()) {
-            writer.write(JSON.toJSONString(result));
+            writer.write(JSON.toJSONString(result, SerializerFeature.WriteMapNullValue));
             writer.flush();
         }
     }

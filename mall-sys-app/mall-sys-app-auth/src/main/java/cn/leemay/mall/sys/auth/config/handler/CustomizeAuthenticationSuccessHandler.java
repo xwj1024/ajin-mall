@@ -5,6 +5,7 @@ import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.common.data.entity.system.SysUser;
 import cn.leemay.mall.sys.system.service.SysUserService;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,10 +34,10 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         // 更新用户登录时间
-        User    userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        SysUser sysUser     = sysUserService.loadUserByUsername(userDetails.getUsername());
+        User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SysUser sysUser = sysUserService.loadUserByUsername(userDetails.getUsername());
         sysUser.setLoginTime(LocalDateTime.now());
-//        sysUserService.updateById(sysUser);
+        sysUserService.updateById(sysUser);
 
         //此处还可以进行一些处理，比如登录成功之后可能需要返回给前台当前用户有哪些菜单权限，
         //进而前台动态的控制菜单的显示等，具体根据自己的业务需求进行扩展
@@ -48,7 +49,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         httpServletResponse.setContentType("application/json;charset=utf-8");
         // 塞到HttpServletResponse中返回给前台
         try (PrintWriter writer = httpServletResponse.getWriter()) {
-            writer.write(JSON.toJSONString(result));
+            writer.write(JSON.toJSONString(result, SerializerFeature.WriteMapNullValue));
             writer.flush();
         }
     }

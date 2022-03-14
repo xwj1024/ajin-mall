@@ -68,6 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
     @Override
     public UserDetailsService userDetailsService() {
         // 获取用户账号密码及权限信息
