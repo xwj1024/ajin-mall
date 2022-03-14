@@ -31,5 +31,10 @@
             <artifactId>mall-sys-api-system</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <!--security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -3,9 +3,3 @@ server:
 spring:
   redis:
     host: localhost
-  datasource:
-    url: jdbc:mysql://localhost:3306/leemay_mall?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-    username: root
-    password: root1024
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
