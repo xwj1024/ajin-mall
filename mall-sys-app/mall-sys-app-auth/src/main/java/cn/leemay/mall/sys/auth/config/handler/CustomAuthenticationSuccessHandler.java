@@ -32,10 +32,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private SysUserService sysUserService;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         // 更新用户登录时间
-        User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        SysUser sysUser = sysUserService.loadUserByUsername(userDetails.getUsername());
+        User    userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SysUser sysUser     = sysUserService.loadUserByUsername(userDetails.getUsername());
         sysUser.setLoginTime(LocalDateTime.now());
         sysUserService.updateById(sysUser);
 
@@ -46,9 +46,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         // 返回json数据
         BaseResult<String> result = new BaseResult<>(ResultCode.OK, "登录成功");
         // 处理编码方式，防止中文乱码的情况
-        httpServletResponse.setContentType("application/json;charset=utf-8");
+        response.setContentType("application/json;charset=utf-8");
         // 塞到HttpServletResponse中返回给前台
-        try (PrintWriter writer = httpServletResponse.getWriter()) {
+        try (PrintWriter writer = response.getWriter()) {
             writer.write(JSON.toJSONString(result, SerializerFeature.WriteMapNullValue));
             writer.flush();
         }

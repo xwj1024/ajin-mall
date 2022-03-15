@@ -17,4 +17,13 @@ public interface SysPermissionService extends IService<SysPermission> {
      * @return 权限列表
      */
     List<String> selectPermissionListByUser(Long sysUserId);
+
+    /**
+     * 根据请求路径，请求方法 查询用户权限
+     *
+     * @param requestUrl 请求路径
+     * @param requestMethod 请求方法
+     * @return 权限列表
+     */
+    List<String> selectPermissionListByPathAndMethod(String requestUrl, String requestMethod);
 }

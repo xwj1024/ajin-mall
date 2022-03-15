@@ -4,8 +4,8 @@ import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -15,19 +15,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * 匿名用户访问无权限资源时的异常
+ * 访问拒绝处理
  *
  * @author Ajin
  */
 @Component
-public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        BaseResult<String> result = new BaseResult<>(ResultCode.ERR, exception.getMessage());
-        String             json   = JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException, ServletException {
+        BaseResult<String> result = new BaseResult<>(ResultCode.ERR, "无权限访问");
         response.setContentType("application/json;charset=utf-8");
         try (PrintWriter writer = response.getWriter()) {
-            writer.print(json);
+            writer.write(JSON.toJSONString(result, SerializerFeature.WriteMapNullValue));
             writer.flush();
         }
     }

@@ -23,10 +23,10 @@ import java.io.PrintWriter;
 @Component
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
-    public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         BaseResult<String> result = new BaseResult<>(ResultCode.OK, "退出成功");
-        httpServletResponse.setContentType("application/json;charset=utf-8");
-        try (PrintWriter writer = httpServletResponse.getWriter()) {
+        response.setContentType("application/json;charset=utf-8");
+        try (PrintWriter writer = response.getWriter()) {
             writer.write(JSON.toJSONString(result, SerializerFeature.WriteMapNullValue));
             writer.flush();
         }

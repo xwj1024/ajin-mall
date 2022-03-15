@@ -20,4 +20,13 @@ public interface SysPermissionMapper extends BaseMapper<SysPermission> {
      * @return 权限列表
      */
     List<String> selectPermissionListByUser(@Param("sysUserId") Long sysUserId);
+
+    /**
+     * 根据请求路径查询用户权限
+     *
+     * @param path   请求路径
+     * @param method 请求方法
+     * @return 权限列表
+     */
+    List<String> selectPermissionListByPathAndMethod(@Param("path") String path, @Param("method") String method);
 }
