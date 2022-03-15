@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
  * @author Ajin
  */
 @Component
-public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Reference
     private SysUserService sysUserService;

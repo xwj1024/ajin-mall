@@ -17,19 +17,19 @@ import javax.annotation.Resource;
  * @since 2021-06-20
  */
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
     /**
      * 登录成功处理逻辑
      */
     @Resource
-    private CustomizeAuthenticationSuccessHandler authenticationSuccessHandler;
+    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
 
     /**
      * 登录失败处理逻辑
      */
     @Resource
-    private CustomizeAuthenticationFailureHandler authenticationFailureHandler;
+    private CustomAuthenticationFailureHandler authenticationFailureHandler;
 
     //权限拒绝处理逻辑
 //    @Resource
@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 匿名用户访问无权限资源时的异常
      */
     @Resource
-    private CustomizeAuthenticationEntryPoint authenticationEntryPoint;
+    private CustomAuthenticationEntryPoint authenticationEntryPoint;
 
 //    //会话失效(账号被挤下线)处理逻辑
 //    @Resource
@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 登出成功处理逻辑
      */
     @Resource
-    private CustomizeLogoutSuccessHandler logoutSuccessHandler;
+    private CustomLogoutSuccessHandler logoutSuccessHandler;
 //
 //    //访问决策管理器
 //    @Resource
