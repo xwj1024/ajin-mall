@@ -1,8 +1,10 @@
 package cn.leemay.mall.sys.auth.config.handler;
 
 
+import cn.leemay.mall.common.base.constant.RedisConstants;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
+import cn.leemay.mall.common.base.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 登录失败处理逻辑
@@ -57,9 +60,13 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
         } else if (exception instanceof UsernameNotFoundException || exception instanceof BadCredentialsException) {
             // 记录登录失败次数
             String username = request.getParameter("username");
-            recordLoginFailTimes(username);
-
-            result = new BaseResult<>(ResultCode.ERR, "账号或密码错误");
+            int loginFailTimes = recordLoginFailTimes(username);
+            int remainLoginTimes = loginTimesLimit - loginFailTimes;
+            if (remainLoginTimes <= 3) {
+                result = new BaseResult<>(ResultCode.ERR, "账号或密码错误，剩余登录次数：" + remainLoginTimes);
+            } else {
+                result = new BaseResult<>(ResultCode.ERR, "账号或密码错误");
+            }
         } else {
             result = new BaseResult<>(ResultCode.ERR, "登录失败");
         }
@@ -71,7 +78,13 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
         }
     }
 
-    private void recordLoginFailTimes(String username) {
-
+    private int recordLoginFailTimes(String username) {
+        String loginFailTimes = stringRedisTemplate.opsForValue().get(RedisConstants.LOGIN_FAIL_TIMES + username);
+        if (StringUtils.isEmpty(loginFailTimes)) {
+            loginFailTimes = "0";
+        }
+        int newLoginFailTimes = Integer.parseInt(loginFailTimes) + 1;
+        stringRedisTemplate.opsForValue().set(RedisConstants.LOGIN_FAIL_TIMES + username, Integer.toString(newLoginFailTimes), loginAfterTime, TimeUnit.MINUTES);
+        return newLoginFailTimes;
     }
 }
