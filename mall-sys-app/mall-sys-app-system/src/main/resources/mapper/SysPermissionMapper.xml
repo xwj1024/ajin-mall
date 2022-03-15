@@ -12,7 +12,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         id
-        ,
+                ,
         name,
         keyword,
         description,
@@ -21,18 +21,22 @@
         is_delete
     </sql>
     <select id="selectListByUser" resultMap="BaseResultMap">
-        SELECT p.id      id,
-               p.name    name,
-               p.keyword keyword
-        FROM sys_user AS u
-                 LEFT JOIN sys_user_role AS ur
-                           ON u.id = ur.sys_user_id
-                 LEFT JOIN sys_role AS r
-                           ON r.id = ur.sys_role_id
-                 LEFT JOIN sys_role_permission AS rp
-                           ON r.id = rp.sys_role_id
-                 LEFT JOIN sys_permission AS p
-                           ON p.id = rp.sys_permission_id
-        WHERE u.id = #{sysUserId}
+    </select>
+
+    <select id="selectPermissionListByUser" resultType="java.lang.String">
+        select p.keyword keyword
+        from sys_user as u
+                     left join sys_user_role as ur
+                on u.id = ur.sys_user_id
+                     left join sys_role as r
+                on r.id = ur.sys_role_id
+                     left join sys_role_permission as rp
+                on r.id = rp.sys_role_id
+                     left join sys_permission as p
+                on p.id = rp.sys_permission_id
+        where u.id = #{sysUserId}
+          and u.is_delete = 0
+          and r.is_delete = 0
+          and p.is_delete = 0
     </select>
 </mapper>

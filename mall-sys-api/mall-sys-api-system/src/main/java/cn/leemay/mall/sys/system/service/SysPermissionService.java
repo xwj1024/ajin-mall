@@ -16,5 +16,5 @@ public interface SysPermissionService extends IService<SysPermission> {
      * @param sysUserId 用户id
      * @return 权限列表
      */
-    List<SysPermission> selectListByUser(Long sysUserId);
+    List<String> selectPermissionListByUser(Long sysUserId);
 }

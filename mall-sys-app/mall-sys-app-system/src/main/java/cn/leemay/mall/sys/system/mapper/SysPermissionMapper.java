@@ -12,11 +12,12 @@ import java.util.List;
  */
 @Mapper
 public interface SysPermissionMapper extends BaseMapper<SysPermission> {
+
     /**
      * 根据用户id查询用户权限
      *
      * @param sysUserId 用户id
      * @return 权限列表
      */
-    List<SysPermission> selectListByUser(@Param("sysUserId") Long sysUserId);
+    List<String> selectPermissionListByUser(@Param("sysUserId") Long sysUserId);
 }

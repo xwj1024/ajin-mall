@@ -2,7 +2,6 @@ package cn.leemay.mall.sys.auth.config.handler;
 
 import cn.leemay.mall.common.base.asserts.BizAssert;
 import cn.leemay.mall.common.base.util.StringUtils;
-import cn.leemay.mall.common.data.entity.system.SysPermission;
 import cn.leemay.mall.common.data.entity.system.SysUser;
 import cn.leemay.mall.sys.system.service.SysPermissionService;
 import cn.leemay.mall.sys.system.service.SysUserService;
@@ -43,14 +42,23 @@ public class CustomUserDetailServiceImpl implements UserDetailsService {
         BizAssert.notTrue(sysUser.getState() == 4, "账号已锁定");
         BizAssert.notTrue(sysUser.getState() == 8, "账号已过期");
 
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         // 获取该用户所拥有的权限
-        List<SysPermission> sysPermissions = sysPermissionService.selectListByUser(sysUser.getId());
-        // 声明用户授权
-        sysPermissions.forEach(sysPermission -> {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(sysPermission.getKeyword());
-            grantedAuthorities.add(grantedAuthority);
-        });
+        List<GrantedAuthority> grantedAuthorities = getGrantedAuthorities(sysUser);
         return new User(sysUser.getUsername(), sysUser.getPassword(), sysUser.getState() == 1, sysUser.getState() == 1, sysUser.getState() == 1, sysUser.getState() == 1, grantedAuthorities);
     }
+
+    private List<GrantedAuthority> getGrantedAuthorities(SysUser sysUser) {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        List<String>           permissions        = sysPermissionService.selectPermissionListByUser(sysUser.getId());
+        if (permissions != null && permissions.size() > 0) {
+            // 声明用户授权
+            permissions.forEach(permission -> {
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission);
+                grantedAuthorities.add(grantedAuthority);
+            });
+        }
+        return grantedAuthorities;
+    }
+
+
 }

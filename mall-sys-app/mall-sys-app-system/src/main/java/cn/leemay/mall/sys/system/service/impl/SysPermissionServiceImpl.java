@@ -20,7 +20,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     private SysPermissionMapper sysPermissionMapper;
 
     @Override
-    public List<SysPermission> selectListByUser(Long sysUserId) {
-        return sysPermissionMapper.selectListByUser(sysUserId);
+    public List<String> selectPermissionListByUser(Long sysUserId) {
+        return sysPermissionMapper.selectPermissionListByUser(sysUserId);
     }
 }
