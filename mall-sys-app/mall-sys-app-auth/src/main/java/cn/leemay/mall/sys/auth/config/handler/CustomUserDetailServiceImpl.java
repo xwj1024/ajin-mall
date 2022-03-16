@@ -71,6 +71,7 @@ public class CustomUserDetailServiceImpl implements UserDetailsService {
 
         // 获取该用户所拥有的权限
         List<GrantedAuthority> grantedAuthorities = getGrantedAuthorities(sysUser);
+
         return new User(sysUser.getUsername(), sysUser.getPassword(),
                 state == 1,
                 state != 8,

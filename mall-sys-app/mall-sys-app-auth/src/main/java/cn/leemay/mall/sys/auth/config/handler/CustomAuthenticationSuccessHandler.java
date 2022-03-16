@@ -1,5 +1,6 @@
 package cn.leemay.mall.sys.auth.config.handler;
 
+import cn.leemay.mall.common.base.constant.RedisConstants;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultCode;
 import cn.leemay.mall.common.data.entity.system.SysUser;
@@ -7,12 +8,14 @@ import cn.leemay.mall.sys.system.service.SysUserService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,13 +34,21 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Reference
     private SysUserService sysUserService;
 
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        // 更新用户登录时间
         User    userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        SysUser sysUser     = sysUserService.loadUserByUsername(userDetails.getUsername());
+        String  username    = userDetails.getUsername();
+        SysUser sysUser     = sysUserService.loadUserByUsername(username);
+        // 更新用户登录时间
         sysUser.setLoginTime(LocalDateTime.now());
         sysUserService.updateById(sysUser);
+        // 清除redis中登录失败次数限制
+        if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(RedisConstants.LOGIN_FAIL_TIMES + username))) {
+            stringRedisTemplate.delete(RedisConstants.LOGIN_FAIL_TIMES + username);
+        }
 
         //此处还可以进行一些处理，比如登录成功之后可能需要返回给前台当前用户有哪些菜单权限，
         //进而前台动态的控制菜单的显示等，具体根据自己的业务需求进行扩展
