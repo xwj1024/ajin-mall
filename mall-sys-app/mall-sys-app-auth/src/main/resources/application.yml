@@ -1,3 +1,10 @@
 spring:
   profiles:
-    active: dev
+    active: test
+server:
+  servlet:
+    context-path: /sys/auth
+# 登录失败限制
+security:
+  loginTimesLimit: 10
+  loginAfterTime: 10

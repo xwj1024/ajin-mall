@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,12 +45,6 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Resource
     private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-
-    /**
-     * 会话失效(账号被挤下线)处理逻辑
-     */
-    @Resource
-    private CustomSessionInformationExpiredStrategy customSessionInformationExpiredStrategy;
 
     /**
      * 登出成功处理逻辑
@@ -110,8 +105,6 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 // 登出成功处理逻辑
                 .logoutSuccessHandler(customLogoutSuccessHandler)
-                // 登出之后删除cookie
-                .deleteCookies("JSESSIONID")
                 // 登录
                 .and().formLogin().permitAll()//允许所有用户
                 // 登录成功处理逻辑
@@ -126,10 +119,8 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(customAuthenticationEntryPoint)
                 // 会话管理
                 .and().sessionManagement()
-                // 同一账号同时登录最大用户数
-                .maximumSessions(1)
-                // 会话失效(账号被挤下线)处理逻辑
-                .expiredSessionStrategy(customSessionInformationExpiredStrategy);
+                // jwt不需要session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(customAbstractSecurityInterceptor, FilterSecurityInterceptor.class);
     }
 }
