@@ -18,19 +18,21 @@
         <fastjson.version>1.2.79</fastjson.version>
         <jwt.version>0.9.1</jwt.version>
         <knife4j.version>3.0.3</knife4j.version>
+        <reflections.version>0.10.2</reflections.version>
+        <disruptor.version>3.4.4</disruptor.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
-            <version>0.10.2</version>
+            <version>${reflections.version}</version>
         </dependency>
         <!--异步日志依赖-->
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
-            <version>3.4.4</version>
+            <version>${disruptor.version}</version>
         </dependency>
         <!--log4j2-->
         <dependency>

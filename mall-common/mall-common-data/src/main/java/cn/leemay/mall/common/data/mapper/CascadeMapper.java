@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /**
- * @author A
+ * @author Ajin
  */
 @Mapper
 public interface CascadeMapper {

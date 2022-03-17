@@ -10,8 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 //@EnableDiscoveryClient
-public class GoodsServiceApplication {
+public class SysGoodsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(GoodsServiceApplication.class, args);
+        SpringApplication.run(SysGoodsApplication.class, args);
     }
 }

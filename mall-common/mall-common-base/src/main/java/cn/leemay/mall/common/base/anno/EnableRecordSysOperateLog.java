@@ -1,6 +1,6 @@
 package cn.leemay.mall.common.base.anno;
 
-import cn.leemay.mall.common.base.aspect.SysOperateLogAspect;
+import cn.leemay.mall.common.base.aspect.RecordSysOperateLogAspect;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({SysOperateLogAspect.class})
+@Import({RecordSysOperateLogAspect.class})
 public @interface EnableRecordSysOperateLog {
 
 }

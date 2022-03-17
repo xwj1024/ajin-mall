@@ -15,6 +15,7 @@
     <artifactId>leemay-mall</artifactId>
     <version>0.0.1</version>
     <name>leemay-mall</name>
+
     <modules>
         <module>mall-common</module>
         <module>mall-sys-app</module>
