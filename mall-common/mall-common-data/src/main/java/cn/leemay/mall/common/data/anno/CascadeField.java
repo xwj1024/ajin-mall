@@ -24,7 +24,7 @@ public @interface CascadeField {
     TableInfo linkedTable();
 
     /**
-     * 子表中关联字段
+     * 子表中关联字段，即为该字段所对应的表中字段名
      */
     String linkedField();
 
