@@ -1,5 +1,5 @@
 server:
-  port: 9031
+  port: 8010
 swagger:
   title: ${spring.application.name}
 spring:
@@ -27,14 +27,14 @@ spring:
             slowSqlMillis: 500
       stat-view-servlet:
         login-username: root # 后台监控登录账号
-        login-password: 1024 # 后台监控登录密码
+        login-password: root1024 # 后台监控登录密码
         enabled: true # 是否开启后台监控
   redis:
-    host: 192.168.1.128
+    host: localhost
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 repeat:
-  interval-time: 8000 # 重复提交，间隔时间
+  interval-time: 8000 # 重复提交，间隔时间（毫秒）
 logging:
   config: classpath:log/log4j2-test.xml

@@ -36,7 +36,7 @@ public class SameUriDataInterceptor extends RepeatSubmitInterceptor implements S
 
     private static final String REPEAT_KEY = "repeatKey";
 
-    private static final String HEADER = "Authorization";
+    private static final String AUTHORIZATION = "Authorization";
 
     private int intervalTime = 3000;
 
@@ -66,7 +66,7 @@ public class SameUriDataInterceptor extends RepeatSubmitInterceptor implements S
         String uri = request.getRequestURI();
 
         // 唯一值（没有请求头则使用请求地址）
-        String submitKey = request.getHeader(HEADER);
+        String submitKey = request.getHeader(AUTHORIZATION);
         if (StringUtils.isEmpty(submitKey)) {
             submitKey = uri;
         }

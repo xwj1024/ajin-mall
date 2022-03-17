@@ -1,7 +1,5 @@
 server:
-  port: 9031
-swagger:
-  title: ${spring.application.name}
+  port: 8010
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource # 数据源类型
@@ -23,22 +21,27 @@ spring:
       connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       stat-view-servlet:
         login-username: root # 后台监控登录账号
-        login-password: 1024 # 后台监控登录密码
+        login-password: root1024 # 后台监控登录密码
         enabled: true # 是否开启后台监控，默认false
       test-while-idle: true # 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
       test-on-borrow: false # 申请连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
       test-on-return: false # 归还连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
   redis:
-    host: 192.168.3.123
+    host: localhost
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
+# 防重复提交
 repeat:
-  interval-time: 2000 # 重复提交，间隔时间
+  interval-time: 2000 # 重复提交，间隔时间（毫秒）
+# swagger文档
 springfox:
   documentation:
     auto-startup: true
     enabled: true
+swagger:
+  title: ${spring.application.name}
+# 日志
 logging:
   config: classpath:log/log4j2-dev.xml
