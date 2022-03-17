@@ -30,8 +30,8 @@ public class ServerInfoController {
     public BaseResult<ServerInfo> getHardwareInfo() {
         ServerInfo result = serverInfoService.getServerInfo();
         if (result == null) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 }

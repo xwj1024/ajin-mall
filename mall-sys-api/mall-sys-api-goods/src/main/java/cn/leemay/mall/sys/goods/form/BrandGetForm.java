@@ -11,25 +11,19 @@ import java.io.Serializable;
 
 /**
  * @author Ajin
- * @since 2021-05-21
+ * @since 2021-05-20
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel("分类查询对象")
-public class CategorySelectForm extends PageForm implements Serializable {
+@ApiModel("品牌查询对象")
+public class BrandGetForm extends PageForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("上级id")
-    private Long parentId;
-
-    @ApiModelProperty("分类名称")
+    @ApiModelProperty("品牌名称")
     private String name;
 
-    @ApiModelProperty("分类级别")
-    private Integer level;
-
-    @ApiModelProperty("是否显示")
-    private Integer isShow;
+    @ApiModelProperty("首字母")
+    private String initials;
 
 }

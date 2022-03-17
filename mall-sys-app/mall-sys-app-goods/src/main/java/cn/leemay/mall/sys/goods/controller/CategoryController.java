@@ -5,8 +5,8 @@ import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.sys.goods.form.CategoryInsertForm;
-import cn.leemay.mall.sys.goods.form.CategorySelectForm;
+import cn.leemay.mall.sys.goods.form.CategoryAddForm;
+import cn.leemay.mall.sys.goods.form.CategoryGetForm;
 import cn.leemay.mall.sys.goods.form.CategoryUpdateForm;
 import cn.leemay.mall.sys.goods.view.CategoryView;
 import cn.leemay.mall.sys.goods.service.CategoryService;
@@ -41,9 +41,9 @@ public class CategoryController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加分类")
-    public BaseResult<String> insertCategory(@RequestBody @Validated CategoryInsertForm categoryInsertForm) {
-        categoryService.insertCategory(categoryInsertForm);
-        return new BaseResult<>(ResultEnum.INSERT_OK);
+    public BaseResult<String> insertCategory(@RequestBody @Validated CategoryAddForm categoryAddForm) {
+        categoryService.insertCategory(categoryAddForm);
+        return new BaseResult<>(ResultEnum.ADD_OK);
     }
 
     @DeleteMapping("/{id}")
@@ -66,19 +66,19 @@ public class CategoryController {
     public BaseResult<CategoryView> selectOne(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
         CategoryView result = categoryService.selectOne(id);
         if (result == null) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @PostMapping("/selectList")
     @ApiOperation("根据条件查询分类")
-    public BaseResult<ResultPage<CategoryView>> selectListByCondition(@RequestBody CategorySelectForm categorySelectForm) {
-        ResultPage<CategoryView> result = categoryService.selectList(categorySelectForm);
+    public BaseResult<ResultPage<CategoryView>> selectListByCondition(@RequestBody CategoryGetForm categoryGetForm) {
+        ResultPage<CategoryView> result = categoryService.selectList(categoryGetForm);
         if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @GetMapping("/selectWithTree")
@@ -86,9 +86,9 @@ public class CategoryController {
     public BaseResult<List<CategoryView>> selectWithTree() {
         List<CategoryView> result = categoryService.selectWithTree();
         if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 }
 

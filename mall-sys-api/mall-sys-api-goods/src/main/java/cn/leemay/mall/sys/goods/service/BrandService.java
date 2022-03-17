@@ -1,10 +1,12 @@
 package cn.leemay.mall.sys.goods.service;
 
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.sys.goods.form.BrandInsertForm;
-import cn.leemay.mall.sys.goods.form.BrandSelectForm;
+import cn.leemay.mall.common.data.entity.goods.Brand;
+import cn.leemay.mall.sys.goods.form.BrandAddForm;
+import cn.leemay.mall.sys.goods.form.BrandGetForm;
 import cn.leemay.mall.sys.goods.form.BrandUpdateForm;
 import cn.leemay.mall.sys.goods.view.BrandView;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -14,14 +16,14 @@ import cn.leemay.mall.sys.goods.view.BrandView;
  * @author Ajin
  * @since 2021-04-13
  */
-public interface BrandService {
+public interface BrandService extends IService<Brand> {
 
     /**
      * 添加品牌
      *
-     * @param brandInsertForm 品牌
+     * @param brandAddForm 品牌
      */
-    void insertBrand(BrandInsertForm brandInsertForm);
+    void addBrand(BrandAddForm brandAddForm);
 
     /**
      * 根据id删除品牌
@@ -48,9 +50,9 @@ public interface BrandService {
     /**
      * 根据条件查询品牌
      *
-     * @param brandSelectForm 品牌条件
+     * @param brandGetForm 品牌条件
      * @return 品牌列表
      */
-    ResultPage<BrandView> selectList(BrandSelectForm brandSelectForm);
+    ResultPage<BrandView> selectList(BrandGetForm brandGetForm);
 
 }

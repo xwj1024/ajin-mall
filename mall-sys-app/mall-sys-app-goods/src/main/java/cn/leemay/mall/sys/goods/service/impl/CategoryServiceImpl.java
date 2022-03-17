@@ -4,8 +4,8 @@ import cn.leemay.mall.common.base.asserts.BizAssert;
 import cn.leemay.mall.common.base.page.PageHelp;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.common.data.entity.goods.Category;
-import cn.leemay.mall.sys.goods.form.CategoryInsertForm;
-import cn.leemay.mall.sys.goods.form.CategorySelectForm;
+import cn.leemay.mall.sys.goods.form.CategoryAddForm;
+import cn.leemay.mall.sys.goods.form.CategoryGetForm;
 import cn.leemay.mall.sys.goods.form.CategoryUpdateForm;
 import cn.leemay.mall.sys.goods.mapper.CategoryBrandMapper;
 import cn.leemay.mall.sys.goods.mapper.CategoryMapper;
@@ -44,12 +44,12 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryBrandMapper categoryBrandMapper;
 
     @Override
-    public void insertCategory(CategoryInsertForm categoryInsertForm) {
-        Integer categoryCount = categoryMapper.selectCountByNameAndParentId(categoryInsertForm.getName(), categoryInsertForm.getParentId());
+    public void insertCategory(CategoryAddForm categoryAddForm) {
+        Integer categoryCount = categoryMapper.selectCountByNameAndParentId(categoryAddForm.getName(), categoryAddForm.getParentId());
         BizAssert.isTrue(categoryCount <= 0, "已有该分类");
 
         Category category = new Category();
-        BeanUtils.copyProperties(categoryInsertForm, category);
+        BeanUtils.copyProperties(categoryAddForm, category);
         int row = categoryMapper.insert(category);
         BizAssert.isTrue(row == 1, "添加失败");
     }
@@ -97,18 +97,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ResultPage<CategoryView> selectList(CategorySelectForm categorySelectForm) {
-        PageHelp.startPage(categorySelectForm.getPageIndex(), categorySelectForm.getPageSize());
-        List<CategoryView> list = categoryMapper.selectListByCondition(categorySelectForm);
+    public ResultPage<CategoryView> selectList(CategoryGetForm categoryGetForm) {
+        PageHelp.startPage(categoryGetForm.getPageIndex(), categoryGetForm.getPageSize());
+        List<CategoryView> list = categoryMapper.selectListByCondition(categoryGetForm);
         return new ResultPage<>(new PageInfo<>(list));
     }
 
     @Override
     public List<CategoryView> selectWithTree() {
         // 查询所有要显示的分类
-        CategorySelectForm categorySelectForm = new CategorySelectForm();
-        categorySelectForm.setIsShow(1);
-        List<CategoryView> categoryViewList = categoryMapper.selectListByCondition(categorySelectForm);
+        CategoryGetForm categoryGetForm = new CategoryGetForm();
+        categoryGetForm.setIsShow(1);
+        List<CategoryView> categoryViewList = categoryMapper.selectListByCondition(categoryGetForm);
         if (ObjectUtils.isEmpty(categoryViewList)) {
             return categoryViewList;
         }

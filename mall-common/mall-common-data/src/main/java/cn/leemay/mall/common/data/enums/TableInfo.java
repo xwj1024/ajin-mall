@@ -5,6 +5,7 @@ package cn.leemay.mall.common.data.enums;
  */
 public enum TableInfo {
 
+    BRAND("brand", "品牌"),
     ORDER("order", "订单"),
     ADDRESS("address", "地址"),
     USER("user", "用户");

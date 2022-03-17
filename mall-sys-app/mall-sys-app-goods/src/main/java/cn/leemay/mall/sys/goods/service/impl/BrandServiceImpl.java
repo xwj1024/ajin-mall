@@ -3,14 +3,17 @@ package cn.leemay.mall.sys.goods.service.impl;
 import cn.leemay.mall.common.base.asserts.BizAssert;
 import cn.leemay.mall.common.base.page.PageHelp;
 import cn.leemay.mall.common.base.result.ResultPage;
+import cn.leemay.mall.common.data.anno.CascadeDelete;
 import cn.leemay.mall.common.data.entity.goods.Brand;
-import cn.leemay.mall.sys.goods.form.BrandInsertForm;
-import cn.leemay.mall.sys.goods.form.BrandSelectForm;
+import cn.leemay.mall.common.data.enums.TableInfo;
+import cn.leemay.mall.sys.goods.form.BrandAddForm;
+import cn.leemay.mall.sys.goods.form.BrandGetForm;
 import cn.leemay.mall.sys.goods.form.BrandUpdateForm;
 import cn.leemay.mall.sys.goods.mapper.BrandMapper;
 import cn.leemay.mall.sys.goods.mapper.SpuMapper;
 import cn.leemay.mall.sys.goods.service.BrandService;
 import cn.leemay.mall.sys.goods.view.BrandView;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -29,7 +32,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class BrandServiceImpl implements BrandService {
+public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
 
     @Resource
     private BrandMapper brandMapper;
@@ -38,21 +41,20 @@ public class BrandServiceImpl implements BrandService {
     private SpuMapper spuMapper;
 
     @Override
-    public void insertBrand(BrandInsertForm brandInsertForm) {
-        Integer brandCount = brandMapper.selectCountByName(brandInsertForm.getName());
+    public void addBrand(BrandAddForm brandAddForm) {
+
+        Integer brandCount = brandMapper.selectCountByName(brandAddForm.getName());
         BizAssert.isTrue(brandCount <= 0, "已有该品牌");
 
         Brand brand = new Brand();
-        BeanUtils.copyProperties(brandInsertForm, brand);
+        BeanUtils.copyProperties(brandAddForm, brand);
         int row = brandMapper.insert(brand);
         BizAssert.isTrue(row == 1, "添加失败");
     }
 
+    @CascadeDelete(TableInfo.BRAND)
     @Override
     public void deleteBrand(Long id) {
-        Integer spuCount = spuMapper.selectCountByBrandId(id);
-        BizAssert.isTrue(spuCount <= 0, "该品牌已关联商品，无法删除");
-
         int row = brandMapper.deleteById(id);
         BizAssert.isTrue(row == 1, "删除失败");
     }
@@ -78,9 +80,9 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public ResultPage<BrandView> selectList(BrandSelectForm brandSelectForm) {
-        PageHelp.startPage(brandSelectForm.getPageIndex(), brandSelectForm.getPageSize());
-        List<BrandView> list = brandMapper.selectListByCondition(brandSelectForm);
+    public ResultPage<BrandView> selectList(BrandGetForm brandGetForm) {
+        PageHelp.startPage(brandGetForm.getPageIndex(), brandGetForm.getPageSize());
+        List<BrandView> list = brandMapper.selectListByCondition(brandGetForm);
         return new ResultPage<>(new PageInfo<>(list));
     }
 }

@@ -1,8 +1,8 @@
 package cn.leemay.mall.sys.goods.service;
 
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.sys.goods.form.CategoryInsertForm;
-import cn.leemay.mall.sys.goods.form.CategorySelectForm;
+import cn.leemay.mall.sys.goods.form.CategoryAddForm;
+import cn.leemay.mall.sys.goods.form.CategoryGetForm;
 import cn.leemay.mall.sys.goods.form.CategoryUpdateForm;
 import cn.leemay.mall.sys.goods.view.CategoryView;
 
@@ -21,9 +21,9 @@ public interface CategoryService {
     /**
      * 添加分类
      *
-     * @param categoryInsertForm 分类
+     * @param categoryAddForm 分类
      */
-    void insertCategory(CategoryInsertForm categoryInsertForm);
+    void insertCategory(CategoryAddForm categoryAddForm);
 
     /**
      * 根据id删除分类
@@ -50,10 +50,10 @@ public interface CategoryService {
     /**
      * 根据条件查询分类
      *
-     * @param categorySelectForm 分类条件
+     * @param categoryGetForm 分类条件
      * @return 分类列表
      */
-    ResultPage<CategoryView> selectList(CategorySelectForm categorySelectForm);
+    ResultPage<CategoryView> selectList(CategoryGetForm categoryGetForm);
 
     /**
      * 树形结构查询

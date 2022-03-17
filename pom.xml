@@ -64,15 +64,15 @@
             </properties>
         </profile>
         <profile>
-            <id>tes</id>
+            <id>test</id>
             <properties>
-                <environment>tes</environment>
+                <environment>test</environment>
             </properties>
         </profile>
         <profile>
-            <id>pro</id>
+            <id>prod</id>
             <properties>
-                <environment>pro</environment>
+                <environment>prod</environment>
             </properties>
         </profile>
     </profiles>

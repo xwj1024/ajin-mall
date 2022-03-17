@@ -5,8 +5,8 @@ import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.data.entity.goods.Spu;
-import cn.leemay.mall.sys.goods.form.SpuInsertForm;
-import cn.leemay.mall.sys.goods.form.SpuSelectForm;
+import cn.leemay.mall.sys.goods.form.SpuAddForm;
+import cn.leemay.mall.sys.goods.form.SpuGetForm;
 import cn.leemay.mall.sys.goods.service.SpuService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -39,9 +39,9 @@ public class SpuController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加spu")
-    public BaseResult<String> insertSpu(@RequestBody @Validated SpuInsertForm spuInsertForm) {
-        spuService.insertSpu(spuInsertForm);
-        return new BaseResult<>(ResultEnum.INSERT_OK);
+    public BaseResult<String> insertSpu(@RequestBody @Validated SpuAddForm spuAddForm) {
+        spuService.insertSpu(spuAddForm);
+        return new BaseResult<>(ResultEnum.ADD_OK);
     }
 
     @DeleteMapping("/{id}")
@@ -64,31 +64,31 @@ public class SpuController {
     public BaseResult<Spu> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
         Spu result = spuService.selectOneById(id);
         if (result == null) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @PostMapping("/selectListByCondition")
     @ApiOperation("根据条件查询Spu")
-    public BaseResult<List<Spu>> selectListByCondition(@RequestBody SpuSelectForm spuSelectForm) {
-        List<Spu> result = spuService.selectListByCondition(spuSelectForm);
+    public BaseResult<List<Spu>> selectListByCondition(@RequestBody SpuGetForm spuGetForm) {
+        List<Spu> result = spuService.selectListByCondition(spuGetForm);
         if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
     @ApiOperation("根据条件分页查询Spu")
-    public BaseResult<Page<Spu>> selectPageByCondition(@RequestBody SpuSelectForm spuSelectForm,
+    public BaseResult<Page<Spu>> selectPageByCondition(@RequestBody SpuGetForm spuGetForm,
                                                        @PathVariable("index") Integer index,
                                                        @PathVariable("size") Integer size) {
-        Page<Spu> result = spuService.selectPageByCondition(spuSelectForm, index, size);
+        Page<Spu> result = spuService.selectPageByCondition(spuGetForm, index, size);
         if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 }
 

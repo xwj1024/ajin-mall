@@ -17,7 +17,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Accessors(chain = true)
 @ApiModel("分类添加对象")
-public class CategoryInsertForm implements Serializable {
+public class CategoryAddForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull(message = "上级id不能为空")

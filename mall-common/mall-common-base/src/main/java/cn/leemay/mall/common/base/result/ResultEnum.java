@@ -10,9 +10,9 @@ public enum ResultEnum {
 
     OPERATE_ERR(ResultCode.ERR, "操作失败"),
 
-    INSERT_OK(ResultCode.OK, "添加成功"),
+    ADD_OK(ResultCode.OK, "添加成功"),
 
-    INSERT_ERR(ResultCode.ERR, "添加失败"),
+    ADD_ERR(ResultCode.ERR, "添加失败"),
 
     DELETE_OK(ResultCode.OK, "删除成功"),
 
@@ -22,11 +22,11 @@ public enum ResultEnum {
 
     UPDATE_ERR(ResultCode.ERR, "修改失败"),
 
-    SELECT_OK(ResultCode.OK, "查询成功"),
+    GET_OK(ResultCode.OK, "查询成功"),
 
-    SELECT_ERR(ResultCode.ERR, "查询失败"),
+    GET_ERR(ResultCode.ERR, "查询失败"),
 
-    SELECT_INFO(ResultCode.INFO, "暂无数据"),
+    GET_INFO(ResultCode.INFO, "暂无数据"),
 
     PARAM_ERR(ResultCode.ERR, "参数有误");
 

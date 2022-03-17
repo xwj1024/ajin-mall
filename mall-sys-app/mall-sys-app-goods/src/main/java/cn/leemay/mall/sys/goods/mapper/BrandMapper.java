@@ -1,7 +1,7 @@
 package cn.leemay.mall.sys.goods.mapper;
 
 import cn.leemay.mall.common.data.entity.goods.Brand;
-import cn.leemay.mall.sys.goods.form.BrandSelectForm;
+import cn.leemay.mall.sys.goods.form.BrandGetForm;
 import cn.leemay.mall.sys.goods.view.BrandView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -31,8 +31,8 @@ public interface BrandMapper extends BaseMapper<Brand> {
     /**
      * 根据条件查询品牌列表
      *
-     * @param brandSelectForm 查询条件
+     * @param brandGetForm 查询条件
      * @return 品牌列表
      */
-    List<BrandView> selectListByCondition(BrandSelectForm brandSelectForm);
+    List<BrandView> selectListByCondition(BrandGetForm brandGetForm);
 }

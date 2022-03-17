@@ -1,6 +1,7 @@
 package cn.leemay.mall.sys.system.service;
 
 import cn.leemay.mall.common.data.entity.system.SysUser;
+import cn.leemay.mall.sys.system.form.SysUserAddForm;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -15,9 +16,9 @@ public interface SysUserService extends IService<SysUser> {
     /**
      * 添加系统用户
      *
-     * @param sysUser 系统用户
+     * @param sysUserAddForm 系统用户
      */
-    void insert(SysUser sysUser);
+    void add(SysUserAddForm sysUserAddForm);
 
     /**
      * 根据用户名获取系统用户
@@ -26,4 +27,5 @@ public interface SysUserService extends IService<SysUser> {
      * @return 系统用户
      */
     SysUser loadUserByUsername(String username);
+
 }

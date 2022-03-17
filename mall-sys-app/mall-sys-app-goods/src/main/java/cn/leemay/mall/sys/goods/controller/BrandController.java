@@ -5,8 +5,8 @@ import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
-import cn.leemay.mall.sys.goods.form.BrandInsertForm;
-import cn.leemay.mall.sys.goods.form.BrandSelectForm;
+import cn.leemay.mall.sys.goods.form.BrandAddForm;
+import cn.leemay.mall.sys.goods.form.BrandGetForm;
 import cn.leemay.mall.sys.goods.form.BrandUpdateForm;
 import cn.leemay.mall.sys.goods.view.BrandView;
 import cn.leemay.mall.sys.goods.service.BrandService;
@@ -26,10 +26,9 @@ import javax.annotation.Resource;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/goods/brand")
+@RequestMapping("/brand")
 @Api(tags = "品牌")
 @CrossOrigin
-@Validated // todo 不知道需不需要 待测
 public class BrandController {
 
     @Resource
@@ -38,11 +37,12 @@ public class BrandController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加品牌")
-    public BaseResult<String> insertBrand(@RequestBody @Validated BrandInsertForm brandInsertForm) {
-        brandService.insertBrand(brandInsertForm);
-        return new BaseResult<>(ResultEnum.INSERT_OK);
+    public BaseResult<String> addBrand(@RequestBody @Validated BrandAddForm brandAddForm) {
+        brandService.addBrand(brandAddForm);
+        return new BaseResult<>(ResultEnum.ADD_OK);
     }
 
+    @RepeatSubmit
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除品牌", notes = "根据主键id删除")
     public BaseResult<String> deleteBrand(@PathVariable("id") Long id) {
@@ -62,20 +62,14 @@ public class BrandController {
     @ApiOperation("根据id查询品牌")
     public BaseResult<BrandView> selectOne(@PathVariable("id") Long id) {
         BrandView result = brandService.selectOne(id);
-        if (result == null) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
-        }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @PostMapping("/list")
     @ApiOperation("根据条件查询品牌")
-    public BaseResult<ResultPage<BrandView>> selectList(@RequestBody BrandSelectForm brandSelectForm) {
-        ResultPage<BrandView> result = brandService.selectList(brandSelectForm);
-        if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
-        }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+    public BaseResult<ResultPage<BrandView>> selectList(@RequestBody BrandGetForm brandGetForm) {
+        ResultPage<BrandView> result = brandService.selectList(brandGetForm);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 }
 

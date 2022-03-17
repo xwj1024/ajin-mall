@@ -16,7 +16,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Accessors(chain = true)
 @ApiModel("Spu添加对象")
-public class SpuInsertForm implements Serializable {
+public class SpuAddForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("spu名称")

@@ -38,7 +38,7 @@ public class SkuController {
     @ApiOperation("添加sku")
     public BaseResult<String> insert(@Validated @RequestBody Sku sku) {
         skuService.insert(sku);
-        return new BaseResult<>(ResultEnum.INSERT_OK);
+        return new BaseResult<>(ResultEnum.ADD_OK);
     }
 
     @DeleteMapping("/{id}")
@@ -61,9 +61,9 @@ public class SkuController {
     public BaseResult<Sku> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
         Sku result = skuService.selectOneById(id);
         if (result == null) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @PostMapping("/selectListByCondition")
@@ -71,9 +71,9 @@ public class SkuController {
     public BaseResult<List<Sku>> selectListByCondition(@RequestBody Sku sku) {
         List<Sku> result = skuService.selectListByCondition(sku);
         if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
@@ -83,9 +83,9 @@ public class SkuController {
                                                        @PathVariable("size") Integer size) {
         Page<Sku> result = skuService.selectPageByCondition(sku, index, size);
         if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultEnum.SELECT_INFO);
+            return new BaseResult<>(ResultEnum.GET_INFO);
         }
-        return new BaseResult<>(ResultEnum.SELECT_OK, result);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 }
 
