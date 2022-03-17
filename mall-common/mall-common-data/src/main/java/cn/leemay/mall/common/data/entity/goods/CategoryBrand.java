@@ -1,5 +1,7 @@
 package cn.leemay.mall.common.data.entity.goods;
 
+import cn.leemay.mall.common.data.anno.CascadeField;
+import cn.leemay.mall.common.data.enums.TableInfo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
@@ -29,6 +31,7 @@ public class CategoryBrand implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
+    @CascadeField(sourceTable = TableInfo.CATEGORY, linkedTable = TableInfo.CATEGORY_BRAND, linkedField = "category_id")
     @ApiModelProperty("分类id")
     private Long categoryId;
 

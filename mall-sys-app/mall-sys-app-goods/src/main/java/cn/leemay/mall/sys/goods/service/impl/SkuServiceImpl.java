@@ -1,15 +1,20 @@
 package cn.leemay.mall.sys.goods.service.impl;
 
-import cn.leemay.mall.common.base.util.ObjectUtils;
+import cn.leemay.mall.common.base.asserts.BizAssert;
+import cn.leemay.mall.common.base.page.PageHelp;
+import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.common.data.entity.goods.Sku;
+import cn.leemay.mall.sys.goods.form.SkuAddForm;
+import cn.leemay.mall.sys.goods.form.SkuListForm;
+import cn.leemay.mall.sys.goods.form.SkuUpdateForm;
 import cn.leemay.mall.sys.goods.mapper.SkuMapper;
 import cn.leemay.mall.sys.goods.service.SkuService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.leemay.mall.sys.goods.view.SkuView;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,16 +28,18 @@ import java.util.List;
  */
 @Service
 @org.apache.dubbo.config.annotation.Service
-public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuService {
+public class SkuServiceImpl implements SkuService {
 
-    @Autowired
+    @Resource
     private SkuMapper skuMapper;
 
     @Override
-    public void insert(Sku sku) {
-        sku.setId(null);
-        sku.setIsDelete(0);
-        skuMapper.insert(sku);
+    public void add(SkuAddForm skuAddForm) {
+        Sku sku = new Sku();
+        BeanUtils.copyProperties(skuAddForm, sku);
+
+        int row = skuMapper.insert(sku);
+        BizAssert.isTrue(row == 1, "添加失败");
     }
 
     @Override
@@ -41,38 +48,22 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     }
 
     @Override
-    public void update(Sku sku) {
+    public void update(SkuUpdateForm skuUpdateForm) {
+        Sku sku = new Sku();
+        BeanUtils.copyProperties(skuUpdateForm, sku);
         skuMapper.updateById(sku);
     }
 
     @Override
-    public Sku selectOneById(Long id) {
+    public Sku get(Long id) {
         return skuMapper.selectById(id);
     }
 
     @Override
-    public List<Sku> selectListByCondition(Sku sku) {
-        QueryWrapper<Sku> queryWrapper = queryWrapper(sku);
-        return skuMapper.selectList(queryWrapper);
-    }
-
-    @Override
-    public Page<Sku> selectPageByCondition(Sku sku, Integer index, Integer size) {
-        Page<Sku> page = new Page<>(index, size);
-        QueryWrapper<Sku> queryWrapper = queryWrapper(sku);
-        return skuMapper.selectPage(page, queryWrapper);
-    }
-
-    /**
-     * 构建条件查询对象
-     *
-     * @param sku 条件
-     * @return 对象
-     */
-    private QueryWrapper<Sku> queryWrapper(Sku sku) {
-        QueryWrapper<Sku> queryWrapper = new QueryWrapper<>();
-        queryWrapper.allEq(ObjectUtils.obj2Map(sku));
-        return queryWrapper;
+    public ResultPage<SkuView> list(SkuListForm skuListForm) {
+        PageHelp.startPage(skuListForm.getPageIndex(), skuListForm.getPageSize());
+        List<SkuView> list = skuMapper.selectListByCondition(skuListForm);
+        return new ResultPage<>(new PageInfo<>(list));
     }
 
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/api/goods/spuPara")
+@RequestMapping("/spuPara")
 @CrossOrigin
 @Api(tags = "商品，参数")
 public class SpuParaController {

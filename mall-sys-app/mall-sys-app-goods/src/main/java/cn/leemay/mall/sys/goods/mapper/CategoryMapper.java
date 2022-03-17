@@ -1,7 +1,7 @@
 package cn.leemay.mall.sys.goods.mapper;
 
 import cn.leemay.mall.common.data.entity.goods.Category;
-import cn.leemay.mall.sys.goods.form.CategoryGetForm;
+import cn.leemay.mall.sys.goods.form.CategoryListForm;
 import cn.leemay.mall.sys.goods.view.CategoryView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -39,9 +39,9 @@ public interface CategoryMapper extends BaseMapper<Category> {
     /**
      * 根据条件查询分类列表
      *
-     * @param categoryGetForm 查询条件
+     * @param categoryListForm 查询条件
      * @return 分类列表
      */
-    List<CategoryView> selectListByCondition(CategoryGetForm categoryGetForm);
+    List<CategoryView> selectListByCondition(CategoryListForm categoryListForm);
 
 }

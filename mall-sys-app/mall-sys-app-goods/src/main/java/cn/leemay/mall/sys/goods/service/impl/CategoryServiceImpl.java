@@ -3,19 +3,18 @@ package cn.leemay.mall.sys.goods.service.impl;
 import cn.leemay.mall.common.base.asserts.BizAssert;
 import cn.leemay.mall.common.base.page.PageHelp;
 import cn.leemay.mall.common.base.result.ResultPage;
+import cn.leemay.mall.common.data.anno.CascadeDelete;
 import cn.leemay.mall.common.data.entity.goods.Category;
+import cn.leemay.mall.common.data.enums.TableInfo;
 import cn.leemay.mall.sys.goods.form.CategoryAddForm;
-import cn.leemay.mall.sys.goods.form.CategoryGetForm;
+import cn.leemay.mall.sys.goods.form.CategoryListForm;
 import cn.leemay.mall.sys.goods.form.CategoryUpdateForm;
-import cn.leemay.mall.sys.goods.mapper.CategoryBrandMapper;
 import cn.leemay.mall.sys.goods.mapper.CategoryMapper;
-import cn.leemay.mall.sys.goods.mapper.SpuMapper;
 import cn.leemay.mall.sys.goods.service.CategoryService;
 import cn.leemay.mall.sys.goods.view.CategoryView;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
@@ -37,14 +36,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Resource
     private CategoryMapper categoryMapper;
 
-    @Resource
-    private SpuMapper spuMapper;
-
-    @Resource
-    private CategoryBrandMapper categoryBrandMapper;
-
     @Override
-    public void insertCategory(CategoryAddForm categoryAddForm) {
+    public void add(CategoryAddForm categoryAddForm) {
         Integer categoryCount = categoryMapper.selectCountByNameAndParentId(categoryAddForm.getName(), categoryAddForm.getParentId());
         BizAssert.isTrue(categoryCount <= 0, "已有该分类");
 
@@ -54,29 +47,20 @@ public class CategoryServiceImpl implements CategoryService {
         BizAssert.isTrue(row == 1, "添加失败");
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    @CascadeDelete(TableInfo.CATEGORY)
     @Override
-    public void deleteCategory(Long id) {
+    public void delete(Long id) {
         Category existCategory = categoryMapper.selectById(id);
-        BizAssert.notNull(existCategory, "分类不存在");
-
-        Integer categoryCount = categoryMapper.selectCountByParentId(id);
-        BizAssert.isTrue(categoryCount <= 0, "该分类已关联下级分类");
-
-        Integer spuCount = spuMapper.selectCountByCategoryId(id);
-        BizAssert.isTrue(spuCount <= 0, "该分类已关联商品");
+        BizAssert.notNull(existCategory, "该分类不存在");
 
         int row = categoryMapper.deleteById(id);
         BizAssert.isTrue(row == 1, "删除失败");
-
-        // 删除分类品牌中间表
-        categoryBrandMapper.deleteByCategoryId(id);
     }
 
     @Override
-    public void updateCategory(CategoryUpdateForm categoryUpdateForm) {
+    public void update(CategoryUpdateForm categoryUpdateForm) {
         Category existCategory = categoryMapper.selectById(categoryUpdateForm.getId());
-        BizAssert.notNull(existCategory, "分类不存在");
+        BizAssert.notNull(existCategory, "该分类不存在");
 
         Integer categoryCount = categoryMapper.selectCountByNameAndParentId(categoryUpdateForm.getName(), categoryUpdateForm.getParentId());
         BizAssert.isTrue(categoryCount <= 0, "已有该分类");
@@ -89,7 +73,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryView selectOne(Long id) {
+    public CategoryView get(Long id) {
         Category     category     = categoryMapper.selectById(id);
         CategoryView categoryView = new CategoryView();
         BeanUtils.copyProperties(category, categoryView);
@@ -97,18 +81,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ResultPage<CategoryView> selectList(CategoryGetForm categoryGetForm) {
-        PageHelp.startPage(categoryGetForm.getPageIndex(), categoryGetForm.getPageSize());
-        List<CategoryView> list = categoryMapper.selectListByCondition(categoryGetForm);
+    public ResultPage<CategoryView> list(CategoryListForm categoryListForm) {
+        PageHelp.startPage(categoryListForm.getPageIndex(), categoryListForm.getPageSize());
+        List<CategoryView> list = categoryMapper.selectListByCondition(categoryListForm);
         return new ResultPage<>(new PageInfo<>(list));
     }
 
     @Override
-    public List<CategoryView> selectWithTree() {
+    public List<CategoryView> tree() {
         // 查询所有要显示的分类
-        CategoryGetForm categoryGetForm = new CategoryGetForm();
-        categoryGetForm.setIsShow(1);
-        List<CategoryView> categoryViewList = categoryMapper.selectListByCondition(categoryGetForm);
+        CategoryListForm categoryListForm = new CategoryListForm();
+        categoryListForm.setIsShow(1);
+        List<CategoryView> categoryViewList = categoryMapper.selectListByCondition(categoryListForm);
         if (ObjectUtils.isEmpty(categoryViewList)) {
             return categoryViewList;
         }

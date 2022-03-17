@@ -1,10 +1,11 @@
 package cn.leemay.mall.sys.goods.service;
 
+import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.common.data.entity.goods.Sku;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
+import cn.leemay.mall.sys.goods.form.SkuAddForm;
+import cn.leemay.mall.sys.goods.form.SkuListForm;
+import cn.leemay.mall.sys.goods.form.SkuUpdateForm;
+import cn.leemay.mall.sys.goods.view.SkuView;
 
 /**
  * <p>
@@ -14,14 +15,14 @@ import java.util.List;
  * @author Ajin
  * @since 2021-04-13
  */
-public interface SkuService extends IService<Sku> {
+public interface SkuService {
 
     /**
      * 添加sku
      *
-     * @param sku sku
+     * @param skuAddForm sku添加对象
      */
-    void insert(Sku sku);
+    void add(SkuAddForm skuAddForm);
 
     /**
      * 根据id删除sku
@@ -33,9 +34,9 @@ public interface SkuService extends IService<Sku> {
     /**
      * 修改sku
      *
-     * @param sku sku
+     * @param skuUpdateForm sku修改对象
      */
-    void update(Sku sku);
+    void update(SkuUpdateForm skuUpdateForm);
 
     /**
      * 根据id查询sku
@@ -43,23 +44,13 @@ public interface SkuService extends IService<Sku> {
      * @param id id
      * @return sku
      */
-    Sku selectOneById(Long id);
+    Sku get(Long id);
 
     /**
      * 根据条件查询sku
      *
-     * @param sku sku
+     * @param skuListForm sku
      * @return sku列表
      */
-    List<Sku> selectListByCondition(Sku sku);
-
-    /**
-     * 根据条件分页查询sku
-     *
-     * @param sku   sku
-     * @param index 当前页码
-     * @param size  每页条数
-     * @return sku分页数据
-     */
-    Page<Sku> selectPageByCondition(Sku sku, Integer index, Integer size);
+    ResultPage<SkuView> list(SkuListForm skuListForm);
 }

@@ -1,5 +1,7 @@
 package cn.leemay.mall.common.data.entity.goods;
 
+import cn.leemay.mall.common.data.anno.CascadeField;
+import cn.leemay.mall.common.data.enums.TableInfo;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -30,6 +32,7 @@ public class Category implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
+    @CascadeField(sourceTable = TableInfo.CATEGORY, linkedTable = TableInfo.CATEGORY, linkedField = "parent_id", enableDelete = false)
     @ApiModelProperty("上级id")
     private Long parentId;
 

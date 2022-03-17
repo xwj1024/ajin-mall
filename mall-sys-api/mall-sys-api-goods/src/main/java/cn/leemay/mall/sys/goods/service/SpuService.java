@@ -2,7 +2,7 @@ package cn.leemay.mall.sys.goods.service;
 
 import cn.leemay.mall.common.data.entity.goods.Spu;
 import cn.leemay.mall.sys.goods.form.SpuAddForm;
-import cn.leemay.mall.sys.goods.form.SpuGetForm;
+import cn.leemay.mall.sys.goods.form.SpuListForm;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -50,18 +50,18 @@ public interface SpuService extends IService<Spu> {
     /**
      * 根据条件查询spu
      *
-     * @param spuGetForm spuGetForm
+     * @param spuListForm spuListForm
      * @return spu列表
      */
-    List<Spu> selectListByCondition(SpuGetForm spuGetForm);
+    List<Spu> selectListByCondition(SpuListForm spuListForm);
 
     /**
      * 根据条件分页查询spu
      *
-     * @param spuGetForm   spuGetForm
+     * @param spuListForm   spuListForm
      * @param index 当前页码
      * @param size  每页条数
      * @return spu分页数据
      */
-    Page<Spu> selectPageByCondition(SpuGetForm spuGetForm, Integer index, Integer size);
+    Page<Spu> selectPageByCondition(SpuListForm spuListForm, Integer index, Integer size);
 }

@@ -6,16 +6,15 @@ import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.data.entity.goods.Spu;
 import cn.leemay.mall.sys.goods.form.SpuAddForm;
-import cn.leemay.mall.sys.goods.form.SpuGetForm;
+import cn.leemay.mall.sys.goods.form.SpuListForm;
 import cn.leemay.mall.sys.goods.service.SpuService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -27,13 +26,13 @@ import java.util.List;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/api/goods/spu")
+@RequestMapping("/spu")
 @CrossOrigin
 @Api(tags = "商品spu")
 @Validated
 public class SpuController {
 
-    @Autowired
+    @Resource
     private SpuService spuService;
 
     @RepeatSubmit
@@ -46,7 +45,7 @@ public class SpuController {
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除spu")
-    public BaseResult<String> deleteSpu(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
+    public BaseResult<String> deleteSpu(@PathVariable("id") Long id) {
         spuService.deleteSpu(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
@@ -61,7 +60,7 @@ public class SpuController {
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询spu")
-    public BaseResult<Spu> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
+    public BaseResult<Spu> selectOneById(@PathVariable("id") Long id) {
         Spu result = spuService.selectOneById(id);
         if (result == null) {
             return new BaseResult<>(ResultEnum.GET_INFO);
@@ -71,8 +70,8 @@ public class SpuController {
 
     @PostMapping("/selectListByCondition")
     @ApiOperation("根据条件查询Spu")
-    public BaseResult<List<Spu>> selectListByCondition(@RequestBody SpuGetForm spuGetForm) {
-        List<Spu> result = spuService.selectListByCondition(spuGetForm);
+    public BaseResult<List<Spu>> selectListByCondition(@RequestBody SpuListForm spuListForm) {
+        List<Spu> result = spuService.selectListByCondition(spuListForm);
         if (result == null || result.size() <= 0) {
             return new BaseResult<>(ResultEnum.GET_INFO);
         }
@@ -81,10 +80,10 @@ public class SpuController {
 
     @PostMapping("/selectPageByCondition/{index}/{size}")
     @ApiOperation("根据条件分页查询Spu")
-    public BaseResult<Page<Spu>> selectPageByCondition(@RequestBody SpuGetForm spuGetForm,
+    public BaseResult<Page<Spu>> selectPageByCondition(@RequestBody SpuListForm spuListForm,
                                                        @PathVariable("index") Integer index,
                                                        @PathVariable("size") Integer size) {
-        Page<Spu> result = spuService.selectPageByCondition(spuGetForm, index, size);
+        Page<Spu> result = spuService.selectPageByCondition(spuListForm, index, size);
         if (result == null || result.getTotal() <= 0) {
             return new BaseResult<>(ResultEnum.GET_INFO);
         }

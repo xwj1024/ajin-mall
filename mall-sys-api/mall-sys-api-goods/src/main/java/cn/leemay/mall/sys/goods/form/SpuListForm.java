@@ -16,7 +16,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Accessors(chain = true)
 @ApiModel("Spu查询对象")
-public class SpuGetForm implements Serializable {
+public class SpuListForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")

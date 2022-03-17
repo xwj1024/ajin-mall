@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/api/goods/template")
+@RequestMapping("/template")
 @CrossOrigin
 @Api(tags = "规格参数，模板")
 public class TemplateController {

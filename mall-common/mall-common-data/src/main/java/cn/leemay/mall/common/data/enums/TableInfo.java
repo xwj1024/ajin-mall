@@ -6,6 +6,10 @@ package cn.leemay.mall.common.data.enums;
 public enum TableInfo {
 
     BRAND("brand", "品牌"),
+    CATEGORY("category", "分类"),
+    CATEGORY_BRAND("category_brand", "分类，品牌"),
+    SPU("spu", "SPU"),
+    SKU("sku", "SKU"),
     ORDER("order", "订单"),
     ADDRESS("address", "地址"),
     USER("user", "用户");

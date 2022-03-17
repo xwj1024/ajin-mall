@@ -4,17 +4,19 @@ package cn.leemay.mall.sys.goods.controller;
 import cn.leemay.mall.common.base.anno.RepeatSubmit;
 import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
+import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.common.data.entity.goods.Sku;
+import cn.leemay.mall.sys.goods.form.SkuAddForm;
+import cn.leemay.mall.sys.goods.form.SkuListForm;
+import cn.leemay.mall.sys.goods.form.SkuUpdateForm;
 import cn.leemay.mall.sys.goods.service.SkuService;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import cn.leemay.mall.sys.goods.view.SkuView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -25,25 +27,25 @@ import java.util.List;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/api/goods/sku")
+@RequestMapping("/sku")
 @Api(tags = "商品sku")
 @CrossOrigin
 public class SkuController {
 
-    @Autowired
+    @Resource
     private SkuService skuService;
 
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加sku")
-    public BaseResult<String> insert(@Validated @RequestBody Sku sku) {
-        skuService.insert(sku);
+    public BaseResult<String> add(@Validated @RequestBody SkuAddForm skuAddForm) {
+        skuService.add(skuAddForm);
         return new BaseResult<>(ResultEnum.ADD_OK);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除sku")
-    public BaseResult<String> delete(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
+    public BaseResult<String> delete(@PathVariable("id") Long id) {
         skuService.delete(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
@@ -51,40 +53,22 @@ public class SkuController {
     @RepeatSubmit
     @PutMapping
     @ApiOperation("修改sku")
-    public BaseResult<String> update(@Validated @RequestBody Sku sku) {
-        skuService.update(sku);
+    public BaseResult<String> update(@Validated @RequestBody SkuUpdateForm skuUpdateForm) {
+        skuService.update(skuUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询sku")
-    public BaseResult<Sku> selectOneById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
-        Sku result = skuService.selectOneById(id);
-        if (result == null) {
-            return new BaseResult<>(ResultEnum.GET_INFO);
-        }
+    public BaseResult<Sku> get(@PathVariable("id") Long id) {
+        Sku result = skuService.get(id);
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
-    @PostMapping("/selectListByCondition")
+    @PostMapping("/list")
     @ApiOperation("根据条件查询Sku")
-    public BaseResult<List<Sku>> selectListByCondition(@RequestBody Sku sku) {
-        List<Sku> result = skuService.selectListByCondition(sku);
-        if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultEnum.GET_INFO);
-        }
-        return new BaseResult<>(ResultEnum.GET_OK, result);
-    }
-
-    @PostMapping("/selectPageByCondition/{index}/{size}")
-    @ApiOperation("根据条件分页查询Sku")
-    public BaseResult<Page<Sku>> selectPageByCondition(@RequestBody Sku sku,
-                                                       @PathVariable("index") Integer index,
-                                                       @PathVariable("size") Integer size) {
-        Page<Sku> result = skuService.selectPageByCondition(sku, index, size);
-        if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultEnum.GET_INFO);
-        }
+    public BaseResult<ResultPage<SkuView>> list(@RequestBody SkuListForm skuListForm) {
+        ResultPage<SkuView> result = skuService.list(skuListForm);
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 }

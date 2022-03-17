@@ -2,7 +2,7 @@ package cn.leemay.mall.sys.goods.service.impl;
 
 import cn.leemay.mall.common.data.entity.goods.Spu;
 import cn.leemay.mall.sys.goods.form.SpuAddForm;
-import cn.leemay.mall.sys.goods.form.SpuGetForm;
+import cn.leemay.mall.sys.goods.form.SpuListForm;
 import cn.leemay.mall.sys.goods.mapper.SkuMapper;
 import cn.leemay.mall.sys.goods.mapper.SpuMapper;
 import cn.leemay.mall.sys.goods.service.SpuService;
@@ -59,16 +59,16 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
     }
 
     @Override
-    public List<Spu> selectListByCondition(SpuGetForm spuGetForm) {
-//        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuGetForm);
+    public List<Spu> selectListByCondition(SpuListForm spuListForm) {
+//        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuListForm);
 //        return spuMapper.selectList(queryWrapper);
         return null;
     }
 
     @Override
-    public Page<Spu> selectPageByCondition(SpuGetForm spuGetForm, Integer index, Integer size) {
+    public Page<Spu> selectPageByCondition(SpuListForm spuListForm, Integer index, Integer size) {
         Page<Spu> page = new Page<>(index, size);
-//        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuGetForm);
+//        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuListForm);
 //        return spuMapper.selectPage(page, queryWrapper);
         return null;
     }

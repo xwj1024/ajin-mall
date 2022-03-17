@@ -6,17 +6,16 @@ import cn.leemay.mall.common.base.result.BaseResult;
 import cn.leemay.mall.common.base.result.ResultEnum;
 import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.sys.goods.form.CategoryAddForm;
-import cn.leemay.mall.sys.goods.form.CategoryGetForm;
+import cn.leemay.mall.sys.goods.form.CategoryListForm;
 import cn.leemay.mall.sys.goods.form.CategoryUpdateForm;
-import cn.leemay.mall.sys.goods.view.CategoryView;
 import cn.leemay.mall.sys.goods.service.CategoryService;
+import cn.leemay.mall.sys.goods.view.CategoryView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
@@ -29,10 +28,9 @@ import java.util.List;
  * @since 2021-04-13
  */
 @RestController
-@RequestMapping("/goods/category")
+@RequestMapping("/category")
 @Api(tags = "分类")
 @CrossOrigin
-@Validated// todo
 public class CategoryController {
 
     @Resource
@@ -41,53 +39,44 @@ public class CategoryController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加分类")
-    public BaseResult<String> insertCategory(@RequestBody @Validated CategoryAddForm categoryAddForm) {
-        categoryService.insertCategory(categoryAddForm);
+    public BaseResult<String> add(@RequestBody @Validated CategoryAddForm categoryAddForm) {
+        categoryService.add(categoryAddForm);
         return new BaseResult<>(ResultEnum.ADD_OK);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除分类", notes = "根据主键id删除")
-    public BaseResult<String> deleteCategory(@PathVariable("id") Long id) {
-        categoryService.deleteCategory(id);
+    public BaseResult<String> delete(@PathVariable("id") Long id) {
+        categoryService.delete(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
 
     @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改分类", notes = "根据主键id修改")
-    public BaseResult<String> updateCategory(@RequestBody @Validated CategoryUpdateForm categoryUpdateForm) {
-        categoryService.updateCategory(categoryUpdateForm);
+    public BaseResult<String> update(@RequestBody @Validated CategoryUpdateForm categoryUpdateForm) {
+        categoryService.update(categoryUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
     @ApiOperation("根据id查询品牌")
-    public BaseResult<CategoryView> selectOne(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
-        CategoryView result = categoryService.selectOne(id);
-        if (result == null) {
-            return new BaseResult<>(ResultEnum.GET_INFO);
-        }
+    public BaseResult<CategoryView> get(@PathVariable("id") Long id) {
+        CategoryView result = categoryService.get(id);
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
-    @PostMapping("/selectList")
+    @PostMapping("/list")
     @ApiOperation("根据条件查询分类")
-    public BaseResult<ResultPage<CategoryView>> selectListByCondition(@RequestBody CategoryGetForm categoryGetForm) {
-        ResultPage<CategoryView> result = categoryService.selectList(categoryGetForm);
-        if (result == null || result.getTotal() <= 0) {
-            return new BaseResult<>(ResultEnum.GET_INFO);
-        }
+    public BaseResult<ResultPage<CategoryView>> list(@RequestBody CategoryListForm categoryListForm) {
+        ResultPage<CategoryView> result = categoryService.list(categoryListForm);
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
-    @GetMapping("/selectWithTree")
+    @GetMapping("/tree")
     @ApiOperation("树形查询所有显示分类")
-    public BaseResult<List<CategoryView>> selectWithTree() {
-        List<CategoryView> result = categoryService.selectWithTree();
-        if (result == null || result.size() <= 0) {
-            return new BaseResult<>(ResultEnum.GET_INFO);
-        }
+    public BaseResult<List<CategoryView>> tree() {
+        List<CategoryView> result = categoryService.tree();
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 }

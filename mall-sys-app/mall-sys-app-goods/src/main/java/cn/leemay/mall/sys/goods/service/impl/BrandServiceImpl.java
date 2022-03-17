@@ -7,13 +7,11 @@ import cn.leemay.mall.common.data.anno.CascadeDelete;
 import cn.leemay.mall.common.data.entity.goods.Brand;
 import cn.leemay.mall.common.data.enums.TableInfo;
 import cn.leemay.mall.sys.goods.form.BrandAddForm;
-import cn.leemay.mall.sys.goods.form.BrandGetForm;
+import cn.leemay.mall.sys.goods.form.BrandListForm;
 import cn.leemay.mall.sys.goods.form.BrandUpdateForm;
 import cn.leemay.mall.sys.goods.mapper.BrandMapper;
-import cn.leemay.mall.sys.goods.mapper.SpuMapper;
 import cn.leemay.mall.sys.goods.service.BrandService;
 import cn.leemay.mall.sys.goods.view.BrandView;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -32,17 +30,13 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
+public class BrandServiceImpl implements BrandService {
 
     @Resource
     private BrandMapper brandMapper;
 
-    @Resource
-    private SpuMapper spuMapper;
-
     @Override
-    public void addBrand(BrandAddForm brandAddForm) {
-
+    public void add(BrandAddForm brandAddForm) {
         Integer brandCount = brandMapper.selectCountByName(brandAddForm.getName());
         BizAssert.isTrue(brandCount <= 0, "已有该品牌");
 
@@ -54,13 +48,19 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 
     @CascadeDelete(TableInfo.BRAND)
     @Override
-    public void deleteBrand(Long id) {
+    public void delete(Long id) {
+        Brand existBrand = brandMapper.selectById(id);
+        BizAssert.notNull(existBrand, "没有该品牌");
+
         int row = brandMapper.deleteById(id);
         BizAssert.isTrue(row == 1, "删除失败");
     }
 
     @Override
-    public void updateBrand(BrandUpdateForm brandUpdateForm) {
+    public void update(BrandUpdateForm brandUpdateForm) {
+        Brand existBrand = brandMapper.selectById(brandUpdateForm.getId());
+        BizAssert.notNull(existBrand, "没有该品牌");
+
         Integer brandCount = brandMapper.selectCountByName(brandUpdateForm.getName());
         BizAssert.isTrue(brandCount <= 0, "已有该品牌");
 
@@ -72,7 +72,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     }
 
     @Override
-    public BrandView selectOne(Long id) {
+    public BrandView get(Long id) {
         Brand     brand     = brandMapper.selectById(id);
         BrandView brandView = new BrandView();
         BeanUtils.copyProperties(brand, brandView);
@@ -80,9 +80,9 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     }
 
     @Override
-    public ResultPage<BrandView> selectList(BrandGetForm brandGetForm) {
-        PageHelp.startPage(brandGetForm.getPageIndex(), brandGetForm.getPageSize());
-        List<BrandView> list = brandMapper.selectListByCondition(brandGetForm);
+    public ResultPage<BrandView> list(BrandListForm brandListForm) {
+        PageHelp.startPage(brandListForm.getPageIndex(), brandListForm.getPageSize());
+        List<BrandView> list = brandMapper.selectListByCondition(brandListForm);
         return new ResultPage<>(new PageInfo<>(list));
     }
 }

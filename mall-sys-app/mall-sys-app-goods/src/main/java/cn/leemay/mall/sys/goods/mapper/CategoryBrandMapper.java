@@ -15,5 +15,4 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
 
-    void deleteByCategoryId(Long categoryId);
 }

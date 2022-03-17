@@ -1,5 +1,7 @@
 package cn.leemay.mall.common.data.entity.goods;
 
+import cn.leemay.mall.common.data.anno.CascadeField;
+import cn.leemay.mall.common.data.enums.TableInfo;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -42,12 +44,15 @@ public class Spu implements Serializable {
     @ApiModelProperty("品牌id")
     private Long brandId;
 
+    @CascadeField(sourceTable = TableInfo.CATEGORY, linkedTable = TableInfo.SPU, linkedField = "category1_id", enableDelete = false)
     @ApiModelProperty("一级分类")
     private Long category1Id;
 
+    @CascadeField(sourceTable = TableInfo.CATEGORY, linkedTable = TableInfo.SPU, linkedField = "category2_id", enableDelete = false)
     @ApiModelProperty("二级分类")
     private Long category2Id;
 
+    @CascadeField(sourceTable = TableInfo.CATEGORY, linkedTable = TableInfo.SPU, linkedField = "category3_id", enableDelete = false)
     @ApiModelProperty("三级分类")
     private Long category3Id;
 
