@@ -14,7 +14,7 @@
 
     <modules>
         <module>mall-sys-app-goods</module>
-        <module>mall-sys-app-user</module>
+        <module>mall-sys-app-member</module>
         <module>mall-sys-app-order</module>
         <module>mall-sys-app-search</module>
         <module>mall-sys-app-system</module>

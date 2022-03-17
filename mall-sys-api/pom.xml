@@ -14,7 +14,7 @@
 
     <modules>
         <module>mall-sys-api-goods</module>
-        <module>mall-sys-api-user</module>
+        <module>mall-sys-api-member</module>
         <module>mall-sys-api-order</module>
         <module>mall-sys-api-search</module>
         <module>mall-sys-api-system</module>
