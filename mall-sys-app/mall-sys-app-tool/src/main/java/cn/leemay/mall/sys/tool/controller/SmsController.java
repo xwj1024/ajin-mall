@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @since 2021-05-06
  */
 @RestController
-@RequestMapping("/tool/sms")
+@RequestMapping("/sms")
 @Api(tags = "短信服务")
 @CrossOrigin
 public class SmsController {

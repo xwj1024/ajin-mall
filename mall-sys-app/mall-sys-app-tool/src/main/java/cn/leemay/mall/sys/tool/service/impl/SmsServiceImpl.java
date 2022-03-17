@@ -1,7 +1,7 @@
 package cn.leemay.mall.sys.tool.service.impl;
 
+import cn.leemay.mall.common.base.asserts.BizAssert;
 import cn.leemay.mall.common.base.constant.RedisConstants;
-import cn.leemay.mall.common.base.exception.BizException;
 import cn.leemay.mall.sys.tool.property.SmsProperties;
 import cn.leemay.mall.sys.tool.service.SmsService;
 import cn.leemay.mall.sys.tool.util.CodeUtils;
@@ -33,9 +33,7 @@ public class SmsServiceImpl implements SmsService {
         if (redisCode != null) {
             // 如果有验证码，判断验证码请求是否超过1分钟
             long time = Long.parseLong(redisCode.split(",")[1]);
-            if (System.currentTimeMillis() - time < 60000) {
-                throw new BizException("验证码请求频繁，请一分钟后重试");
-            }
+            BizAssert.notTrue(System.currentTimeMillis() - time < 60000, "验证码请求频繁，请一分钟后重试");
         }
         String code = CodeUtils.generateCode4Int(4).toString();
         redisCode = code + "," + System.currentTimeMillis();

@@ -11,8 +11,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableDiscoveryClient
-public class ToolServiceApplication {
+public class SysToolApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ToolServiceApplication.class, args);
+        SpringApplication.run(SysToolApplication.class, args);
     }
 }

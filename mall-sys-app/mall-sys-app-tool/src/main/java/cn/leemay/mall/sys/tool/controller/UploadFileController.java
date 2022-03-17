@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2021-04-14
  */
 @RestController
-@RequestMapping("/tool/uploadFile")
+@RequestMapping("/uploadFile")
 @Api(tags = "文件上传")
 @CrossOrigin
 public class UploadFileController {

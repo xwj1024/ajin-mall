@@ -1,3 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: @environment@
+server:
+  servlet:
+    context-path: /sys/tool

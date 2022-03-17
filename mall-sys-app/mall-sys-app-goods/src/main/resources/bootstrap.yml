@@ -3,25 +3,20 @@ spring:
     name: @artifactId@
   cloud:
     nacos:
-      config:
-        refresh-enabled: true
-        server-addr: 192.168.3.123:8848
-        file-extension: yaml
-        namespace: dev
-        group: DEV_GROUP
-        enabled: true
+      #      config:
+      #        refresh-enabled: true
+      #        server-addr: 192.168.3.123:8848
+      #        file-extension: yaml
+      #        namespace: dev
+      #        group: DEV_GROUP
+      #        enabled: true
       discovery:
-        server-addr: 192.168.3.123:8848
-        namespace: dev
-        group: DEV_GROUP
+        server-addr: localhost:8848
 dubbo:
   scan:
-    base-packages: cn.leemay.mall.goods.service.impl # 开启包扫描
-  protocols:
-    dubbo:
-      name: dubbo # 服务协议
-      port: -1 # 服务端口
+    base-packages: cn.leemay.mall.sys.goods.service # 开启包扫描
+  protocol:
+    name: dubbo # 服务协议
+    port: -1 # 服务端口
   registry:
-    address: spring-cloud://192.168.3.123 # 注册中心
-  provider:
-    host: 192.168.3.10
+    address: nacos://localhost:8848 # 注册中心
