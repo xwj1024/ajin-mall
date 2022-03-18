@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Ajin
- * @since 2021-06-16
+ * @since 2021-05-26
  */
 @RestController
-@RequestMapping("/downloadFile")
-@Api(tags = "文件下载")
+@RequestMapping("/reportImport")
+@Api(tags = "导入报表")
 @CrossOrigin
-public class DownloadFileController {
+public class ReportImportController {
+
 }

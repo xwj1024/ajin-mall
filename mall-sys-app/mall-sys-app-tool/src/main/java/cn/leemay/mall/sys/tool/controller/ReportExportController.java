@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-05-26
  */
 @RestController
-@RequestMapping("/exportReport")
+@RequestMapping("/reportExport")
 @Api(tags = "导出报表")
 @CrossOrigin
-public class ExportReportController {
+public class ReportExportController {
 }

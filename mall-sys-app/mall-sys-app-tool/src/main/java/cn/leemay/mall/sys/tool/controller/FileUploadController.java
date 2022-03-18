@@ -17,10 +17,10 @@ import java.util.List;
  * @since 2021-04-14
  */
 @RestController
-@RequestMapping("/uploadFile")
+@RequestMapping("/fileUpload")
 @Api(tags = "文件上传")
 @CrossOrigin
-public class UploadFileController {
+public class FileUploadController {
 
     @Resource
     private UploadFileService uploadFileService;
