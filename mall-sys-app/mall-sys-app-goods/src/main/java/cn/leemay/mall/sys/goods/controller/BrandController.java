@@ -37,7 +37,7 @@ public class BrandController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加品牌")
-    public BaseResult<String> add(@RequestBody @Validated BrandAddForm brandAddForm) {
+    public BaseResult<String> add(@Validated @RequestBody BrandAddForm brandAddForm) {
         brandService.add(brandAddForm);
         return new BaseResult<>(ResultEnum.ADD_OK);
     }
@@ -53,7 +53,7 @@ public class BrandController {
     @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改品牌", notes = "根据主键id修改")
-    public BaseResult<String> update(@RequestBody @Validated BrandUpdateForm brandUpdateForm) {
+    public BaseResult<String> update(@Validated @RequestBody BrandUpdateForm brandUpdateForm) {
         brandService.update(brandUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
