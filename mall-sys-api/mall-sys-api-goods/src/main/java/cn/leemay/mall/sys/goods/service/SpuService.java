@@ -1,12 +1,10 @@
 package cn.leemay.mall.sys.goods.service;
 
+import cn.leemay.mall.common.base.result.ResultPage;
 import cn.leemay.mall.common.data.entity.goods.Spu;
 import cn.leemay.mall.sys.goods.form.SpuAddForm;
 import cn.leemay.mall.sys.goods.form.SpuListForm;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
+import cn.leemay.mall.sys.goods.form.SpuUpdateForm;
 
 /**
  * <p>
@@ -16,28 +14,28 @@ import java.util.List;
  * @author Ajin
  * @since 2021-04-13
  */
-public interface SpuService extends IService<Spu> {
-    
+public interface SpuService {
+
     /**
      * 添加spu
      *
      * @param spuAddForm spu
      */
-    void insertSpu(SpuAddForm spuAddForm);
+    void add(SpuAddForm spuAddForm);
 
     /**
      * 根据id删除spu
      *
      * @param id id
      */
-    void deleteSpu(Long id);
+    void delete(Long id);
 
     /**
      * 修改spu
      *
-     * @param spu spu
+     * @param spuUpdateForm spu
      */
-    void updateSpu(Spu spu);
+    void update(SpuUpdateForm spuUpdateForm);
 
     /**
      * 根据id查询spu
@@ -45,7 +43,7 @@ public interface SpuService extends IService<Spu> {
      * @param id id
      * @return spu
      */
-    Spu selectOneById(Long id);
+    Spu get(Long id);
 
     /**
      * 根据条件查询spu
@@ -53,15 +51,7 @@ public interface SpuService extends IService<Spu> {
      * @param spuListForm spuListForm
      * @return spu列表
      */
-    List<Spu> selectListByCondition(SpuListForm spuListForm);
+    ResultPage<Spu> list(SpuListForm spuListForm);
 
-    /**
-     * 根据条件分页查询spu
-     *
-     * @param spuListForm   spuListForm
-     * @param index 当前页码
-     * @param size  每页条数
-     * @return spu分页数据
-     */
-    Page<Spu> selectPageByCondition(SpuListForm spuListForm, Integer index, Integer size);
+
 }

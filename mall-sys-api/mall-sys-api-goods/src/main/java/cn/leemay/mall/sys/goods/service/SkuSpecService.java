@@ -1,8 +1,5 @@
 package cn.leemay.mall.sys.goods.service;
 
-import cn.leemay.mall.common.data.entity.goods.SkuSpec;
-import com.baomidou.mybatisplus.extension.service.IService;
-
 /**
  * <p>
  * 商品,规格 关联表 服务类
@@ -11,6 +8,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Ajin
  * @since 2021-04-13
  */
-public interface SkuSpecService extends IService<SkuSpec> {
+public interface SkuSpecService  {
 
 }

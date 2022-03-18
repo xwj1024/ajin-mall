@@ -1,19 +1,20 @@
 package cn.leemay.mall.sys.goods.service.impl;
 
+import cn.leemay.mall.common.base.result.ResultPage;
+import cn.leemay.mall.common.data.anno.CascadeDelete;
 import cn.leemay.mall.common.data.entity.goods.Spu;
+import cn.leemay.mall.common.data.enums.TableInfo;
 import cn.leemay.mall.sys.goods.form.SpuAddForm;
 import cn.leemay.mall.sys.goods.form.SpuListForm;
+import cn.leemay.mall.sys.goods.form.SpuUpdateForm;
 import cn.leemay.mall.sys.goods.mapper.SkuMapper;
 import cn.leemay.mall.sys.goods.mapper.SpuMapper;
 import cn.leemay.mall.sys.goods.service.SpuService;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,23 +26,24 @@ import java.util.Map;
  * @since 2021-04-13
  */
 @Service
-public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuService {
+public class SpuServiceImpl implements SpuService {
 
-    @Autowired
+    @Resource
     private SpuMapper spuMapper;
 
-    @Autowired
+    @Resource
     private SkuMapper skuMapper;
 
     @Override
-    public void insertSpu(SpuAddForm spuAddForm) {
+    public void add(SpuAddForm spuAddForm) {
         Spu spu = new Spu();
         BeanUtils.copyProperties(spuAddForm, spu);
         spuMapper.insert(spu);
     }
 
+    @CascadeDelete(TableInfo.SPU)
     @Override
-    public void deleteSpu(Long id) {
+    public void delete(Long id) {
         spuMapper.deleteById(id);
         Map<String, Object> map = new HashMap<>(1);
         map.put("spu_id", id);
@@ -49,27 +51,16 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
     }
 
     @Override
-    public void updateSpu(Spu spu) {
-        spuMapper.updateById(spu);
+    public void update(SpuUpdateForm spuUpdateForm) {
     }
 
     @Override
-    public Spu selectOneById(Long id) {
+    public Spu get(Long id) {
         return spuMapper.selectById(id);
     }
 
     @Override
-    public List<Spu> selectListByCondition(SpuListForm spuListForm) {
-//        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuListForm);
-//        return spuMapper.selectList(queryWrapper);
-        return null;
-    }
-
-    @Override
-    public Page<Spu> selectPageByCondition(SpuListForm spuListForm, Integer index, Integer size) {
-        Page<Spu> page = new Page<>(index, size);
-//        QueryWrapper<Spu> queryWrapper = SpuWrapper.queryWrapper(spuListForm);
-//        return spuMapper.selectPage(page, queryWrapper);
+    public ResultPage<Spu> list(SpuListForm spuListForm) {
         return null;
     }
 
