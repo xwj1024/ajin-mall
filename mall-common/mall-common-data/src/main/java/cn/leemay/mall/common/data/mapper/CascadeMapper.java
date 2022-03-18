@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /**
+ * 要用@MapperScan 扫描到
+ *
  * @author Ajin
  */
 public interface CascadeMapper {
