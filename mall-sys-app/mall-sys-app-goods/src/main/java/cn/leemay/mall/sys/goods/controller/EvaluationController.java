@@ -1,11 +1,21 @@
 package cn.leemay.mall.sys.goods.controller;
 
 
+import cn.leemay.mall.common.base.anno.RepeatSubmit;
+import cn.leemay.mall.common.base.result.BaseResult;
+import cn.leemay.mall.common.base.result.ResultEnum;
+import cn.leemay.mall.common.base.result.ResultPage;
+import cn.leemay.mall.sys.goods.form.EvaluationAddForm;
+import cn.leemay.mall.sys.goods.form.EvaluationListForm;
+import cn.leemay.mall.sys.goods.form.EvaluationUpdateForm;
+import cn.leemay.mall.sys.goods.service.EvaluationService;
+import cn.leemay.mall.sys.goods.view.EvaluationView;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -21,5 +31,45 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "商品评价")
 public class EvaluationController {
 
+    @Resource
+    private EvaluationService evaluationService;
+
+    @RepeatSubmit
+    @PostMapping
+    @ApiOperation("添加商品评价")
+    public BaseResult<String> add(@RequestBody @Validated EvaluationAddForm evaluationAddForm) {
+        evaluationService.add(evaluationAddForm);
+        return new BaseResult<>(ResultEnum.ADD_OK);
+    }
+
+    @RepeatSubmit
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除商品评价", notes = "根据主键id删除")
+    public BaseResult<String> delete(@PathVariable("id") Long id) {
+        evaluationService.delete(id);
+        return new BaseResult<>(ResultEnum.DELETE_OK);
+    }
+
+    @RepeatSubmit
+    @PutMapping
+    @ApiOperation(value = "修改商品评价", notes = "根据主键id修改")
+    public BaseResult<String> update(@RequestBody @Validated EvaluationUpdateForm evaluationUpdateForm) {
+        evaluationService.update(evaluationUpdateForm);
+        return new BaseResult<>(ResultEnum.UPDATE_OK);
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询商品评价")
+    public BaseResult<EvaluationView> get(@PathVariable("id") Long id) {
+        EvaluationView result = evaluationService.get(id);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
+    }
+
+    @PostMapping("/list")
+    @ApiOperation("根据条件查询商品评价")
+    public BaseResult<ResultPage<EvaluationView>> list(@RequestBody EvaluationListForm evaluationListForm) {
+        ResultPage<EvaluationView> result = evaluationService.list(evaluationListForm);
+        return new BaseResult<>(ResultEnum.GET_OK, result);
+    }
 }
 
