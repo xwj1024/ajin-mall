@@ -35,6 +35,7 @@ public class CategoryBrand implements Serializable {
     @ApiModelProperty("分类id")
     private Long categoryId;
 
+    @CascadeField(sourceTable = TableInfo.BRAND, linkedTable = TableInfo.CATEGORY_BRAND, linkedField = "brand_id")
     @ApiModelProperty("品牌id")
     private Long brandId;
 

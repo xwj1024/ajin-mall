@@ -4,7 +4,6 @@ import cn.leemay.mall.common.data.entity.goods.Category;
 import cn.leemay.mall.sys.goods.form.CategoryListForm;
 import cn.leemay.mall.sys.goods.view.CategoryView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +16,6 @@ import java.util.List;
  * @author Ajin
  * @since 2021-04-13
  */
-@Mapper
 public interface CategoryMapper extends BaseMapper<Category> {
     /**
      * 根据名称和父id查询分类数量

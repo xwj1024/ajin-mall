@@ -4,6 +4,7 @@ import cn.leemay.mall.common.data.anno.CascadeDelete;
 import cn.leemay.mall.common.data.anno.CascadeField;
 import cn.leemay.mall.common.data.enums.TableInfo;
 import cn.leemay.mall.common.data.mapper.CascadeMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -23,6 +24,7 @@ import java.util.Set;
  */
 @Component
 @Aspect
+@Slf4j
 public class CascadeDeleteHandler {
 
     @Pointcut("@annotation(cn.leemay.mall.common.data.anno.CascadeDelete)")
@@ -32,14 +34,14 @@ public class CascadeDeleteHandler {
     @AfterReturning(pointcut = "@annotation(cascadeDelete)", returning = "jsonResult")
     public void doAfterReturning(JoinPoint joinPoint, CascadeDelete cascadeDelete, Object jsonResult) {
         Object[] args = joinPoint.getArgs();
-        Integer  arg  = (Integer) args[0];
+        Long     arg  = (Long) args[0];
         handleCascadeDelete(cascadeDelete, arg);
     }
 
-    @Value("${cascadeFieldPackageName}")
+    @Value("${cascadeFieldPackageName:cn.leemay.mall.common.data.entity}")
     private String cascadeFieldPackageName;
 
-    public void handleCascadeDelete(CascadeDelete cascadeDelete, Integer arg) {
+    public void handleCascadeDelete(CascadeDelete cascadeDelete, Long arg) {
         // 获取要删除的主表名
         String      tableName   = cascadeDelete.value().getName();
         Reflections reflections = new Reflections(cascadeFieldPackageName, new FieldAnnotationsScanner());
@@ -56,6 +58,7 @@ public class CascadeDeleteHandler {
                 if (cascadeFieldAnno.enableDelete()) {
                     // 如果能直接删关联表数据
                     int row = delete(arg, linkedTableName, linkedFieldName);
+                    log.warn("{}表删除数据，{}表级联删除：{}条数据", sourceTableName, linkedTableName, row);
                 } else {
                     // 如果不能直接删，判断关联表是否有关联数据
                     int    count = count(arg, linkedTableName, linkedFieldName);
@@ -74,7 +77,7 @@ public class CascadeDeleteHandler {
      *
      * @return 数量
      */
-    private int count(Integer arg, String linkedTableName, String linkedFieldName) {
+    private int count(Long arg, String linkedTableName, String linkedFieldName) {
         return cascadeMapper.count(arg, linkedTableName, linkedFieldName);
     }
 
@@ -83,7 +86,7 @@ public class CascadeDeleteHandler {
      *
      * @return 删除条数
      */
-    private int delete(Integer arg, String linkedTableName, String linkedFieldName) {
+    private int delete(Long arg, String linkedTableName, String linkedFieldName) {
         return cascadeMapper.delete(arg, linkedTableName, linkedFieldName);
     }
 }

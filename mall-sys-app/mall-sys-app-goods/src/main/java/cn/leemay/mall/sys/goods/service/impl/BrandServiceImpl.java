@@ -30,6 +30,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@org.apache.dubbo.config.annotation.Service
 public class BrandServiceImpl implements BrandService {
 
     @Resource
@@ -50,7 +51,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void delete(Long id) {
         Brand existBrand = brandMapper.selectById(id);
-        BizAssert.notNull(existBrand, "没有该品牌");
+//        BizAssert.notNull(existBrand, "没有该品牌");
 
         int row = brandMapper.deleteById(id);
         BizAssert.isTrue(row == 1, "删除失败");

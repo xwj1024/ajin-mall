@@ -1,5 +1,7 @@
 package cn.leemay.mall.sys.goods;
 
+import cn.leemay.mall.common.data.anno.EnableCascadeDelete;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,7 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2021-04-13
  */
 @SpringBootApplication
-//@EnableDiscoveryClient
+@EnableCascadeDelete
+@MapperScan(basePackages = {"cn.leemay.mall.**.mapper"})
 public class SysGoodsApplication {
     public static void main(String[] args) {
         SpringApplication.run(SysGoodsApplication.class, args);

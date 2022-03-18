@@ -7,7 +7,8 @@
 
     <!--集中配置属性进行管理，使用时通过：${name}-->
     <properties>
-        <property name="path" value="/Users/jina/Ajin/A/logs"/>
+<!--        <property name="path" value="/Users/jina/Ajin/A/logs"/>-->
+        <property name="path" value="/Users/apple/A/logs"/>
     </properties>
 
     <!--日志处理-->

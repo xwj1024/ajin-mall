@@ -1,7 +1,6 @@
 package cn.leemay.mall.common.data.anno;
 
 import cn.leemay.mall.common.data.handler.CascadeDeleteHandler;
-import cn.leemay.mall.common.data.mapper.CascadeMapper;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -12,6 +11,6 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({CascadeDeleteHandler.class, CascadeMapper.class})
+@Import({CascadeDeleteHandler.class})
 public @interface EnableCascadeDelete {
 }

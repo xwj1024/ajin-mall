@@ -1,6 +1,5 @@
 package cn.leemay.mall.common.data.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -8,7 +7,6 @@ import org.apache.ibatis.annotations.Update;
 /**
  * @author Ajin
  */
-@Mapper
 public interface CascadeMapper {
 
     /**
@@ -20,7 +18,7 @@ public interface CascadeMapper {
      * @return 结果数量
      */
     @Select("select count(*) from `${linkedTableName}` where `${linkedFieldName}` = #{arg} and is_delete = 0")
-    int count(@Param("arg") Integer arg, @Param("linkedTableName") String linkedTableName, @Param("linkedFieldName") String linkedFieldName);
+    int count(@Param("arg") Long arg, @Param("linkedTableName") String linkedTableName, @Param("linkedFieldName") String linkedFieldName);
 
     /**
      * 删除关联表中数据
@@ -31,6 +29,6 @@ public interface CascadeMapper {
      * @return 删除结果
      */
     @Update("update `${linkedTableName}` set is_delete = 1 where `${linkedFieldName}` = #{arg}")
-    int delete(@Param("arg") Integer arg, @Param("linkedTableName") String linkedTableName, @Param("linkedFieldName") String linkedFieldName);
+    int delete(@Param("arg") Long arg, @Param("linkedTableName") String linkedTableName, @Param("linkedFieldName") String linkedFieldName);
 
 }

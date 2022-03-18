@@ -4,7 +4,6 @@ import cn.leemay.mall.common.data.entity.goods.Brand;
 import cn.leemay.mall.sys.goods.form.BrandListForm;
 import cn.leemay.mall.sys.goods.view.BrandView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +16,6 @@ import java.util.List;
  * @author Ajin
  * @since 2021-04-13
  */
-@Mapper
 public interface BrandMapper extends BaseMapper<Brand> {
 
     /**

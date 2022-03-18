@@ -2,7 +2,6 @@ package cn.leemay.mall.sys.goods.mapper;
 
 import cn.leemay.mall.common.data.entity.goods.CategoryBrand;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -12,7 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Ajin
  * @since 2021-04-13
  */
-@Mapper
 public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
 
 }
