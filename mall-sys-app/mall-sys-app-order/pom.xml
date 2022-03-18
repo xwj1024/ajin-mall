@@ -11,5 +11,12 @@
 
     <artifactId>mall-sys-app-order</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.leemay.mall</groupId>
+            <artifactId>mall-sys-api-order</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 
 </project>
