@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource # 数据源类型
-    url: jdbc:mysql://localhost:3306/leemay_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/ajin_mall?characterEncoding=UTF8&serverTimezone=Asia/Shanghai
     username: root
     password: root1024
     driver-class-name: com.mysql.cj.jdbc.Driver

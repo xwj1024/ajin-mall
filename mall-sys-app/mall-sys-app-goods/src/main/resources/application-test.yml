@@ -38,4 +38,3 @@ repeat:
   interval-time: 8000 # 重复提交，间隔时间（毫秒）
 logging:
   config: classpath:log/log4j2-dev.xml
-#cascadeFieldPackageName: cn.leemay.

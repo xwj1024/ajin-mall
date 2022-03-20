@@ -40,7 +40,7 @@
             includeLocation="false" 关闭日志记录的行号信息，打开可能会影响性能
             additivity="false" 不再继承rootLogger对象
         -->
-        <AsyncLogger name="cn.leemay" level="warn" includeLocation="false" additivity="false">
+        <AsyncLogger name="ajin.mall" level="warn" includeLocation="false" additivity="false">
             <AppenderRef ref="rollingFile"/>
         </AsyncLogger>
 

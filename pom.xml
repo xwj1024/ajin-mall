@@ -11,8 +11,8 @@
         <relativePath/>
     </parent>
 
-    <groupId>cn.leemay.mall</groupId>
-    <artifactId>leemay-mall</artifactId>
+    <groupId>ajin.mall</groupId>
+    <artifactId>ajin-mall</artifactId>
     <version>0.0.1</version>
     <name>leemay-mall</name>
 

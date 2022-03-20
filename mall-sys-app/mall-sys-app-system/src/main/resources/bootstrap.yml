@@ -9,7 +9,7 @@ spring:
         password: nacos
 dubbo:
   scan:
-    base-packages: cn.leemay.mall.sys.system.service # 开启包扫描
+    base-packages: ajin.mall.sys.system.service # 开启包扫描
   protocol:
     name: dubbo # 服务协议
     port: -1 # 服务端口
