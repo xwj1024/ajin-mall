@@ -1,14 +1,13 @@
 package ajin.mall.common.data.handler;
 
-import ajin.mall.common.data.mapper.CascadeMapper;
 import ajin.mall.common.data.anno.CascadeDelete;
 import ajin.mall.common.data.anno.CascadeField;
 import ajin.mall.common.data.enums.TableInfo;
+import ajin.mall.common.data.mapper.CascadeMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,12 +26,8 @@ import java.util.Set;
 @Slf4j
 public class CascadeDeleteHandler {
 
-    @Pointcut("@annotation(ajin.mall.common.data.anno.CascadeDelete)")
-    public void cascadeDeletePointCut() {
-    }
-
-    @AfterReturning(pointcut = "@annotation(cascadeDelete)", returning = "jsonResult")
-    public void doAfterReturning(JoinPoint joinPoint, CascadeDelete cascadeDelete, Object jsonResult) {
+    @AfterReturning(pointcut = "@annotation(cascadeDelete)")
+    public void doAfterReturning(JoinPoint joinPoint, CascadeDelete cascadeDelete) {
         Object[] args = joinPoint.getArgs();
         Long     arg  = (Long) args[0];
         handleCascadeDelete(cascadeDelete, arg);
