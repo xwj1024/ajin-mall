@@ -17,6 +17,11 @@
             <artifactId>mall-sys-api-system</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>ajin.mall</groupId>
+            <artifactId>mall-sys-app-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
 </project>

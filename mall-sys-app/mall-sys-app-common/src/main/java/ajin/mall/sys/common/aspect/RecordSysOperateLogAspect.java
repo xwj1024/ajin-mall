@@ -72,14 +72,17 @@ public class RecordSysOperateLogAspect {
                 String json = JSON.toJSONString(arg);
                 // 设置请求参数
                 if (sysOperateLogAnno.saveRequestData()) {
+                    // todo 隐藏敏感字段：密码
                     sysOperateLog.setRequestParam(json);
                 }
                 Map    map       = JSON.parseObject(json, Map.class);
                 Long   id        = (Long) map.get("id");
                 String tableName = sysOperateLogAnno.saveSourceData().getName();
                 if (!StringUtils.isEmpty(tableName)) {
+                    // 设置原始数据
                     Map    sourceMap  = commonMapper.selectById(tableName, id);
                     String sourceDate = JSON.toJSONString(sourceMap);
+                    // todo 隐藏敏感字段
                     sysOperateLog.setSourceData(sourceDate);
                 }
             }
