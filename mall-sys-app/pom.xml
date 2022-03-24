@@ -22,6 +22,7 @@
         <module>mall-sys-app-monitor</module>
         <module>mall-sys-app-auth</module>
         <module>mall-sys-app-gateway</module>
+        <module>mall-sys-app-common</module>
     </modules>
 
 </project>

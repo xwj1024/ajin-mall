@@ -1,4 +1,6 @@
-package ajin.mall.common.base.anno;
+package ajin.mall.sys.common.anno;
+
+import ajin.mall.common.data.enums.TableInfo;
 
 import java.lang.annotation.*;
 
@@ -13,7 +15,7 @@ public @interface RecordSysOperateLog {
     /**
      * 操作描述
      */
-    String desc() default "";
+    String description() default "";
 
     /**
      * 是否保存请求的参数
@@ -24,5 +26,10 @@ public @interface RecordSysOperateLog {
      * 是否保存响应的参数
      */
     boolean saveResponseData() default true;
+
+    /**
+     * 是否保存原始数据
+     */
+    TableInfo saveSourceData() default TableInfo.NONE;
 
 }

@@ -5,6 +5,7 @@ package ajin.mall.common.data.enums;
  */
 public enum TableInfo {
 
+    NONE("", ""),
     BRAND("brand", "品牌"),
     CATEGORY("category", "分类"),
     CATEGORY_BRAND("category_brand", "分类，品牌"),

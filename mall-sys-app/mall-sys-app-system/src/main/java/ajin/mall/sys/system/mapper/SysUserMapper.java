@@ -2,7 +2,6 @@ package ajin.mall.sys.system.mapper;
 
 import ajin.mall.common.data.entity.system.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -13,7 +12,6 @@ import org.apache.ibatis.annotations.Param;
  * @author Ajin
  * @since 2021-05-07
  */
-@Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
     /**
      * 根据用户名获取用户

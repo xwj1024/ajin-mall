@@ -4,12 +4,14 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.Map;
+
 /**
  * 要用@MapperScan 扫描到
  *
  * @author Ajin
  */
-public interface CascadeMapper {
+public interface CommonMapper {
 
     /**
      * 获取关联表中数据数量
@@ -33,4 +35,13 @@ public interface CascadeMapper {
     @Update("update `${linkedTableName}` set is_delete = 1 where `${linkedFieldName}` = #{arg}")
     int delete(@Param("arg") Long arg, @Param("linkedTableName") String linkedTableName, @Param("linkedFieldName") String linkedFieldName);
 
+    /**
+     * 根据id查询数据
+     *
+     * @param tableName 表名
+     * @param id        id
+     * @return 查询结果
+     */
+    @Select("select * from `${tableName}` where `id` = #{id} ")
+    Map selectById(@Param("tableName") String tableName, @Param("id") Long id);
 }

@@ -1,14 +1,11 @@
 package ajin.mall.sys.system.service;
 
-import ajin.mall.common.data.entity.system.SysPermission;
-import com.baomidou.mybatisplus.extension.service.IService;
-
 import java.util.List;
 
 /**
  * @author Ajin
  */
-public interface SysPermissionService extends IService<SysPermission> {
+public interface SysPermissionService {
 
     /**
      * 根据用户id查询用户权限

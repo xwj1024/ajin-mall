@@ -2,7 +2,6 @@ package ajin.mall.sys.system.service;
 
 import ajin.mall.common.data.entity.system.SysUser;
 import ajin.mall.sys.system.form.SysUserAddForm;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -12,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Ajin
  * @since 2021-05-07
  */
-public interface SysUserService extends IService<SysUser> {
+public interface SysUserService {
     /**
      * 添加系统用户
      *

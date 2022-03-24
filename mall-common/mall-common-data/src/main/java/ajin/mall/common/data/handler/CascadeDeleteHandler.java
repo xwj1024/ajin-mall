@@ -3,7 +3,7 @@ package ajin.mall.common.data.handler;
 import ajin.mall.common.data.anno.CascadeDelete;
 import ajin.mall.common.data.anno.CascadeField;
 import ajin.mall.common.data.enums.TableInfo;
-import ajin.mall.common.data.mapper.CascadeMapper;
+import ajin.mall.common.data.mapper.CommonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -65,7 +65,7 @@ public class CascadeDeleteHandler {
     }
 
     @Resource
-    private CascadeMapper cascadeMapper;
+    private CommonMapper commonMapper;
 
     /**
      * 获取关联表数据条数
@@ -73,7 +73,7 @@ public class CascadeDeleteHandler {
      * @return 数量
      */
     private int count(Long arg, String linkedTableName, String linkedFieldName) {
-        return cascadeMapper.count(arg, linkedTableName, linkedFieldName);
+        return commonMapper.count(arg, linkedTableName, linkedFieldName);
     }
 
     /**
@@ -82,6 +82,6 @@ public class CascadeDeleteHandler {
      * @return 删除条数
      */
     private int delete(Long arg, String linkedTableName, String linkedFieldName) {
-        return cascadeMapper.delete(arg, linkedTableName, linkedFieldName);
+        return commonMapper.delete(arg, linkedTableName, linkedFieldName);
     }
 }

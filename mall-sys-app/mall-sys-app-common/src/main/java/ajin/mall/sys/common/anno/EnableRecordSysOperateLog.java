@@ -1,6 +1,6 @@
-package ajin.mall.common.base.anno;
+package ajin.mall.sys.common.anno;
 
-import ajin.mall.common.base.aspect.RecordSysOperateLogAspect;
+import ajin.mall.sys.common.aspect.RecordSysOperateLogAspect;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
