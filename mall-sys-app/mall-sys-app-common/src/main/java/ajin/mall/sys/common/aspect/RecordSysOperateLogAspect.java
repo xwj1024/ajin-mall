@@ -56,7 +56,8 @@ public class RecordSysOperateLogAspect {
             sysOperateLog.setDescription(description);
 
             // todo 处理用户id，请求地址，请求方法
-            /*sysOperateLog.setRemoteIp();
+            /*sysOperateLog.setSysUserId();
+            sysOperateLog.setRemoteIp();
             sysOperateLog.setRequestUri();
             sysOperateLog.setRequestMethod();*/
 

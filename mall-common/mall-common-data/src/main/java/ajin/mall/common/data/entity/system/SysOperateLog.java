@@ -19,6 +19,9 @@ public class SysOperateLog implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
+    @ApiModelProperty(value = "系统用户id")
+    private Long sysUserId;
+
     @ApiModelProperty(value = "操作描述")
     private String description;
 
