@@ -10,7 +10,7 @@ create table if not exists brand
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
     )
-    comment '品牌表' charset = utf8;
+    comment '品牌表';
 
 create table if not exists category
 (
@@ -26,7 +26,7 @@ create table if not exists category
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
     )
-    comment '商品类目表' charset = utf8;
+    comment '商品类目表';
 
 create index parent_id
     on category (parent_id);
@@ -41,25 +41,25 @@ create table if not exists category_brand
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
 )
-    comment '分类，品牌  关联表' charset = utf8;
+    comment '分类，品牌  关联表';
 
 create table if not exists evaluation
 (
-    id              bigint                       not null comment '主键id'
+    id              bigint            not null comment '主键id'
     primary key,
-    sku_id          bigint                       null comment 'sku id',
-    user_id         bigint                       null comment '用户id',
-    order_id        bigint                       null comment '订单id',
-    images          varchar(2000)                null comment '图片路径',
-    description     varchar(255) charset utf8mb4 null comment '商品描述',
-    goods_score     tinyint                      null comment '商品分',
-    service_score   tinyint                      null comment '服务分',
-    logistics_score tinyint                      null comment '物流分',
-    create_time     datetime                     null comment '创建时间',
-    update_time     datetime                     null comment '修改时间',
-    is_delete       tinyint default 0            null comment '是否删除'
+    sku_id          bigint            null comment 'sku id',
+    user_id         bigint            null comment '用户id',
+    order_id        bigint            null comment '订单id',
+    images          varchar(2000)     null comment '图片路径',
+    description     varchar(255)      null comment '商品描述',
+    goods_score     tinyint           null comment '商品分',
+    service_score   tinyint           null comment '服务分',
+    logistics_score tinyint           null comment '物流分',
+    create_time     datetime          null comment '创建时间',
+    update_time     datetime          null comment '修改时间',
+    is_delete       tinyint default 0 null comment '是否删除'
     )
-    comment '商品评价表' charset = utf8;
+    comment '商品评价表';
 
 create table if not exists freight
 (
@@ -69,7 +69,7 @@ create table if not exists freight
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
 )
-    comment '运费表' charset = utf8;
+    comment '运费表';
 
 create table if not exists label
 (
@@ -82,7 +82,7 @@ create table if not exists label
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
     )
-    comment '标签表' charset = utf8;
+    comment '标签表';
 
 create table if not exists label_goods
 (
@@ -94,7 +94,7 @@ create table if not exists label_goods
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
 )
-    comment '标签，商品  关联表' charset = utf8;
+    comment '标签，商品  关联表';
 
 create table if not exists member
 (
@@ -102,7 +102,7 @@ create table if not exists member
     primary key,
     level tinyint default 0 null comment '会员等级'
 )
-    comment '会员表' charset = utf8;
+    comment '会员表';
 
 create table if not exists param
 (
@@ -115,33 +115,33 @@ create table if not exists param
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
     )
-    comment '商品参数表' charset = utf8;
+    comment '商品参数表';
 
 create table if not exists sku
 (
-    id           bigint                       not null comment '主键id'
+    id           bigint                  not null comment '主键id'
     primary key,
-    spu_id       bigint                       null comment 'spu id',
-    sn           varchar(255) default ''      null comment '商品条码',
-    code         varchar(255)                 null comment '商品编号',
-    name         varchar(255) charset utf8mb4 null comment 'sku名称',
-    images       varchar(2000)                null comment '商品图片',
-    weight       decimal(10, 2)               null comment '商品重量,克',
-    market_price decimal(10, 2)               null comment '市场价,元',
-    cheap_price  decimal(10, 2)               null comment '优惠价,元',
-    cost_price   decimal(10, 2)               null comment '成本价,元',
-    qrcode       varchar(255)                 null comment '二维码',
-    sum_num      int          default 0       null comment '库存数量',
-    alert_num    int                          null comment '库存预警数',
-    sale_num     int          default 0       null comment '商品销量',
-    comment_num  int          default 0       null comment '评论数',
-    is_check     tinyint      default 0       null comment '是否审核',
-    is_market    tinyint      default 0       null comment '是否上架',
-    create_time  datetime                     null comment '创建时间',
-    update_time  datetime                     null comment '修改时间',
-    is_delete    tinyint      default 0       null comment '是否删除'
+    spu_id       bigint                  null comment 'spu id',
+    sn           varchar(255) default '' null comment '商品条码',
+    code         varchar(255)            null comment '商品编号',
+    name         varchar(255)            null comment 'sku名称',
+    images       varchar(2000)           null comment '商品图片',
+    weight       decimal(10, 2)          null comment '商品重量,克',
+    market_price decimal(10, 2)          null comment '市场价,元',
+    cheap_price  decimal(10, 2)          null comment '优惠价,元',
+    cost_price   decimal(10, 2)          null comment '成本价,元',
+    qrcode       varchar(255)            null comment '二维码',
+    sum_num      int          default 0  null comment '库存数量',
+    alert_num    int                     null comment '库存预警数',
+    sale_num     int          default 0  null comment '商品销量',
+    comment_num  int          default 0  null comment '评论数',
+    is_check     tinyint      default 0  null comment '是否审核',
+    is_market    tinyint      default 0  null comment '是否上架',
+    create_time  datetime                null comment '创建时间',
+    update_time  datetime                null comment '修改时间',
+    is_delete    tinyint      default 0  null comment '是否删除'
     )
-    comment '商品sku表' charset = utf8;
+    comment '商品sku表';
 
 create index status
     on sku (is_market);
@@ -158,7 +158,7 @@ create table if not exists sku_spec
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
     )
-    comment '商品，规格  关联表' charset = utf8;
+    comment '商品，规格  关联表';
 
 create table if not exists spec
 (
@@ -171,7 +171,7 @@ create table if not exists spec
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
     )
-    comment '商品规格表' charset = utf8;
+    comment '商品规格表';
 
 create table if not exists spu
 (
@@ -188,7 +188,7 @@ create table if not exists spu
     update_time  datetime          null comment '修改时间',
     is_delete    tinyint default 0 null comment '是否删除'
     )
-    comment '商品spu表' charset = utf8;
+    comment '商品spu表';
 
 create table if not exists spu_param
 (
@@ -206,17 +206,24 @@ create table if not exists spu_param
 
 create table if not exists sys_operate_log
 (
-    id             bigint       not null comment '主键id'
+    id              bigint       not null comment '主键id'
     primary key,
-    description    varchar(255) null comment '操作描述',
-    request_info   text         null comment '请求信息',
-    response_info  text         null comment '响应信息',
-    exception_info text         null comment '异常信息',
-    create_time    datetime     null comment '创建时间',
-    update_time    datetime     null comment '修改时间',
-    is_delete      tinyint      null comment '是否删除'
+    sys_user_id     bigint       null comment '系统用户id',
+    description     varchar(255) null comment '操作描述',
+    remote_ip       varchar(100) null comment '远程IP',
+    request_uri     varchar(200) null comment '请求路径',
+    request_method  varchar(20)  null comment '请求方法',
+    method_name     varchar(500) null comment '方法名称',
+    request_param   text         null comment '请求参数',
+    response_result text         null comment '响应结果',
+    source_data     text         null comment '原始数据',
+    exception_info  text         null comment '异常信息',
+    operate_time    datetime     null comment '操作时间',
+    create_time     datetime     null comment '创建时间',
+    update_time     datetime     null comment '修改时间',
+    is_delete       tinyint      null comment '是否删除'
     )
-    comment '系统操作日志表' charset = utf8;
+    comment '系统操作日志表';
 
 create table if not exists sys_permission
 (
@@ -224,7 +231,9 @@ create table if not exists sys_permission
     primary key,
     name        varchar(255)      null comment '名称',
     keyword     varchar(255)      null comment '关键字',
-    note        varchar(255)      null comment '备注',
+    path        varchar(255)      null comment '路径',
+    method      varchar(255)      null comment '方法',
+    description varchar(255)      null comment '备注，描述',
     create_time datetime          null comment '创建时间',
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
@@ -265,12 +274,13 @@ create table if not exists sys_user
     nickname    varchar(255)  null comment '昵称',
     avatar      varchar(255)  null comment '头像',
     description varchar(255)  null comment '备注，描述',
-    state       int default 0 null comment '状态信息：0全部，1正常，2禁用，4锁定，8过期',
+    state       int default 1 null comment '状态信息：0全部，1账号正常，2账号禁用，4账号锁定，8账号过期，16密码过期',
+    login_time  datetime      null comment '登录时间',
     create_time datetime      null comment '创建时间',
     update_time datetime      null comment '修改时间',
     is_delete   tinyint       null comment '是否删除'
     )
-    comment '系统用户表' charset = utf8;
+    comment '系统用户表';
 
 create table if not exists sys_user_role
 (
@@ -282,7 +292,7 @@ create table if not exists sys_user_role
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
 )
-    comment '系统用户，角色  关联表' charset = utf8;
+    comment '系统用户，角色  关联表';
 
 create table if not exists template
 (
@@ -294,5 +304,5 @@ create table if not exists template
     update_time datetime          null comment '修改时间',
     is_delete   tinyint default 0 null comment '是否删除'
     )
-    comment '规格，参数  模板表' charset = utf8;
+    comment '规格，参数  模板表';
 
