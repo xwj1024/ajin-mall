@@ -1,5 +1,3 @@
-server:
-  port: 8010
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource # 数据源类型

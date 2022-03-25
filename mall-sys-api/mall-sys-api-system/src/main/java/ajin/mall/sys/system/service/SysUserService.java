@@ -27,4 +27,10 @@ public interface SysUserService {
      */
     SysUser loadUserByUsername(String username);
 
+    /**
+     * 根据id修改系统用户
+     *
+     * @param sysUser 系统用户修改信息
+     */
+    void updateById(SysUser sysUser);
 }

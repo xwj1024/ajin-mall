@@ -4,7 +4,6 @@ import ajin.mall.common.data.entity.system.SysUser;
 import ajin.mall.sys.system.form.SysUserAddForm;
 import ajin.mall.sys.system.mapper.SysUserMapper;
 import ajin.mall.sys.system.service.SysUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ import javax.annotation.Resource;
  */
 @org.apache.dubbo.config.annotation.Service
 @Service
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
+public class SysUserServiceImpl implements SysUserService {
 
     @Resource
     private SysUserMapper sysUserMapper;
@@ -39,4 +38,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public SysUser loadUserByUsername(String username) {
         return sysUserMapper.loadUserByUsername(username);
     }
+
+    @Override
+    public void updateById(SysUser sysUser) {
+        sysUserMapper.updateById(sysUser);
+    }
+
+
 }
