@@ -34,7 +34,7 @@ public class ExceptionHandlers {
 
     @ExceptionHandler(SysException.class)
     public BaseResult<String> handleSysException(SysException e) {
-        log.error(e.getMessage(), e);
+        log.warn(e.getMessage());
         return new BaseResult<>(ResultCode.ERR, e.getMessage());
     }
 
