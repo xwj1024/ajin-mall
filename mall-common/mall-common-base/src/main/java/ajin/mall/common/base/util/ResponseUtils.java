@@ -15,8 +15,8 @@ import java.io.PrintWriter;
 public class ResponseUtils {
 
     public static void printJson(HttpServletResponse response, Object obj) throws IOException {
+        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         try (PrintWriter writer = response.getWriter()) {
-            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             String json = JSON.toJSONString(obj, SerializerFeature.WriteMapNullValue);
             writer.print(json);
             writer.flush();
