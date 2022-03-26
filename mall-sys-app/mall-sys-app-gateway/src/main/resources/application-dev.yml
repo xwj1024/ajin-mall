@@ -26,8 +26,18 @@ spring:
             - name: RequestRateLimiter # 请求数限流,名字不能随便写
               args:
                 key-resolver: "#{@ipKeyResolver}" # 引用bean
-                redis-rate-limiter.replenishRate: 1 # 令牌桶每秒填充平均速率
-                redis-rate-limiter.burstCapacity: 1 # 令牌桶总容量
+                redis-rate-limiter.replenishRate: 10 # 令牌桶每秒填充平均速率
+                redis-rate-limiter.burstCapacity: 10 # 令牌桶总容量
+        - id: mall-sys-app-system
+          uri: lb://mall-sys-app-system
+          predicates:
+            - Path=/sys/system/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 10
 
 # 日志
 logging:
