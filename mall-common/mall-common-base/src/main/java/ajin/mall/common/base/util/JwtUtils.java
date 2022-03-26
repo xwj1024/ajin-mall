@@ -23,7 +23,7 @@ public class JwtUtils {
     /**
      * 秘钥明文
      */
-    public static final String JWT_KEY = "ajin";
+    public static final String JWT_KEY = "ajin-mall";
     /**
      * 有效时长
      */
@@ -55,6 +55,10 @@ public class JwtUtils {
                 .setExpiration(new Date(expireMillis))
                 .setClaims(claims);
         return builder.compact();
+    }
+
+    public static String generateJwt(Map<String, Object> claims) {
+        return generateJwt("mall-jwt", "Ajin", null, claims);
     }
 
     /**
