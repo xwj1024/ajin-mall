@@ -6,6 +6,7 @@ import ajin.mall.common.data.mapper.CommonMapper;
 import ajin.mall.sys.common.anno.RecordSysOperateLog;
 import ajin.mall.sys.system.service.SysOperateLogService;
 import com.alibaba.fastjson.JSON;
+import lombok.SneakyThrows;
 import org.apache.dubbo.config.annotation.Reference;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -42,17 +43,19 @@ public class RecordSysOperateLogAspect {
     }
 
 
+    @SneakyThrows
     private Object handleLog(final ProceedingJoinPoint pjp) {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
-        Method          method    = signature.getMethod();
-        Object          result    = null;
+        Method method = signature.getMethod();
+        Object result = null;
 
         if (method.isAnnotationPresent(RecordSysOperateLog.class)) {
             // 数据库系统操作日志
             SysOperateLog sysOperateLog = new SysOperateLog();
+            sysOperateLog.setOperateTime(LocalDateTime.now());
             // 获取注解
             RecordSysOperateLog sysOperateLogAnno = method.getAnnotation(RecordSysOperateLog.class);
-            String              description       = sysOperateLogAnno.description();
+            String description = sysOperateLogAnno.description();
             sysOperateLog.setDescription(description);
 
             // todo 处理用户id，请求地址，请求方法
@@ -62,25 +65,25 @@ public class RecordSysOperateLogAspect {
             sysOperateLog.setRequestMethod();*/
 
             // 设置方法名称
-            String className  = pjp.getTarget().getClass().getName();
+            String className = pjp.getTarget().getClass().getName();
             String methodName = pjp.getSignature().getName();
             sysOperateLog.setMethodName(className + "." + methodName + "()");
             // 获取请求参数
             Object[] args = pjp.getArgs();
             if (args != null && args.length > 0) {
-                Object arg  = args[0];
+                Object arg = args[0];
                 String json = JSON.toJSONString(arg);
                 // 设置请求参数
                 if (sysOperateLogAnno.saveRequestData()) {
                     // todo 隐藏敏感字段：密码
                     sysOperateLog.setRequestParam(json);
                 }
-                Map    map       = JSON.parseObject(json, Map.class);
-                Long   id        = (Long) map.get("id");
+                Map map = JSON.parseObject(json, Map.class);
+                Long id = (Long) map.get("id");
                 String tableName = sysOperateLogAnno.saveSourceData().getName();
                 if (!StringUtils.isEmpty(tableName)) {
                     // 设置原始数据
-                    Map    sourceMap  = commonMapper.selectById(tableName, id);
+                    Map sourceMap = commonMapper.selectById(tableName, id);
                     String sourceDate = JSON.toJSONString(sourceMap);
                     // todo 隐藏敏感字段
                     sysOperateLog.setSourceData(sourceDate);
@@ -95,8 +98,10 @@ public class RecordSysOperateLogAspect {
                 }
             } catch (Throwable e) {
                 sysOperateLog.setExceptionInfo(e.getMessage());
+                // 保存数据库
+                sysOperateLogService.add(sysOperateLog);
+                throw e;
             }
-            sysOperateLog.setOperateTime(LocalDateTime.now());
             // 保存数据库
             sysOperateLogService.add(sysOperateLog);
         }

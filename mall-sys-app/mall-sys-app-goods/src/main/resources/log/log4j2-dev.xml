@@ -7,7 +7,7 @@
 
     <!--集中配置属性进行管理，使用时通过：${name}-->
     <properties>
-        <property name="path" value="./logs"/>
+        <property name="path" value="./logs/mall-sys-app-goods"/>
     </properties>
 
     <!--日志处理-->
@@ -20,7 +20,7 @@
 
         <!--按照一定规则拆分的日志文件 appender-->
         <RollingFile name="rollingFile" fileName="${path}/roll.log"
-                     filePattern="${path}/$${date:yyyy-MM-dd}/roll-%d{yyyyMMdd-HH}-%i.log">
+                     filePattern="${path}/$${date:MM-dd}/roll-%d{yyyy-MMdd-HH}-%i.log">
             <!--日志级别过滤器-->
             <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] %l %c{36} - %m%n"/>

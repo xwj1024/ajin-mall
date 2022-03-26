@@ -3,13 +3,6 @@ spring:
     name: @artifactId@
   cloud:
     nacos:
-      #      config:
-      #        refresh-enabled: true
-      #        server-addr: 192.168.3.123:8848
-      #        file-extension: yaml
-      #        namespace: dev
-      #        group: DEV_GROUP
-      #        enabled: true
       discovery:
         server-addr: localhost:8848
 dubbo:

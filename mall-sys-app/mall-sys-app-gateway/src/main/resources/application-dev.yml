@@ -1,6 +1,8 @@
 spring:
   main:
     web-application-type: reactive
+  redis:
+    host: localhost
   cloud:
     gateway:
       globalcors:
@@ -12,17 +14,21 @@ spring:
               - POST
               - PUT
               - DELETE
-      routes:
+      routes: # 路由配置
         - id: mall-sys-app-goods # 唯一标识
           uri: lb://mall-sys-app-goods # 请求要路由的服务
+          #uri: http://localhost:8080 # 请求要路由的路径
           predicates:
             - Path=/sys/goods/**
           filters:
-            - StripPrefix= 1
-  #            - name: RequestRateLimiter # 请求数限流,名字不能随便写
-  #              args:
-  #                key-resolver: "#{@ipKeyResolver}" # 引用bean
-  #                redis-rate-limiter.replenishRate: 1 # 令牌桶每秒填充平均速率
-  #                redis-rate-limiter.burstCapacity: 1 # 令牌桶总容量
-  redis:
-    host: localhost
+            #- StripPrefix=1 # 将请求路径中的第一个路径去掉
+            #- PrefixPath=/api # 将请求路径添前加该路径
+            - name: RequestRateLimiter # 请求数限流,名字不能随便写
+              args:
+                key-resolver: "#{@ipKeyResolver}" # 引用bean
+                redis-rate-limiter.replenishRate: 1 # 令牌桶每秒填充平均速率
+                redis-rate-limiter.burstCapacity: 1 # 令牌桶总容量
+
+# 日志
+logging:
+  config: classpath:log/log4j2-dev.xml

@@ -7,16 +7,22 @@
 
     <!--集中配置属性进行管理，使用时通过：${name}-->
     <properties>
-        <property name="path">./logs/mall-sys-app-goods</property>
+        <property name="path" value="./logs/mall-sys-app-auth"/>
     </properties>
 
     <!--日志处理-->
     <Appenders>
+        <!--控制台输出 appender-->
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%style{%d}{YELLOW} [%t] %highlight{%-5level}{ERROR=RED, WARN=YELLOW, INFO=GREEN, DEBUG=CYAN, TRACE=WHITE} %style{%c{36}:%L}{BLUE} --- %m %style{%throwable}{RED} %n"/>
+        </Console>
+
         <!--按照一定规则拆分的日志文件 appender-->
         <RollingFile name="rollingFile" fileName="${path}/roll.log"
                      filePattern="${path}/$${date:MM-dd}/roll-%d{yyyy-MMdd-HH}-%i.log">
             <!--日志级别过滤器-->
-            <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] %l %c{36} - %m%n"/>
             <!--策略-->
             <Policies>
@@ -40,14 +46,15 @@
             includeLocation="false" 关闭日志记录的行号信息，打开可能会影响性能
             additivity="false" 不再继承rootLogger对象
         -->
-        <AsyncLogger name="ajin.mall" level="warn" includeLocation="false" additivity="false">
+        <AsyncLogger name="ajin.mall" level="debug" includeLocation="false" additivity="false">
             <AppenderRef ref="rollingFile"/>
+            <AppenderRef ref="console"/>
         </AsyncLogger>
 
-        <!--使用rootLogger配置-->
-        <Root level="warn">
+        <!--使用rootLogger配置 日志级别：level="trace"-->
+        <Root level="info" includeLocation="true">
             <!--指定日志使用的处理器-->
-            <AppenderRef ref="rollingFile"/>
+            <AppenderRef ref="console"/>
         </Root>
     </Loggers>
 </Configuration>

@@ -11,3 +11,6 @@ spring:
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
+# 日志
+logging:
+  config: classpath:log/log4j2-dev.xml

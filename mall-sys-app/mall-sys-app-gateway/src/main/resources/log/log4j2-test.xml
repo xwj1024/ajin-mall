@@ -7,7 +7,7 @@
 
     <!--集中配置属性进行管理，使用时通过：${name}-->
     <properties>
-        <property name="path">./logs/mall-sys-app-goods</property>
+        <property name="path">./logs/mall-sys-app-gateway</property>
     </properties>
 
     <!--日志处理-->
