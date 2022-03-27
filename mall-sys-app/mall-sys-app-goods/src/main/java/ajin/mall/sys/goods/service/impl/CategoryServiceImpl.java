@@ -74,7 +74,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryView get(Long id) {
-        Category     category     = categoryMapper.selectById(id);
+        Category category = categoryMapper.selectById(id);
+        BizAssert.notNull(category, "该分类不存在");
+
         CategoryView categoryView = new CategoryView();
         BeanUtils.copyProperties(category, categoryView);
         return categoryView;

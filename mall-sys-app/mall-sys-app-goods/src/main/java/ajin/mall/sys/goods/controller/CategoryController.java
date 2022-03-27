@@ -60,7 +60,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation("根据id查询品牌")
+    @ApiOperation("根据id查询分类")
     public BaseResult<CategoryView> get(@PathVariable("id") Long id) {
         CategoryView result = categoryService.get(id);
         return new BaseResult<>(ResultEnum.GET_OK, result);
