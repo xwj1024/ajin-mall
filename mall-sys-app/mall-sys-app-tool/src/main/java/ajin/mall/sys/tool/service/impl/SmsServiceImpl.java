@@ -28,7 +28,7 @@ public class SmsServiceImpl implements SmsService {
 
     @Override
     public void getCheckCode(String phone) throws ClientException {
-        String redisCode = stringRedisTemplate.opsForValue().get(RedisConstants.CHECK_CODE + phone);
+        String redisCode = stringRedisTemplate.opsForValue().get(RedisConstants.CHECK_CODE_PHONE + phone);
         // 判断redis中是否有验证码
         if (redisCode != null) {
             // 如果有验证码，判断验证码请求是否超过1分钟
@@ -38,7 +38,7 @@ public class SmsServiceImpl implements SmsService {
         String code = CodeUtils.generateCode4Int(4).toString();
         redisCode = code + "," + System.currentTimeMillis();
         stringRedisTemplate.opsForValue()
-                .set(RedisConstants.CHECK_CODE + phone, redisCode, smsProperties.getExpire(), TimeUnit.SECONDS);
+                .set(RedisConstants.CHECK_CODE_PHONE + phone, redisCode, smsProperties.getExpire(), TimeUnit.SECONDS);
         SmsUtils.sendCheckCode(smsProperties.getKey(), smsProperties.getSecret(), smsProperties.getSign(), smsProperties.getTemplate(), phone, code);
     }
 }

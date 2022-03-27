@@ -11,7 +11,8 @@ public class RedisConstants implements Serializable {
 
     public static final String IMAGE_PREVIEW = "imagePreview_";
     public static final String IMAGE_DATABASE = "imageDatabase_";
-    public static final String CHECK_CODE = "checkCode_";
+    public static final String CHECK_CODE_PHONE = "checkCodePhone_";
+    public static final String CHECK_CODE_LOGIN = "checkCodeLogin_";
     public static final String LOGIN_FAIL_TIMES = "loginFailTimes_";
 
 }
