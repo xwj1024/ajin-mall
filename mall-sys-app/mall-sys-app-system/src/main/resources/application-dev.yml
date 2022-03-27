@@ -14,3 +14,10 @@ mybatis-plus:
 # 日志
 logging:
   config: classpath:log/log4j2-dev.xml
+# swagger文档
+springfox:
+  documentation:
+    auto-startup: true
+    enabled: true
+swagger:
+  title: ${spring.application.name}
