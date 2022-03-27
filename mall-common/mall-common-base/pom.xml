@@ -103,7 +103,7 @@
         <!--swagger ui增强-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <artifactId>knife4j-micro-spring-boot-starter</artifactId>
             <version>${knife4j.version}</version>
         </dependency>
         <!--nacos-->

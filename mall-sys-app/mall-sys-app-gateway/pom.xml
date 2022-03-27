@@ -15,6 +15,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <springboot.version>2.2.1.RELEASE</springboot.version>
+        <knife4j.version>3.0.3</knife4j.version>
     </properties>
 
     <dependencies>
@@ -26,6 +27,11 @@
             <groupId>ajin.mall</groupId>
             <artifactId>mall-common-base</artifactId>
             <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>${knife4j.version}</version>
         </dependency>
     </dependencies>
 </project>
