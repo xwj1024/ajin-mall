@@ -1,6 +1,7 @@
 //package ajin.mall.sys.auth.config;
 //
 //import ajin.mall.sys.auth.config.handler.*;
+//import ajin.mall.sys.auth.handler.CustomAccessDeniedHandler;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.security.config.annotation.ObjectPostProcessor;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,7 +21,7 @@
 // * @since 2021-06-20
 // */
 //@EnableWebSecurity
-//public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
+//public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //    /**
 //     * 登录成功处理逻辑
