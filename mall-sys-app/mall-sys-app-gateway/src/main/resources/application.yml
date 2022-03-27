@@ -3,5 +3,3 @@ spring:
     active: @environment@
 server:
   port: 8000
-  servlet:
-    context-path: /sys/gateway
