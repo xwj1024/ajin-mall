@@ -4,8 +4,8 @@ spring:
 
 # 登录失败限制
 security:
-  loginTimesLimit: 10
-  loginAfterTime: 10
+  loginTimesLimit: 10 # 次数
+  loginAfterTime: 10 # 时间（分钟）
 # 日志
 logging:
   config: classpath:log/log4j2-dev.xml

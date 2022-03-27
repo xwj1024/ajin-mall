@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -20,7 +19,6 @@ import java.time.LocalDateTime;
  * @since 2021-05-07
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "SysUser对象", description = "系统用户")
 public class SysUser implements Serializable {
@@ -48,7 +46,7 @@ public class SysUser implements Serializable {
     @ApiModelProperty(value = "状态信息：0全部，1正常，2禁用，4锁定，8过期")
     private Integer state;
 
-    @ApiModelProperty(value = "登录时间", hidden = true)
+    @ApiModelProperty(value = "登录时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime loginTime;
 
