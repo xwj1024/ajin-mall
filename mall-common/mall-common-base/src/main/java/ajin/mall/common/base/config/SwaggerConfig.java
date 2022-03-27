@@ -34,11 +34,8 @@ public class SwaggerConfig {
     public Docket docket() {
 
         return new Docket(DocumentationType.OAS_30)
+                // 基本信息
                 .apiInfo(apiInfo())
-                // 是否启用swagger
-                //.enable(flag)
-                // 设置组名
-                .groupName(swaggerProperties.getGroup())
                 // 选择条件
                 .select()
                 .apis(RequestHandlerSelectors.any())

@@ -17,7 +17,6 @@ import java.io.Serializable;
 public class SwaggerProperties implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String group             = "AGroup";
     private String title             = "";
     private String description       = "生活如此美好,学习永无止境!";
     private String version           = "0.0.1";
