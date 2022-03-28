@@ -33,4 +33,12 @@ public interface BrandMapper extends BaseMapper<Brand> {
      * @return 品牌列表
      */
     List<BrandView> selectListByCondition(BrandListForm brandListForm);
+
+    /**
+     * 根据名称查询id
+     *
+     * @param name 名称
+     * @return id
+     */
+    Long selectIdByName(@Param("name") String name);
 }

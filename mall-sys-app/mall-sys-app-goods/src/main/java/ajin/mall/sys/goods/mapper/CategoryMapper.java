@@ -42,4 +42,12 @@ public interface CategoryMapper extends BaseMapper<Category> {
      */
     List<CategoryView> selectListByCondition(CategoryListForm categoryListForm);
 
+    /**
+     * 根据名称和父级id查询
+     *
+     * @param name     名称
+     * @param parentId 父id
+     * @return id
+     */
+    Long selectIdByNameAndParentId(@Param("name") String name, @Param("parentId") Long parentId);
 }

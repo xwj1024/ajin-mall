@@ -39,7 +39,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void add(BrandAddForm brandAddForm) {
         Integer brandCount = brandMapper.selectCountByName(brandAddForm.getName());
-        BizAssert.isTrue(brandCount <= 0, "已有该品牌");
+        BizAssert.isTrue(brandCount <= 0, "该品牌已存在");
 
         Brand brand = new Brand();
         BeanUtils.copyProperties(brandAddForm, brand);
@@ -51,7 +51,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void delete(Long id) {
         Brand existBrand = brandMapper.selectById(id);
-        BizAssert.notNull(existBrand, "没有该品牌");
+        BizAssert.notNull(existBrand, "该品牌不存在");
 
         int row = brandMapper.deleteById(id);
         BizAssert.isTrue(row == 1, "删除失败");
@@ -60,10 +60,10 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void update(BrandUpdateForm brandUpdateForm) {
         Brand existBrand = brandMapper.selectById(brandUpdateForm.getId());
-        BizAssert.notNull(existBrand, "没有该品牌");
+        BizAssert.notNull(existBrand, "该品牌不存在，无法修改");
 
-        Integer brandCount = brandMapper.selectCountByName(brandUpdateForm.getName());
-        BizAssert.isTrue(brandCount <= 0, "已有该品牌");
+        Long existBrandId = brandMapper.selectIdByName(brandUpdateForm.getName());
+        BizAssert.isTrue(existBrandId == null || existBrandId.equals(brandUpdateForm.getId()), "该品牌已存在");
 
         Brand brand = new Brand();
         BeanUtils.copyProperties(brandUpdateForm, brand);
@@ -74,7 +74,9 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public BrandView get(Long id) {
-        Brand     brand     = brandMapper.selectById(id);
+        Brand brand = brandMapper.selectById(id);
+        BizAssert.notNull(brand, "该品牌不存在");
+
         BrandView brandView = new BrandView();
         BeanUtils.copyProperties(brand, brandView);
         return brandView;

@@ -38,8 +38,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void add(CategoryAddForm categoryAddForm) {
+        // 判断上级是否存在
+        Category existParentCategory = categoryMapper.selectById(categoryAddForm.getParentId());
+        BizAssert.isTrue(existParentCategory != null || categoryAddForm.getParentId() == 0, "上级分类不存在");
+
         Integer categoryCount = categoryMapper.selectCountByNameAndParentId(categoryAddForm.getName(), categoryAddForm.getParentId());
-        BizAssert.isTrue(categoryCount <= 0, "已有该分类");
+        BizAssert.isTrue(categoryCount <= 0, "该分类已存在");
 
         Category category = new Category();
         BeanUtils.copyProperties(categoryAddForm, category);
@@ -62,8 +66,12 @@ public class CategoryServiceImpl implements CategoryService {
         Category existCategory = categoryMapper.selectById(categoryUpdateForm.getId());
         BizAssert.notNull(existCategory, "该分类不存在");
 
-        Integer categoryCount = categoryMapper.selectCountByNameAndParentId(categoryUpdateForm.getName(), categoryUpdateForm.getParentId());
-        BizAssert.isTrue(categoryCount <= 0, "已有该分类");
+        // 判断上级是否存在
+        Category existParentCategory = categoryMapper.selectById(categoryUpdateForm.getParentId());
+        BizAssert.isTrue(existParentCategory != null || categoryUpdateForm.getParentId() == 0, "上级分类不存在");
+
+        Long existCategoryId = categoryMapper.selectIdByNameAndParentId(categoryUpdateForm.getName(), categoryUpdateForm.getParentId());
+        BizAssert.isTrue(existCategoryId == null || existCategoryId.equals(categoryUpdateForm.getId()), "该分类已存在");
 
         Category category = new Category();
         BeanUtils.copyProperties(categoryUpdateForm, category);
