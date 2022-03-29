@@ -42,6 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category existParentCategory = categoryMapper.selectById(categoryAddForm.getParentId());
         BizAssert.isTrue(existParentCategory != null || categoryAddForm.getParentId() == 0, "上级分类不存在");
 
+        // 判断同级是否存在同名分类
         Integer categoryCount = categoryMapper.selectCountByNameAndParentId(categoryAddForm.getName(), categoryAddForm.getParentId());
         BizAssert.isTrue(categoryCount <= 0, "该分类已存在");
 
@@ -63,6 +64,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void update(CategoryUpdateForm categoryUpdateForm) {
+        // 判断要修改的分类是否存在
         Category existCategory = categoryMapper.selectById(categoryUpdateForm.getId());
         BizAssert.notNull(existCategory, "该分类不存在");
 
@@ -70,6 +72,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category existParentCategory = categoryMapper.selectById(categoryUpdateForm.getParentId());
         BizAssert.isTrue(existParentCategory != null || categoryUpdateForm.getParentId() == 0, "上级分类不存在");
 
+        // 判断同级是否存在同名分类
         Long existCategoryId = categoryMapper.selectIdByNameAndParentId(categoryUpdateForm.getName(), categoryUpdateForm.getParentId());
         BizAssert.isTrue(existCategoryId == null || existCategoryId.equals(categoryUpdateForm.getId()), "该分类已存在");
 

@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 
 /**
  * <p>
- * 标签,商品 关联表 前端控制器
+ * 商品标签,商品 关联表 前端控制器
  * </p>
  *
  * @author Ajin
@@ -28,7 +28,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/labelGoods")
 @CrossOrigin
-@Api(tags = "标签，商品")
+@Api(tags = "商品标签，商品")
 public class LabelGoodsController {
     
     @Resource
@@ -36,7 +36,7 @@ public class LabelGoodsController {
 
     @RepeatSubmit
     @PostMapping
-    @ApiOperation("添加标签，商品")
+    @ApiOperation("添加商品标签，商品")
     public BaseResult<String> add(@Validated @RequestBody LabelGoodsAddForm labelGoodsAddForm) {
         labelGoodsService.add(labelGoodsAddForm);
         return new BaseResult<>(ResultEnum.ADD_OK);
@@ -44,7 +44,7 @@ public class LabelGoodsController {
 
     @RepeatSubmit
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "删除标签，商品", notes = "根据主键id删除")
+    @ApiOperation(value = "删除商品标签，商品", notes = "根据主键id删除")
     public BaseResult<String> delete(@PathVariable("id") Long id) {
         labelGoodsService.delete(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
@@ -52,21 +52,21 @@ public class LabelGoodsController {
 
     @RepeatSubmit
     @PutMapping
-    @ApiOperation(value = "修改标签，商品", notes = "根据主键id修改")
+    @ApiOperation(value = "修改商品标签，商品", notes = "根据主键id修改")
     public BaseResult<String> update(@Validated @RequestBody LabelGoodsUpdateForm labelGoodsUpdateForm) {
         labelGoodsService.update(labelGoodsUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
-    @ApiOperation("根据id查询标签，商品")
+    @ApiOperation("根据id查询商品标签，商品")
     public BaseResult<LabelGoodsView> get(@PathVariable("id") Long id) {
         LabelGoodsView result = labelGoodsService.get(id);
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @PostMapping("/list")
-    @ApiOperation("根据条件查询标签，商品")
+    @ApiOperation("根据条件查询商品标签，商品")
     public BaseResult<ResultPage<LabelGoodsView>> list(@RequestBody LabelGoodsListForm labelGoodsListForm) {
         ResultPage<LabelGoodsView> result = labelGoodsService.list(labelGoodsListForm);
         return new BaseResult<>(ResultEnum.GET_OK, result);

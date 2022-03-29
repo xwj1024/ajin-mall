@@ -19,7 +19,7 @@ public class SysUserAddForm implements Serializable {
     private String username;
 
     @NotBlank(message = "密码不能为空")
-    @Size(min = 6, max = 20, message = "密码最低6位，最高20位")
+    @Size(min = 6, max = 100, message = "密码最低6位，最高100位")
     @ApiModelProperty(value = "密码")
     private String password;
 

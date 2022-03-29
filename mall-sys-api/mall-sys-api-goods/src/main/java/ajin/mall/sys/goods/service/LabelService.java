@@ -8,7 +8,7 @@ import ajin.mall.sys.goods.view.LabelView;
 
 /**
  * <p>
- * 标签表 服务类
+ * 商品标签表 服务类
  * </p>
  *
  * @author Ajin
@@ -17,39 +17,39 @@ import ajin.mall.sys.goods.view.LabelView;
 public interface LabelService {
 
     /**
-     * 添加标签
+     * 添加商品标签
      *
-     * @param labelAddForm 标签
+     * @param labelAddForm 商品标签
      */
     void add(LabelAddForm labelAddForm);
 
     /**
-     * 根据id删除标签
+     * 根据id删除商品标签
      *
      * @param id 主键id
      */
     void delete(Long id);
 
     /**
-     * 修改标签
+     * 修改商品标签
      *
-     * @param labelUpdateForm 标签
+     * @param labelUpdateForm 商品标签
      */
     void update(LabelUpdateForm labelUpdateForm);
 
     /**
-     * 根据id查询标签
+     * 根据id查询商品标签
      *
      * @param id id
-     * @return 标签
+     * @return 商品标签
      */
     LabelView get(Long id);
 
     /**
-     * 根据条件查询标签
+     * 根据条件查询商品标签
      *
-     * @param labelListForm 标签条件
-     * @return 标签列表
+     * @param labelListForm 商品标签条件
+     * @return 商品标签列表
      */
     ResultPage<LabelView> list(LabelListForm labelListForm);
 

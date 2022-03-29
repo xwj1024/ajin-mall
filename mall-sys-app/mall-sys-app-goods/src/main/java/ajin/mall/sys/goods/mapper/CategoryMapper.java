@@ -18,27 +18,27 @@ import java.util.List;
  */
 public interface CategoryMapper extends BaseMapper<Category> {
     /**
-     * 根据名称和父id查询分类数量
+     * 根据名称和父id查询商品分类数量
      *
      * @param name     名称
      * @param parentId 父id
-     * @return 分类数量
+     * @return 商品分类数量
      */
     Integer selectCountByNameAndParentId(@Param("name") String name, @Param("parentId") Long parentId);
 
     /**
-     * 根据父id查询分类数量
+     * 根据父id查询商品分类数量
      *
      * @param parentId 父id
-     * @return 分类数量
+     * @return 商品分类数量
      */
     Integer selectCountByParentId(@Param("parentId") Long parentId);
 
     /**
-     * 根据条件查询分类列表
+     * 根据条件查询商品分类列表
      *
      * @param categoryListForm 查询条件
-     * @return 分类列表
+     * @return 商品分类列表
      */
     List<CategoryView> selectListByCondition(CategoryListForm categoryListForm);
 

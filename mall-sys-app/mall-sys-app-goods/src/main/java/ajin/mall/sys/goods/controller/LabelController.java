@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 
 /**
  * <p>
- * 标签表 前端控制器
+ * 商品标签表 前端控制器
  * </p>
  *
  * @author Ajin
@@ -28,7 +28,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/label")
 @CrossOrigin
-@Api(tags = "标签")
+@Api(tags = "商品标签")
 public class LabelController {
 
     @Resource
@@ -36,7 +36,7 @@ public class LabelController {
 
     @RepeatSubmit
     @PostMapping
-    @ApiOperation("添加标签")
+    @ApiOperation("添加商品标签")
     public BaseResult<String> add(@RequestBody @Validated LabelAddForm labelAddForm) {
         labelService.add(labelAddForm);
         return new BaseResult<>(ResultEnum.ADD_OK);
@@ -44,7 +44,7 @@ public class LabelController {
 
     @RepeatSubmit
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "删除标签", notes = "根据主键id删除")
+    @ApiOperation(value = "删除商品标签", notes = "根据主键id删除")
     public BaseResult<String> delete(@PathVariable("id") Long id) {
         labelService.delete(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
@@ -52,21 +52,21 @@ public class LabelController {
 
     @RepeatSubmit
     @PutMapping
-    @ApiOperation(value = "修改标签", notes = "根据主键id修改")
+    @ApiOperation(value = "修改商品标签", notes = "根据主键id修改")
     public BaseResult<String> update(@RequestBody @Validated LabelUpdateForm labelUpdateForm) {
         labelService.update(labelUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
-    @ApiOperation("根据id查询标签")
+    @ApiOperation("根据id查询商品标签")
     public BaseResult<LabelView> get(@PathVariable("id") Long id) {
         LabelView result = labelService.get(id);
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @PostMapping("/list")
-    @ApiOperation("根据条件查询标签")
+    @ApiOperation("根据条件查询商品标签")
     public BaseResult<ResultPage<LabelView>> list(@RequestBody LabelListForm labelListForm) {
         ResultPage<LabelView> result = labelService.list(labelListForm);
         return new BaseResult<>(ResultEnum.GET_OK, result);

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 商品,规格 关联表 前端控制器
+ * 商品,商品规格 关联表 前端控制器
  * </p>
  *
  * @author Ajin
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/skuSpec")
 @CrossOrigin
-@Api(tags = "商品，规格")
+@Api(tags = "商品，商品规格")
 public class SkuSpecController {
 
 }

@@ -8,7 +8,7 @@ import ajin.mall.sys.goods.view.BrandView;
 
 /**
  * <p>
- * 品牌表 服务类
+ * 商品品牌表 服务类
  * </p>
  *
  * @author Ajin
@@ -17,39 +17,39 @@ import ajin.mall.sys.goods.view.BrandView;
 public interface BrandService {
 
     /**
-     * 添加品牌
+     * 添加商品品牌
      *
-     * @param brandAddForm 品牌
+     * @param brandAddForm 商品品牌
      */
     void add(BrandAddForm brandAddForm);
 
     /**
-     * 根据id删除品牌
+     * 根据id删除商品品牌
      *
      * @param id 主键id
      */
     void delete(Long id);
 
     /**
-     * 修改品牌
+     * 修改商品品牌
      *
-     * @param brandUpdateForm 品牌
+     * @param brandUpdateForm 商品品牌
      */
     void update(BrandUpdateForm brandUpdateForm);
 
     /**
-     * 根据id查询品牌
+     * 根据id查询商品品牌
      *
      * @param id id
-     * @return 品牌
+     * @return 商品品牌
      */
     BrandView get(Long id);
 
     /**
-     * 根据条件查询品牌
+     * 根据条件查询商品品牌
      *
-     * @param brandListForm 品牌条件
-     * @return 品牌列表
+     * @param brandListForm 商品品牌条件
+     * @return 商品品牌列表
      */
     ResultPage<BrandView> list(BrandListForm brandListForm);
 

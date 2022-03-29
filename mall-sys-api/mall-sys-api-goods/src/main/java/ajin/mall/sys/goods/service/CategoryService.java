@@ -19,46 +19,46 @@ import java.util.List;
 public interface CategoryService {
 
     /**
-     * 添加分类
+     * 添加商品分类
      *
-     * @param categoryAddForm 分类
+     * @param categoryAddForm 商品分类
      */
     void add(CategoryAddForm categoryAddForm);
 
     /**
-     * 根据id删除分类
+     * 根据id删除商品分类
      *
      * @param id 主键id
      */
     void delete(Long id);
 
     /**
-     * 修改分类
+     * 修改商品分类
      *
-     * @param categoryUpdateForm 分类
+     * @param categoryUpdateForm 商品分类
      */
     void update(CategoryUpdateForm categoryUpdateForm);
 
     /**
-     * 根据id查询分类
+     * 根据id查询商品分类
      *
      * @param id id
-     * @return 分类
+     * @return 商品分类
      */
     CategoryView get(Long id);
 
     /**
-     * 根据条件查询分类
+     * 根据条件查询商品分类
      *
-     * @param categoryListForm 分类条件
-     * @return 分类列表
+     * @param categoryListForm 商品分类条件
+     * @return 商品分类列表
      */
     ResultPage<CategoryView> list(CategoryListForm categoryListForm);
 
     /**
      * 树形结构查询
      *
-     * @return 所有显示分类以树形结构
+     * @return 所有显示商品分类以树形结构
      */
     List<CategoryView> tree();
 

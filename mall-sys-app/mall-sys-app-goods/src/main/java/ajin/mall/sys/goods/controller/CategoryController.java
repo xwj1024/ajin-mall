@@ -29,7 +29,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/category")
-@Api(tags = "分类")
+@Api(tags = "商品分类")
 @CrossOrigin
 public class CategoryController {
 
@@ -38,14 +38,14 @@ public class CategoryController {
 
     @RepeatSubmit
     @PostMapping
-    @ApiOperation("添加分类")
+    @ApiOperation("添加商品分类")
     public BaseResult<String> add(@RequestBody @Validated CategoryAddForm categoryAddForm) {
         categoryService.add(categoryAddForm);
         return new BaseResult<>(ResultEnum.ADD_OK);
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "删除分类", notes = "根据主键id删除")
+    @ApiOperation(value = "删除商品分类", notes = "根据主键id删除")
     public BaseResult<String> delete(@PathVariable("id") Long id) {
         categoryService.delete(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
@@ -53,28 +53,28 @@ public class CategoryController {
 
     @RepeatSubmit
     @PutMapping
-    @ApiOperation(value = "修改分类", notes = "根据主键id修改")
+    @ApiOperation(value = "修改商品分类", notes = "根据主键id修改")
     public BaseResult<String> update(@RequestBody @Validated CategoryUpdateForm categoryUpdateForm) {
         categoryService.update(categoryUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
     @GetMapping("/{id}")
-    @ApiOperation("根据id查询分类")
+    @ApiOperation("根据id查询商品分类")
     public BaseResult<CategoryView> get(@PathVariable("id") Long id) {
         CategoryView result = categoryService.get(id);
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @PostMapping("/list")
-    @ApiOperation("根据条件查询分类")
+    @ApiOperation("根据条件查询商品分类")
     public BaseResult<ResultPage<CategoryView>> list(@RequestBody CategoryListForm categoryListForm) {
         ResultPage<CategoryView> result = categoryService.list(categoryListForm);
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
     @GetMapping("/tree")
-    @ApiOperation("树形查询所有显示分类")
+    @ApiOperation("树形查询所有显示商品分类")
     public BaseResult<List<CategoryView>> tree() {
         List<CategoryView> result = categoryService.tree();
         return new BaseResult<>(ResultEnum.GET_OK, result);

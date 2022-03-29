@@ -37,7 +37,15 @@
                 and is_show = #{isShow}
             </if>
         </where>
-        order by sort asc
+        order by
+        <choose>
+            <when test="orderBy != null and orderBy != '' and sortType != null and sortType != ''">
+                #{orderBy} #{sortType}
+            </when>
+            <otherwise>
+            sort asc
+            </otherwise>
+        </choose>
     </select>
 
     <select id="selectIdByNameAndParentId" resultType="java.lang.Long">

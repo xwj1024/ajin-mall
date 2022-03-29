@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- * 品牌表 Mapper 接口
+ * 商品品牌表 Mapper 接口
  * </p>
  *
  * @author Ajin
@@ -27,10 +27,10 @@ public interface BrandMapper extends BaseMapper<Brand> {
     Integer selectCountByName(@Param("name") String name);
 
     /**
-     * 根据条件查询品牌列表
+     * 根据条件查询商品品牌列表
      *
      * @param brandListForm 查询条件
-     * @return 品牌列表
+     * @return 商品品牌列表
      */
     List<BrandView> selectListByCondition(BrandListForm brandListForm);
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * 标签,商品 关联表 服务实现类
+ * 商品标签,商品 关联表 服务实现类
  * </p>
  *
  * @author Ajin

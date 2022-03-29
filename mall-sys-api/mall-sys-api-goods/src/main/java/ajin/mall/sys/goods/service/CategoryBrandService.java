@@ -8,7 +8,7 @@ import ajin.mall.sys.goods.view.CategoryBrandView;
 
 /**
  * <p>
- * 分类,品牌 关联表 服务类
+ * 分类,商品品牌 关联表 服务类
  * </p>
  *
  * @author Ajin
