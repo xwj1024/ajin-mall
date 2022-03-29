@@ -1,0 +1,44 @@
+spring:
+  main:
+    web-application-type: reactive
+  redis:
+    host: localhost
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations: # 跨域配置
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" # 跨域处理,允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes: # 路由配置
+        - id: mall-sys-app-goods # 唯一标识
+          uri: lb://mall-sys-app-goods # 请求要路由的服务
+          #uri: http://localhost:8080 # 请求要路由的路径
+          predicates:
+            - Path=/sys/goods/**
+          filters:
+            #- StripPrefix=1 # 将请求路径中的第一个路径去掉
+            #- PrefixPath=/api # 将请求路径添前加该路径
+            - name: RequestRateLimiter # 请求数限流,名字不能随便写
+              args:
+                key-resolver: "#{@ipKeyResolver}" # 引用bean
+                redis-rate-limiter.replenishRate: 10 # 令牌桶每秒填充平均速率
+                redis-rate-limiter.burstCapacity: 10 # 令牌桶总容量
+        - id: mall-sys-app-system
+          uri: lb://mall-sys-app-system
+          predicates:
+            - Path=/sys/system/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 10
+
+# 日志
+logging:
+  config: classpath:log/log4j2-dev.xml
