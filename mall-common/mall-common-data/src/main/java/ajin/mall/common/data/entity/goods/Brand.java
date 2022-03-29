@@ -42,6 +42,10 @@ public class Brand implements Serializable {
     @ApiModelProperty("排序")
     private Integer sort;
 
+    @Version
+    @ApiModelProperty("版本号")
+    private Integer version;
+
     @ApiModelProperty("是否删除")
     @TableLogic
     private Integer isDelete;

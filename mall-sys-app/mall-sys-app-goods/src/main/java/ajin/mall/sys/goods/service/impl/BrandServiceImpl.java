@@ -65,10 +65,9 @@ public class BrandServiceImpl implements BrandService {
         Long existBrandId = brandMapper.selectIdByName(brandUpdateForm.getName());
         BizAssert.isTrue(existBrandId == null || existBrandId.equals(brandUpdateForm.getId()), "该品牌已存在");
 
-        Brand brand = new Brand();
-        BeanUtils.copyProperties(brandUpdateForm, brand);
+        BeanUtils.copyProperties(brandUpdateForm, existBrand);
 
-        int row = brandMapper.updateById(brand);
+        int row = brandMapper.updateById(existBrand);
         BizAssert.isTrue(row == 1, "修改失败");
     }
 

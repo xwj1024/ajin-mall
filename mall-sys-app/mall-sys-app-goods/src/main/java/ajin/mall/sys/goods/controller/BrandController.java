@@ -29,7 +29,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/brand")
-@Api(tags = "商品商品品牌")
+@Api(tags = "商品品牌")
 @CrossOrigin
 public class BrandController {
 

@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource # 数据源类型
+    url: mpw:+g7Vb573ZiEUoetgRFRSAy73He7ItRZVxHg65DbKCyvDEPYKh+VV709lzMZJyE/9e2V9rTNPeQzfcDOtH9SYB1af2FUwU20Dk/ca1s8GLpxFnI1vf89EJ/M6pzigGzP8ZAQ82zBTsMf2zNNlUF3ECHvbQ8P8BKEgfMvcgldkOHq9pAX79E1Azaz5j5LCm/O4EHkPV8tmBfd6Z+EcgBFOA992mqDMjRUIoemyd/QlOYDg3bYNt3rDzsf5yhVnCney
+    username: mpw:3PREIhFqY2lF8FXXIETPkA==
+    password: mpw:6/a0fTR89mwEPe+jVDfKkQ==
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      filters: stat,wall,log4j2
+      initial-size: 5 # 初始化时建立物理连接的个数
+      min-idle: 5 # 最小连接池数量
+      max-active: 20 # 最大连接池数量
+      max-wait: 60000 # 获取连接时最大等待时间，毫秒
+      time-between-eviction-runs-millis: 60000 # 既作为检测的间隔时间又作为testWhileIdle的执行依据
+      min-evictable-idle-time-millis: 300000 # 销毁线程时检测当前连接的最后活动时间和当前时间差大于该值时，关闭当前连接
+      pool-prepared-statements: true # 是否缓存prepareStatement
+      max-pool-prepared-statement-per-connection-size: 20
+      use-global-data-source-stat: true # 合并多个DruidDataSource的监控数据
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      stat-view-servlet:
+        login-username: root # 后台监控登录账号
+        login-password: root1024 # 后台监控登录密码
+        enabled: true # 是否开启后台监控，默认false
+      test-while-idle: true # 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+      test-on-borrow: false # 申请连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
+      test-on-return: false # 归还连接时会执行validationQuery检测连接是否有效，开启会降低性能，默认为true
+  redis:
+    host: localhost
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+# 防重复提交
+repeat:
+  interval-time: 2000 # 重复提交，间隔时间（毫秒）
+# swagger文档
+springfox:
+  documentation:
+    auto-startup: true
+    enabled: true
+swagger:
+  title: ${spring.application.name}
+# 日志
+logging:
+  config: classpath:log/log4j2-dev.xml

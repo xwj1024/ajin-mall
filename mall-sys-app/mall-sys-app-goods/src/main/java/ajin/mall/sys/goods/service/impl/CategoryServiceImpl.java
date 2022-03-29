@@ -76,10 +76,9 @@ public class CategoryServiceImpl implements CategoryService {
         Long existCategoryId = categoryMapper.selectIdByNameAndParentId(categoryUpdateForm.getName(), categoryUpdateForm.getParentId());
         BizAssert.isTrue(existCategoryId == null || existCategoryId.equals(categoryUpdateForm.getId()), "该分类已存在");
 
-        Category category = new Category();
-        BeanUtils.copyProperties(categoryUpdateForm, category);
+        BeanUtils.copyProperties(categoryUpdateForm, existCategory);
 
-        int row = categoryMapper.updateById(category);
+        int row = categoryMapper.updateById(existCategory);
         BizAssert.isTrue(row == 1, "修改失败");
     }
 
