@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -24,11 +25,11 @@ public class CategoryAddForm implements Serializable {
     @ApiModelProperty("上级id")
     private Long parentId;
 
-    @NotNull(message = "分类名称不能为空")
+    @NotBlank(message = "分类名称不能为空")
     @ApiModelProperty("分类名称")
     private String name;
 
-    @NotNull(message = "分类图片不能为空")
+    @NotBlank(message = "分类图片不能为空")
     @ApiModelProperty("分类图片")
     private String image;
 
