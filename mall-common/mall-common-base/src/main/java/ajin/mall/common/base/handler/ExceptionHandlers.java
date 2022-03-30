@@ -6,6 +6,7 @@ import ajin.mall.common.base.result.BaseResult;
 import ajin.mall.common.base.result.ResultCode;
 import ajin.mall.common.base.result.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,6 +39,12 @@ public class ExceptionHandlers {
         return new BaseResult<>(ResultCode.ERR, e.getMessage());
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public BaseResult<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+        log.warn(e.getMessage());
+        return new BaseResult<>(ResultEnum.PARAM_ERR);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public BaseResult<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
@@ -55,13 +62,13 @@ public class ExceptionHandlers {
     @ExceptionHandler(ConstraintViolationException.class)
     public BaseResult<Map<String, String>> handleConstraintViolationException(ConstraintViolationException e) {
         Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
-        Map<String, String> errMap = new HashMap<>(1);
+        Map<String, String>         errMap               = new HashMap<>(1);
         if (constraintViolations != null && constraintViolations.size() > 0) {
             for (ConstraintViolation<?> constraintViolation : constraintViolations) {
-                Path propertyPath = constraintViolation.getPropertyPath();
-                String path = propertyPath.toString();
-                String[] mp = path.split("\\.");
-                String message = constraintViolation.getMessage();
+                Path     propertyPath = constraintViolation.getPropertyPath();
+                String   path         = propertyPath.toString();
+                String[] mp           = path.split("\\.");
+                String   message      = constraintViolation.getMessage();
                 errMap.put(mp[1], message);
             }
             log.warn(e.getMessage());
