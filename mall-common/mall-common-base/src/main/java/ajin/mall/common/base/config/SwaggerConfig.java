@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * swagger自定义配置信息
+ * https://springfox.github.io/springfox/docs/current/#springfox-spring-mvc-and-spring-boot
  *
  * @author Ajin
  * @since 2021-04-14
