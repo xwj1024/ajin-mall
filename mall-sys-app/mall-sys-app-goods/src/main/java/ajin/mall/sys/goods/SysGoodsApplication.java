@@ -1,6 +1,6 @@
 package ajin.mall.sys.goods;
 
-import ajin.mall.common.data.anno.EnableCascadeDelete;
+import ajin.mall.common.data.anno.EnableCascade;
 import ajin.mall.sys.common.anno.EnableRecordSysLog;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2021-04-13
  */
 @SpringBootApplication
-@EnableCascadeDelete
+@EnableCascade
 @MapperScan(basePackages = {"ajin.mall.**.mapper"})
 @EnableRecordSysLog
 public class SysGoodsApplication {

@@ -12,5 +12,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import({CascadeDeleteHandler.class})
-public @interface EnableCascadeDelete {
+public @interface EnableCascade {
 }
