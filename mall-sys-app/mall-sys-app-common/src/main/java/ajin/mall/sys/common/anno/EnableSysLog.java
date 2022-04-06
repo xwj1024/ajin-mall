@@ -12,6 +12,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import({RecordSysLogAspect.class})
-public @interface EnableRecordSysLog {
+public @interface EnableSysLog {
 
 }
