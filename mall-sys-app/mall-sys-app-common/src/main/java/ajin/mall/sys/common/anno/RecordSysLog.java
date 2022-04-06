@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface RecordSysOperateLog {
+public @interface RecordSysLog {
 
     /**
      * 操作描述

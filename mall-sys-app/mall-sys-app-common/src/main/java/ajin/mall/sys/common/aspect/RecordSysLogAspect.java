@@ -3,7 +3,7 @@ package ajin.mall.sys.common.aspect;
 import ajin.mall.common.base.util.StringUtils;
 import ajin.mall.common.data.entity.system.SysOperateLog;
 import ajin.mall.common.data.mapper.CommonMapper;
-import ajin.mall.sys.common.anno.RecordSysOperateLog;
+import ajin.mall.sys.common.anno.RecordSysLog;
 import ajin.mall.sys.system.service.SysOperateLogService;
 import com.alibaba.fastjson.JSON;
 import lombok.SneakyThrows;
@@ -24,7 +24,7 @@ import java.util.Map;
  */
 @Component
 @Aspect
-public class RecordSysOperateLogAspect {
+public class RecordSysLogAspect {
 
     @Reference
     private SysOperateLogService sysOperateLogService;
@@ -37,7 +37,7 @@ public class RecordSysOperateLogAspect {
      *
      * @param pjp 切点
      */
-    @Around("@annotation(ajin.mall.sys.common.anno.RecordSysOperateLog)")
+    @Around("@annotation(ajin.mall.sys.common.anno.RecordSysLog)")
     public Object doAround(ProceedingJoinPoint pjp) {
         return handleLog(pjp);
     }
@@ -49,13 +49,13 @@ public class RecordSysOperateLogAspect {
         Method method = signature.getMethod();
         Object result = null;
 
-        if (method.isAnnotationPresent(RecordSysOperateLog.class)) {
+        if (method.isAnnotationPresent(RecordSysLog.class)) {
             // 数据库系统操作日志
             SysOperateLog sysOperateLog = new SysOperateLog();
             sysOperateLog.setOperateTime(LocalDateTime.now());
             // 获取注解
-            RecordSysOperateLog sysOperateLogAnno = method.getAnnotation(RecordSysOperateLog.class);
-            String description = sysOperateLogAnno.description();
+            RecordSysLog sysOperateLogAnno = method.getAnnotation(RecordSysLog.class);
+            String       description       = sysOperateLogAnno.description();
             sysOperateLog.setDescription(description);
 
             // todo 处理用户id，请求地址，请求方法

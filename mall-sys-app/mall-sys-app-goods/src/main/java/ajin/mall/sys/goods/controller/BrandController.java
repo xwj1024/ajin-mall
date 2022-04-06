@@ -6,7 +6,7 @@ import ajin.mall.common.base.result.BaseResult;
 import ajin.mall.common.base.result.ResultEnum;
 import ajin.mall.common.base.result.ResultPage;
 import ajin.mall.common.data.enums.TableInfo;
-import ajin.mall.sys.common.anno.RecordSysOperateLog;
+import ajin.mall.sys.common.anno.RecordSysLog;
 import ajin.mall.sys.goods.form.BrandAddForm;
 import ajin.mall.sys.goods.form.BrandListForm;
 import ajin.mall.sys.goods.form.BrandUpdateForm;
@@ -36,7 +36,7 @@ public class BrandController {
     @Resource
     private BrandService brandService;
 
-    @RecordSysOperateLog(description = "添加商品品牌")
+    @RecordSysLog(description = "添加商品品牌")
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加商品品牌")
@@ -53,7 +53,7 @@ public class BrandController {
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
 
-    @RecordSysOperateLog(description = "修改商品品牌", saveSourceData = TableInfo.BRAND)
+    @RecordSysLog(description = "修改商品品牌", saveSourceData = TableInfo.BRAND)
     @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改商品品牌", notes = "根据主键id修改")
