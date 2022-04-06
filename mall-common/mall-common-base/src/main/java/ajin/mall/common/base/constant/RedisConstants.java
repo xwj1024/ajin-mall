@@ -14,5 +14,6 @@ public class RedisConstants implements Serializable {
     public static final String CHECK_CODE_PHONE = "checkCodePhone_";
     public static final String CHECK_CODE_LOGIN = "checkCodeLogin_";
     public static final String LOGIN_FAIL_TIMES = "loginFailTimes_";
+    public static final String REPEAT_SUBMIT_KEY = "repeatSubmitKey_";
 
 }

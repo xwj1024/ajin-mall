@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static ajin.mall.common.base.constant.RedisConstants.REPEAT_SUBMIT_KEY;
+
 /**
  * 判断请求url和数据是否和上一次相同，如果和上次相同，则是重复提交表单。有效时间为 x 秒内。
  *
@@ -33,8 +35,6 @@ public class SameUriDataInterceptor extends RepeatSubmitInterceptor implements S
     private static final String REPEAT_PARAM = "repeatParam";
 
     private static final String REPEAT_TIME = "repeatTime";
-
-    private static final String REPEAT_KEY = "repeatKey";
 
     private static final String AUTHORIZATION = "Authorization";
 
@@ -72,7 +72,7 @@ public class SameUriDataInterceptor extends RepeatSubmitInterceptor implements S
         }
 
         // 唯一标识（指定key + 请求头）
-        String repeatSubmitKey = REPEAT_KEY + submitKey;
+        String repeatSubmitKey = REPEAT_SUBMIT_KEY + submitKey;
         Object obj             = stringRedisTemplate.opsForValue().get(repeatSubmitKey);
         if (obj != null) {
             Map<String, Object> oldDataMap = JSON.parseObject(obj.toString(), Map.class);
