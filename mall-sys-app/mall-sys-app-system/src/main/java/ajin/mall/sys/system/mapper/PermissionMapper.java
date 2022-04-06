@@ -1,6 +1,6 @@
 package ajin.mall.sys.system.mapper;
 
-import ajin.mall.common.data.entity.system.SysPermission;
+import ajin.mall.common.data.entity.system.Permission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Ajin
  */
-public interface SysPermissionMapper extends BaseMapper<SysPermission> {
+public interface PermissionMapper extends BaseMapper<Permission> {
 
     /**
      * 根据用户id查询用户权限

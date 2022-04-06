@@ -3,8 +3,8 @@
 //import ajin.mall.common.base.constant.RedisConstants;
 //import ajin.mall.common.base.result.BaseResult;
 //import ajin.mall.common.base.result.ResultCode;
-//import ajin.mall.common.data.entity.system.SysUser;
-//import ajin.mall.sys.system.service.SysUserService;
+//import ajin.mall.common.data.entity.system.User;
+//import ajin.mall.sys.system.service.UserService;
 //import com.alibaba.fastjson.JSON;
 //import com.alibaba.fastjson.serializer.SerializerFeature;
 //import org.apache.dubbo.config.annotation.Reference;
@@ -32,7 +32,7 @@
 //public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 //
 //    @Reference
-//    private SysUserService sysUserService;
+//    private UserService sysUserService;
 //
 //    @Resource
 //    private StringRedisTemplate stringRedisTemplate;
@@ -41,7 +41,7 @@
 //    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 //        User    userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        String  username    = userDetails.getUsername();
-//        SysUser sysUser     = sysUserService.loadUserByUsername(username);
+//        User sysUser     = sysUserService.loadUserByUsername(username);
 //        // 更新用户登录时间
 //        sysUser.setLoginTime(LocalDateTime.now());
 //        sysUserService.updateById(sysUser);

@@ -1,6 +1,6 @@
 package ajin.mall.sys.system.mapper;
 
-import ajin.mall.common.data.entity.system.SysUser;
+import ajin.mall.common.data.entity.system.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,12 +12,12 @@ import org.apache.ibatis.annotations.Param;
  * @author Ajin
  * @since 2021-05-07
  */
-public interface SysUserMapper extends BaseMapper<SysUser> {
+public interface UserMapper extends BaseMapper<User> {
     /**
      * 根据用户名获取用户
      *
      * @param username 用户名
      * @return 系统用户
      */
-    SysUser loadUserByUsername(@Param("username") String username);
+    User loadUserByUsername(@Param("username") String username);
 }

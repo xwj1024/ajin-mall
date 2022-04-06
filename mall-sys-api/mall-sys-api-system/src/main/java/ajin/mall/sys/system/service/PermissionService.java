@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author Ajin
  */
-public interface SysPermissionService {
+public interface PermissionService {
 
     /**
      * 根据用户id查询用户权限

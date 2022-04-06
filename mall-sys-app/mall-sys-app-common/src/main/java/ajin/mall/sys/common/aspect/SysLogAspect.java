@@ -1,10 +1,10 @@
 package ajin.mall.sys.common.aspect;
 
 import ajin.mall.common.base.util.StringUtils;
-import ajin.mall.common.data.entity.system.SysOperateLog;
+import ajin.mall.common.data.entity.system.SysLog;
 import ajin.mall.common.data.mapper.CommonMapper;
 import ajin.mall.sys.common.anno.RecordSysLog;
-import ajin.mall.sys.system.service.SysOperateLogService;
+import ajin.mall.sys.system.service.SysLogService;
 import com.alibaba.fastjson.JSON;
 import lombok.SneakyThrows;
 import org.apache.dubbo.config.annotation.Reference;
@@ -24,10 +24,10 @@ import java.util.Map;
  */
 @Component
 @Aspect
-public class RecordSysLogAspect {
+public class SysLogAspect {
 
     @Reference
-    private SysOperateLogService sysOperateLogService;
+    private SysLogService sysLogService;
 
     @Resource
     private CommonMapper commonMapper;
@@ -51,23 +51,23 @@ public class RecordSysLogAspect {
 
         if (method.isAnnotationPresent(RecordSysLog.class)) {
             // 数据库系统操作日志
-            SysOperateLog sysOperateLog = new SysOperateLog();
-            sysOperateLog.setOperateTime(LocalDateTime.now());
+            SysLog sysLog = new SysLog();
+            sysLog.setOperateTime(LocalDateTime.now());
             // 获取注解
             RecordSysLog sysOperateLogAnno = method.getAnnotation(RecordSysLog.class);
             String       description       = sysOperateLogAnno.description();
-            sysOperateLog.setDescription(description);
+            sysLog.setDescription(description);
 
             // todo 处理用户id，请求地址，请求方法
-            /*sysOperateLog.setSysUserId();
-            sysOperateLog.setRemoteIp();
-            sysOperateLog.setRequestUri();
-            sysOperateLog.setRequestMethod();*/
+            /*sysLog.setSysUserId();
+            sysLog.setRemoteIp();
+            sysLog.setRequestUri();
+            sysLog.setRequestMethod();*/
 
             // 设置方法名称
             String className = pjp.getTarget().getClass().getName();
             String methodName = pjp.getSignature().getName();
-            sysOperateLog.setMethodName(className + "." + methodName + "()");
+            sysLog.setMethodName(className + "." + methodName + "()");
             // 获取请求参数
             Object[] args = pjp.getArgs();
             if (args != null && args.length > 0) {
@@ -76,7 +76,7 @@ public class RecordSysLogAspect {
                 // 设置请求参数
                 if (sysOperateLogAnno.saveRequestData()) {
                     // todo 隐藏敏感字段：密码
-                    sysOperateLog.setRequestParam(json);
+                    sysLog.setRequestParam(json);
                 }
                 Map map = JSON.parseObject(json, Map.class);
                 Long id = (Long) map.get("id");
@@ -86,7 +86,7 @@ public class RecordSysLogAspect {
                     Map sourceMap = commonMapper.selectById(tableName, id);
                     String sourceDate = JSON.toJSONString(sourceMap);
                     // todo 隐藏敏感字段
-                    sysOperateLog.setSourceData(sourceDate);
+                    sysLog.setSourceData(sourceDate);
                 }
             }
             try {
@@ -94,16 +94,16 @@ public class RecordSysLogAspect {
                 result = pjp.proceed();
                 // 设置响应结果
                 if (sysOperateLogAnno.saveResponseData()) {
-                    sysOperateLog.setResponseResult(JSON.toJSONString(result));
+                    sysLog.setResponseResult(JSON.toJSONString(result));
                 }
             } catch (Throwable e) {
-                sysOperateLog.setExceptionInfo(e.getMessage());
+                sysLog.setExceptionInfo(e.getMessage());
                 // 保存数据库
-                sysOperateLogService.add(sysOperateLog);
+                sysLogService.add(sysLog);
                 throw e;
             }
             // 保存数据库
-            sysOperateLogService.add(sysOperateLog);
+            sysLogService.add(sysLog);
         }
         return result;
     }

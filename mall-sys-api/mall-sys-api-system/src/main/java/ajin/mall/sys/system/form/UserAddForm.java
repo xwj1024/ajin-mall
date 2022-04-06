@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author Ajin
  */
 @Data
-public class SysUserAddForm implements Serializable {
+public class UserAddForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotBlank(message = "账号不能为空")
@@ -19,7 +19,6 @@ public class SysUserAddForm implements Serializable {
     private String username;
 
     @NotBlank(message = "密码不能为空")
-    @Size(min = 6, max = 100, message = "密码最低6位，最高100位")
     @ApiModelProperty(value = "密码")
     private String password;
 

@@ -3,9 +3,9 @@
 //import ajin.mall.common.base.asserts.BizAssert;
 //import ajin.mall.common.base.constant.RedisConstants;
 //import ajin.mall.common.base.util.StringUtils;
-//import ajin.mall.common.data.entity.system.SysUser;
-//import ajin.mall.sys.system.service.SysPermissionService;
-//import ajin.mall.sys.system.service.SysUserService;
+//import ajin.mall.common.data.entity.system.User;
+//import ajin.mall.sys.system.service.PermissionService;
+//import ajin.mall.sys.system.service.UserService;
 //import org.apache.dubbo.config.annotation.Reference;
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.data.redis.core.StringRedisTemplate;
@@ -31,10 +31,10 @@
 //public class CustomUserDetailServiceImpl implements UserDetailsService {
 //
 //    @Reference
-//    private SysUserService sysUserService;
+//    private UserService sysUserService;
 //
 //    @Reference
-//    private SysPermissionService sysPermissionService;
+//    private PermissionService sysPermissionService;
 //
 //    @Resource
 //    private StringRedisTemplate stringRedisTemplate;
@@ -64,7 +64,7 @@
 //        }
 //
 //        // 根据用户名查询用户
-//        SysUser sysUser = sysUserService.loadUserByUsername(username);
+//        User sysUser = sysUserService.loadUserByUsername(username);
 //        BizAssert.notNull(sysUser, "账号不存在");
 //        // 获取用户状态信息
 //        Integer state = sysUser.getState();
@@ -80,7 +80,7 @@
 //                grantedAuthorities);
 //    }
 //
-//    private List<GrantedAuthority> getGrantedAuthorities(SysUser sysUser) {
+//    private List<GrantedAuthority> getGrantedAuthorities(User sysUser) {
 //        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 //        List<String>           permissions        = sysPermissionService.selectPermissionListByUser(sysUser.getId());
 //        if (permissions != null && permissions.size() > 0) {

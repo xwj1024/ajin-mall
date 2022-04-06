@@ -1,7 +1,7 @@
 package ajin.mall.sys.system.service;
 
-import ajin.mall.common.data.entity.system.SysUser;
-import ajin.mall.sys.system.form.SysUserAddForm;
+import ajin.mall.common.data.entity.system.User;
+import ajin.mall.sys.system.form.UserAddForm;
 
 /**
  * <p>
@@ -11,13 +11,13 @@ import ajin.mall.sys.system.form.SysUserAddForm;
  * @author Ajin
  * @since 2021-05-07
  */
-public interface SysUserService {
+public interface UserService {
     /**
      * 添加系统用户
      *
-     * @param sysUserAddForm 系统用户
+     * @param userAddForm 系统用户
      */
-    void add(SysUserAddForm sysUserAddForm);
+    void add(UserAddForm userAddForm);
 
     /**
      * 根据用户名获取系统用户
@@ -25,12 +25,12 @@ public interface SysUserService {
      * @param username 用户名
      * @return 系统用户
      */
-    SysUser loadUserByUsername(String username);
+    User loadUserByUsername(String username);
 
     /**
      * 根据id修改系统用户
      *
-     * @param sysUser 系统用户修改信息
+     * @param user 系统用户修改信息
      */
-    void updateById(SysUser sysUser);
+    void updateById(User user);
 }

@@ -1,7 +1,7 @@
 //package ajin.mall.sys.auth.config.handler;
 //
 //
-//import ajin.mall.sys.system.service.SysPermissionService;
+//import ajin.mall.sys.system.service.PermissionService;
 //import org.apache.dubbo.config.annotation.Reference;
 //import org.springframework.security.access.ConfigAttribute;
 //import org.springframework.security.access.SecurityConfig;
@@ -19,7 +19,7 @@
 //public class CustomFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 //
 //    @Reference
-//    private SysPermissionService sysPermissionService;
+//    private PermissionService sysPermissionService;
 //
 //    @Override
 //    public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
