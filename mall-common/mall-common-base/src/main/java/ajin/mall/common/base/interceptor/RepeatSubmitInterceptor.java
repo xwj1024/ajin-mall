@@ -4,6 +4,7 @@ import ajin.mall.common.base.anno.RepeatSubmit;
 import ajin.mall.common.base.asserts.BizAssert;
 import org.springframework.lang.NonNull;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import java.lang.reflect.Method;
  * @author Ajin
  * @since 2021-05-17
  */
-public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter {
+public abstract class RepeatSubmitInterceptor implements AsyncHandlerInterceptor {
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
@@ -26,7 +27,7 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter 
             RepeatSubmit  annotation    = method.getAnnotation(RepeatSubmit.class);
             BizAssert.isTrue(annotation == null || !this.isRepeatSubmit(request), "不允许重复操作，请稍后再试");
         }
-        return super.preHandle(request, response, handler);
+        return true;
     }
 
     /**

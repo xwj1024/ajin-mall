@@ -14,7 +14,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 /**
  * 通用http工具封装
  *
- * @author ruoyi
+ * @author Ajin
  * @since 2021-05-18
  */
 @Slf4j
