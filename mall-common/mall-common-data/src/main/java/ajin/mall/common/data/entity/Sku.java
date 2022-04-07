@@ -4,13 +4,11 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import lombok.Data;
 
 /**
  * 商品sku表
@@ -46,10 +44,6 @@ public class Sku implements Serializable {
     @TableField(value = "images")
     @ApiModelProperty(value = "商品图片")
     private String images;
-
-    @TableField(value = "weight")
-    @ApiModelProperty(value = "商品重量,克")
-    private BigDecimal weight;
 
     @TableField(value = "market_price")
     @ApiModelProperty(value = "市场价,元")

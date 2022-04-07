@@ -1,354 +1,561 @@
-create table if not exists address
+/*
+ Date: 2022/04/07
+*/
+
+SET NAMES utf8mb4;
+SET
+FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for address
+-- ----------------------------
+DROP TABLE IF EXISTS `address`;
+CREATE TABLE `address`
 (
-    id bigint not null comment '地址id'
-    primary key
-)
-    comment '会员地址表';
+    `id`          bigint                                                        NOT NULL COMMENT '地址id',
+    `member_id`   bigint                                                        NOT NULL DEFAULT '0' COMMENT '会员id',
+    `province`    varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '省',
+    `city`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '市',
+    `area`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '区县',
+    `town`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '乡镇',
+    `detail`      varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '详细地址',
+    `sort`        int                                                           NOT NULL DEFAULT '999' COMMENT '排序',
+    `is_default`  tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否默认',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='会员地址表';
 
-create table if not exists brand
+-- ----------------------------
+-- Table structure for brand
+-- ----------------------------
+DROP TABLE IF EXISTS `brand`;
+CREATE TABLE `brand`
 (
-    id          bigint              not null comment '品牌id'
-    primary key,
-    name        varchar(100)        null comment '品牌名称',
-    initials    varchar(100)        null comment '首字母',
-    image       varchar(200)        null comment '品牌图片',
-    sort        int     default 100 null comment '排序',
-    create_time datetime            null comment '创建时间',
-    update_time datetime            null comment '修改时间',
-    is_delete   tinyint default 0   null comment '是否删除'
-    )
-    comment '商品品牌表';
+    `id`          bigint                                                        NOT NULL COMMENT '品牌id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '品牌名称',
+    `initial`     varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '首字母',
+    `image`       varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '品牌图片',
+    `sort`        int                                                           NOT NULL DEFAULT '999' COMMENT '排序',
+    `is_show`     tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否显示',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品品牌表';
 
-create table if not exists cart
+-- ----------------------------
+-- Table structure for browse
+-- ----------------------------
+DROP TABLE IF EXISTS `browse`;
+CREATE TABLE `browse`
 (
-    id bigint not null comment '主键id'
-    primary key
-)
-    comment '会员购物车表';
+    `id`          bigint   NOT NULL COMMENT '浏览记录id',
+    `member_id`   bigint   NOT NULL DEFAULT '0' COMMENT '会员id',
+    `spu_id`      bigint   NOT NULL DEFAULT '0' COMMENT 'spu id',
+    `browse_time` datetime NOT NULL COMMENT '浏览时间',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `update_time` datetime NOT NULL COMMENT '修改时间',
+    `version`     int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='会员浏览记录表';
 
-create table if not exists category
+-- ----------------------------
+-- Table structure for cart
+-- ----------------------------
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart`
 (
-    id          bigint              not null comment '分类id'
-    primary key,
-    parent_id   bigint              null comment '上级id',
-    name        varchar(100)        null comment '分类名称',
-    image       varchar(200)        null comment '分类图片',
-    level       tinyint             null comment '分类级别',
-    sort        int     default 100 null comment '分类排序',
-    is_show     tinyint default 0   null comment '是否显示',
-    create_time datetime            null comment '创建时间',
-    update_time datetime            null comment '修改时间',
-    is_delete   tinyint default 0   null comment '是否删除'
-    )
-    comment '商品类目表';
+    `id`          bigint   NOT NULL COMMENT '购物车id',
+    `member_id`   bigint   NOT NULL DEFAULT '0' COMMENT '会员id',
+    `sku_id`      bigint   NOT NULL DEFAULT '0' COMMENT 'sku id',
+    `num`         int      NOT NULL DEFAULT '1' COMMENT '数量',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `update_time` datetime NOT NULL COMMENT '修改时间',
+    `version`     int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='会员购物车表';
 
-create index parent_id
-    on category (parent_id);
-
-create table if not exists category_brand
+-- ----------------------------
+-- Table structure for category
+-- ----------------------------
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    category_id bigint            null comment '分类id',
-    brand_id    bigint            null comment '品牌id',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-)
-    comment '商品分类，商品品牌  关联表';
+    `id`          bigint                                                        NOT NULL COMMENT '分类id',
+    `parent_id`   bigint                                                        NOT NULL DEFAULT '0' COMMENT '上级id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '分类名称',
+    `image`       varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '分类图片',
+    `level`       tinyint                                                       NOT NULL DEFAULT '0' COMMENT '分类级别',
+    `sort`        int                                                           NOT NULL DEFAULT '999' COMMENT '分类排序',
+    `is_show`     tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否显示',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`),
+    KEY           `parent_id` (`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品类目表';
 
-create table if not exists common_file
+-- ----------------------------
+-- Table structure for category_brand
+-- ----------------------------
+DROP TABLE IF EXISTS `category_brand`;
+CREATE TABLE `category_brand`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-)
-    comment '公共文件表';
+    `id`          bigint   NOT NULL COMMENT '主键id',
+    `category_id` bigint   NOT NULL DEFAULT '0' COMMENT '分类id',
+    `brand_id`    bigint   NOT NULL DEFAULT '0' COMMENT '品牌id',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `update_time` datetime NOT NULL COMMENT '修改时间',
+    `version`     int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品分类，商品品牌  关联表';
 
-create table if not exists evaluation
+-- ----------------------------
+-- Table structure for common_file
+-- ----------------------------
+DROP TABLE IF EXISTS `common_file`;
+CREATE TABLE `common_file`
 (
-    id            bigint             not null comment '主键id'
-    primary key,
-    sku_id        bigint             null comment 'sku id',
-    user_id       bigint             null comment '用户id',
-    order_id      bigint             null comment '订单id',
-    images        varchar(2000)      null comment '图片路径',
-    description   varchar(500)       null comment '商品描述',
-    goods_score   tinyint default 10 null comment '商品分',
-    service_score tinyint default 10 null comment '服务分',
-    express_score tinyint default 10 null comment '物流分',
-    create_time   datetime           null comment '创建时间',
-    update_time   datetime           null comment '修改时间',
-    is_delete     tinyint default 0  null comment '是否删除'
-    )
-    comment '商品评价表';
+    `id`          bigint   NOT NULL COMMENT '文件id',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `update_time` datetime NOT NULL COMMENT '修改时间',
+    `version`     int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='公共文件表';
 
-create table if not exists favorite
+-- ----------------------------
+-- Table structure for company
+-- ----------------------------
+DROP TABLE IF EXISTS `company`;
+CREATE TABLE `company`
 (
-    id bigint not null comment '主键id'
-    primary key
-)
-    comment '会员收藏表';
+    `id`          bigint                                  NOT NULL COMMENT '公司id',
+    `name`        varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '公司名称',
+    `image`       varchar(200) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '公司图片',
+    `create_time` datetime                                NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                NOT NULL COMMENT '修改时间',
+    `version`     int                                     NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                 NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='公司表';
 
-create table if not exists freight
+-- ----------------------------
+-- Table structure for dept
+-- ----------------------------
+DROP TABLE IF EXISTS `dept`;
+CREATE TABLE `dept`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-)
-    comment '商品运费表';
+    `id`          bigint                                  NOT NULL COMMENT '部门id',
+    `company_id`  bigint                                  NOT NULL DEFAULT '0' COMMENT '公司id',
+    `name`        varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '部门名称',
+    `image`       varchar(200) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '部门图片',
+    `sort`        int                                     NOT NULL DEFAULT '999' COMMENT '排序',
+    `create_time` datetime                                NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                NOT NULL COMMENT '修改时间',
+    `version`     int                                     NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                 NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='部门表';
 
-create table if not exists label
+-- ----------------------------
+-- Table structure for evaluation
+-- ----------------------------
+DROP TABLE IF EXISTS `evaluation`;
+CREATE TABLE `evaluation`
 (
-    id          bigint              not null comment '主键id'
-    primary key,
-    name        varchar(100)        null comment '标签名称',
-    image       varchar(200)        null comment '标签图片',
-    type        tinyint             null comment '标签类型',
-    sort        int     default 100 null comment '排序',
-    create_time datetime            null comment '创建时间',
-    update_time datetime            null comment '修改时间',
-    is_delete   tinyint default 0   null comment '是否删除'
-    )
-    comment '商品标签表';
+    `id`            bigint                                                         NOT NULL COMMENT '主键id',
+    `member_id`     bigint                                                         NOT NULL DEFAULT '0' COMMENT '会员id',
+    `sku_id`        bigint                                                         NOT NULL DEFAULT '0' COMMENT 'sku id',
+    `order_id`      bigint                                                         NOT NULL DEFAULT '0' COMMENT '订单id',
+    `images`        varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '图片路径',
+    `description`   varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '商品描述',
+    `goods_score`   tinyint                                                        NOT NULL DEFAULT '10' COMMENT '商品分',
+    `service_score` tinyint                                                        NOT NULL DEFAULT '10' COMMENT '服务分',
+    `express_score` tinyint                                                        NOT NULL DEFAULT '10' COMMENT '物流分',
+    `create_time`   datetime                                                       NOT NULL COMMENT '创建时间',
+    `update_time`   datetime                                                       NOT NULL COMMENT '修改时间',
+    `version`       int                                                            NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`     tinyint                                                        NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品评价表';
 
-create table if not exists label_goods
+-- ----------------------------
+-- Table structure for favorite
+-- ----------------------------
+DROP TABLE IF EXISTS `favorite`;
+CREATE TABLE `favorite`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    label_id    bigint            null comment '标签id',
-    sku_id      bigint            null comment 'sku id',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-)
-    comment '商品标签，商品  关联表';
+    `id`            bigint   NOT NULL COMMENT '主键id',
+    `member_id`     bigint   NOT NULL DEFAULT '0' COMMENT '会员id',
+    `spu_id`        bigint   NOT NULL DEFAULT '0' COMMENT 'spu id',
+    `favorite_time` datetime NOT NULL COMMENT '收藏时间',
+    `create_time`   datetime NOT NULL COMMENT '创建时间',
+    `update_time`   datetime NOT NULL COMMENT '修改时间',
+    `version`       int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`     tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='会员收藏表';
 
-create table if not exists member
+-- ----------------------------
+-- Table structure for freight
+-- ----------------------------
+DROP TABLE IF EXISTS `freight`;
+CREATE TABLE `freight`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    level       tinyint default 0 null comment '会员等级',
-    username    varchar(200)      null comment '账号',
-    password    varchar(200)      null comment '密码',
-    state       int     default 1 null comment '状态信息：0全部，1正常',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '会员表';
+    `id`          bigint   NOT NULL COMMENT '主键id',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `update_time` datetime NOT NULL COMMENT '修改时间',
+    `version`     int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品运费表';
 
-create table if not exists `order`
+-- ----------------------------
+-- Table structure for label
+-- ----------------------------
+DROP TABLE IF EXISTS `label`;
+CREATE TABLE `label`
 (
-    id bigint not null comment '主键id'
-    primary key
-)
-    comment '会员订单表';
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '标签名称',
+    `image`       varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '标签图片',
+    `type`        tinyint                                                       NOT NULL COMMENT '标签类型',
+    `sort`        int                                                           NOT NULL DEFAULT '999' COMMENT '排序',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品标签表';
 
-create table if not exists param
+-- ----------------------------
+-- Table structure for label_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `label_goods`;
+CREATE TABLE `label_goods`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    template_id bigint            null comment '模板id',
-    name        varchar(100)      null comment '参数名称',
-    options     varchar(500)      null comment '参数选项',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '商品参数表';
+    `id`          bigint   NOT NULL COMMENT '主键id',
+    `label_id`    bigint   NOT NULL COMMENT '标签id',
+    `sku_id`      bigint   NOT NULL COMMENT 'sku id',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `update_time` datetime NOT NULL COMMENT '修改时间',
+    `version`     int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品标签，商品  关联表';
 
-create table if not exists sku
+-- ----------------------------
+-- Table structure for member
+-- ----------------------------
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE `member`
 (
-    id           bigint            not null comment '主键id'
-    primary key,
-    spu_id       bigint            null comment 'spu id',
-    sn           varchar(100)      null comment '商品条码',
-    code         varchar(100)      null comment '商品编号',
-    name         varchar(100)      null comment 'sku名称',
-    images       varchar(2000)     null comment '商品图片',
-    weight       decimal(10, 2)    null comment '商品重量,克',
-    market_price decimal(10, 2)    null comment '市场价,元',
-    cheap_price  decimal(10, 2)    null comment '优惠价,元',
-    cost_price   decimal(10, 2)    null comment '成本价,元',
-    qrcode       varchar(255)      null comment '二维码',
-    sum_num      int     default 0 null comment '库存数量',
-    alert_num    int     default 0 null comment '库存预警数',
-    sale_num     int     default 0 null comment '商品销量',
-    comment_num  int     default 0 null comment '评论数',
-    is_check     tinyint default 0 null comment '是否审核',
-    is_market    tinyint default 0 null comment '是否上架',
-    create_time  datetime          null comment '创建时间',
-    update_time  datetime          null comment '修改时间',
-    is_delete    tinyint default 0 null comment '是否删除'
-    )
-    comment '商品sku表';
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `level`       tinyint                                                       NOT NULL DEFAULT '0' COMMENT '会员等级',
+    `username`    varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '账号',
+    `password`    varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
+    `state`       int                                                           NOT NULL DEFAULT '1' COMMENT '状态信息：0全部，1正常',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='会员表';
 
-create index status
-    on sku (is_market);
-
-create table if not exists sku_spec
+-- ----------------------------
+-- Table structure for order
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    sku_id      bigint            null comment 'sku id',
-    spec_id     bigint            null comment '规格id',
-    name        varchar(100)      null comment '规格名',
-    value       varchar(100)      null comment '规格值',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '商品，商品规格  关联表';
+    `id`          bigint   NOT NULL COMMENT '主键id',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `update_time` datetime NOT NULL COMMENT '修改时间',
+    `version`     int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='会员订单表';
 
-create table if not exists spec
+-- ----------------------------
+-- Table structure for param
+-- ----------------------------
+DROP TABLE IF EXISTS `param`;
+CREATE TABLE `param`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    template_id bigint            null comment '模板id',
-    name        varchar(100)      null comment '规格名称',
-    options     varchar(500)      null comment '规格选项',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '商品规格表';
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `template_id` bigint                                                        NOT NULL DEFAULT '0' COMMENT '模板id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '参数名称',
+    `options`     varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '参数选项',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品参数表';
 
-create table if not exists spu
+-- ----------------------------
+-- Table structure for permission
+-- ----------------------------
+DROP TABLE IF EXISTS `permission`;
+CREATE TABLE `permission`
 (
-    id           bigint            not null comment '主键id'
-    primary key,
-    name         varchar(200)      null comment 'spu名称',
-    caption      varchar(200)      null comment '商品标题',
-    details      text              null comment '商品详情',
-    brand_id     bigint            null comment '品牌id',
-    category1_id bigint            null comment '一级分类',
-    category2_id bigint            null comment '二级分类',
-    category3_id bigint            null comment '三级分类',
-    create_time  datetime          null comment '创建时间',
-    update_time  datetime          null comment '修改时间',
-    is_delete    tinyint default 0 null comment '是否删除'
-    )
-    comment '商品spu表';
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '名称',
+    `keyword`     varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '关键字',
+    `path`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '路径',
+    `method`      varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '方法',
+    `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '备注，描述',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='权限表';
 
-create table if not exists spu_param
+-- ----------------------------
+-- Table structure for region
+-- ----------------------------
+DROP TABLE IF EXISTS `region`;
+CREATE TABLE `region`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    spu_id      bigint            null comment 'spu id',
-    param_id    bigint            null comment '参数id',
-    name        varchar(100)      null comment '参数名',
-    value       varchar(100)      null comment '参数值',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '商品，商品参数  关联表';
+    `id`          bigint                                                       NOT NULL COMMENT '主键id',
+    `parent_id`   bigint                                                       NOT NULL DEFAULT '0' COMMENT '上级id',
+    `code`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '编码',
+    `name`        varchar(50) COLLATE utf8mb4_general_ci                       NOT NULL DEFAULT '' COMMENT '名称',
+    `edition`     varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '版本信息：2020版，2022版',
+    `create_time` datetime                                                     NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                     NOT NULL COMMENT '修改时间',
+    `version`     int                                                          NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                      NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='行政区划表';
 
-create table if not exists sys_operate_log
+-- ----------------------------
+-- Table structure for role
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role`
 (
-    id              bigint       not null comment '主键id'
-    primary key,
-    sys_user_id     bigint       null comment '系统用户id',
-    description     varchar(100) null comment '操作描述',
-    remote_ip       varchar(100) null comment '远程IP',
-    request_uri     varchar(100) null comment '请求路径',
-    request_method  varchar(100) null comment '请求方法',
-    method_name     varchar(100) null comment '方法名称',
-    request_param   text         null comment '请求参数',
-    response_result text         null comment '响应结果',
-    source_data     text         null comment '原始数据',
-    exception_info  text         null comment '异常信息',
-    operate_time    datetime     null comment '操作时间',
-    create_time     datetime     null comment '创建时间',
-    update_time     datetime     null comment '修改时间',
-    is_delete       tinyint      null comment '是否删除'
-    )
-    comment '系统操作日志表';
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '名称',
+    `keyword`     varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '关键字',
+    `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '备注，描述',
+    `sort`        int                                                           NOT NULL DEFAULT '999' COMMENT '排序',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='角色表';
 
-create table if not exists sys_permission
+-- ----------------------------
+-- Table structure for role_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `role_permission`;
+CREATE TABLE `role_permission`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    name        varchar(100)      null comment '名称',
-    keyword     varchar(100)      null comment '关键字',
-    path        varchar(100)      null comment '路径',
-    method      varchar(100)      null comment '方法',
-    description varchar(200)      null comment '备注，描述',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '系统权限表';
+    `id`            bigint   NOT NULL COMMENT '主键id',
+    `role_id`       bigint   NOT NULL DEFAULT '0' COMMENT '系统角色id',
+    `permission_id` bigint   NOT NULL DEFAULT '0' COMMENT '系统权限id',
+    `create_time`   datetime NOT NULL COMMENT '创建时间',
+    `update_time`   datetime NOT NULL COMMENT '修改时间',
+    `version`       int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`     tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='角色，权限  关联表';
 
-create table if not exists sys_role
+-- ----------------------------
+-- Table structure for sku
+-- ----------------------------
+DROP TABLE IF EXISTS `sku`;
+CREATE TABLE `sku`
 (
-    id          bigint              not null comment '主键id'
-    primary key,
-    name        varchar(100)        null comment '名称',
-    keyword     varchar(100)        null comment '关键字',
-    description varchar(200)        null comment '备注，描述',
-    sort        int     default 100 null comment '排序',
-    create_time datetime            null comment '创建时间',
-    update_time datetime            null comment '修改时间',
-    is_delete   tinyint default 0   null comment '是否删除'
-    )
-    comment '系统角色表';
+    `id`              bigint                                                         NOT NULL COMMENT '主键id',
+    `spu_id`          bigint                                                         NOT NULL DEFAULT '0' COMMENT 'spu id',
+    `sn`              varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '商品条码',
+    `code`            varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '商品编号',
+    `name`            varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT 'sku名称',
+    `images`          varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '商品图片',
+    `market_price`    decimal(10, 2)                                                 NOT NULL COMMENT '市场价,元',
+    `cheap_price`     decimal(10, 2)                                                 NOT NULL COMMENT '优惠价,元',
+    `cost_price`      decimal(10, 2)                                                 NOT NULL COMMENT '成本价,元',
+    `qrcode`          varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL DEFAULT '' COMMENT '二维码',
+    `stock_num`       int                                                            NOT NULL DEFAULT '0' COMMENT '库存数量',
+    `alert_num`       int                                                            NOT NULL DEFAULT '0' COMMENT '库存预警数',
+    `sale_num`        int                                                            NOT NULL DEFAULT '0' COMMENT '商品销量',
+    `evaluate_num`    int                                                            NOT NULL DEFAULT '0' COMMENT '评论数',
+    `is_check`        tinyint                                                        NOT NULL DEFAULT '0' COMMENT '是否审核',
+    `is_market`       tinyint                                                        NOT NULL DEFAULT '0' COMMENT '是否上架',
+    `is_invalid`      tinyint                                                        NOT NULL DEFAULT '0' COMMENT '是否作废',
+    `on_market_time`  datetime                                                       NOT NULL COMMENT '上架时间',
+    `off_market_time` datetime                                                       NOT NULL COMMENT '下架时间',
+    `create_time`     datetime                                                       NOT NULL COMMENT '创建时间',
+    `update_time`     datetime                                                       NOT NULL COMMENT '修改时间',
+    `version`         int                                                            NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`       tinyint                                                        NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品sku表';
 
-create table if not exists sys_role_permission
+-- ----------------------------
+-- Table structure for sku_spec
+-- ----------------------------
+DROP TABLE IF EXISTS `sku_spec`;
+CREATE TABLE `sku_spec`
 (
-    id                bigint            not null comment '主键id'
-    primary key,
-    sys_role_id       bigint            null comment '系统角色id',
-    sys_permission_id bigint            null comment '系统权限id',
-    create_time       datetime          null comment '创建时间',
-    update_time       datetime          null comment '修改时间',
-    is_delete         tinyint default 0 null comment '是否删除'
-)
-    comment '系统角色，系统权限  关联表';
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `sku_id`      bigint                                                        NOT NULL DEFAULT '0' COMMENT 'sku id',
+    `spec_id`     bigint                                                        NOT NULL DEFAULT '0' COMMENT '规格id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '规格名',
+    `value`       varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '规格值',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品，商品规格  关联表';
 
-create table if not exists sys_user
+-- ----------------------------
+-- Table structure for spec
+-- ----------------------------
+DROP TABLE IF EXISTS `spec`;
+CREATE TABLE `spec`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    username    varchar(200)      null comment '账号',
-    password    varchar(200)      null comment '密码',
-    nickname    varchar(100)      null comment '昵称',
-    avatar      varchar(200)      null comment '头像',
-    description varchar(200)      null comment '备注，描述',
-    state       int     default 1 null comment '状态信息：0全部，1账号正常，2账号禁用，4账号锁定，8账号过期，16密码过期',
-    login_time  datetime          null comment '登录时间',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '系统用户表';
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `template_id` bigint                                                        NOT NULL DEFAULT '0' COMMENT '模板id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '规格名称',
+    `options`     varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '规格选项',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品规格表';
 
-create table if not exists sys_user_role
+-- ----------------------------
+-- Table structure for spu
+-- ----------------------------
+DROP TABLE IF EXISTS `spu`;
+CREATE TABLE `spu`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    sys_user_id bigint            null comment '系统用户id',
-    sys_role_id bigint            null comment '系统角色id',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-)
-    comment '系统用户，角色  关联表';
+    `id`           bigint                                                        NOT NULL COMMENT '主键id',
+    `name`         varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'spu名称',
+    `caption`      varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '商品标题',
+    `details`      text COLLATE utf8mb4_general_ci                               NOT NULL COMMENT '商品详情',
+    `brand_id`     bigint                                                        NOT NULL DEFAULT '0' COMMENT '品牌id',
+    `category1_id` bigint                                                        NOT NULL DEFAULT '0' COMMENT '一级分类',
+    `category2_id` bigint                                                        NOT NULL DEFAULT '0' COMMENT '二级分类',
+    `category3_id` bigint                                                        NOT NULL DEFAULT '0' COMMENT '三级分类',
+    `create_time`  datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time`  datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`      int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`    tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品spu表';
 
-create table if not exists template
+-- ----------------------------
+-- Table structure for spu_param
+-- ----------------------------
+DROP TABLE IF EXISTS `spu_param`;
+CREATE TABLE `spu_param`
 (
-    id          bigint            not null comment '主键id'
-    primary key,
-    category_id bigint            null comment '分类id',
-    name        varchar(100)      null comment '模板名称',
-    create_time datetime          null comment '创建时间',
-    update_time datetime          null comment '修改时间',
-    is_delete   tinyint default 0 null comment '是否删除'
-    )
-    comment '商品规格，商品参数  模板表';
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `spu_id`      bigint                                                        NOT NULL DEFAULT '0' COMMENT 'spu id',
+    `param_id`    bigint                                                        NOT NULL DEFAULT '0' COMMENT '参数id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '参数名',
+    `value`       varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '参数值',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品，商品参数  关联表';
 
+-- ----------------------------
+-- Table structure for sys_log
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_log`;
+CREATE TABLE `sys_log`
+(
+    `id`              bigint                                                        NOT NULL COMMENT '主键id',
+    `sys_user_id`     bigint                                                        NOT NULL DEFAULT '0' COMMENT '系统用户id',
+    `description`     varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '操作描述',
+    `remote_ip`       varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '远程IP',
+    `request_uri`     varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '请求路径',
+    `request_method`  varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '请求方法',
+    `method_name`     varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '方法名称',
+    `request_param`   text COLLATE utf8mb4_general_ci COMMENT '请求参数',
+    `response_result` text COLLATE utf8mb4_general_ci COMMENT '响应结果',
+    `source_data`     text COLLATE utf8mb4_general_ci COMMENT '原始数据',
+    `exception_info`  text COLLATE utf8mb4_general_ci COMMENT '异常信息',
+    `operate_time`    datetime                                                      NOT NULL COMMENT '操作时间',
+    `create_time`     datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time`     datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`         int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`       tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='系统日志表';
+
+-- ----------------------------
+-- Table structure for template
+-- ----------------------------
+DROP TABLE IF EXISTS `template`;
+CREATE TABLE `template`
+(
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `category_id` bigint                                                        NOT NULL DEFAULT '0' COMMENT '分类id',
+    `name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '模板名称',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='商品规格，商品参数  模板表';
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`
+(
+    `id`          bigint                                                        NOT NULL COMMENT '主键id',
+    `username`    varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '账号',
+    `password`    varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '密码',
+    `nickname`    varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
+    `avatar`      varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '头像',
+    `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '备注，描述',
+    `state`       int                                                           NOT NULL DEFAULT '1' COMMENT '状态信息：0全部，1账号正常，2账号禁用，4账号锁定，8账号过期，16密码过期',
+    `login_time`  datetime                                                               DEFAULT NULL COMMENT '登录时间',
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
+    `version`     int                                                           NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint                                                       NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户表';
+
+-- ----------------------------
+-- Table structure for user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE `user_role`
+(
+    `id`          bigint   NOT NULL COMMENT '主键id',
+    `user_id`     bigint   NOT NULL DEFAULT '0' COMMENT '系统用户id',
+    `role_id`     bigint   NOT NULL DEFAULT '0' COMMENT '系统角色id',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `update_time` datetime NOT NULL COMMENT '修改时间',
+    `version`     int      NOT NULL DEFAULT '0' COMMENT '版本号',
+    `is_delete`   tinyint  NOT NULL DEFAULT '0' COMMENT '是否删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户，角色  关联表';
+
+SET
+FOREIGN_KEY_CHECKS = 1;
