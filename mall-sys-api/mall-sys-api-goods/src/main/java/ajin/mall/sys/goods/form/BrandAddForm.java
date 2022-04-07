@@ -29,7 +29,7 @@ public class BrandAddForm implements Serializable {
     @Pattern(regexp = "^[A-Za-z]+$", message = "品牌首字母只能为英文字母")
     @NotBlank(message = "品牌首字母不能为空")
     @ApiModelProperty("首字母")
-    private String initials;
+    private String initial;
 
     @Max(value = Integer.MAX_VALUE, message = "排序数值过大")
     @Positive(message = "排序必须为正整数")
