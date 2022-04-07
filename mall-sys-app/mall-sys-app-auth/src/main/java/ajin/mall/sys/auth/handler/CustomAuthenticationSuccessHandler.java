@@ -3,7 +3,7 @@
 //import ajin.mall.common.base.constant.RedisConstants;
 //import ajin.mall.common.base.result.BaseResult;
 //import ajin.mall.common.base.result.ResultCode;
-//import ajin.mall.common.data.entity.system.User;
+//import ajin.mall.common.data.entity.User;
 //import ajin.mall.sys.system.service.UserService;
 //import com.alibaba.fastjson.JSON;
 //import com.alibaba.fastjson.serializer.SerializerFeature;

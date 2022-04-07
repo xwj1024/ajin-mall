@@ -1,6 +1,6 @@
 package ajin.mall.sys.goods.service.impl;
 
-import ajin.mall.common.data.entity.goods.Spec;
+import ajin.mall.common.data.entity.Spec;
 import ajin.mall.sys.goods.mapper.SpecMapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

@@ -1,4 +1,4 @@
-package ajin.mall.common.data.entity.goods;
+package ajin.mall.common.data.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 商品评价表
+ * 品牌表
  * </p>
  *
  * @author Ajin
@@ -22,37 +22,29 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel(value = "Evaluation对象", description = "商品评价表")
-public class Evaluation implements Serializable {
+@ApiModel(value = "Brand对象", description = "品牌表")
+public class Brand implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键id")
+    @ApiModelProperty("品牌id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty("sku id")
-    private Long skuId;
+    @ApiModelProperty("品牌名称")
+    private String name;
 
-    @ApiModelProperty("用户id")
-    private Long userId;
+    @ApiModelProperty("品牌图片")
+    private String image;
 
-    @ApiModelProperty("订单id")
-    private Long orderId;
+    @ApiModelProperty("首字母")
+    private String initial;
 
-    @ApiModelProperty("图片路径")
-    private String images;
+    @ApiModelProperty("排序")
+    private Integer sort;
 
-    @ApiModelProperty("商品描述")
-    private String description;
-
-    @ApiModelProperty("商品分")
-    private Integer goodsScore;
-
-    @ApiModelProperty("服务分")
-    private Integer serviceScore;
-
-    @ApiModelProperty("物流分")
-    private Integer logisticsScore;
+    @Version
+    @ApiModelProperty("版本号")
+    private Integer version;
 
     @ApiModelProperty("是否删除")
     @TableLogic

@@ -1,4 +1,4 @@
-package ajin.mall.common.data.entity.goods;
+package ajin.mall.common.data.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

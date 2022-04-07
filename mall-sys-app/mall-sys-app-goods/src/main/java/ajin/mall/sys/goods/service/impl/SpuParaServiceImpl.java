@@ -1,6 +1,6 @@
 package ajin.mall.sys.goods.service.impl;
 
-import ajin.mall.common.data.entity.goods.SpuPara;
+import ajin.mall.common.data.entity.SpuPara;
 import ajin.mall.sys.goods.service.SpuParaService;
 import ajin.mall.sys.goods.mapper.SpuParaMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

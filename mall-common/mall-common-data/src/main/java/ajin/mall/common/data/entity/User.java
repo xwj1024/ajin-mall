@@ -1,57 +1,54 @@
-package ajin.mall.common.data.entity.system;
+package ajin.mall.common.data.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
+ * <p>
+ * 系统用户表
+ * </p>
+ *
  * @author Ajin
+ * @since 2021-05-07
  */
 @Data
-public class SysLog implements Serializable {
+@Accessors(chain = true)
+@ApiModel(value = "SysUser对象", description = "系统用户")
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty(value = "系统用户id")
-    private Long sysUserId;
+    @ApiModelProperty(value = "账号")
+    private String username;
 
-    @ApiModelProperty(value = "操作描述")
+    @ApiModelProperty(value = "密码")
+    private String password;
+
+    @ApiModelProperty(value = "昵称")
+    private String nickname;
+
+    @ApiModelProperty(value = "头像")
+    private String avatar;
+
+    @ApiModelProperty(value = "备注")
     private String description;
 
-    @ApiModelProperty(value = "请求IP")
-    private String remoteIp;
+    @ApiModelProperty(value = "状态信息：0全部，1正常，2禁用，4锁定，8过期")
+    private Integer state;
 
-    @ApiModelProperty(value = "请求路径")
-    private String requestUri;
-
-    @ApiModelProperty(value = "请求方法")
-    private String requestMethod;
-
-    @ApiModelProperty(value = "方法名称")
-    private String methodName;
-
-    @ApiModelProperty(value = "请求参数")
-    private String requestParam;
-
-    @ApiModelProperty(value = "响应结果")
-    private String responseResult;
-
-    @ApiModelProperty(value = "原始数据")
-    private String sourceData;
-
-    @ApiModelProperty(value = "异常信息")
-    private String exceptionInfo;
-
-    @ApiModelProperty(value = "操作时间")
+    @ApiModelProperty(value = "登录时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime operateTime;
+    private LocalDateTime loginTime;
 
     @ApiModelProperty(value = "创建时间", hidden = true)
     @TableField(fill = FieldFill.INSERT)
@@ -65,6 +62,6 @@ public class SysLog implements Serializable {
 
     @ApiModelProperty(value = "是否删除")
     @TableLogic
-    private String isDelete;
+    private Integer isDelete;
 
 }

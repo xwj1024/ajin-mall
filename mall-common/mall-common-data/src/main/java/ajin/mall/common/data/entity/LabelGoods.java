@@ -1,4 +1,4 @@
-package ajin.mall.common.data.entity.goods;
+package ajin.mall.common.data.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 商品,参数 关联表
+ * 标签,商品 关联表
  * </p>
  *
  * @author Ajin
@@ -21,22 +21,19 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel(value = "SpuPara对象", description = "商品，参数  关联表")
-public class SpuPara implements Serializable {
+@ApiModel(value = "LabelGoods对象", description = "标签，商品  关联表")
+public class LabelGoods implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty("spu id")
-    private Long spuId;
+    @ApiModelProperty("标签id")
+    private Long labelId;
 
-    @ApiModelProperty("参数名")
-    private String name;
-
-    @ApiModelProperty("参数值")
-    private String value;
+    @ApiModelProperty("sku id")
+    private Long skuId;
 
 
 }

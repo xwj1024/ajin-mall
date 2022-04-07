@@ -1,4 +1,4 @@
-package ajin.mall.common.data.entity.goods;
+package ajin.mall.common.data.entity;
 
 import ajin.mall.common.data.anno.CascadeField;
 import ajin.mall.common.data.enums.TableInfo;

@@ -1,4 +1,4 @@
-package ajin.mall.common.data.entity.goods;
+package ajin.mall.common.data.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,31 +13,31 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 商品规格表
+ * 标签表
  * </p>
  *
  * @author Ajin
- * @since 2021-05-22
+ * @since 2021-04-13
  */
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel(value = "Spec对象", description = "商品规格表")
-public class Spec implements Serializable {
+@ApiModel(value = "Label对象", description = "标签表")
+public class Label implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty("模板id")
-    private Long templateId;
-
-    @ApiModelProperty("规格名称")
+    @ApiModelProperty("标签名称")
     private String name;
 
-    @ApiModelProperty("规格选项")
-    private String options;
+    @ApiModelProperty("标签图片")
+    private String image;
+
+    @ApiModelProperty("标签类型")
+    private Integer type;
 
     @ApiModelProperty("是否删除")
     @TableLogic
@@ -52,5 +52,6 @@ public class Spec implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
+
 
 }

@@ -1,6 +1,6 @@
 package ajin.mall.sys.goods.mapper;
 
-import ajin.mall.common.data.entity.goods.Label;
+import ajin.mall.common.data.entity.Label;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

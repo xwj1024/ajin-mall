@@ -1,6 +1,6 @@
 package ajin.mall.sys.goods.mapper;
 
-import ajin.mall.common.data.entity.goods.Brand;
+import ajin.mall.common.data.entity.Brand;
 import ajin.mall.sys.goods.form.BrandListForm;
 import ajin.mall.sys.goods.view.BrandView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

@@ -1,5 +1,7 @@
-package ajin.mall.common.data.entity.goods;
+package ajin.mall.common.data.entity;
 
+import ajin.mall.common.data.anno.CascadeField;
+import ajin.mall.common.data.enums.TableInfo;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 品牌表
+ * 商品类目表
  * </p>
  *
  * @author Ajin
@@ -22,29 +24,32 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel(value = "Brand对象", description = "品牌表")
-public class Brand implements Serializable {
+@ApiModel(value = "Category对象", description = "商品类目表")
+public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("品牌id")
+    @ApiModelProperty(value = "分类id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty("品牌名称")
+    @CascadeField(sourceTable = TableInfo.CATEGORY, linkedTable = TableInfo.CATEGORY, linkedField = "parent_id", enableDelete = false)
+    @ApiModelProperty("上级id")
+    private Long parentId;
+
+    @ApiModelProperty("分类名称")
     private String name;
 
-    @ApiModelProperty("品牌图片")
+    @ApiModelProperty("分类图片")
     private String image;
 
-    @ApiModelProperty("首字母")
-    private String initials;
+    @ApiModelProperty("分类级别")
+    private Integer level;
 
-    @ApiModelProperty("排序")
+    @ApiModelProperty("分类排序")
     private Integer sort;
 
-    @Version
-    @ApiModelProperty("版本号")
-    private Integer version;
+    @ApiModelProperty("是否显示")
+    private Integer isShow;
 
     @ApiModelProperty("是否删除")
     @TableLogic

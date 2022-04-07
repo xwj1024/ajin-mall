@@ -4,7 +4,7 @@ import ajin.mall.common.base.asserts.BizAssert;
 import ajin.mall.common.base.page.PageHelp;
 import ajin.mall.common.base.result.ResultPage;
 import ajin.mall.common.data.anno.CascadeDelete;
-import ajin.mall.common.data.entity.goods.Brand;
+import ajin.mall.common.data.entity.Brand;
 import ajin.mall.common.data.enums.TableInfo;
 import ajin.mall.sys.goods.form.BrandAddForm;
 import ajin.mall.sys.goods.form.BrandListForm;

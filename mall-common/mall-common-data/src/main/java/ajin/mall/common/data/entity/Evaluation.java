@@ -1,7 +1,5 @@
-package ajin.mall.common.data.entity.goods;
+package ajin.mall.common.data.entity;
 
-import ajin.mall.common.data.anno.CascadeField;
-import ajin.mall.common.data.enums.TableInfo;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -15,7 +13,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 商品类目表
+ * 商品评价表
  * </p>
  *
  * @author Ajin
@@ -24,32 +22,37 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel(value = "Category对象", description = "商品类目表")
-public class Category implements Serializable {
+@ApiModel(value = "Evaluation对象", description = "商品评价表")
+public class Evaluation implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "分类id")
+    @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @CascadeField(sourceTable = TableInfo.CATEGORY, linkedTable = TableInfo.CATEGORY, linkedField = "parent_id", enableDelete = false)
-    @ApiModelProperty("上级id")
-    private Long parentId;
+    @ApiModelProperty("sku id")
+    private Long skuId;
 
-    @ApiModelProperty("分类名称")
-    private String name;
+    @ApiModelProperty("用户id")
+    private Long userId;
 
-    @ApiModelProperty("分类图片")
-    private String image;
+    @ApiModelProperty("订单id")
+    private Long orderId;
 
-    @ApiModelProperty("分类级别")
-    private Integer level;
+    @ApiModelProperty("图片路径")
+    private String images;
 
-    @ApiModelProperty("分类排序")
-    private Integer sort;
+    @ApiModelProperty("商品描述")
+    private String description;
 
-    @ApiModelProperty("是否显示")
-    private Integer isShow;
+    @ApiModelProperty("商品分")
+    private Integer goodsScore;
+
+    @ApiModelProperty("服务分")
+    private Integer serviceScore;
+
+    @ApiModelProperty("物流分")
+    private Integer logisticsScore;
 
     @ApiModelProperty("是否删除")
     @TableLogic

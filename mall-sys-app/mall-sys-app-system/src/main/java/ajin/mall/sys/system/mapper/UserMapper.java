@@ -1,6 +1,6 @@
 package ajin.mall.sys.system.mapper;
 
-import ajin.mall.common.data.entity.system.User;
+import ajin.mall.common.data.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 

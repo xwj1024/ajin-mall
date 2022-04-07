@@ -3,7 +3,7 @@ package ajin.mall.sys.goods.service.impl;
 import ajin.mall.common.base.asserts.BizAssert;
 import ajin.mall.common.base.page.PageHelp;
 import ajin.mall.common.base.result.ResultPage;
-import ajin.mall.common.data.entity.goods.Sku;
+import ajin.mall.common.data.entity.Sku;
 import ajin.mall.sys.goods.form.SkuAddForm;
 import ajin.mall.sys.goods.form.SkuListForm;
 import ajin.mall.sys.goods.form.SkuUpdateForm;

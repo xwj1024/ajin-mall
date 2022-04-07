@@ -3,7 +3,7 @@
 //import ajin.mall.common.base.asserts.BizAssert;
 //import ajin.mall.common.base.constant.RedisConstants;
 //import ajin.mall.common.base.util.StringUtils;
-//import ajin.mall.common.data.entity.system.User;
+//import ajin.mall.common.data.entity.User;
 //import ajin.mall.sys.system.service.PermissionService;
 //import ajin.mall.sys.system.service.UserService;
 //import org.apache.dubbo.config.annotation.Reference;

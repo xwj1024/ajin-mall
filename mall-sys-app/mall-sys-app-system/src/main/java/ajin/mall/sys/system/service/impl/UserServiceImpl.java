@@ -1,6 +1,6 @@
 package ajin.mall.sys.system.service.impl;
 
-import ajin.mall.common.data.entity.system.User;
+import ajin.mall.common.data.entity.User;
 import ajin.mall.sys.system.form.UserAddForm;
 import ajin.mall.sys.system.mapper.UserMapper;
 import ajin.mall.sys.system.service.UserService;

@@ -1,6 +1,6 @@
 package ajin.mall.sys.goods.mapper;
 
-import ajin.mall.common.data.entity.goods.Category;
+import ajin.mall.common.data.entity.Category;
 import ajin.mall.sys.goods.form.CategoryListForm;
 import ajin.mall.sys.goods.view.CategoryView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
