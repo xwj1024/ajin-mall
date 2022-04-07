@@ -12,27 +12,19 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 商品分类，商品品牌  关联表
+ * 公共文件表
  *
  * @author Ajin
  */
-@ApiModel(value = "商品分类，商品品牌  关联表")
+@ApiModel(value = "公共文件表")
 @Data
-@TableName(value = "category_brand")
-public class CategoryBrand implements Serializable {
+@TableName(value = "common_file")
+public class CommonFile implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "文件id")
     private Long id;
-
-    @TableField(value = "category_id")
-    @ApiModelProperty(value = "分类id")
-    private Long categoryId;
-
-    @TableField(value = "brand_id")
-    @ApiModelProperty(value = "品牌id")
-    private Long brandId;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)

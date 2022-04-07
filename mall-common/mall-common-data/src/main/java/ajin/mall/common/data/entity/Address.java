@@ -10,47 +10,51 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 用户表
+ * 会员地址表
  *
  * @author Ajin
  */
-@ApiModel(value = "用户表")
+@ApiModel(value = "会员地址表")
 @Data
-@TableName(value = "`user`")
-public class User implements Serializable {
+@TableName(value = "address")
+public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键id")
+    @ApiModelProperty(value = "地址id")
     private Long id;
 
-    @TableField(value = "username")
-    @ApiModelProperty(value = "账号")
-    private String username;
+    @TableField(value = "member_id")
+    @ApiModelProperty(value = "会员id")
+    private Long memberId;
 
-    @TableField(value = "`password`")
-    @ApiModelProperty(value = "密码")
-    private String password;
+    @TableField(value = "province")
+    @ApiModelProperty(value = "省")
+    private String province;
 
-    @TableField(value = "nickname")
-    @ApiModelProperty(value = "昵称")
-    private String nickname;
+    @TableField(value = "city")
+    @ApiModelProperty(value = "市")
+    private String city;
 
-    @TableField(value = "avatar")
-    @ApiModelProperty(value = "头像")
-    private String avatar;
+    @TableField(value = "area")
+    @ApiModelProperty(value = "区县")
+    private String area;
 
-    @TableField(value = "description")
-    @ApiModelProperty(value = "备注，描述")
-    private String description;
+    @TableField(value = "town")
+    @ApiModelProperty(value = "乡镇")
+    private String town;
 
-    @TableField(value = "`state`")
-    @ApiModelProperty(value = "状态信息：0全部，1账号正常，2账号禁用，4账号锁定，8账号过期，16密码过期")
-    private Integer state;
+    @TableField(value = "detail")
+    @ApiModelProperty(value = "详细地址")
+    private String detail;
 
-    @TableField(value = "login_time")
-    @ApiModelProperty(value = "登录时间")
-    private LocalDateTime loginTime;
+    @TableField(value = "sort")
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
+
+    @TableField(value = "is_default")
+    @ApiModelProperty(value = "是否默认")
+    private Integer isDefault;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -69,4 +73,5 @@ public class User implements Serializable {
     @TableLogic
     @ApiModelProperty("是否删除")
     private Integer isDelete;
+
 }

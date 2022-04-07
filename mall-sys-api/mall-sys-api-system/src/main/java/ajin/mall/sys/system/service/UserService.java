@@ -1,6 +1,5 @@
 package ajin.mall.sys.system.service;
 
-import ajin.mall.common.data.entity.User;
 import ajin.mall.sys.system.form.UserAddForm;
 
 /**

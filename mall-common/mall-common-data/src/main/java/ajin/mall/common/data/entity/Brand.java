@@ -4,51 +4,47 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
+import lombok.Data;
 
 /**
- * <p>
- * 品牌表
- * </p>
+ * 商品品牌表
  *
  * @author Ajin
- * @since 2021-04-13
  */
+@ApiModel(value = "商品品牌表")
 @Data
-@EqualsAndHashCode
-@Accessors(chain = true)
-@ApiModel(value = "Brand对象", description = "品牌表")
+@TableName(value = "brand")
 public class Brand implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("品牌id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @ApiModelProperty(value = "品牌id")
     private Long id;
 
-    @ApiModelProperty("品牌名称")
+    @TableField(value = "`name`")
+    @ApiModelProperty(value = "品牌名称")
     private String name;
 
-    @ApiModelProperty("品牌图片")
-    private String image;
-
-    @ApiModelProperty("首字母")
+    @TableField(value = "`initial`")
+    @ApiModelProperty(value = "首字母")
     private String initial;
 
-    @ApiModelProperty("排序")
+    @TableField(value = "image")
+    @ApiModelProperty(value = "品牌图片")
+    private String image;
+
+    @TableField(value = "sort")
+    @ApiModelProperty(value = "排序")
     private Integer sort;
 
-    @Version
-    @ApiModelProperty("版本号")
-    private Integer version;
-
-    @ApiModelProperty("是否删除")
-    @TableLogic
-    private Integer isDelete;
+    @TableField(value = "is_show")
+    @ApiModelProperty(value = "是否显示")
+    private Integer isShow;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -60,4 +56,11 @@ public class Brand implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
 
+    @Version
+    @ApiModelProperty("版本号")
+    private Integer version;
+
+    @TableLogic
+    @ApiModelProperty("是否删除")
+    private Integer isDelete;
 }

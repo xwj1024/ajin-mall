@@ -1,6 +1,5 @@
 package ajin.mall.sys.goods.service.impl;
 
-import ajin.mall.common.data.entity.Template;
 import ajin.mall.sys.goods.service.TemplateService;
 import ajin.mall.sys.goods.mapper.TemplateMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

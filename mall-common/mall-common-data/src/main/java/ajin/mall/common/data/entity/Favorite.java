@@ -12,27 +12,31 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 商品分类，商品品牌  关联表
+ * 会员收藏表
  *
  * @author Ajin
  */
-@ApiModel(value = "商品分类，商品品牌  关联表")
+@ApiModel(value = "会员收藏表")
 @Data
-@TableName(value = "category_brand")
-public class CategoryBrand implements Serializable {
+@TableName(value = "favorite")
+public class Favorite implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "主键id")
     private Long id;
 
-    @TableField(value = "category_id")
-    @ApiModelProperty(value = "分类id")
-    private Long categoryId;
+    @TableField(value = "member_id")
+    @ApiModelProperty(value = "会员id")
+    private Long memberId;
 
-    @TableField(value = "brand_id")
-    @ApiModelProperty(value = "品牌id")
-    private Long brandId;
+    @TableField(value = "spu_id")
+    @ApiModelProperty(value = "spu id")
+    private Long spuId;
+
+    @TableField(value = "favorite_time")
+    @ApiModelProperty(value = "收藏时间")
+    private LocalDateTime favoriteTime;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)

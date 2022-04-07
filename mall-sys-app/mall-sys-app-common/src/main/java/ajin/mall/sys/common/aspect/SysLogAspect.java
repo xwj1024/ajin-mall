@@ -1,7 +1,6 @@
 package ajin.mall.sys.common.aspect;
 
 import ajin.mall.common.base.util.StringUtils;
-import ajin.mall.common.data.entity.SysLog;
 import ajin.mall.common.data.mapper.CommonMapper;
 import ajin.mall.sys.common.anno.RecordSysLog;
 import ajin.mall.sys.system.service.SysLogService;

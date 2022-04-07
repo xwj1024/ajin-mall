@@ -4,44 +4,39 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
+import lombok.Data;
 
 /**
- * <p>
  * 商品规格表
- * </p>
  *
  * @author Ajin
- * @since 2021-05-22
  */
+@ApiModel(value = "商品规格表")
 @Data
-@EqualsAndHashCode
-@Accessors(chain = true)
-@ApiModel(value = "Spec对象", description = "商品规格表")
+@TableName(value = "spec")
 public class Spec implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @ApiModelProperty(value = "主键id")
     private Long id;
 
-    @ApiModelProperty("模板id")
+    @TableField(value = "template_id")
+    @ApiModelProperty(value = "模板id")
     private Long templateId;
 
-    @ApiModelProperty("规格名称")
+    @TableField(value = "`name`")
+    @ApiModelProperty(value = "规格名称")
     private String name;
 
-    @ApiModelProperty("规格选项")
+    @TableField(value = "`options`")
+    @ApiModelProperty(value = "规格选项")
     private String options;
-
-    @ApiModelProperty("是否删除")
-    @TableLogic
-    private Integer isDelete;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -53,4 +48,11 @@ public class Spec implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
 
+    @Version
+    @ApiModelProperty("版本号")
+    private Integer version;
+
+    @TableLogic
+    @ApiModelProperty("是否删除")
+    private Integer isDelete;
 }

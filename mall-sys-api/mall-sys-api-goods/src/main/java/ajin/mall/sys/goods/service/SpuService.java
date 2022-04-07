@@ -1,7 +1,6 @@
 package ajin.mall.sys.goods.service;
 
 import ajin.mall.common.base.result.ResultPage;
-import ajin.mall.common.data.entity.Spu;
 import ajin.mall.sys.goods.form.SpuAddForm;
 import ajin.mall.sys.goods.form.SpuListForm;
 import ajin.mall.sys.goods.form.SpuUpdateForm;

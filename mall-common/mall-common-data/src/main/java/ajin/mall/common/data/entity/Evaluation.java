@@ -4,59 +4,59 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
+import lombok.Data;
 
 /**
- * <p>
  * 商品评价表
- * </p>
  *
  * @author Ajin
- * @since 2021-04-13
  */
+@ApiModel(value = "商品评价表")
 @Data
-@EqualsAndHashCode
-@Accessors(chain = true)
-@ApiModel(value = "Evaluation对象", description = "商品评价表")
+@TableName(value = "evaluation")
 public class Evaluation implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @ApiModelProperty(value = "主键id")
     private Long id;
 
-    @ApiModelProperty("sku id")
+    @TableField(value = "member_id")
+    @ApiModelProperty(value = "会员id")
+    private Long memberId;
+
+    @TableField(value = "sku_id")
+    @ApiModelProperty(value = "sku id")
     private Long skuId;
 
-    @ApiModelProperty("用户id")
-    private Long userId;
-
-    @ApiModelProperty("订单id")
+    @TableField(value = "order_id")
+    @ApiModelProperty(value = "订单id")
     private Long orderId;
 
-    @ApiModelProperty("图片路径")
+    @TableField(value = "images")
+    @ApiModelProperty(value = "图片路径")
     private String images;
 
-    @ApiModelProperty("商品描述")
+    @TableField(value = "description")
+    @ApiModelProperty(value = "商品描述")
     private String description;
 
-    @ApiModelProperty("商品分")
+    @TableField(value = "goods_score")
+    @ApiModelProperty(value = "商品分")
     private Integer goodsScore;
 
-    @ApiModelProperty("服务分")
+    @TableField(value = "service_score")
+    @ApiModelProperty(value = "服务分")
     private Integer serviceScore;
 
-    @ApiModelProperty("物流分")
-    private Integer logisticsScore;
-
-    @ApiModelProperty("是否删除")
-    @TableLogic
-    private Integer isDelete;
+    @TableField(value = "express_score")
+    @ApiModelProperty(value = "物流分")
+    private Integer expressScore;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -68,4 +68,11 @@ public class Evaluation implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
 
+    @Version
+    @ApiModelProperty("版本号")
+    private Integer version;
+
+    @TableLogic
+    @ApiModelProperty("是否删除")
+    private Integer isDelete;
 }

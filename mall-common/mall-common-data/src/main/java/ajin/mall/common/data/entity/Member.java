@@ -12,27 +12,35 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 商品分类，商品品牌  关联表
+ * 会员表
  *
  * @author Ajin
  */
-@ApiModel(value = "商品分类，商品品牌  关联表")
+@ApiModel(value = "会员表")
 @Data
-@TableName(value = "category_brand")
-public class CategoryBrand implements Serializable {
+@TableName(value = "`member`")
+public class Member implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "主键id")
     private Long id;
 
-    @TableField(value = "category_id")
-    @ApiModelProperty(value = "分类id")
-    private Long categoryId;
+    @TableField(value = "`level`")
+    @ApiModelProperty(value = "会员等级")
+    private Integer level;
 
-    @TableField(value = "brand_id")
-    @ApiModelProperty(value = "品牌id")
-    private Long brandId;
+    @TableField(value = "username")
+    @ApiModelProperty(value = "账号")
+    private String username;
+
+    @TableField(value = "`password`")
+    @ApiModelProperty(value = "密码")
+    private String password;
+
+    @TableField(value = "`state`")
+    @ApiModelProperty(value = "状态信息：0全部，1正常")
+    private Integer state;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)

@@ -1,6 +1,5 @@
 package ajin.mall.sys.goods.mapper;
 
-import ajin.mall.common.data.entity.Spu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 

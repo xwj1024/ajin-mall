@@ -1,59 +1,54 @@
 package ajin.mall.common.data.entity;
 
-import ajin.mall.common.data.anno.CascadeField;
-import ajin.mall.common.data.enums.TableInfo;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
+import lombok.Data;
 
 /**
- * <p>
  * 商品类目表
- * </p>
  *
  * @author Ajin
- * @since 2021-04-13
  */
+@ApiModel(value = "商品类目表")
 @Data
-@EqualsAndHashCode
-@Accessors(chain = true)
-@ApiModel(value = "Category对象", description = "商品类目表")
+@TableName(value = "category")
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "分类id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @ApiModelProperty(value = "分类id")
     private Long id;
 
-    @CascadeField(sourceTable = TableInfo.CATEGORY, linkedTable = TableInfo.CATEGORY, linkedField = "parent_id", enableDelete = false)
-    @ApiModelProperty("上级id")
+    @TableField(value = "parent_id")
+    @ApiModelProperty(value = "上级id")
     private Long parentId;
 
-    @ApiModelProperty("分类名称")
+    @TableField(value = "`name`")
+    @ApiModelProperty(value = "分类名称")
     private String name;
 
-    @ApiModelProperty("分类图片")
+    @TableField(value = "image")
+    @ApiModelProperty(value = "分类图片")
     private String image;
 
-    @ApiModelProperty("分类级别")
+    @TableField(value = "`level`")
+    @ApiModelProperty(value = "分类级别")
     private Integer level;
 
-    @ApiModelProperty("分类排序")
+    @TableField(value = "sort")
+    @ApiModelProperty(value = "分类排序")
     private Integer sort;
 
-    @ApiModelProperty("是否显示")
+    @TableField(value = "is_show")
+    @ApiModelProperty(value = "是否显示")
     private Integer isShow;
-
-    @ApiModelProperty("是否删除")
-    @TableLogic
-    private Integer isDelete;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -65,4 +60,11 @@ public class Category implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
 
+    @Version
+    @ApiModelProperty("版本号")
+    private Integer version;
+
+    @TableLogic
+    @ApiModelProperty("是否删除")
+    private Integer isDelete;
 }

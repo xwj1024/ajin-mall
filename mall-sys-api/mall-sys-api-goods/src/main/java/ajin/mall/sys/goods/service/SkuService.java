@@ -1,7 +1,6 @@
 package ajin.mall.sys.goods.service;
 
 import ajin.mall.common.base.result.ResultPage;
-import ajin.mall.common.data.entity.Sku;
 import ajin.mall.sys.goods.form.SkuAddForm;
 import ajin.mall.sys.goods.form.SkuListForm;
 import ajin.mall.sys.goods.form.SkuUpdateForm;

@@ -4,44 +4,43 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
+import lombok.Data;
 
 /**
- * <p>
- * 商品参数表
- * </p>
+ * 商品，商品参数  关联表
  *
  * @author Ajin
- * @since 2021-04-13
  */
+@ApiModel(value = "商品，商品参数  关联表")
 @Data
-@EqualsAndHashCode
-@Accessors(chain = true)
-@ApiModel(value = "Para对象", description = "商品参数表")
-public class Para implements Serializable {
+@TableName(value = "spu_param")
+public class SpuParam implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @ApiModelProperty(value = "主键id")
     private Long id;
 
-    @ApiModelProperty("模板id")
-    private Long templateId;
+    @TableField(value = "spu_id")
+    @ApiModelProperty(value = "spu id")
+    private Long spuId;
 
-    @ApiModelProperty("参数名称")
+    @TableField(value = "param_id")
+    @ApiModelProperty(value = "参数id")
+    private Long paramId;
+
+    @TableField(value = "`name`")
+    @ApiModelProperty(value = "参数名")
     private String name;
 
-    @ApiModelProperty("参数选项")
-    private String options;
-
-    @ApiModelProperty("是否删除")
-    @TableLogic
-    private Integer isDelete;
+    @TableField(value = "`value`")
+    @ApiModelProperty(value = "参数值")
+    private String value;
 
     @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -53,5 +52,11 @@ public class Para implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
 
+    @Version
+    @ApiModelProperty("版本号")
+    private Integer version;
 
+    @TableLogic
+    @ApiModelProperty("是否删除")
+    private Integer isDelete;
 }

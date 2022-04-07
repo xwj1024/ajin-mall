@@ -5,7 +5,6 @@ import ajin.mall.common.base.anno.RepeatSubmit;
 import ajin.mall.common.base.result.BaseResult;
 import ajin.mall.common.base.result.ResultEnum;
 import ajin.mall.common.base.result.ResultPage;
-import ajin.mall.common.data.entity.Spu;
 import ajin.mall.sys.goods.form.SpuAddForm;
 import ajin.mall.sys.goods.form.SpuListForm;
 import ajin.mall.sys.goods.form.SpuUpdateForm;
