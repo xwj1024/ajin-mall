@@ -1,15 +1,19 @@
-package ajin.mall.sys.user;
+package ajin.mall.sys.member;
 
+import ajin.mall.common.data.anno.EnableCascade;
+import ajin.mall.sys.common.anno.EnableSysLog;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author Ajin
  * @since 2021-05-13
  */
+@EnableSysLog
+@EnableCascade
 @SpringBootApplication
-@EnableDiscoveryClient
+@MapperScan(basePackages = {"ajin.mall.**.mapper"})
 public class SysMemberApplication {
     public static void main(String[] args) {
         SpringApplication.run(SysMemberApplication.class, args);

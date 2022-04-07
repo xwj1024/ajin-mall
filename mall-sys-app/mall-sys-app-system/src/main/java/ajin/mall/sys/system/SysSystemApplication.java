@@ -1,5 +1,6 @@
 package ajin.mall.sys.system;
 
+import ajin.mall.common.data.anno.EnableCascade;
 import ajin.mall.sys.common.anno.EnableSysLog;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan(basePackages = {"ajin.mall.**.mapper"})
 @EnableSysLog
+@EnableCascade
 public class SysSystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(SysSystemApplication.class, args);
