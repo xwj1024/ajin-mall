@@ -1,5 +1,6 @@
 package ajin.mall.sys.goods.mapper;
 
+import ajin.mall.common.data.entity.SpuParam;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -10,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Ajin
  * @since 2021-04-13
  */
-public interface SpuParaMapper extends BaseMapper<SpuPara> {
+public interface SpuParaMapper extends BaseMapper<SpuParam> {
 
 }

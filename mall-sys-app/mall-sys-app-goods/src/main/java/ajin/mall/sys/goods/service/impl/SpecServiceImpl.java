@@ -1,8 +1,6 @@
 package ajin.mall.sys.goods.service.impl;
 
-import ajin.mall.sys.goods.mapper.SpecMapper;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import ajin.mall.sys.goods.service.SpecService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +12,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-05-22
  */
 @Service
-public class SpecServiceImpl extends ServiceImpl<SpecMapper, Spec> implements IService<Spec> {
+public class SpecServiceImpl implements SpecService {
 
 }

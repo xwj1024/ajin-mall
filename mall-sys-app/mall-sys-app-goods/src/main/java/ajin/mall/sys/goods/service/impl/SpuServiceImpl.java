@@ -2,13 +2,14 @@ package ajin.mall.sys.goods.service.impl;
 
 import ajin.mall.common.base.result.ResultPage;
 import ajin.mall.common.data.anno.CascadeDelete;
+import ajin.mall.common.data.entity.Spu;
 import ajin.mall.common.data.enums.TableInfo;
 import ajin.mall.sys.goods.form.SpuAddForm;
 import ajin.mall.sys.goods.form.SpuListForm;
 import ajin.mall.sys.goods.form.SpuUpdateForm;
-import ajin.mall.sys.goods.service.SpuService;
 import ajin.mall.sys.goods.mapper.SkuMapper;
 import ajin.mall.sys.goods.mapper.SpuMapper;
+import ajin.mall.sys.goods.service.SpuService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

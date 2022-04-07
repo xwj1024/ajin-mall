@@ -1,8 +1,6 @@
 package ajin.mall.sys.goods.service.impl;
 
 import ajin.mall.sys.goods.service.TemplateService;
-import ajin.mall.sys.goods.mapper.TemplateMapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +12,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-04-13
  */
 @Service
-public class TemplateServiceImpl extends ServiceImpl<TemplateMapper, Template> implements TemplateService {
+public class TemplateServiceImpl  implements TemplateService {
 
 }

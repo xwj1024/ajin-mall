@@ -1,5 +1,6 @@
 package ajin.mall.sys.goods.mapper;
 
+import ajin.mall.common.data.entity.Sku;
 import ajin.mall.sys.goods.form.SkuListForm;
 import ajin.mall.sys.goods.view.SkuView;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

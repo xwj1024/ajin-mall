@@ -1,5 +1,7 @@
 package ajin.mall.sys.system.service;
 
+import ajin.mall.common.data.entity.SysLog;
+
 /**
  * @author Ajin
  */

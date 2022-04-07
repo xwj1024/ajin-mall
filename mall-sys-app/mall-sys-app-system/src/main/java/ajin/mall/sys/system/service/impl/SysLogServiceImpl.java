@@ -1,5 +1,6 @@
 package ajin.mall.sys.system.service.impl;
 
+import ajin.mall.common.data.entity.SysLog;
 import ajin.mall.sys.system.mapper.SysLogMapper;
 import ajin.mall.sys.system.service.SysLogService;
 import org.springframework.stereotype.Service;
