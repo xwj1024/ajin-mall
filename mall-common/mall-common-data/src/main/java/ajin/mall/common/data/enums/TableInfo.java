@@ -13,7 +13,8 @@ public enum TableInfo {
     SKU("sku", "SKU"),
     ORDER("order", "订单"),
     ADDRESS("address", "地址"),
-    USER("user", "用户");
+    USER("user", "用户"),
+    MEMBER("member", "会员");
 
     private final String name;
     private final String desc;

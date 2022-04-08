@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import lombok.Data;
 
 /**
  * 会员表
@@ -26,10 +24,6 @@ public class Member implements Serializable {
     @ApiModelProperty(value = "主键id")
     private Long id;
 
-    @TableField(value = "`level`")
-    @ApiModelProperty(value = "会员等级")
-    private Integer level;
-
     @TableField(value = "username")
     @ApiModelProperty(value = "账号")
     private String username;
@@ -37,6 +31,26 @@ public class Member implements Serializable {
     @TableField(value = "`password`")
     @ApiModelProperty(value = "密码")
     private String password;
+
+    @TableField(value = "`nickname`")
+    @ApiModelProperty(value = "会员昵称")
+    private Integer nickname;
+
+    @TableField(value = "`age`")
+    @ApiModelProperty(value = "会员年龄")
+    private Integer age;
+
+    @TableField(value = "`phone`")
+    @ApiModelProperty(value = "手机号")
+    private Integer phone;
+
+    @TableField(value = "`email`")
+    @ApiModelProperty(value = "邮箱")
+    private Integer email;
+
+    @TableField(value = "`level`")
+    @ApiModelProperty(value = "会员等级")
+    private Integer level;
 
     @TableField(value = "`state`")
     @ApiModelProperty(value = "状态信息：0全部，1正常")

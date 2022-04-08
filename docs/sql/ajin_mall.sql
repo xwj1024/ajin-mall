@@ -260,9 +260,13 @@ DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member`
 (
     `id`          bigint                                                        NOT NULL COMMENT '主键id',
-    `level`       tinyint                                                       NOT NULL DEFAULT '0' COMMENT '会员等级',
     `username`    varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '账号',
     `password`    varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
+    `nickname`    varchar(100) COLLATE utf8mb4_general_ci                       NOT NULL DEFAULT '' COMMENT '会员昵称',
+    `age`         int                                                           NOT NULL DEFAULT '0' COMMENT '会员年龄',
+    `phone`       varchar(20) COLLATE utf8mb4_general_ci                        NOT NULL DEFAULT '' COMMENT '手机号',
+    `email`       varchar(50) COLLATE utf8mb4_general_ci                        NOT NULL DEFAULT '' COMMENT '会员邮箱',
+    `level`       tinyint                                                       NOT NULL DEFAULT '0' COMMENT '会员等级',
     `state`       int                                                           NOT NULL DEFAULT '1' COMMENT '状态信息：0全部，1正常',
     `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
     `update_time` datetime                                                      NOT NULL COMMENT '修改时间',
