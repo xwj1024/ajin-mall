@@ -9,6 +9,6 @@ import java.io.Serializable;
 public class DubboConstants implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String GROUP = "ajin-mall";
+    public static final String GROUP = "ajin.mall";
 
 }
