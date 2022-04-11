@@ -6,6 +6,7 @@ package ajin.mall.common.data.enums;
 public enum TableInfo {
 
     NONE("", ""),
+
     BRAND("brand", "品牌"),
     CATEGORY("category", "分类"),
     CATEGORY_BRAND("category_brand", "分类，品牌"),
@@ -14,6 +15,11 @@ public enum TableInfo {
     ORDER("order", "订单"),
     ADDRESS("address", "地址"),
     USER("user", "用户"),
+    CART("cart", "购物车"),
+    COMPANY("company", "公司"),
+    DEPT("dept", "部门"),
+    EVALUATION("evaluation", "评价"),
+    FAVORITE("favorite", "评价"),
     MEMBER("member", "会员");
 
     private final String name;

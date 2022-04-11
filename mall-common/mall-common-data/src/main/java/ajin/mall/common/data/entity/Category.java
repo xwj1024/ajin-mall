@@ -1,15 +1,15 @@
 package ajin.mall.common.data.entity;
 
+import ajin.mall.common.data.anno.CascadeField;
+import ajin.mall.common.data.enums.TableInfo;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import lombok.Data;
 
 /**
  * 商品类目表
@@ -26,6 +26,7 @@ public class Category implements Serializable {
     @ApiModelProperty(value = "分类id")
     private Long id;
 
+    @CascadeField(sourceTable = TableInfo.CATEGORY, linkedTable = TableInfo.CATEGORY, linkedField = "parent_id")
     @TableField(value = "parent_id")
     @ApiModelProperty(value = "上级id")
     private Long parentId;

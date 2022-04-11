@@ -1,15 +1,15 @@
 package ajin.mall.common.data.entity;
 
+import ajin.mall.common.data.anno.CascadeField;
+import ajin.mall.common.data.enums.TableInfo;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import lombok.Data;
 
 /**
  * 会员收藏表
@@ -26,10 +26,12 @@ public class Favorite implements Serializable {
     @ApiModelProperty(value = "主键id")
     private Long id;
 
+    @CascadeField(sourceTable = TableInfo.MEMBER, linkedTable = TableInfo.FAVORITE, linkedField = "member_id")
     @TableField(value = "member_id")
     @ApiModelProperty(value = "会员id")
     private Long memberId;
 
+    @CascadeField(sourceTable = TableInfo.SPU, linkedTable = TableInfo.FAVORITE, linkedField = "spu_id")
     @TableField(value = "spu_id")
     @ApiModelProperty(value = "spu id")
     private Long spuId;
