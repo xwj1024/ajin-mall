@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import lombok.Data;
 
 /**
  * 系统日志表
@@ -26,9 +24,9 @@ public class SysLog implements Serializable {
     @ApiModelProperty(value = "主键id")
     private Long id;
 
-    @TableField(value = "sys_user_id")
+    @TableField(value = "user_id")
     @ApiModelProperty(value = "系统用户id")
-    private Long sysUserId;
+    private Long userId;
 
     @TableField(value = "description")
     @ApiModelProperty(value = "操作描述")

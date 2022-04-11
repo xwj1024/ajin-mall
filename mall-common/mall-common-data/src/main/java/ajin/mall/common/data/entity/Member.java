@@ -34,7 +34,7 @@ public class Member implements Serializable {
 
     @TableField(value = "`nickname`")
     @ApiModelProperty(value = "会员昵称")
-    private Integer nickname;
+    private String nickname;
 
     @TableField(value = "`age`")
     @ApiModelProperty(value = "会员年龄")
@@ -42,11 +42,11 @@ public class Member implements Serializable {
 
     @TableField(value = "`phone`")
     @ApiModelProperty(value = "手机号")
-    private Integer phone;
+    private String phone;
 
     @TableField(value = "`email`")
     @ApiModelProperty(value = "邮箱")
-    private Integer email;
+    private String email;
 
     @TableField(value = "`level`")
     @ApiModelProperty(value = "会员等级")
