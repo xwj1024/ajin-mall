@@ -27,35 +27,27 @@ public class Address implements Serializable {
     private Long id;
 
     @CascadeField(sourceTable = TableInfo.MEMBER, linkedTable = TableInfo.ADDRESS, linkedField = "member_id")
-    @TableField(value = "member_id")
     @ApiModelProperty(value = "会员id")
     private Long memberId;
 
-    @TableField(value = "province")
     @ApiModelProperty(value = "省")
     private String province;
 
-    @TableField(value = "city")
     @ApiModelProperty(value = "市")
     private String city;
 
-    @TableField(value = "area")
     @ApiModelProperty(value = "区县")
     private String area;
 
-    @TableField(value = "town")
-    @ApiModelProperty(value = "乡镇")
+    @ApiModelProperty(value = "乡镇街道")
     private String town;
 
-    @TableField(value = "detail")
     @ApiModelProperty(value = "详细地址")
     private String detail;
 
-    @TableField(value = "sort")
     @ApiModelProperty(value = "排序")
     private Integer sort;
 
-    @TableField(value = "is_default")
     @ApiModelProperty(value = "是否默认")
     private Integer isDefault;
 

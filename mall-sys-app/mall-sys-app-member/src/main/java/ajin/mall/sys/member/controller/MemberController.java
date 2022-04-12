@@ -30,7 +30,7 @@ public class MemberController {
     @Resource
     private MemberService memberService;
 
-    @RecordSysLog(description = "添加会员")
+    @RecordSysLog("添加会员")
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加会员")
@@ -39,6 +39,7 @@ public class MemberController {
         return new BaseResult<>(ResultEnum.ADD_OK);
     }
 
+    @RecordSysLog("删除会员")
     @RepeatSubmit
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除会员", notes = "根据主键id删除")
@@ -47,7 +48,7 @@ public class MemberController {
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
 
-    @RecordSysLog(description = "修改会员", saveSourceData = TableInfo.BRAND)
+    @RecordSysLog(value = "修改会员", saveSourceData = TableInfo.BRAND)
     @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改会员", notes = "根据主键id修改")

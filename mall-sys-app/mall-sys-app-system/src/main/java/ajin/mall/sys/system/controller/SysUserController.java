@@ -30,7 +30,7 @@ public class SysUserController {
     @Resource
     private UserService userService;
 
-    @RecordSysLog(description = "添加系统用户")
+    @RecordSysLog(value = "添加系统用户")
     @PostMapping
     @ApiOperation("添加系统用户")
     public BaseResult<String> add(@Validated @RequestBody UserAddForm userAddForm) {

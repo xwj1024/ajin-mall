@@ -36,7 +36,7 @@ public class BrandController {
     @Resource
     private BrandService brandService;
 
-    @RecordSysLog(description = "添加商品品牌")
+    @RecordSysLog(value = "添加商品品牌")
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加商品品牌")
@@ -53,7 +53,7 @@ public class BrandController {
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
 
-    @RecordSysLog(description = "修改商品品牌", saveSourceData = TableInfo.BRAND)
+    @RecordSysLog(value = "修改商品品牌", saveSourceData = TableInfo.BRAND)
     @RepeatSubmit
     @PutMapping
     @ApiOperation(value = "修改商品品牌", notes = "根据主键id修改")
