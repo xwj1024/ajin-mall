@@ -15,7 +15,7 @@ public @interface RecordSysLog {
     /**
      * 操作描述
      */
-    String description() default "";
+    String value() default "";
 
     /**
      * 是否保存请求的参数

@@ -55,7 +55,7 @@ public class SysLogAspect {
             sysLog.setOperateTime(LocalDateTime.now());
             // 获取注解
             RecordSysLog recordSysLog = method.getAnnotation(RecordSysLog.class);
-            String       description  = recordSysLog.description();
+            String       description  = recordSysLog.value();
             sysLog.setDescription(description);
 
             // todo 处理用户id，请求地址，请求方法
