@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ajin.mall.web.member.mapper.FavoriteMapper">
+    <sql id="BaseColumnList">
+        id,
+        member_id,
+        spu_id,
+        favorite_time,
+        create_time,
+        update_time,
+        version,
+        is_delete
+    </sql>
+    <select id="selectByMemberIdAndSpuId" resultType="ajin.mall.common.data.entity.Favorite">
+        select
+        <include refid="BaseColumnList"/>
+        from favorite
+        where member_id = #{memberId}
+          and spu_id = #{spuId}
+          and is_delete = 0
+    </select>
+</mapper>

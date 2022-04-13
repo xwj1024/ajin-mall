@@ -25,6 +25,6 @@ public interface MemberMapper extends BaseMapper<Member> {
      * @param username 用户名
      * @return id
      */
-    Long selectIdByUsername(String username);
+    Long selectIdByUsername(@Param("username") String username);
 
 }
