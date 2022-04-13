@@ -7,7 +7,10 @@ import ajin.mall.sys.member.form.MemberUpdateForm;
 import ajin.mall.sys.member.view.MemberView;
 
 /**
+ * 会员服务
+ *
  * @author Ajin
+ * @date 2022/04/13
  */
 public interface MemberService {
     /**

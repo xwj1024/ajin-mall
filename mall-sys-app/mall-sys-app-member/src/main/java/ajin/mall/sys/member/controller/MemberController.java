@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
+ * 成员控制器
+ *
  * @author Ajin
+ * @date 2022/04/13
  */
 @RestController
 @RequestMapping("/member")

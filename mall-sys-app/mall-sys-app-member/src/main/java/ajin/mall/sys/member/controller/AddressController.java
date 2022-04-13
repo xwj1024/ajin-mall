@@ -23,7 +23,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/address")
-@Api(tags = "会员地址")
+@Api(tags = "收件地址")
 @CrossOrigin
 public class AddressController {
 

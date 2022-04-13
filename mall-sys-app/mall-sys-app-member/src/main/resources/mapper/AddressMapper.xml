@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ajin.mall.sys.member.mapper.AddressMapper">
+    <update id="updateIsDefaultByMemberId">
+        update address
+        set is_default = #{isDefault}
+        where member_id = #{memberId}
+          and is_delete = 0
+    </update>
+</mapper>

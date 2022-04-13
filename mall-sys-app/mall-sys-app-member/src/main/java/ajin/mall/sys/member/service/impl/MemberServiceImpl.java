@@ -20,7 +20,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 会员服务impl
+ *
  * @author Ajin
+ * @date 2022/04/13
  */
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -35,17 +38,18 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = new Member();
         BeanUtils.copyProperties(memberAddForm, member);
-        int row = memberMapper.insert(member);
-        BizAssert.isTrue(row == 1, "添加失败");
+        int affectRow = memberMapper.insert(member);
+        BizAssert.isTrue(affectRow == 1, "添加失败");
     }
+
     @CascadeDelete(TableInfo.MEMBER)
     @Override
     public void delete(Long id) {
         Member existMember = memberMapper.selectById(id);
         BizAssert.notNull(existMember, "该会员不存在");
 
-        int row = memberMapper.deleteById(id);
-        BizAssert.isTrue(row == 1, "删除失败");
+        int affectRow = memberMapper.deleteById(id);
+        BizAssert.isTrue(affectRow == 1, "删除失败");
     }
 
     @Override
@@ -58,17 +62,17 @@ public class MemberServiceImpl implements MemberService {
 
         BeanUtils.copyProperties(memberUpdateForm, existMember);
 
-        int row = memberMapper.updateById(existMember);
-        BizAssert.isTrue(row == 1, "修改失败");
+        int affectRow = memberMapper.updateById(existMember);
+        BizAssert.isTrue(affectRow == 1, "修改失败");
     }
 
     @Override
     public MemberView get(Long id) {
-        Member member = memberMapper.selectById(id);
-        BizAssert.notNull(member, "该会员不存在");
+        Member existMember = memberMapper.selectById(id);
+        BizAssert.notNull(existMember, "该会员不存在");
 
         MemberView memberView = new MemberView();
-        BeanUtils.copyProperties(member, memberView);
+        BeanUtils.copyProperties(existMember, memberView);
         return memberView;
     }
 

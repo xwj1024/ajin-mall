@@ -12,11 +12,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 会员地址表
+ * 收件地址表
  *
  * @author Ajin
+ * @date 2022/04/13
  */
-@ApiModel(value = "会员地址表")
+@ApiModel(value = "收件地址表")
 @Data
 @TableName(value = "address")
 public class Address implements Serializable {
@@ -29,6 +30,12 @@ public class Address implements Serializable {
     @CascadeField(sourceTable = TableInfo.MEMBER, linkedTable = TableInfo.ADDRESS, linkedField = "member_id")
     @ApiModelProperty(value = "会员id")
     private Long memberId;
+
+    @ApiModelProperty(value = "收件人")
+    private String addressee;
+
+    @ApiModelProperty(value = "手机号")
+    private String phone;
 
     @ApiModelProperty(value = "省")
     private String province;
