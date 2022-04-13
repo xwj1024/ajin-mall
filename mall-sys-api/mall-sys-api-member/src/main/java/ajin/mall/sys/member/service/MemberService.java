@@ -13,40 +13,45 @@ import ajin.mall.sys.member.view.MemberView;
  * @date 2022/04/13
  */
 public interface MemberService {
+
     /**
-     * 添加会员
+     * 添加
      *
-     * @param memberAddForm 添加表单
+     * @param memberAddForm 成员添加表单
      */
     void add(MemberAddForm memberAddForm);
 
+
     /**
-     * 删除会员
+     * 删除
      *
-     * @param id 会员id
+     * @param id id
      */
     void delete(Long id);
 
+
     /**
-     * 修改会员
+     * 更新
      *
-     * @param memberUpdateForm 修改表单
+     * @param memberUpdateForm 成员更新表单
      */
     void update(MemberUpdateForm memberUpdateForm);
 
+
     /**
-     * 查询会员
+     * 得到
      *
-     * @param id 会员id
-     * @return 会员信息
+     * @param id id
+     * @return {@link MemberView}
      */
     MemberView get(Long id);
 
+
     /**
-     * 根据条件查询会员
+     * 列表
      *
-     * @param memberListForm 查询条件
-     * @return 会员信息列表
+     * @param memberListForm 成员列表形式
+     * @return {@link ResultPage}<{@link MemberView}>
      */
     ResultPage<MemberView> list(MemberListForm memberListForm);
 }
