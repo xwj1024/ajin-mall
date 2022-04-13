@@ -78,8 +78,15 @@ public class SysLogAspect {
                     // todo 隐藏敏感字段：密码
                     sysLog.setRequestParam(json);
                 }
-                Map    map       = JSON.parseObject(json, Map.class);
-                Long   id        = (Long) map.get("id");
+                Map    map   = JSON.parseObject(json, Map.class);
+                Object objId = map.get("id");
+                Long   id    = null;
+                if (objId instanceof Long) {
+                    id = (Long) objId;
+                } else if (objId instanceof Integer) {
+                    id = ((Integer) objId).longValue();
+                }
+
                 String tableName = recordSysLog.saveSourceData().getName();
                 if (!StringUtils.isEmpty(tableName)) {
                     // 设置原始数据
