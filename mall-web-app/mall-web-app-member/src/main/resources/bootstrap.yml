@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+dubbo:
+  scan:
+    base-packages: ajin.mall.web.member.service # 开启包扫描
+  protocol:
+    name: dubbo # 服务协议
+    port: -1 # 服务端口
+  registry:
+    address: nacos://localhost:8848 # 注册中心
