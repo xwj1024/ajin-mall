@@ -2,9 +2,9 @@ spring:
   redis:
     host: localhost
   datasource:
-    url: mpw:+g7Vb573ZiEUoetgRFRSAy73He7ItRZVxHg65DbKCyvDEPYKh+VV709lzMZJyE/9e2V9rTNPeQzfcDOtH9SYB1af2FUwU20Dk/ca1s8GLpxFnI1vf89EJ/M6pzigGzP8ZAQ82zBTsMf2zNNlUF3ECHvbQ8P8BKEgfMvcgldkOHq9pAX79E1Azaz5j5LCm/O4EHkPV8tmBfd6Z+EcgBFOA992mqDMjRUIoemyd/QlOYDg3bYNt3rDzsf5yhVnCney
-    username: mpw:3PREIhFqY2lF8FXXIETPkA==
-    password: mpw:6/a0fTR89mwEPe+jVDfKkQ==
+    url: jdbc:mysql://localhost:3306/ajin_mall?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root1024
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
 # mybatis-plus

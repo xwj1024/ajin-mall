@@ -4,3 +4,4 @@ spring:
 server:
   servlet:
     context-path: /sys/tool
+  port: 8090

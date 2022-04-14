@@ -45,4 +45,4 @@ swagger:
   title: ${spring.application.name}
 # ----------------------------------------------日志------------------------------------------------------------------
 logging:
-  config: classpath:log/log4j2-dev.xml
+  config: classpath:log/log4j2-test.xml
