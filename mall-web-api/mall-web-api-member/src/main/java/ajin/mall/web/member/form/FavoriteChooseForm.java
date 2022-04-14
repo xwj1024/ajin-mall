@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @ApiModel(value = "收藏添加或取消表单")
 @Data
-public class FavoriteOnOrOffForm implements Serializable {
+public class FavoriteChooseForm implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "会员id")

@@ -3,7 +3,7 @@ package ajin.mall.web.member.service.impl;
 import ajin.mall.common.base.asserts.BizAssert;
 import ajin.mall.common.base.result.ResultPage;
 import ajin.mall.common.data.entity.Favorite;
-import ajin.mall.web.member.form.FavoriteOnOrOffForm;
+import ajin.mall.web.member.form.FavoriteChooseForm;
 import ajin.mall.web.member.form.FavoriteListForm;
 import ajin.mall.web.member.mapper.FavoriteMapper;
 import ajin.mall.web.member.service.FavoriteService;
@@ -27,9 +27,9 @@ public class FavoriteServiceImpl implements FavoriteService {
     private FavoriteMapper favoriteMapper;
 
     @Override
-    public Boolean onOrOff(FavoriteOnOrOffForm favoriteOnOrOffForm) {
+    public Boolean choose(FavoriteChooseForm favoriteChooseForm) {
         // 判断该商品是否已收藏
-        Favorite existFavorite = favoriteMapper.selectByMemberIdAndSpuId(favoriteOnOrOffForm.getMemberId(), favoriteOnOrOffForm.getSpuId());
+        Favorite existFavorite = favoriteMapper.selectByMemberIdAndSpuId(favoriteChooseForm.getMemberId(), favoriteChooseForm.getSpuId());
         if (existFavorite != null) {
             // 如果已经收藏，则取消收藏
             int affectRow = favoriteMapper.deleteById(existFavorite.getId());
@@ -38,7 +38,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         }
         // 没有收藏，添加收藏
         Favorite favorite = new Favorite();
-        BeanUtils.copyProperties(favoriteOnOrOffForm, favorite);
+        BeanUtils.copyProperties(favoriteChooseForm, favorite);
         favorite.setFavoriteTime(LocalDateTime.now());
 
         int affectRow = favoriteMapper.insert(favorite);

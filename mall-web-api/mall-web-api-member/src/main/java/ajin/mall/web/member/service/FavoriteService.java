@@ -2,7 +2,7 @@ package ajin.mall.web.member.service;
 
 import ajin.mall.common.base.result.ResultPage;
 import ajin.mall.web.member.form.FavoriteListForm;
-import ajin.mall.web.member.form.FavoriteOnOrOffForm;
+import ajin.mall.web.member.form.FavoriteChooseForm;
 import ajin.mall.web.member.view.FavoriteView;
 
 /**
@@ -14,12 +14,12 @@ import ajin.mall.web.member.view.FavoriteView;
 public interface FavoriteService {
 
     /**
-     * 打开或关闭
+     * 选择
      *
-     * @param favoriteOnOrOffForm 最喜欢打开或关闭表单
+     * @param favoriteChooseForm 最喜欢打开或关闭表单
      * @return {@link Boolean}
      */
-    Boolean onOrOff(FavoriteOnOrOffForm favoriteOnOrOffForm);
+    Boolean choose(FavoriteChooseForm favoriteChooseForm);
 
     /**
      * 删除

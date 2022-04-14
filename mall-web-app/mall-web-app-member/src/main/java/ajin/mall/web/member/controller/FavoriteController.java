@@ -4,7 +4,7 @@ import ajin.mall.common.base.anno.RepeatSubmit;
 import ajin.mall.common.base.result.BaseResult;
 import ajin.mall.common.base.result.ResultEnum;
 import ajin.mall.common.base.result.ResultPage;
-import ajin.mall.web.member.form.FavoriteOnOrOffForm;
+import ajin.mall.web.member.form.FavoriteChooseForm;
 import ajin.mall.web.member.form.FavoriteListForm;
 import ajin.mall.web.member.service.FavoriteService;
 import ajin.mall.web.member.view.FavoriteView;
@@ -33,9 +33,9 @@ public class FavoriteController {
     @RepeatSubmit
     @PostMapping
     @ApiOperation("添加或取消收藏")
-    public BaseResult<Boolean> onOrOff(@Validated @RequestBody FavoriteOnOrOffForm favoriteOnOrOffForm) {
+    public BaseResult<Boolean> choose(@Validated @RequestBody FavoriteChooseForm favoriteChooseForm) {
         // todo 关于会员的都要进行验证是否是该会员本身操作
-        Boolean result = favoriteService.onOrOff(favoriteOnOrOffForm);
+        Boolean result = favoriteService.choose(favoriteChooseForm);
         return new BaseResult<>(ResultEnum.OPERATE_OK, result);
     }
 
