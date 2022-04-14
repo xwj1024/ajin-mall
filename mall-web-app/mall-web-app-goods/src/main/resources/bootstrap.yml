@@ -7,7 +7,7 @@ spring:
         server-addr: localhost:8848
 dubbo:
   scan:
-    base-packages: ajin.mall.sys.member.service # 开启包扫描
+    base-packages: ajin.mall.web.goods.service # 开启包扫描
   protocol:
     name: dubbo # 服务协议
     port: -1 # 服务端口

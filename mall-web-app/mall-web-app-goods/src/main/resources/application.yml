@@ -1,0 +1,7 @@
+spring:
+  profiles:
+    active: @environment@
+server:
+  servlet:
+    context-path: /web/goods
+  port: 9030

@@ -16,4 +16,11 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>ajin.mall</groupId>
+            <artifactId>mall-common-data</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 </project>

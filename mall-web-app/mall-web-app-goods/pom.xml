@@ -12,8 +12,15 @@
     <artifactId>mall-web-app-goods</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>ajin.mall</groupId>
+            <artifactId>mall-web-api-goods</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 </project>
