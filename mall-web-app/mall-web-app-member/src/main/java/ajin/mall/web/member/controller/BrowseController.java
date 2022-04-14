@@ -4,14 +4,11 @@ import ajin.mall.common.base.anno.RepeatSubmit;
 import ajin.mall.common.base.result.BaseResult;
 import ajin.mall.common.base.result.ResultEnum;
 import ajin.mall.common.base.result.ResultPage;
-import ajin.mall.web.member.form.BrowseAddForm;
 import ajin.mall.web.member.form.BrowseListForm;
-import ajin.mall.web.member.form.BrowseUpdateForm;
 import ajin.mall.web.member.service.BrowseService;
 import ajin.mall.web.member.view.BrowseView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,7 +27,7 @@ public class BrowseController {
 
     @RepeatSubmit
     @DeleteMapping("/{id}")
-    @ApiOperation( "删除浏览记录")
+    @ApiOperation("删除浏览记录")
     public BaseResult<String> delete(@PathVariable("id") Long id) {
         browseService.delete(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
