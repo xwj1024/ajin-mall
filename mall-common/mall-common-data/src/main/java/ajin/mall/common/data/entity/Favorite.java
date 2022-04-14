@@ -31,7 +31,6 @@ public class Favorite implements Serializable {
     @ApiModelProperty(value = "会员id")
     private Long memberId;
 
-    @CascadeField(sourceTable = TableInfo.SPU, linkedTable = TableInfo.FAVORITE, linkedField = "spu_id")
     @TableField(value = "spu_id")
     @ApiModelProperty(value = "spu id")
     private Long spuId;

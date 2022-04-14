@@ -13,10 +13,11 @@ import ajin.mall.web.member.view.FavoriteView;
  */
 public interface FavoriteService {
 
+
     /**
      * 选择
      *
-     * @param favoriteChooseForm 最喜欢打开或关闭表单
+     * @param favoriteChooseForm 最喜欢选择形式
      * @return {@link Boolean}
      */
     Boolean choose(FavoriteChooseForm favoriteChooseForm);

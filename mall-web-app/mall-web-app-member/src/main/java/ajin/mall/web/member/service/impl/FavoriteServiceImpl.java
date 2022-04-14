@@ -2,7 +2,9 @@ package ajin.mall.web.member.service.impl;
 
 import ajin.mall.common.base.asserts.BizAssert;
 import ajin.mall.common.base.result.ResultPage;
+import ajin.mall.common.data.anno.CascadeDelete;
 import ajin.mall.common.data.entity.Favorite;
+import ajin.mall.common.data.enums.TableInfo;
 import ajin.mall.web.member.form.FavoriteChooseForm;
 import ajin.mall.web.member.form.FavoriteListForm;
 import ajin.mall.web.member.mapper.FavoriteMapper;
@@ -46,9 +48,14 @@ public class FavoriteServiceImpl implements FavoriteService {
         return true;
     }
 
+    @CascadeDelete(TableInfo.FAVORITE)
     @Override
     public void delete(Long id) {
+        Favorite existFavorite = favoriteMapper.selectById(id);
+        BizAssert.notNull(existFavorite, "该收藏不存在");
 
+        int affectRow = favoriteMapper.deleteById(id);
+        BizAssert.isTrue(affectRow == 1, "删除失败");
     }
 
     @Override
