@@ -10,22 +10,22 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 系统日志表
+ * 业务日志表
  *
  * @author Ajin
+ * @date 2022/04/15
  */
-@ApiModel(value = "系统日志表")
+@ApiModel(value = "业务日志表")
 @Data
-public class SysLog implements Serializable {
+public class BizLog implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "主键id")
     private Long id;
 
-    @TableField(value = "user_id")
-    @ApiModelProperty(value = "系统用户id")
-    private Long userId;
+    @ApiModelProperty(value = "会员id")
+    private Long memberId;
 
     @TableField(value = "description")
     @ApiModelProperty(value = "操作描述")

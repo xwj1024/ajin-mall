@@ -30,7 +30,7 @@ public class MemberController {
 
     @RepeatSubmit
     @PutMapping
-    @ApiOperation(value = "修改会员", notes = "根据主键id修改")
+    @ApiOperation("修改会员")
     public BaseResult<String> update(@Validated @RequestBody MemberUpdateForm memberUpdateForm) {
         memberService.update(memberUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);

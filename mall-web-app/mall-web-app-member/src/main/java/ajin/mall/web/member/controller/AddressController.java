@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
+ * 地址控制器
+ *
  * @author Ajin
+ * @date 2022/04/15
  */
 @RestController
 @RequestMapping("/address")
@@ -38,7 +41,7 @@ public class AddressController {
 
     @RepeatSubmit
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "删除地址", notes = "根据主键id删除")
+    @ApiOperation("删除地址")
     public BaseResult<String> delete(@PathVariable("id") Long id) {
         addressService.delete(id);
         return new BaseResult<>(ResultEnum.DELETE_OK);
@@ -46,7 +49,7 @@ public class AddressController {
 
     @RepeatSubmit
     @PutMapping
-    @ApiOperation(value = "修改地址", notes = "根据主键id修改")
+    @ApiOperation("修改地址")
     public BaseResult<String> update(@Validated @RequestBody AddressUpdateForm addressUpdateForm) {
         addressService.update(addressUpdateForm);
         return new BaseResult<>(ResultEnum.UPDATE_OK);

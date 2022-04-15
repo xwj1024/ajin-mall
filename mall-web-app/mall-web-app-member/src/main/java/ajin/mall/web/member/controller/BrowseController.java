@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
+ * 浏览控制器
+ *
  * @author Ajin
+ * @date 2022/04/15
  */
 @RestController
 @RequestMapping("/browse")

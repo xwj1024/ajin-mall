@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * 最喜欢映射器
+ * 收藏映射器
  *
  * @author Ajin
  * @date 2022/04/13

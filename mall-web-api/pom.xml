@@ -20,5 +20,6 @@
     <modules>
         <module>mall-web-api-goods</module>
         <module>mall-web-api-member</module>
+        <module>mall-web-api-system</module>
     </modules>
 </project>
