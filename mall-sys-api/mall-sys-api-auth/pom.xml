@@ -11,21 +11,42 @@
 
     <artifactId>mall-sys-api-auth</artifactId>
     <dependencies>
-    <dependency>
-        <groupId>ajin.mall</groupId>
-        <artifactId>mall-sys-app-common</artifactId>
-        <version>0.0.1</version>
-    </dependency>
-    <!--security-->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-security</artifactId>
-        <exclusions><!--去掉springboot默认配置-->
-            <exclusion>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-logging</artifactId>
-            </exclusion>
-        </exclusions>
-    </dependency>
+        <dependency>
+            <groupId>ajin.mall</groupId>
+            <artifactId>mall-sys-app-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <!--security-->
+        <!--    <dependency>-->
+        <!--        <groupId>org.springframework.boot</groupId>-->
+        <!--        <artifactId>spring-boot-starter-security</artifactId>-->
+        <!--        <exclusions>&lt;!&ndash;去掉springboot默认配置&ndash;&gt;-->
+        <!--            <exclusion>-->
+        <!--                <groupId>org.springframework.boot</groupId>-->
+        <!--                <artifactId>spring-boot-starter-logging</artifactId>-->
+        <!--            </exclusion>-->
+        <!--        </exclusions>-->
+        <!--    </dependency>-->
     </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.2.1.RELEASE</version>
+                <configuration>
+                    <mainClass>ajin.mall.common.data.CommonDataApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -51,8 +51,10 @@ public class AuthServiceImpl implements AuthService {
         // 判断是否超过登录失败限制次数
         if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(RedisConstants.LOGIN_FAIL_TIMES + loginForm.getUsername()))) {
             String loginFailTimes = stringRedisTemplate.opsForValue().get(RedisConstants.LOGIN_FAIL_TIMES + loginForm.getUsername());
+            Long expireTime = stringRedisTemplate.opsForValue().getOperations().getExpire(RedisConstants.LOGIN_FAIL_TIMES + loginForm.getUsername(), TimeUnit.MINUTES);
             int count = Integer.parseInt(loginFailTimes == null ? "0" : loginFailTimes);
-            Assert.isTrue(count < securityProperties.getLoginFailTimeLimit() - 1, "登录次数已超过限制，请在" + securityProperties.getLoginFailAfterTime() + "分钟后重试");
+            expireTime = expireTime == null ? 0 : expireTime;
+            Assert.isTrue(count < securityProperties.getLoginFailTimeLimit() - 1, "登录次数已超过限制，请在" + (expireTime + 1) + "分钟后重试");
         }
         // 根据用户名查询用户信息
         User existUser = userService.loadUserByUsername(loginForm.getUsername());
@@ -60,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
         if (existUser == null || !BCrypt.checkpw(loginForm.getPassword(), existUser.getPassword())) {
             int loginFailTimes = recordFailTimes(RedisConstants.LOGIN_FAIL_TIMES + loginForm.getUsername(), securityProperties.getLoginFailAfterTime());
             int remainLoginTimes = securityProperties.getLoginFailTimeLimit() - loginFailTimes;
-            BizAssert.isTrue(remainLoginTimes <= 3, "账号或密码错误，剩余登录次数：" + remainLoginTimes);
+            BizAssert.isTrue(remainLoginTimes > 3, "账号或密码错误，剩余登录次数：" + remainLoginTimes);
             throw new BizException("账号或密码错误");
         }
         // 判断账号状态
@@ -87,7 +89,7 @@ public class AuthServiceImpl implements AuthService {
         stringRedisTemplate.opsForValue().set(RedisConstants.SYS_TOKEN_ACCESS + accessTokenKey,
                 refreshTokenKey + TOKEN_SEPARATOR + accessTokenValue, 2L, TimeUnit.HOURS);
         // refresh token 过期时间30天
-        stringRedisTemplate.opsForValue().set(RedisConstants.SYS_TOKEN_ACCESS + refreshTokenKey,
+        stringRedisTemplate.opsForValue().set(RedisConstants.SYS_TOKEN_REFRESH + refreshTokenKey,
                 refreshTokenValue, 30L, TimeUnit.DAYS);
 
         // 返回token信息
@@ -124,8 +126,10 @@ public class AuthServiceImpl implements AuthService {
         // 判断是否超过修改失败限制次数
         if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(RedisConstants.CHANGE_FAIL_TIMES + changeForm.getUsername()))) {
             String loginFailTimes = stringRedisTemplate.opsForValue().get(RedisConstants.LOGIN_FAIL_TIMES + changeForm.getUsername());
+            Long expireTime = stringRedisTemplate.opsForValue().getOperations().getExpire(RedisConstants.CHANGE_FAIL_TIMES + changeForm.getUsername(), TimeUnit.MINUTES);
             int count = Integer.parseInt(loginFailTimes == null ? "0" : loginFailTimes);
-            Assert.isTrue(count < securityProperties.getChangeFailTimeLimit() - 1, "修改次数已超过限制，请在" + securityProperties.getChangeFailAfterTime() + "分钟后重试");
+            expireTime = expireTime == null ? 0 : expireTime;
+            Assert.isTrue(count < securityProperties.getChangeFailTimeLimit() - 1, "修改次数已超过限制，请在" + (expireTime + 1) + "分钟后重试");
         }
         // 根据用户名查询用户信息
         User existUser = userService.loadUserByUsername(changeForm.getUsername());
@@ -146,12 +150,12 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private int recordFailTimes(String key, Integer time) {
-        String loginFailTimes = stringRedisTemplate.opsForValue().get(key);
-        if (StringUtils.isEmpty(loginFailTimes)) {
-            loginFailTimes = "0";
+        String failTimes = stringRedisTemplate.opsForValue().get(key);
+        if (StringUtils.isEmpty(failTimes)) {
+            failTimes = "0";
         }
-        int newLoginFailTimes = Integer.parseInt(loginFailTimes) + 1;
-        stringRedisTemplate.opsForValue().set(key, Integer.toString(newLoginFailTimes), time, TimeUnit.MINUTES);
-        return newLoginFailTimes;
+        int newFailTimes = Integer.parseInt(failTimes) + 1;
+        stringRedisTemplate.opsForValue().set(key, Integer.toString(newFailTimes), time, TimeUnit.MINUTES);
+        return newFailTimes;
     }
 }

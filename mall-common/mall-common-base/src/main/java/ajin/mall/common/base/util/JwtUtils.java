@@ -23,7 +23,7 @@ public class JwtUtils {
     /**
      * 秘钥明文
      */
-    public static final String JWT_KEY = "ajin-mall";
+    public static final String JWT_KEY = "AjinMall";
     /**
      * 有效时长
      */
