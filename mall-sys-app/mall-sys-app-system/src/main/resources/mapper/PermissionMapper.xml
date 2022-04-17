@@ -25,15 +25,15 @@
 
     <select id="selectPermissionListByUser" resultType="java.lang.String">
         select p.keyword keyword
-        from sys_user as u
-                 left join sys_user_role as ur
-                           on u.id = ur.sys_user_id
-                 left join sys_role as r
-                           on r.id = ur.sys_role_id
-                 left join sys_role_permission as rp
-                           on r.id = rp.sys_role_id
-                 left join sys_permission as p
-                           on p.id = rp.sys_permission_id
+        from user as u
+                 left join user_role as ur
+                           on u.id = ur.user_id
+                 left join role as r
+                           on r.id = ur.role_id
+                 left join role_permission as rp
+                           on r.id = rp.role_id
+                 left join permission as p
+                           on p.id = rp.permission_id
         where u.id = #{sysUserId}
           and u.is_delete = 0
           and r.is_delete = 0
@@ -42,7 +42,7 @@
 
     <select id="selectPermissionListByPathAndMethod" resultType="java.lang.String">
         select keyword
-        from sys_permission
+        from permission
         where is_delete = 0
           and path = #{path}
           and method = #{method}

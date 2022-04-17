@@ -40,9 +40,8 @@ public class User implements Serializable {
     @ApiModelProperty(value = "头像")
     private String avatar;
 
-    @TableField(value = "description")
     @ApiModelProperty(value = "备注，描述")
-    private String description;
+    private String remark;
 
     @TableField(value = "`state`")
     @ApiModelProperty(value = "状态信息：0全部，1账号正常，2账号禁用，4账号锁定，8账号过期，16密码过期")

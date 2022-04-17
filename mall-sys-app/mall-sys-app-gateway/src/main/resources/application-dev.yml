@@ -26,6 +26,17 @@ spring:
                 key-resolver: "#{@ipKeyResolver}"
                 redis-rate-limiter.replenishRate: 10
                 redis-rate-limiter.burstCapacity: 10
+        # -------------------------------------------auth-------------------------------------------
+        - id: mall-sys-app-auth
+          uri: lb://mall-sys-app-auth
+          predicates:
+            - Path=/sys/auth/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 10
         # -----------------------------------------goods-----------------------------------------
         - id: mall-sys-app-goods
           uri: lb://mall-sys-app-goods

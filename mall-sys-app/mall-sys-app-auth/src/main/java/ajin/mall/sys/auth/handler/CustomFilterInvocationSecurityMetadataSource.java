@@ -1,5 +1,4 @@
-//package ajin.mall.sys.auth.config.handler;
-//
+//package ajin.mall.sys.auth.handler;
 //
 //import ajin.mall.sys.system.service.PermissionService;
 //import org.apache.dubbo.config.annotation.Reference;
@@ -13,7 +12,10 @@
 //import java.util.List;
 //
 ///**
+// * 自定义过滤器调用安全元数据来源
+// *
 // * @author Ajin
+// * @date 2022/04/16
 // */
 //@Component
 //public class CustomFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {

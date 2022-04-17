@@ -1,4 +1,4 @@
-//package ajin.mall.sys.auth.config.handler;
+//package ajin.mall.sys.auth.handler;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.access.SecurityMetadataSource;
@@ -12,9 +12,11 @@
 //import java.io.IOException;
 //
 ///**
+// * 自定义抽象安全拦截器
 // * 权限拦截器
 // *
 // * @author Ajin
+// * @date 2022/04/16
 // */
 //@Component
 //public class CustomAbstractSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {

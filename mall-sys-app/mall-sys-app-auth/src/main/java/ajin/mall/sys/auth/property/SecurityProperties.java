@@ -22,8 +22,20 @@ public class SecurityProperties implements Serializable {
      * 登录失败次数限制
      */
     private Integer loginFailTimeLimit = 10;
+
     /**
      * 登录失败时间限制（分钟）
      */
     private Integer loginFailAfterTime = 10;
+
+
+    /**
+     * 修改密码失败次数限制
+     */
+    private Integer changeFailTimeLimit = 10;
+
+    /**
+     * 修改密码失败时间限制（分钟）
+     */
+    private Integer changeFailAfterTime = 10;
 }

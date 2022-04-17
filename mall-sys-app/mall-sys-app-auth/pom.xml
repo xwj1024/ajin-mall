@@ -18,27 +18,8 @@
     <dependencies>
         <dependency>
             <groupId>ajin.mall</groupId>
-            <artifactId>mall-sys-api-system</artifactId>
+            <artifactId>mall-sys-api-auth</artifactId>
             <version>0.0.1</version>
-        </dependency>
-        <!--security-->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-data</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-security</artifactId>
-            <exclusions><!--去掉springboot默认配置-->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 </project>

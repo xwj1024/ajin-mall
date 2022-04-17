@@ -1,4 +1,4 @@
-//package ajin.mall.sys.auth.config.handler;
+//package ajin.mall.sys.auth.handler;
 //
 //import org.springframework.security.access.AccessDecisionManager;
 //import org.springframework.security.access.AccessDeniedException;
@@ -14,6 +14,7 @@
 // * 访问决策管理器
 // *
 // * @author Ajin
+// * @date 2022/04/16
 // */
 //@Component
 //public class CustomAccessDecisionManager implements AccessDecisionManager {

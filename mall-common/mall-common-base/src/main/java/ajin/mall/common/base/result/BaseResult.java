@@ -13,8 +13,8 @@ public class BaseResult<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer code;
-    private String  desc;
-    private T       data;
+    private String desc;
+    private T data;
 
     public BaseResult(ResultEnum resultEnum) {
         this.code = resultEnum.getCode();

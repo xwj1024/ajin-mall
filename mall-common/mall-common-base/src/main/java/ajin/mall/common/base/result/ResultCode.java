@@ -12,7 +12,5 @@ public class ResultCode implements Serializable {
 
     public static final int ERR = 0;
     public static final int OK = 1;
-    public static final int INFO = 2;
-    public static final int WARN = 3;
 
 }

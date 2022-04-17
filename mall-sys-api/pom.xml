@@ -20,6 +20,7 @@
         <module>mall-sys-api-system</module>
         <module>mall-sys-api-tool</module>
         <module>mall-sys-api-monitor</module>
+        <module>mall-sys-api-auth</module>
     </modules>
 
 </project>
