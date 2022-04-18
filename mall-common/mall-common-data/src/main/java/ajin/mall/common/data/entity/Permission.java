@@ -1,15 +1,13 @@
 package ajin.mall.common.data.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import lombok.Data;
 
 /**
  * 权限表
@@ -18,13 +16,11 @@ import lombok.Data;
  */
 @ApiModel(value = "权限表")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "permission")
-public class Permission implements Serializable {
+public class Permission extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键id")
-    private Long id;
 
     @TableField(value = "`name`")
     @ApiModelProperty(value = "名称")
@@ -46,21 +42,4 @@ public class Permission implements Serializable {
     @ApiModelProperty(value = "备注，描述")
     private String description;
 
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty("修改时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime updateTime;
-
-    @Version
-    @ApiModelProperty("版本号")
-    private Integer version;
-
-    @TableLogic
-    @ApiModelProperty("是否删除")
-    private Integer isDelete;
 }
