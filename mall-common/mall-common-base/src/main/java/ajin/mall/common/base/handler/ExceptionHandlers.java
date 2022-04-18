@@ -1,5 +1,6 @@
 package ajin.mall.common.base.handler;
 
+import ajin.mall.common.base.exception.AuthException;
 import ajin.mall.common.base.exception.BizException;
 import ajin.mall.common.base.exception.SysException;
 import ajin.mall.common.base.result.BaseResult;
@@ -37,6 +38,12 @@ public class ExceptionHandlers {
     public BaseResult<String> handleSysException(SysException e) {
         log.warn(e.getMessage());
         return new BaseResult<>(ResultCode.ERR, e.getMessage());
+    }
+
+    @ExceptionHandler(AuthException.class)
+    public BaseResult<String> handleAuthException(AuthException e) {
+        log.warn(e.getMessage());
+        return new BaseResult<>(ResultCode.AUTH, e.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

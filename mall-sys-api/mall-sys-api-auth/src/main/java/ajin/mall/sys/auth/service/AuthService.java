@@ -38,6 +38,7 @@ public interface AuthService {
      * 修改密码
      *
      * @param changeForm 改变形式
+     * @param token      令牌
      */
-    void change(ChangeForm changeForm);
+    void change(ChangeForm changeForm, String token);
 }

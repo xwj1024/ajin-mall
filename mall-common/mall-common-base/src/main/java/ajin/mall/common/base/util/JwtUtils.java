@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class JwtUtils {
     /**
      * 秘钥明文
      */
-    public static final String JWT_KEY = "AjinMall";
+    public static final String JWT_KEY = "ajin-mall";
     /**
      * 有效时长
      */
@@ -42,7 +43,7 @@ public class JwtUtils {
             // 默认30天
             ttlMillis = JwtUtils.JWT_TTL;
         }
-        long nowMillis = System.currentTimeMillis();
+        long nowMillis    = System.currentTimeMillis();
         long expireMillis = nowMillis + ttlMillis;
 
         JwtBuilder builder = Jwts.builder()
@@ -70,7 +71,7 @@ public class JwtUtils {
      * @return SecretKey
      */
     public static SecretKey generateKey() {
-        byte[] encodedKey = Base64.getDecoder().decode(JwtUtils.JWT_KEY);
+        byte[] encodedKey = Base64.getEncoder().encode(JwtUtils.JWT_KEY.getBytes(StandardCharsets.UTF_8));
         return new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
     }
 

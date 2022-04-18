@@ -37,7 +37,7 @@ public class AuthController {
     @RecordSysLog(value = "用户登录", saveRequestData = false)
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public BaseResult<LoginView> login(@Validated@RequestBody LoginForm loginForm) {
+    public BaseResult<LoginView> login(@Validated @RequestBody LoginForm loginForm) {
         LoginView result = authService.login(loginForm);
         return new BaseResult<>(ResultCode.OK, "登录成功", result);
     }
@@ -64,8 +64,9 @@ public class AuthController {
     @RepeatSubmit
     @ApiOperation("修改密码")
     @PostMapping("/change")
-    public BaseResult<String> change(@Validated @RequestBody ChangeForm changeForm) {
-        authService.change(changeForm);
+    public BaseResult<String> change(@Validated @RequestBody ChangeForm changeForm, HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        authService.change(changeForm, token);
         return new BaseResult<>(ResultCode.OK, "修改成功");
     }
 }
