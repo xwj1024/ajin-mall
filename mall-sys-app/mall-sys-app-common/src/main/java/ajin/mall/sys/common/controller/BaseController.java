@@ -7,5 +7,6 @@ package ajin.mall.sys.common.controller;
  * @date 2022/04/18
  */
 public class BaseController {
+    String a = "a";
 
 }

@@ -70,6 +70,7 @@ public class AuthServiceImpl implements AuthService {
         BizAssert.notTrue(existUser.getState() == 8, "账号已过期");
         BizAssert.notTrue(existUser.getState() == 16, "密码已过期");
         // 登录成功，更新登录时间
+        LocalDateTime loginTime = existUser.getLoginTime();
         existUser.setLoginTime(LocalDateTime.now());
         userService.updateById(existUser);
         // 登录成功清除redis中登录失败次数限制
@@ -96,10 +97,15 @@ public class AuthServiceImpl implements AuthService {
         stringRedisTemplate.opsForSet().add(userTokenKey, accessKey, refreshKey);
         stringRedisTemplate.expire(userTokenKey, 31L, TimeUnit.DAYS);
 
-        // 返回token信息
+        // 返回token信息，用户信息
         LoginView loginView = new LoginView();
         loginView.setAccessToken(accessToken);
         loginView.setRefreshToken(refreshToken);
+        loginView.setUserId(existUser.getId());
+        loginView.setUsername(existUser.getUsername());
+        loginView.setNickname(existUser.getNickname());
+        loginView.setAvatar(existUser.getAvatar());
+        loginView.setLoginTime(loginTime);
         return loginView;
     }
 
