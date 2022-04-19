@@ -30,6 +30,7 @@ public class RedisConstants implements Serializable {
 
     // token
 
+    public static final String SYS_TOKEN_USER = "mall:sys:token:user:";
     public static final String SYS_TOKEN_ACCESS = "mall:sys:token:access:";
     public static final String SYS_TOKEN_REFRESH = "mall:sys:token:refresh:";
 
