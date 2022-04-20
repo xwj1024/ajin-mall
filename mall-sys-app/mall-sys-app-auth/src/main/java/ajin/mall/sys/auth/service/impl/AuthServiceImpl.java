@@ -85,7 +85,7 @@ public class AuthServiceImpl implements AuthService {
         String refreshToken = UUID.randomUUID().toString();
         String jwt = JwtUtils.generateJwt(existUser.getId().toString(), claims);
 
-        String userTokenKey = RedisConstants.SYS_TOKEN_ACCESS + existUser.getId();
+        String userTokenKey = RedisConstants.SYS_TOKEN_USER + existUser.getId();
         String accessKey = RedisConstants.SYS_TOKEN_ACCESS + accessToken;
         String refreshKey = RedisConstants.SYS_TOKEN_REFRESH + refreshToken;
         String accessValue = refreshKey + SplitConstants.TOKEN_SPLIT + jwt;
