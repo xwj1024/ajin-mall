@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2022/04/18
  */
 public class BaseController {
+    String a = "a";
 
     protected HttpServletRequest request;
     protected HttpServletResponse response;

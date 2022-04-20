@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @author Ajin
@@ -18,4 +19,19 @@ public class LoginView implements Serializable {
 
     @ApiModelProperty("refreshToken")
     private String refreshToken;
+
+    @ApiModelProperty("用户id")
+    private Long userId;
+
+    @ApiModelProperty("用户名")
+    private String username;
+
+    @ApiModelProperty("昵称")
+    private String nickname;
+
+    @ApiModelProperty("头像")
+    private String avatar;
+
+    @ApiModelProperty("上次登录时间")
+    private LocalDateTime loginTime;
 }

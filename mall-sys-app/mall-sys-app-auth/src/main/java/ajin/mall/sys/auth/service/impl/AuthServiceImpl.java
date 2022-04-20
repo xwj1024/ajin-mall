@@ -14,6 +14,7 @@ import ajin.mall.sys.auth.property.SecurityProperties;
 import ajin.mall.sys.auth.service.AuthService;
 import ajin.mall.sys.auth.view.LoginView;
 import ajin.mall.sys.system.service.UserService;
+import io.jsonwebtoken.Claims;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -69,6 +70,7 @@ public class AuthServiceImpl implements AuthService {
         BizAssert.notTrue(existUser.getState() == 8, "账号已过期");
         BizAssert.notTrue(existUser.getState() == 16, "密码已过期");
         // 登录成功，更新登录时间
+        LocalDateTime loginTime = existUser.getLoginTime();
         existUser.setLoginTime(LocalDateTime.now());
         userService.updateById(existUser);
         // 登录成功清除redis中登录失败次数限制
@@ -81,48 +83,60 @@ public class AuthServiceImpl implements AuthService {
         claims.put("username", existUser.getUsername());
         String accessToken  = UUID.randomUUID().toString();
         String refreshToken = UUID.randomUUID().toString();
-        String jwt          = JwtUtils.generateJwt(accessToken, claims);
+        String jwt          = JwtUtils.generateJwt(existUser.getId().toString(), claims);
 
-        String accessKey   = RedisConstants.SYS_TOKEN_ACCESS + existUser.getId() + SplitConstants.REDIS_SPLIT + accessToken;
-        String refreshKey  = RedisConstants.SYS_TOKEN_REFRESH + existUser.getId() + SplitConstants.REDIS_SPLIT + refreshToken;
-        String accessValue = refreshKey + SplitConstants.TOKEN_SPLIT + jwt;
+        String userTokenKey = RedisConstants.SYS_TOKEN_ACCESS + existUser.getId();
+        String accessKey    = RedisConstants.SYS_TOKEN_ACCESS + accessToken;
+        String refreshKey   = RedisConstants.SYS_TOKEN_REFRESH + refreshToken;
+        String accessValue  = refreshKey + SplitConstants.TOKEN_SPLIT + jwt;
         // access token  过期时间2小时
         stringRedisTemplate.opsForValue().set(accessKey, accessValue, 2L, TimeUnit.HOURS);
         // refresh token  过期时间30天
-        stringRedisTemplate.opsForValue().set(refreshKey, accessKey + accessValue, 30L, TimeUnit.DAYS);
+        stringRedisTemplate.opsForValue().set(refreshKey, accessKey + SplitConstants.TOKEN_SPLIT + accessValue, 30L, TimeUnit.DAYS);
+        // 当前用户下的 token 过期时间31天
+        stringRedisTemplate.opsForSet().add(userTokenKey, accessKey, refreshKey);
+        stringRedisTemplate.expire(userTokenKey, 31L, TimeUnit.DAYS);
 
-        // 返回token信息
+        // 返回token信息，用户信息
         LoginView loginView = new LoginView();
         loginView.setAccessToken(accessToken);
         loginView.setRefreshToken(refreshToken);
+        loginView.setUserId(existUser.getId());
+        loginView.setUsername(existUser.getUsername());
+        loginView.setNickname(existUser.getNickname());
+        loginView.setAvatar(existUser.getAvatar());
+        loginView.setLoginTime(loginTime);
         return loginView;
     }
 
     @Override
     public void logout(String accessToken) {
         BizAssert.isTrue(StringUtils.isNotEmpty(accessToken), "访问令牌不存在");
-        Set<String> keys = stringRedisTemplate.keys(RedisConstants.SYS_TOKEN_ACCESS + "*" + accessToken);
-        AuthAssert.isTrue(keys != null && !keys.isEmpty(), "访问令牌已失效");
+        String accessValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_ACCESS + accessToken);
+        AuthAssert.notNull(accessValue, "访问令牌已失效");
         // 移除当前token相关信息
-        String accessKey   = keys.stream().findFirst().get();
-        String accessValue = stringRedisTemplate.opsForValue().get(accessKey);
-        String refreshKey  = accessValue.split(SplitConstants.TOKEN_SPLIT)[0];
+        String[] split      = accessValue.split(SplitConstants.TOKEN_SPLIT);
+        String   refreshKey = split[0];
+        String   jwt        = split[1];
+        Claims   claims     = JwtUtils.parseJwt(jwt);
+        String   userId     = claims.getId();
+
         stringRedisTemplate.delete(refreshKey);
-        stringRedisTemplate.delete(accessKey);
+        stringRedisTemplate.delete(accessToken);
+        stringRedisTemplate.opsForSet().remove(RedisConstants.SYS_TOKEN_USER + userId, refreshKey, accessToken);
     }
 
     @Override
     public void refresh(String refreshToken) {
         BizAssert.isTrue(StringUtils.isNotEmpty(refreshToken), "刷新令牌不存在");
         // 获取刷新令牌信息，判断是否过期
-        Set<String> keys = stringRedisTemplate.keys(RedisConstants.SYS_TOKEN_REFRESH + "*" + refreshToken);
-        BizAssert.isTrue(keys != null && !keys.isEmpty(), "身份已失效，请重新登录");
+        String refreshValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_REFRESH + refreshToken);
+        BizAssert.notNull(refreshValue, "身份已失效，请重新登录");
 
-        String refreshKey   = keys.stream().findFirst().get();
-        String refreshValue = stringRedisTemplate.opsForValue().get(refreshKey);
-        String accessKey    = refreshValue.split(SplitConstants.TOKEN_SPLIT)[0];
-        String accessValue  = refreshValue.split(SplitConstants.TOKEN_SPLIT)[1];
-        stringRedisTemplate.opsForValue().set(accessKey, accessValue, 2L, TimeUnit.HOURS);
+        String accessKey   = refreshValue.split(SplitConstants.TOKEN_SPLIT)[0];
+        String refreshKey  = refreshValue.split(SplitConstants.TOKEN_SPLIT)[1];
+        String accessValue = refreshValue.split(SplitConstants.TOKEN_SPLIT)[2];
+        stringRedisTemplate.opsForValue().set(accessKey, refreshKey + SplitConstants.TOKEN_SPLIT + accessValue, 2L, TimeUnit.HOURS);
     }
 
     @Override
@@ -152,20 +166,18 @@ public class AuthServiceImpl implements AuthService {
             stringRedisTemplate.delete(RedisConstants.FAIL_TIMES_CHANGE + changeForm.getUsername());
         }
         // 清除token信息
-        Set<String> keys = stringRedisTemplate.keys(RedisConstants.SYS_TOKEN_ACCESS + "*" + accessToken);
-        AuthAssert.isTrue(keys != null && !keys.isEmpty(), "访问令牌已失效");
-        String      access      = keys.stream().findFirst().get();
-        String      userId      = access.split(RedisConstants.SYS_TOKEN_ACCESS)[1].split(SplitConstants.REDIS_SPLIT)[0];
-        Set<String> accessKeys  = stringRedisTemplate.keys(RedisConstants.SYS_TOKEN_ACCESS + userId + "*");
-        Set<String> refreshKeys = stringRedisTemplate.keys(RedisConstants.SYS_TOKEN_REFRESH + userId + "*");
-        if (refreshKeys != null && !refreshKeys.isEmpty()) {
-            for (String refreshKey : refreshKeys) {
-                stringRedisTemplate.delete(refreshKey);
-            }
-        }
-        if (accessKeys != null && !accessKeys.isEmpty()) {
-            for (String accessKey : accessKeys) {
-                stringRedisTemplate.delete(accessKey);
+        String accessValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_ACCESS + accessToken);
+        AuthAssert.notNull(accessValue, "访问令牌已失效");
+
+        String jwt    = accessValue.split(SplitConstants.TOKEN_SPLIT)[1];
+        Claims claims = JwtUtils.parseJwt(jwt);
+        String userId = claims.getId();
+
+        Set<String> members = stringRedisTemplate.opsForSet().members(RedisConstants.SYS_TOKEN_USER + userId);
+        stringRedisTemplate.delete(RedisConstants.SYS_TOKEN_USER + userId);
+        if (members != null) {
+            for (String member : members) {
+                stringRedisTemplate.delete(member);
             }
         }
     }
