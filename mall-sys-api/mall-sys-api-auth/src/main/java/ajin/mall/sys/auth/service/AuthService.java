@@ -16,9 +16,10 @@ public interface AuthService {
      * 登录
      *
      * @param loginForm 登录表单
+     * @param ip        ip
      * @return {@link LoginView}
      */
-    LoginView login(LoginForm loginForm);
+    LoginView login(LoginForm loginForm, String ip);
 
     /**
      * 注销

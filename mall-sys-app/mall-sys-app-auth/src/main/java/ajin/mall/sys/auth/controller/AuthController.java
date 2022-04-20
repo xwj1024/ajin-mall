@@ -37,8 +37,9 @@ public class AuthController {
     @RecordSysLog(value = "用户登录", saveRequestData = false)
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public BaseResult<LoginView> login(@Validated @RequestBody LoginForm loginForm) {
-        LoginView result = authService.login(loginForm);
+    public BaseResult<LoginView> login(@Validated @RequestBody LoginForm loginForm, HttpServletRequest request) {
+        String ip = request.getRemoteAddr();
+        LoginView result = authService.login(loginForm, ip);
         return new BaseResult<>(ResultCode.OK, "登录成功", result);
     }
 
