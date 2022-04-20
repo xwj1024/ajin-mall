@@ -93,7 +93,7 @@ public class AuthServiceImpl implements AuthService {
         stringRedisTemplate.opsForValue().set(accessKey, accessValue, 2L, TimeUnit.HOURS);
         // refresh token  过期时间30天
         stringRedisTemplate.opsForValue().set(refreshKey, accessKey + SplitConstants.TOKEN_SPLIT + accessValue, 30L, TimeUnit.DAYS);
-        // 当前用户下的 token 过期时间31天
+        // 当前用户下的 token 过期时间31天 todo 排除30天以外的
         stringRedisTemplate.opsForSet().add(userTokenKey, accessKey, refreshKey);
         stringRedisTemplate.expire(userTokenKey, 31L, TimeUnit.DAYS);
 
@@ -122,7 +122,7 @@ public class AuthServiceImpl implements AuthService {
         String userId = claims.getId();
 
         stringRedisTemplate.delete(refreshKey);
-        stringRedisTemplate.delete(accessToken);
+        stringRedisTemplate.delete(RedisConstants.SYS_TOKEN_ACCESS + accessToken);
         stringRedisTemplate.opsForSet().remove(RedisConstants.SYS_TOKEN_USER + userId, refreshKey, accessToken);
     }
 
