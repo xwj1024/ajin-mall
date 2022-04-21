@@ -1,6 +1,5 @@
 package ajin.mall.sys.auth.service.impl;
 
-import ajin.mall.common.base.asserts.AuthAssert;
 import ajin.mall.common.base.asserts.BizAssert;
 import ajin.mall.common.base.constant.RedisConstants;
 import ajin.mall.common.base.constant.SplitConstants;
@@ -58,8 +57,8 @@ public class AuthServiceImpl implements AuthService {
         // 判断是否超过登录失败限制次数
         if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(RedisConstants.FAIL_TIMES_LOGIN + ip + SplitConstants.REDIS_SPLIT + loginForm.getUsername()))) {
             String loginFailTimes = stringRedisTemplate.opsForValue().get(RedisConstants.FAIL_TIMES_LOGIN + ip + SplitConstants.REDIS_SPLIT + loginForm.getUsername());
-            Long   expireTime     = stringRedisTemplate.opsForValue().getOperations().getExpire(RedisConstants.FAIL_TIMES_LOGIN + ip + SplitConstants.REDIS_SPLIT + loginForm.getUsername(), TimeUnit.MINUTES);
-            int    count          = Integer.parseInt(loginFailTimes == null ? "0" : loginFailTimes);
+            Long expireTime = stringRedisTemplate.opsForValue().getOperations().getExpire(RedisConstants.FAIL_TIMES_LOGIN + ip + SplitConstants.REDIS_SPLIT + loginForm.getUsername(), TimeUnit.MINUTES);
+            int count = Integer.parseInt(loginFailTimes == null ? "0" : loginFailTimes);
             expireTime = expireTime == null ? 0 : expireTime;
             Assert.isTrue(count < securityProperties.getLoginFailTimeLimit() - 1, "登录次数已超过限制，请在" + (expireTime + 1) + "分钟后重试");
         }
@@ -67,7 +66,7 @@ public class AuthServiceImpl implements AuthService {
         User existUser = userService.loadUserByUsername(loginForm.getUsername());
         // 判断是否登录失败，记录失败次数
         if (existUser == null || !BCrypt.checkpw(loginForm.getPassword(), existUser.getPassword())) {
-            int loginFailTimes   = recordFailTimes(RedisConstants.FAIL_TIMES_LOGIN + ip + SplitConstants.REDIS_SPLIT + loginForm.getUsername(), securityProperties.getLoginFailAfterTime());
+            int loginFailTimes = recordFailTimes(RedisConstants.FAIL_TIMES_LOGIN + ip + SplitConstants.REDIS_SPLIT + loginForm.getUsername(), securityProperties.getLoginFailAfterTime());
             int remainLoginTimes = securityProperties.getLoginFailTimeLimit() - loginFailTimes;
             BizAssert.isTrue(remainLoginTimes > 3, "账号或密码错误，剩余登录次数：" + remainLoginTimes);
             throw new BizException("账号或密码错误");
@@ -77,7 +76,10 @@ public class AuthServiceImpl implements AuthService {
         BizAssert.notTrue(existUser.getState() == 4, "账号已被锁定");
         BizAssert.notTrue(existUser.getState() == 8, "账号已过期");
         BizAssert.notTrue(existUser.getState() == 16, "密码已过期");
-        // 登录成功，更新登录时间
+        // 登录成功，判断是否超过登录地点限制
+        Long size = stringRedisTemplate.opsForZSet().size(RedisConstants.SYS_TOKEN_USER + existUser.getId());
+        BizAssert.isTrue((size == null ? 0 : size) < 10, "登录地点过多，请退出其它登录");
+        // 更新登录时间
         LocalDateTime loginTime = existUser.getLoginTime();
         existUser.setLoginTime(LocalDateTime.now());
         userService.updateById(existUser);
@@ -86,21 +88,23 @@ public class AuthServiceImpl implements AuthService {
             stringRedisTemplate.delete(RedisConstants.FAIL_TIMES_LOGIN + ip + SplitConstants.REDIS_SPLIT + loginForm.getUsername());
         }
         // 设置 角色，权限
-        List<String>        permissions = permissionService.selectPermissionListByUser(existUser.getId());
-        List<String>        roles       = roleService.selectRoleListByUser(existUser.getId());
-        Map<String, Object> claims      = new HashMap<>(2);
+        List<String> permissions = permissionService.selectPermissionListByUser(existUser.getId());
+        List<String> roles = roleService.selectRoleListByUser(existUser.getId());
+        Map<String, Object> claims = new HashMap<>(2);
+        claims.put("userId", existUser.getId());
+        claims.put("username", existUser.getUsername());
         claims.put("permissions", permissions);
         claims.put("roles", roles);
 
         // 设置token信息
-        String accessToken  = UUID.randomUUID().toString();
+        String accessToken = UUID.randomUUID().toString();
         String refreshToken = UUID.randomUUID().toString();
-        String jwt          = JwtUtils.generateJwt(existUser.getId().toString(), existUser.getUsername(), claims);
+        String jwt = JwtUtils.generateJwt(claims);
 
         String userTokenKey = RedisConstants.SYS_TOKEN_USER + existUser.getId();
-        String accessKey    = RedisConstants.SYS_TOKEN_ACCESS + accessToken;
-        String refreshKey   = RedisConstants.SYS_TOKEN_REFRESH + refreshToken;
-        String accessValue  = refreshKey + SplitConstants.TOKEN_SPLIT + jwt;
+        String accessKey = RedisConstants.SYS_TOKEN_ACCESS + accessToken;
+        String refreshKey = RedisConstants.SYS_TOKEN_REFRESH + refreshToken;
+        String accessValue = refreshKey + SplitConstants.TOKEN_SPLIT + jwt;
         // access token  过期时间2小时
         stringRedisTemplate.opsForValue().set(accessKey, accessValue, 2L, TimeUnit.HOURS);
         // refresh token  过期时间30天
@@ -126,19 +130,19 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void logout(String accessToken) {
-        AuthAssert.isTrue(StringUtils.isNotEmpty(accessToken), "访问令牌不存在");
+        BizAssert.isTrue(StringUtils.isNotEmpty(accessToken), "访问令牌不存在");
         String accessValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_ACCESS + accessToken);
-        AuthAssert.notNull(accessValue, "访问令牌已失效");
+        BizAssert.notNull(accessValue, "访问令牌已失效");
         // 移除当前token相关信息
-        String[] split      = accessValue.split(SplitConstants.TOKEN_SPLIT);
-        String   refreshKey = split[0];
-        String   jwt        = split[1];
-        Claims   claims     = JwtUtils.parseJwt(jwt);
-        String   userId     = claims.getId();
+        String[] split = accessValue.split(SplitConstants.TOKEN_SPLIT);
+        String refreshKey = split[0];
+        String jwt = split[1];
+        Claims claims = JwtUtils.parseJwt(jwt);
+        String userId = String.valueOf(claims.get("userId"));
 
         stringRedisTemplate.delete(refreshKey);
         stringRedisTemplate.delete(RedisConstants.SYS_TOKEN_ACCESS + accessToken);
-        stringRedisTemplate.opsForZSet().remove(RedisConstants.SYS_TOKEN_USER + userId, refreshKey, accessToken);
+        stringRedisTemplate.opsForZSet().remove(RedisConstants.SYS_TOKEN_USER + userId, refreshKey, RedisConstants.SYS_TOKEN_ACCESS + accessToken);
     }
 
     @Override
@@ -146,10 +150,10 @@ public class AuthServiceImpl implements AuthService {
         BizAssert.isTrue(StringUtils.isNotEmpty(refreshToken), "刷新令牌不存在");
         // 获取刷新令牌信息，判断是否过期
         String refreshValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_REFRESH + refreshToken);
-        AuthAssert.notNull(refreshValue, "身份已失效，请重新登录");
+        BizAssert.notNull(refreshValue, "身份已失效，请重新登录");
 
-        String accessKey   = refreshValue.split(SplitConstants.TOKEN_SPLIT)[0];
-        String refreshKey  = refreshValue.split(SplitConstants.TOKEN_SPLIT)[1];
+        String accessKey = refreshValue.split(SplitConstants.TOKEN_SPLIT)[0];
+        String refreshKey = refreshValue.split(SplitConstants.TOKEN_SPLIT)[1];
         String accessValue = refreshValue.split(SplitConstants.TOKEN_SPLIT)[2];
         stringRedisTemplate.opsForValue().set(accessKey, refreshKey + SplitConstants.TOKEN_SPLIT + accessValue, 2L, TimeUnit.HOURS);
     }
@@ -159,8 +163,8 @@ public class AuthServiceImpl implements AuthService {
         // 判断是否超过修改失败限制次数
         if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(RedisConstants.FAIL_TIMES_CHANGE + changeForm.getUsername()))) {
             String loginFailTimes = stringRedisTemplate.opsForValue().get(RedisConstants.FAIL_TIMES_LOGIN + changeForm.getUsername());
-            Long   expireTime     = stringRedisTemplate.opsForValue().getOperations().getExpire(RedisConstants.FAIL_TIMES_CHANGE + changeForm.getUsername(), TimeUnit.MINUTES);
-            int    count          = Integer.parseInt(loginFailTimes == null ? "0" : loginFailTimes);
+            Long expireTime = stringRedisTemplate.opsForValue().getOperations().getExpire(RedisConstants.FAIL_TIMES_CHANGE + changeForm.getUsername(), TimeUnit.MINUTES);
+            int count = Integer.parseInt(loginFailTimes == null ? "0" : loginFailTimes);
             expireTime = expireTime == null ? 0 : expireTime;
             Assert.isTrue(count < securityProperties.getChangeFailTimeLimit() - 1, "修改次数已超过限制，请在" + (expireTime + 1) + "分钟后重试");
         }
@@ -168,9 +172,9 @@ public class AuthServiceImpl implements AuthService {
         User existUser = userService.loadUserByUsername(changeForm.getUsername());
         // 判断是否原密码是否正确，记录失败次数
         if (existUser == null || !BCrypt.checkpw(changeForm.getOldPassword(), existUser.getPassword())) {
-            int changeFailTimes   = recordFailTimes(RedisConstants.FAIL_TIMES_CHANGE + changeForm.getUsername(), securityProperties.getChangeFailAfterTime());
+            int changeFailTimes = recordFailTimes(RedisConstants.FAIL_TIMES_CHANGE + changeForm.getUsername(), securityProperties.getChangeFailAfterTime());
             int remainChangeTimes = securityProperties.getChangeFailTimeLimit() - changeFailTimes;
-            BizAssert.isTrue(remainChangeTimes <= 3, "原始密码错误，剩余修改次数：" + remainChangeTimes);
+            BizAssert.isTrue(remainChangeTimes > 3, "原始密码错误，剩余修改次数：" + remainChangeTimes);
             throw new BizException("原始密码错误");
         }
         // 修改密码
@@ -182,11 +186,11 @@ public class AuthServiceImpl implements AuthService {
         }
         // 清除token信息
         String accessValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_ACCESS + accessToken);
-        AuthAssert.notNull(accessValue, "访问令牌已失效");
+        BizAssert.notNull(accessValue, "访问令牌已失效");
 
-        String jwt    = accessValue.split(SplitConstants.TOKEN_SPLIT)[1];
+        String jwt = accessValue.split(SplitConstants.TOKEN_SPLIT)[1];
         Claims claims = JwtUtils.parseJwt(jwt);
-        String userId = claims.getId();
+        String userId = String.valueOf(claims.get("userId"));
 
         Set<String> keys = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
         stringRedisTemplate.delete(RedisConstants.SYS_TOKEN_USER + userId);

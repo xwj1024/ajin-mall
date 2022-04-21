@@ -8,13 +8,13 @@ import ajin.mall.sys.auth.form.LoginForm;
 import ajin.mall.sys.auth.service.AuthService;
 import ajin.mall.sys.auth.view.LoginView;
 import ajin.mall.sys.common.anno.RecordSysLog;
+import ajin.mall.sys.common.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 
 import static ajin.mall.common.base.constant.HeaderConstants.AUTHORIZATION;
@@ -30,7 +30,7 @@ import static ajin.mall.common.base.constant.HeaderConstants.AUTHORIZATION;
 @Api(tags = "认证授权")
 @CrossOrigin
 @Validated
-public class AuthController {
+public class AuthController extends BaseController {
 
     @Resource
     private AuthService authService;
@@ -39,17 +39,16 @@ public class AuthController {
     @RecordSysLog(value = "用户登录", saveRequestData = false)
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public BaseResult<LoginView> login(@Validated @RequestBody LoginForm loginForm, HttpServletRequest request) {
-        String    ip     = request.getRemoteAddr();
+    public BaseResult<LoginView> login(@Validated @RequestBody LoginForm loginForm) {
+        String ip = request.getRemoteAddr();
         LoginView result = authService.login(loginForm, ip);
         return new BaseResult<>(ResultCode.OK, "登录成功", result);
     }
 
-    // todo 仅限自己
     @RepeatSubmit
     @ApiOperation("退出登录")
     @DeleteMapping("/logout")
-    public BaseResult<String> logout(HttpServletRequest request) {
+    public BaseResult<String> logout() {
         String token = request.getHeader(AUTHORIZATION);
         authService.logout(token);
         return new BaseResult<>(ResultCode.OK, "退出成功");
@@ -67,7 +66,7 @@ public class AuthController {
     @RepeatSubmit
     @ApiOperation("修改密码")
     @PostMapping("/change")
-    public BaseResult<String> change(@Validated @RequestBody ChangeForm changeForm, HttpServletRequest request) {
+    public BaseResult<String> change(@Validated @RequestBody ChangeForm changeForm) {
         String token = request.getHeader(AUTHORIZATION);
         authService.change(changeForm, token);
         return new BaseResult<>(ResultCode.OK, "修改成功");

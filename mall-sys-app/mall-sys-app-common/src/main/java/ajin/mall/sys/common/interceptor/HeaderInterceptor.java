@@ -33,18 +33,18 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         try {
-            String token       = request.getHeader(AUTHORIZATION);
+            String token = request.getHeader(AUTHORIZATION);
             String accessValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_ACCESS + token);
             if (accessValue != null) {
-                String      jwt    = accessValue.split(SplitConstants.TOKEN_SPLIT)[1];
-                Claims      claims = JwtUtils.parseJwt(jwt);
-                String      userId = claims.getId();
-                Set<String> keys   = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
+                String jwt = accessValue.split(SplitConstants.TOKEN_SPLIT)[1];
+                Claims claims = JwtUtils.parseJwt(jwt);
+                String userId = String.valueOf(claims.get("userId"));
+                Set<String> keys = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
                 AuthAssert.isTrue(keys != null && keys.contains(RedisConstants.SYS_TOKEN_ACCESS + token), null);
 
-                String username    = claims.getIssuer();
+                String username = (String) claims.get("username");
                 Object permissions = claims.get("permissions");
-                Object roles       = claims.get("roles");
+                Object roles = claims.get("roles");
                 SecurityContextHolder.set("userId", userId);
                 SecurityContextHolder.set("username", username);
                 SecurityContextHolder.set("permissions", permissions);

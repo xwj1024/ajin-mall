@@ -66,12 +66,12 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }
         // 如果令牌存在,解析jwt令牌,判断该令牌是否合法,如果令牌不合法,则向客户端返回错误提示信息
         try {
-            String accessValue = stringRedisTemplate.opsForValue().get(token);
+            String accessValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_ACCESS + token);
             AuthAssert.notNull(accessValue, "令牌已失效");
             // 解析令牌
-            Claims      claims = JwtUtils.parseJwt(accessValue.split(SplitConstants.TOKEN_SPLIT)[1]);
-            String      userId = claims.getId();
-            Set<String> keys   = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
+            Claims claims = JwtUtils.parseJwt(accessValue.split(SplitConstants.TOKEN_SPLIT)[1]);
+            String userId = String.valueOf(claims.get("userId"));
+            Set<String> keys = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
             AuthAssert.notNull(keys, "身份已失效，请重新登录");
             AuthAssert.isTrue(keys.contains(RedisConstants.SYS_TOKEN_ACCESS + token), "令牌已失效");
             // todo 设置本地线程变量
