@@ -10,7 +10,7 @@ import java.lang.annotation.*;
  * @author Ajin
  * @date 2022/04/18
  */
-@Target({ElementType.TYPE})
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface OnlyRole {
