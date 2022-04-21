@@ -1,7 +1,6 @@
 package ajin.mall.sys.gateway.filter;
 
 import ajin.mall.common.base.asserts.AuthAssert;
-import ajin.mall.common.base.asserts.BizAssert;
 import ajin.mall.common.base.constant.RedisConstants;
 import ajin.mall.common.base.constant.SplitConstants;
 import ajin.mall.common.base.util.JwtUtils;
@@ -21,7 +20,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
-
 import java.util.Set;
 
 import static ajin.mall.common.base.constant.HeaderConstants.AUTHORIZATION;
@@ -70,7 +68,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
             Claims      claims = JwtUtils.parseJwt(accessValue.split(SplitConstants.TOKEN_SPLIT)[1]);
             String      userId = claims.getId();
             Set<String> keys   = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
-            BizAssert.notNull(keys, "身份已失效，请重新登录");
+            AuthAssert.notNull(keys, "身份已失效，请重新登录");
             AuthAssert.isTrue(keys.contains(RedisConstants.SYS_TOKEN_ACCESS + token), "令牌已失效");
             // todo 设置本地线程变量
 

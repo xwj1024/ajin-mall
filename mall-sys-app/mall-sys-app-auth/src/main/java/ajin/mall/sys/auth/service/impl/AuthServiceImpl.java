@@ -114,7 +114,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void logout(String accessToken) {
-        BizAssert.isTrue(StringUtils.isNotEmpty(accessToken), "访问令牌不存在");
+        AuthAssert.isTrue(StringUtils.isNotEmpty(accessToken), "访问令牌不存在");
         String accessValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_ACCESS + accessToken);
         AuthAssert.notNull(accessValue, "访问令牌已失效");
         // 移除当前token相关信息
@@ -134,7 +134,7 @@ public class AuthServiceImpl implements AuthService {
         BizAssert.isTrue(StringUtils.isNotEmpty(refreshToken), "刷新令牌不存在");
         // 获取刷新令牌信息，判断是否过期
         String refreshValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_REFRESH + refreshToken);
-        BizAssert.notNull(refreshValue, "身份已失效，请重新登录");
+        AuthAssert.notNull(refreshValue, "身份已失效，请重新登录");
 
         String accessKey   = refreshValue.split(SplitConstants.TOKEN_SPLIT)[0];
         String refreshKey  = refreshValue.split(SplitConstants.TOKEN_SPLIT)[1];

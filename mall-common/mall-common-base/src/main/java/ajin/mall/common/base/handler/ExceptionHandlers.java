@@ -7,6 +7,7 @@ import ajin.mall.common.base.result.BaseResult;
 import ajin.mall.common.base.result.ResultCode;
 import ajin.mall.common.base.result.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -43,7 +44,7 @@ public class ExceptionHandlers {
     @ExceptionHandler(AuthException.class)
     public BaseResult<String> handleAuthException(AuthException e) {
         log.warn(e.getMessage());
-        return new BaseResult<>(ResultCode.AUTH, e.getMessage());
+        return new BaseResult<>(HttpStatus.UNAUTHORIZED.value(), e.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
