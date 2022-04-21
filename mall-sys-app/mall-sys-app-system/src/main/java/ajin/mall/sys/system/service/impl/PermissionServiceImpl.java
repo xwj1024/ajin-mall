@@ -8,7 +8,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 许可服务impl
+ *
  * @author Ajin
+ * @date 2022/04/21
  */
 @org.apache.dubbo.config.annotation.Service
 @Service
@@ -18,8 +21,8 @@ public class PermissionServiceImpl implements PermissionService {
     private PermissionMapper permissionMapper;
 
     @Override
-    public List<String> selectPermissionListByUser(Long sysUserId) {
-        return permissionMapper.selectPermissionListByUser(sysUserId);
+    public List<String> selectPermissionListByUser(Long userId) {
+        return permissionMapper.selectPermissionListByUser(userId);
     }
 
     @Override

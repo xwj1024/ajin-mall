@@ -13,6 +13,8 @@ import ajin.mall.sys.auth.form.LoginForm;
 import ajin.mall.sys.auth.property.SecurityProperties;
 import ajin.mall.sys.auth.service.AuthService;
 import ajin.mall.sys.auth.view.LoginView;
+import ajin.mall.sys.system.service.PermissionService;
+import ajin.mall.sys.system.service.RoleService;
 import ajin.mall.sys.system.service.UserService;
 import io.jsonwebtoken.Claims;
 import org.apache.dubbo.config.annotation.Reference;
@@ -43,6 +45,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Reference
     private UserService userService;
+
+    @Reference
+    private PermissionService permissionService;
+
+    @Reference
+    private RoleService roleService;
 
 
     @Override
@@ -77,13 +85,17 @@ public class AuthServiceImpl implements AuthService {
         if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(RedisConstants.FAIL_TIMES_LOGIN + ip + SplitConstants.REDIS_SPLIT + loginForm.getUsername()))) {
             stringRedisTemplate.delete(RedisConstants.FAIL_TIMES_LOGIN + ip + SplitConstants.REDIS_SPLIT + loginForm.getUsername());
         }
+        // 设置 角色，权限
+        List<String>        permissions = permissionService.selectPermissionListByUser(existUser.getId());
+        List<String>        roles       = roleService.selectRoleListByUser(existUser.getId());
+        Map<String, Object> claims      = new HashMap<>(2);
+        claims.put("permissions", permissions);
+        claims.put("roles", roles);
+
         // 设置token信息
-        Map<String, Object> claims = new HashMap<>(16);
-        claims.put("userId", existUser.getId());
-        claims.put("username", existUser.getUsername());
         String accessToken  = UUID.randomUUID().toString();
         String refreshToken = UUID.randomUUID().toString();
-        String jwt          = JwtUtils.generateJwt(existUser.getId().toString(), claims);
+        String jwt          = JwtUtils.generateJwt(existUser.getId().toString(), existUser.getUsername(), claims);
 
         String userTokenKey = RedisConstants.SYS_TOKEN_USER + existUser.getId();
         String accessKey    = RedisConstants.SYS_TOKEN_ACCESS + accessToken;

@@ -17,6 +17,11 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>2.12.2</version>
+        </dependency>
+        <dependency>
             <groupId>ajin.mall</groupId>
             <artifactId>mall-common-data</artifactId>
             <version>0.0.1</version>

@@ -34,6 +34,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
     private static final String LOGIN_URI = "/sys/auth/login";
     private static final String REFRESH_URI = "/sys/auth/refresh";
+    private static final String SWAGGER_URI = "/v3/api-docs";
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
@@ -46,7 +47,10 @@ public class AuthFilter implements GlobalFilter, Ordered {
         ServerHttpResponse response = exchange.getResponse();
 
         // 判断当前的请求时否为登录请求,如果是 直接放行
-        if (request.getURI().getPath().contains(LOGIN_URI) || request.getURI().getPath().contains(REFRESH_URI)) {
+        String path = request.getURI().getPath();
+        if (path.contains(LOGIN_URI)
+                || path.contains(REFRESH_URI)
+                || path.contains(SWAGGER_URI)) {
             // 放行
             return chain.filter(exchange);
         }
@@ -85,6 +89,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return 0;
+        return -1000;
     }
 }

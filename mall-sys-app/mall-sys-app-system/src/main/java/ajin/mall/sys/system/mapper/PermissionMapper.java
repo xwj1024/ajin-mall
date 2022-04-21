@@ -7,17 +7,20 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
+ * 许可映射器
+ *
  * @author Ajin
+ * @date 2022/04/21
  */
 public interface PermissionMapper extends BaseMapper<Permission> {
 
     /**
      * 根据用户id查询用户权限
      *
-     * @param sysUserId 用户id
+     * @param userId 用户id
      * @return 权限列表
      */
-    List<String> selectPermissionListByUser(@Param("sysUserId") Long sysUserId);
+    List<String> selectPermissionListByUser(@Param("userId") Long userId);
 
     /**
      * 根据请求路径查询用户权限

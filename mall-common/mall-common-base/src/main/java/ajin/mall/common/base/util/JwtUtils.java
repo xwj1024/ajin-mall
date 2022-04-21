@@ -57,8 +57,8 @@ public class JwtUtils {
         return builder.compact();
     }
 
-    public static String generateJwt(String id, Map<String, Object> claims) {
-        return generateJwt(id, "ajin-mall", "Ajin", null, claims);
+    public static String generateJwt(String id, String issuer, Map<String, Object> claims) {
+        return generateJwt(id, "ajin-mall", issuer, null, claims);
     }
 
     public static String generateJwt(Map<String, Object> claims) {
