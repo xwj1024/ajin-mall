@@ -17,6 +17,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 
+import static ajin.mall.common.base.constant.HeaderConstants.AUTHORIZATION;
+
 /**
  * 身份验证控制器
  *
@@ -38,7 +40,7 @@ public class AuthController {
     @ApiOperation("用户登录")
     @PostMapping("/login")
     public BaseResult<LoginView> login(@Validated @RequestBody LoginForm loginForm, HttpServletRequest request) {
-        String ip = request.getRemoteAddr();
+        String    ip     = request.getRemoteAddr();
         LoginView result = authService.login(loginForm, ip);
         return new BaseResult<>(ResultCode.OK, "登录成功", result);
     }
@@ -48,7 +50,7 @@ public class AuthController {
     @ApiOperation("退出登录")
     @DeleteMapping("/logout")
     public BaseResult<String> logout(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader(AUTHORIZATION);
         authService.logout(token);
         return new BaseResult<>(ResultCode.OK, "退出成功");
     }
@@ -66,7 +68,7 @@ public class AuthController {
     @ApiOperation("修改密码")
     @PostMapping("/change")
     public BaseResult<String> change(@Validated @RequestBody ChangeForm changeForm, HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader(AUTHORIZATION);
         authService.change(changeForm, token);
         return new BaseResult<>(ResultCode.OK, "修改成功");
     }
