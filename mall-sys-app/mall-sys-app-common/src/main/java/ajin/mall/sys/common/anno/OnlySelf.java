@@ -1,20 +1,19 @@
 package ajin.mall.sys.common.anno;
 
-import ajin.mall.sys.common.enums.Logical;
-
 import java.lang.annotation.*;
 
 /**
- * 只允许
+ * 只有自我
  *
  * @author Ajin
- * @date 2022/04/18
+ * @date 2022/04/22
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface OnlyPermission {
-    String[] value() default {};
+public @interface OnlySelf {
 
-    Logical logical() default Logical.AND;
+    String value();
+
+    String claim();
 }

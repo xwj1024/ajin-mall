@@ -7,6 +7,7 @@ import ajin.mall.sys.auth.form.ChangeForm;
 import ajin.mall.sys.auth.form.LoginForm;
 import ajin.mall.sys.auth.service.AuthService;
 import ajin.mall.sys.auth.view.LoginView;
+import ajin.mall.sys.common.anno.OnlySelf;
 import ajin.mall.sys.common.anno.RecordSysLog;
 import ajin.mall.sys.common.controller.BaseController;
 import io.swagger.annotations.Api;
@@ -40,7 +41,7 @@ public class AuthController extends BaseController {
     @ApiOperation("用户登录")
     @PostMapping("/login")
     public BaseResult<LoginView> login(@Validated @RequestBody LoginForm loginForm) {
-        String ip = request.getRemoteAddr();
+        String    ip     = request.getRemoteAddr();
         LoginView result = authService.login(loginForm, ip);
         return new BaseResult<>(ResultCode.OK, "登录成功", result);
     }
@@ -62,6 +63,7 @@ public class AuthController extends BaseController {
         return new BaseResult<>(ResultCode.OK, "刷新成功");
     }
 
+    @OnlySelf(value = "#changeForm.username", claim = "username")
     @RecordSysLog(value = "修改密码", saveRequestData = false)
     @RepeatSubmit
     @ApiOperation("修改密码")

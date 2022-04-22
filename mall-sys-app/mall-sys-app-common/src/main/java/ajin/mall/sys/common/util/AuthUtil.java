@@ -2,14 +2,24 @@ package ajin.mall.sys.common.util;
 
 import ajin.mall.common.base.asserts.AuthAssert;
 import ajin.mall.common.base.exception.AuthException;
-import ajin.mall.sys.common.anno.OnlyPermission;
+import ajin.mall.sys.common.anno.OnlyPerm;
 import ajin.mall.sys.common.anno.OnlyRole;
+import ajin.mall.sys.common.anno.OnlySelf;
 import ajin.mall.sys.common.context.SecurityContextHolder;
 import ajin.mall.sys.common.enums.Logical;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * auth跑龙套
@@ -60,13 +70,13 @@ public class AuthUtil {
     /**
      * 根据注解传入参数鉴权
      *
-     * @param onlyPermission 权限注解
+     * @param onlyPerm 权限注解
      */
-    public static void checkPermission(OnlyPermission onlyPermission) {
-        if (onlyPermission.logical() == Logical.AND) {
-            checkPermissionAnd(onlyPermission.value());
+    public static void checkPermission(OnlyPerm onlyPerm) {
+        if (onlyPerm.logical() == Logical.AND) {
+            checkPermissionAnd(onlyPerm.value());
         } else {
-            checkPermissionOr(onlyPermission.value());
+            checkPermissionOr(onlyPerm.value());
         }
     }
 
@@ -95,4 +105,33 @@ public class AuthUtil {
         }
     }
 
+    public static void checkSelf(OnlySelf onlySelf, Method method, ProceedingJoinPoint joinPoint) {
+        try {
+            ExpressionParser parser = new SpelExpressionParser();
+            // 获取方法的参数值
+            Object[]          args    = joinPoint.getArgs();
+            EvaluationContext context = bindParam(method, args);
+            // 根据spel表达式获取值
+            Expression expression = parser.parseExpression(onlySelf.value());
+            Object     key        = expression.getValue(context);
+            Object     value      = SecurityContextHolder.get(onlySelf.claim());
+            AuthAssert.isTrue(value != null && String.valueOf(value).equals(String.valueOf(key)), null);
+        } catch (Exception e) {
+            throw new AuthException("无权限访问");
+        }
+    }
+
+    private static final LocalVariableTableParameterNameDiscoverer DISCOVERER = new LocalVariableTableParameterNameDiscoverer();
+
+    private static EvaluationContext bindParam(Method method, Object[] args) {
+        //获取方法的参数名
+        String[] params = DISCOVERER.getParameterNames(method);
+
+        //将参数名与参数值对应起来
+        EvaluationContext context = new StandardEvaluationContext();
+        for (int len = 0; len < Objects.requireNonNull(params).length; len++) {
+            context.setVariable(params[len], args[len]);
+        }
+        return context;
+    }
 }

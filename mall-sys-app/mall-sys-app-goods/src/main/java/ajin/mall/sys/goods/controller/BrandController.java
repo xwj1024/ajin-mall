@@ -6,7 +6,7 @@ import ajin.mall.common.base.result.BaseResult;
 import ajin.mall.common.base.result.ResultEnum;
 import ajin.mall.common.base.result.ResultPage;
 import ajin.mall.common.data.enums.TableInfo;
-import ajin.mall.sys.common.anno.OnlyPermission;
+import ajin.mall.sys.common.anno.OnlyRole;
 import ajin.mall.sys.common.anno.RecordSysLog;
 import ajin.mall.sys.goods.form.BrandAddForm;
 import ajin.mall.sys.goods.form.BrandListForm;
@@ -37,7 +37,7 @@ public class BrandController {
     @Resource
     private BrandService brandService;
 
-    @OnlyPermission({"a"})
+    @OnlyRole({"a"})
     @RecordSysLog(value = "添加商品品牌")
     @RepeatSubmit
     @PostMapping

@@ -1,7 +1,8 @@
 package ajin.mall.sys.common.aspect;
 
-import ajin.mall.sys.common.anno.OnlyPermission;
+import ajin.mall.sys.common.anno.OnlyPerm;
 import ajin.mall.sys.common.anno.OnlyRole;
+import ajin.mall.sys.common.anno.OnlySelf;
 import ajin.mall.sys.common.util.AuthUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -22,7 +23,9 @@ import java.lang.reflect.Method;
 @Aspect
 public class AuthAspect {
 
-    private static final String POINTCUT_SIGN = "@annotation(ajin.mall.sys.common.anno.OnlyRole)||@annotation(ajin.mall.sys.common.anno.OnlyPermission)";
+    private static final String POINTCUT_SIGN = "@annotation(ajin.mall.sys.common.anno.OnlyRole)" +
+            "||@annotation(ajin.mall.sys.common.anno.OnlyPerm)" +
+            "||@annotation(ajin.mall.sys.common.anno.OnlySelf)";
 
     @Pointcut(POINTCUT_SIGN)
     public void pointcut() {
@@ -38,8 +41,7 @@ public class AuthAspect {
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         // 注解鉴权
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        checkMethodAnnotation(signature.getMethod());
+        checkMethodAnnotation(joinPoint);
         try {
             // 执行原有逻辑
             return joinPoint.proceed();
@@ -51,17 +53,26 @@ public class AuthAspect {
     /**
      * 对一个Method对象进行注解检查
      */
-    public void checkMethodAnnotation(Method method) {
+    public void checkMethodAnnotation(ProceedingJoinPoint joinPoint) {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method          method    = signature.getMethod();
+
         // 校验 @OnlyRole 注解
         OnlyRole onlyRole = method.getAnnotation(OnlyRole.class);
         if (onlyRole != null) {
             AuthUtil.checkRole(onlyRole);
         }
 
-        // 校验 @OnlyPermission 注解
-        OnlyPermission onlyPermission = method.getAnnotation(OnlyPermission.class);
-        if (onlyPermission != null) {
-            AuthUtil.checkPermission(onlyPermission);
+        // 校验 @OnlyPerm 注解
+        OnlyPerm onlyPerm = method.getAnnotation(OnlyPerm.class);
+        if (onlyPerm != null) {
+            AuthUtil.checkPermission(onlyPerm);
+        }
+
+        // 校验 @OnlySelf 注解
+        OnlySelf onlySelf = method.getAnnotation(OnlySelf.class);
+        if (onlySelf != null) {
+            AuthUtil.checkSelf(onlySelf, method, joinPoint);
         }
     }
 }
