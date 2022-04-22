@@ -96,8 +96,8 @@ public class AuthServiceImpl implements AuthService {
         claims.put("roles", roles);
 
         // 设置token信息
-        String accessToken  = UUID.randomUUID().toString();
-        String refreshToken = UUID.randomUUID().toString();
+        String accessToken  = UUID.randomUUID().toString().replace("-", "");
+        String refreshToken = UUID.randomUUID().toString().replace("-", "");
         String jwt          = JwtUtils.generateJwt(claims);
 
         String userTokenKey = RedisConstants.SYS_TOKEN_USER + existUser.getId();
