@@ -124,10 +124,10 @@ public class AuthUtil {
     private static final LocalVariableTableParameterNameDiscoverer DISCOVERER = new LocalVariableTableParameterNameDiscoverer();
 
     private static EvaluationContext bindParam(Method method, Object[] args) {
-        //获取方法的参数名
+        // 获取方法的参数名
         String[] params = DISCOVERER.getParameterNames(method);
 
-        //将参数名与参数值对应起来
+        // 将参数名与参数值对应起来
         EvaluationContext context = new StandardEvaluationContext();
         for (int len = 0; len < Objects.requireNonNull(params).length; len++) {
             context.setVariable(params[len], args[len]);
