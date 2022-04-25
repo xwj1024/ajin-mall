@@ -74,21 +74,20 @@ public class SysLogAspect {
             if (args != null && args.length > 0) {
                 Object arg = args[0];
                 String json = JSON.toJSONString(arg);
+                Map map = JSON.parseObject(json, Map.class);
+                // 隐藏敏感字段
+                hideSensitiveInfo(map);
                 // 设置请求参数
                 if (recordSysLog.saveRequestData()) {
-                    // todo 隐藏敏感字段：密码
                     sysLog.setRequestParam(json);
                 }
-                Map map = JSON.parseObject(json, Map.class);
-                Object objId = map.get("id");
-                Long id = ObjectUtils.obj2Long(objId);
-
+                // 设置原始数据
                 String tableName = recordSysLog.saveSourceData().getName();
                 if (!StringUtils.isEmpty(tableName)) {
-                    // 设置原始数据
+                    Object objId = map.get("id");
+                    Long id = ObjectUtils.obj2Long(objId);
                     Map sourceMap = commonMapper.selectById(tableName, id);
                     String sourceDate = JSON.toJSONString(sourceMap);
-                    // todo 隐藏敏感字段
                     sysLog.setSourceData(sourceDate);
                 }
             }
@@ -109,5 +108,14 @@ public class SysLogAspect {
             sysLogService.add(sysLog);
         }
         return result;
+    }
+
+    private static final String SENSITIVE_FIELDS = "password,oldPassword,newPassword";
+
+    private void hideSensitiveInfo(Map map) {
+        String[] fields = SENSITIVE_FIELDS.split(",");
+        for (String field : fields) {
+            map.remove(field);
+        }
     }
 }
