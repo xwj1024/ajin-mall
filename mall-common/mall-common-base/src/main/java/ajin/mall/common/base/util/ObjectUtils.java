@@ -77,14 +77,24 @@ public class ObjectUtils {
         }
         return map;
     }
+
     /**
      * * 判断一个对象是否为空
      *
-     * @param object Object
+     * @param obj Object
      * @return true：为空 false：非空
      */
-    public static boolean isNull(Object object) {
-        return object == null;
+    public static boolean isNull(Object obj) {
+        return obj == null;
     }
 
+    public static Long obj2Long(Object obj) {
+        Long l = null;
+        if (obj instanceof Long) {
+            l = (Long) obj;
+        } else if (obj instanceof Integer) {
+            l = ((Integer) obj).longValue();
+        }
+        return l;
+    }
 }

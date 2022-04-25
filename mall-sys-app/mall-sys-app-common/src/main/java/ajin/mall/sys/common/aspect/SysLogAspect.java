@@ -1,9 +1,11 @@
 package ajin.mall.sys.common.aspect;
 
+import ajin.mall.common.base.util.ObjectUtils;
 import ajin.mall.common.base.util.StringUtils;
 import ajin.mall.common.data.entity.SysLog;
 import ajin.mall.common.data.mapper.CommonMapper;
 import ajin.mall.sys.common.anno.RecordSysLog;
+import ajin.mall.sys.common.context.SecurityContextHolder;
 import ajin.mall.sys.system.service.SysLogService;
 import com.alibaba.fastjson.JSON;
 import lombok.SneakyThrows;
@@ -46,8 +48,8 @@ public class SysLogAspect {
     @SneakyThrows
     private Object handleLog(final ProceedingJoinPoint pjp) {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
-        Method          method    = signature.getMethod();
-        Object          result    = null;
+        Method method = signature.getMethod();
+        Object result = null;
 
         if (method.isAnnotationPresent(RecordSysLog.class)) {
             // 数据库系统操作日志
@@ -55,42 +57,36 @@ public class SysLogAspect {
             sysLog.setOperateTime(LocalDateTime.now());
             // 获取注解
             RecordSysLog recordSysLog = method.getAnnotation(RecordSysLog.class);
-            String       description  = recordSysLog.value();
+            String description = recordSysLog.value();
             sysLog.setDescription(description);
 
-            // todo 处理用户id，请求地址，请求方法
-            /*sysLog.setSysUserId();
-            sysLog.setRemoteIp();
-            sysLog.setRequestUri();
-            sysLog.setRequestMethod();*/
+            sysLog.setUserId(ObjectUtils.obj2Long(SecurityContextHolder.get("userId")));
+            sysLog.setRemoteIp(String.valueOf(SecurityContextHolder.get("remoteIp")));
+            sysLog.setRequestUri(String.valueOf(SecurityContextHolder.get("requestUri")));
+            sysLog.setRequestMethod(String.valueOf(SecurityContextHolder.get("requestMethod")));
 
             // 设置方法名称
-            String className  = pjp.getTarget().getClass().getName();
+            String className = pjp.getTarget().getClass().getName();
             String methodName = pjp.getSignature().getName();
             sysLog.setMethodName(className + "." + methodName + "()");
             // 获取请求参数
             Object[] args = pjp.getArgs();
             if (args != null && args.length > 0) {
-                Object arg  = args[0];
+                Object arg = args[0];
                 String json = JSON.toJSONString(arg);
                 // 设置请求参数
                 if (recordSysLog.saveRequestData()) {
                     // todo 隐藏敏感字段：密码
                     sysLog.setRequestParam(json);
                 }
-                Map    map   = JSON.parseObject(json, Map.class);
+                Map map = JSON.parseObject(json, Map.class);
                 Object objId = map.get("id");
-                Long   id    = null;
-                if (objId instanceof Long) {
-                    id = (Long) objId;
-                } else if (objId instanceof Integer) {
-                    id = ((Integer) objId).longValue();
-                }
+                Long id = ObjectUtils.obj2Long(objId);
 
                 String tableName = recordSysLog.saveSourceData().getName();
                 if (!StringUtils.isEmpty(tableName)) {
                     // 设置原始数据
-                    Map    sourceMap  = commonMapper.selectById(tableName, id);
+                    Map sourceMap = commonMapper.selectById(tableName, id);
                     String sourceDate = JSON.toJSONString(sourceMap);
                     // todo 隐藏敏感字段
                     sysLog.setSourceData(sourceDate);

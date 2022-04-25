@@ -47,8 +47,15 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor {
                 Object roles = claims.get("roles");
                 SecurityContextHolder.set("userId", userId);
                 SecurityContextHolder.set("username", username);
-                SecurityContextHolder.set("permissions", permissions);
                 SecurityContextHolder.set("roles", roles);
+                SecurityContextHolder.set("permissions", permissions);
+
+                String ip = request.getRemoteAddr();
+                String uri = request.getRequestURI();
+                String method = request.getMethod();
+                SecurityContextHolder.set("remoteIp", ip);
+                SecurityContextHolder.set("requestUri", uri);
+                SecurityContextHolder.set("requestMethod", method);
             }
         } catch (Exception e) {
             throw new AuthException("令牌无效");
