@@ -69,9 +69,9 @@ public class AuthFilter implements GlobalFilter, Ordered {
             String accessValue = stringRedisTemplate.opsForValue().get(RedisConstants.SYS_TOKEN_ACCESS + token);
             AuthAssert.notNull(accessValue, "令牌已失效");
             // 解析令牌
-            Claims claims = JwtUtils.parseJwt(accessValue.split(SplitConstants.TOKEN_SPLIT)[1]);
-            String userId = String.valueOf(claims.get("userId"));
-            Set<String> keys = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
+            Claims      claims = JwtUtils.parseJwt(accessValue.split(SplitConstants.TOKEN_SPLIT)[1]);
+            String      userId = String.valueOf(claims.get("userId"));
+            Set<String> keys   = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
             AuthAssert.notNull(keys, "身份已失效，请重新登录");
             AuthAssert.isTrue(keys.contains(RedisConstants.SYS_TOKEN_ACCESS + token), "令牌已失效");
         } catch (Exception e) {
