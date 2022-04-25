@@ -87,14 +87,4 @@ public class ObjectUtils {
     public static boolean isNull(Object obj) {
         return obj == null;
     }
-
-    public static Long obj2Long(Object obj) {
-        Long l = null;
-        if (obj instanceof Long) {
-            l = (Long) obj;
-        } else if (obj instanceof Integer) {
-            l = ((Integer) obj).longValue();
-        }
-        return l;
-    }
 }

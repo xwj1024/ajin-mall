@@ -1,6 +1,5 @@
 package ajin.mall.sys.common.aspect;
 
-import ajin.mall.common.base.util.ObjectUtils;
 import ajin.mall.common.base.util.StringUtils;
 import ajin.mall.common.data.entity.SysLog;
 import ajin.mall.common.data.mapper.CommonMapper;
@@ -60,7 +59,8 @@ public class SysLogAspect {
             String description = recordSysLog.value();
             sysLog.setDescription(description);
 
-            sysLog.setUserId(ObjectUtils.obj2Long(SecurityContextHolder.get("userId")));
+            Object userId = SecurityContextHolder.get("userId");
+            sysLog.setUserId(userId == null ? null : Long.valueOf(String.valueOf(userId)));
             sysLog.setRemoteIp(String.valueOf(SecurityContextHolder.get("remoteIp")));
             sysLog.setRequestUri(String.valueOf(SecurityContextHolder.get("requestUri")));
             sysLog.setRequestMethod(String.valueOf(SecurityContextHolder.get("requestMethod")));
@@ -71,24 +71,31 @@ public class SysLogAspect {
             sysLog.setMethodName(className + "." + methodName + "()");
             // 获取请求参数
             Object[] args = pjp.getArgs();
-            if (args != null && args.length > 0) {
+            if (args != null && args.length > 0 && args[0] != null) {
                 Object arg = args[0];
                 String json = JSON.toJSONString(arg);
-                Map map = JSON.parseObject(json, Map.class);
-                // 隐藏敏感字段
-                hideSensitiveInfo(map);
+
                 // 设置请求参数
                 if (recordSysLog.saveRequestData()) {
-                    sysLog.setRequestParam(json);
+                    // 隐藏敏感字段
+                    Map requestMap = JSON.parseObject(json, Map.class);
+                    hideSensitiveInfo(requestMap);
+                    String requestParam = JSON.toJSONString(requestMap);
+                    sysLog.setRequestParam(requestParam);
                 }
                 // 设置原始数据
                 String tableName = recordSysLog.saveSourceData().getName();
                 if (!StringUtils.isEmpty(tableName)) {
+                    Map map = JSON.parseObject(json, Map.class);
                     Object objId = map.get("id");
-                    Long id = ObjectUtils.obj2Long(objId);
-                    Map sourceMap = commonMapper.selectById(tableName, id);
-                    String sourceDate = JSON.toJSONString(sourceMap);
-                    sysLog.setSourceData(sourceDate);
+                    Long id = objId == null ? null : Long.valueOf(String.valueOf(objId));
+                    if (id != null) {
+                        Map sourceMap = commonMapper.selectById(tableName, id);
+                        // 隐藏敏感字段
+                        hideSensitiveInfo(sourceMap);
+                        String sourceDate = JSON.toJSONString(sourceMap);
+                        sysLog.setSourceData(sourceDate);
+                    }
                 }
             }
             try {
@@ -115,7 +122,7 @@ public class SysLogAspect {
     private void hideSensitiveInfo(Map map) {
         String[] fields = SENSITIVE_FIELDS.split(",");
         for (String field : fields) {
-            map.remove(field);
+            map.replace(field, "???");
         }
     }
 }

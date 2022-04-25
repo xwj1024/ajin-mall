@@ -37,11 +37,10 @@ public class AuthController extends BaseController {
     private AuthService authService;
 
     @RepeatSubmit
-    @RecordSysLog(value = "用户登录", saveRequestData = false)
     @ApiOperation("用户登录")
     @PostMapping("/login")
     public BaseResult<LoginView> login(@Validated @RequestBody LoginForm loginForm) {
-        String    ip     = request.getRemoteAddr();
+        String ip = request.getRemoteAddr();
         LoginView result = authService.login(loginForm, ip);
         return new BaseResult<>(ResultCode.OK, "登录成功", result);
     }
@@ -64,7 +63,7 @@ public class AuthController extends BaseController {
     }
 
     @OnlySelf(value = "#changeForm.username", claim = "username")
-    @RecordSysLog(value = "修改密码", saveRequestData = false)
+    @RecordSysLog("修改密码")
     @RepeatSubmit
     @ApiOperation("修改密码")
     @PostMapping("/change")
