@@ -74,8 +74,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
             Set<String> keys = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
             AuthAssert.notNull(keys, "身份已失效，请重新登录");
             AuthAssert.isTrue(keys.contains(RedisConstants.SYS_TOKEN_ACCESS + token), "令牌已失效");
-            // todo 设置本地线程变量
-
         } catch (Exception e) {
             log.warn(e.getMessage());
             // 令牌解析失败

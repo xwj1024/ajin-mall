@@ -37,7 +37,7 @@ public class BrandController {
     @Resource
     private BrandService brandService;
 
-    @OnlyRole({"a"})
+    @OnlyRole({"root"})
     @RecordSysLog(value = "添加商品品牌")
     @RepeatSubmit
     @PostMapping
