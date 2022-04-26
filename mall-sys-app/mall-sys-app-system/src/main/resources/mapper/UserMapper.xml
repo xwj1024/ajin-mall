@@ -32,6 +32,6 @@
         select
         <include refid="Base_Column_List"/>
         from user
-        where is_delete = 0
+        where username = #{username} and is_delete = 0
     </select>
 </mapper>
