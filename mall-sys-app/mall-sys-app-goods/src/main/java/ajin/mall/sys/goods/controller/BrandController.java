@@ -37,7 +37,7 @@ public class BrandController {
     @Resource
     private BrandService brandService;
 
-    @OnlyRole({"root"})
+    @OnlyRole({"admin"})
     @RecordSysLog(value = "添加商品品牌")
     @RepeatSubmit
     @PostMapping
@@ -47,6 +47,7 @@ public class BrandController {
         return new BaseResult<>(ResultEnum.ADD_OK);
     }
 
+    @OnlyRole({"admin"})
     @RepeatSubmit
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除商品品牌", notes = "根据主键id删除")
@@ -55,6 +56,7 @@ public class BrandController {
         return new BaseResult<>(ResultEnum.DELETE_OK);
     }
 
+    @OnlyRole({"admin"})
     @RecordSysLog(value = "修改商品品牌", saveSourceData = TableInfo.BRAND)
     @RepeatSubmit
     @PutMapping
@@ -64,6 +66,7 @@ public class BrandController {
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
+    @OnlyRole({"admin"})
     @GetMapping("/{id}")
     @ApiOperation("根据id查询商品品牌")
     public BaseResult<BrandView> get(@PathVariable("id") Long id) {
@@ -71,6 +74,7 @@ public class BrandController {
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
+    @OnlyRole({"user", "manager", "admin"})
     @PostMapping("/list")
     @ApiOperation("根据条件查询商品品牌")
     public BaseResult<ResultPage<BrandView>> list(@RequestBody BrandListForm brandListForm) {
