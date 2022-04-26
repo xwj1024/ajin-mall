@@ -3,7 +3,6 @@ package ajin.mall.sys.common.context;
 import com.alibaba.ttl.TransmittableThreadLocal;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 安全上下文持有人
@@ -13,26 +12,29 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SecurityContextHolder {
 
-    private static final TransmittableThreadLocal<Map<String, Object>> THREAD_LOCAL = new TransmittableThreadLocal<>();
+    private static final TransmittableThreadLocal<SecurityContext> THREAD_LOCAL = new TransmittableThreadLocal<>();
 
     public static void set(String key, Object value) {
-        Map<String, Object> map = getLocalMap();
+        Map<String, Object> map = getContext();
         map.put(key, value == null ? "" : value);
     }
 
     public static Object get(String key) {
-        Map<String, Object> map = getLocalMap();
+        Map<String, Object> map = getContext();
         return map.get(key);
     }
 
+    public static void setContext(SecurityContext context) {
+        THREAD_LOCAL.set(context);
+    }
 
-    public static Map<String, Object> getLocalMap() {
-        Map<String, Object> map = THREAD_LOCAL.get();
-        if (map == null) {
-            map = new ConcurrentHashMap<>(16);
-            THREAD_LOCAL.set(map);
+    public static SecurityContext getContext() {
+        SecurityContext securityContext = THREAD_LOCAL.get();
+        if (securityContext == null) {
+            securityContext = new SecurityContext();
+            THREAD_LOCAL.set(securityContext);
         }
-        return map;
+        return securityContext;
     }
 
     public static void remove() {

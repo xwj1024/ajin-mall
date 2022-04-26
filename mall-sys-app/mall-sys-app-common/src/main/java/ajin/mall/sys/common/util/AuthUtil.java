@@ -5,6 +5,7 @@ import ajin.mall.common.base.exception.AuthException;
 import ajin.mall.sys.common.anno.OnlyPerm;
 import ajin.mall.sys.common.anno.OnlyRole;
 import ajin.mall.sys.common.anno.OnlySelf;
+import ajin.mall.sys.common.context.SecurityContext;
 import ajin.mall.sys.common.context.SecurityContextHolder;
 import ajin.mall.sys.common.enums.Logical;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -15,6 +16,7 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -44,8 +46,8 @@ public class AuthUtil {
 
     private static void checkRoleAnd(String[] value) {
         try {
-            Object       rolesObj = SecurityContextHolder.get("roles");
-            List<String> roles    = (List<String>) rolesObj;
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            List<String> roles = securityContext.getRoles();
             AuthAssert.isTrue(new HashSet<>(roles).containsAll(Arrays.asList(value)), null);
         } catch (Exception e) {
             throw new AuthException("无权限访问");
@@ -54,8 +56,8 @@ public class AuthUtil {
 
     private static void checkRoleOr(String[] value) {
         try {
-            Object       rolesObj = SecurityContextHolder.get("roles");
-            List<String> roles    = (List<String>) rolesObj;
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            List<String> roles = securityContext.getRoles();
             for (String role : value) {
                 if (roles.contains(role)) {
                     return;
@@ -82,8 +84,8 @@ public class AuthUtil {
 
     private static void checkPermissionAnd(String[] value) {
         try {
-            Object       permissionsObj = SecurityContextHolder.get("permissions");
-            List<String> permissions    = (List<String>) permissionsObj;
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            List<String> permissions = securityContext.getPermissions();
             AuthAssert.isTrue(new HashSet<>(permissions).containsAll(Arrays.asList(value)), null);
         } catch (Exception e) {
             throw new AuthException("无权限访问");
@@ -92,8 +94,8 @@ public class AuthUtil {
 
     private static void checkPermissionOr(String[] value) {
         try {
-            Object       permissionsObj = SecurityContextHolder.get("permissions");
-            List<String> permissions    = (List<String>) permissionsObj;
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            List<String> permissions = securityContext.getPermissions();
             for (String permission : value) {
                 if (permissions.contains(permission)) {
                     return;
@@ -109,12 +111,22 @@ public class AuthUtil {
         try {
             ExpressionParser parser = new SpelExpressionParser();
             // 获取方法的参数值
-            Object[]          args    = joinPoint.getArgs();
+            Object[] args = joinPoint.getArgs();
             EvaluationContext context = bindParam(method, args);
             // 根据spel表达式获取值
             Expression expression = parser.parseExpression(onlySelf.value());
-            Object     key        = expression.getValue(context);
-            Object     value      = SecurityContextHolder.get(onlySelf.claim());
+            Object key = expression.getValue(context);
+
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            Class<? extends SecurityContext> clazz = securityContext.getClass();
+            Object value;
+            try {
+                Field field = clazz.getDeclaredField(onlySelf.claim());
+                field.setAccessible(true);
+                value = field.get(securityContext);
+            } catch (NoSuchFieldException e) {
+                value = securityContext.get(onlySelf.claim());
+            }
             AuthAssert.isTrue(value != null && String.valueOf(value).equals(String.valueOf(key)), null);
         } catch (Exception e) {
             throw new AuthException("无权限访问");

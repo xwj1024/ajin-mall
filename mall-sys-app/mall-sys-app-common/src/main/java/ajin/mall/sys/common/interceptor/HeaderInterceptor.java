@@ -5,6 +5,7 @@ import ajin.mall.common.base.constant.RedisConstants;
 import ajin.mall.common.base.constant.SplitConstants;
 import ajin.mall.common.base.exception.AuthException;
 import ajin.mall.common.base.util.JwtUtils;
+import ajin.mall.sys.common.context.SecurityContext;
 import ajin.mall.sys.common.context.SecurityContextHolder;
 import io.jsonwebtoken.Claims;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Set;
 
 import static ajin.mall.common.base.constant.HeaderConstants.AUTHORIZATION;
@@ -42,20 +44,22 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor {
                 Set<String> keys = stringRedisTemplate.opsForZSet().range(RedisConstants.SYS_TOKEN_USER + userId, 0, -1);
                 AuthAssert.isTrue(keys != null && keys.contains(RedisConstants.SYS_TOKEN_ACCESS + token), null);
 
-                String username = (String) claims.get("username");
-                Object permissions = claims.get("permissions");
+                Object username = claims.get("username");
                 Object roles = claims.get("roles");
-                SecurityContextHolder.set("userId", userId);
-                SecurityContextHolder.set("username", username);
-                SecurityContextHolder.set("roles", roles);
-                SecurityContextHolder.set("permissions", permissions);
-
+                Object permissions = claims.get("permissions");
                 String ip = request.getRemoteAddr();
                 String uri = request.getRequestURI();
                 String method = request.getMethod();
-                SecurityContextHolder.set("remoteIp", ip);
-                SecurityContextHolder.set("requestUri", uri);
-                SecurityContextHolder.set("requestMethod", method);
+                // 设置安全上下文信息
+                SecurityContext securityContext = new SecurityContext();
+                securityContext.setUserId(Long.valueOf(userId));
+                securityContext.setUsername((String) username);
+                securityContext.setRoles((List<String>) roles);
+                securityContext.setPermissions((List<String>) permissions);
+                securityContext.setRemoteIp(ip);
+                securityContext.setRequestUri(uri);
+                securityContext.setRequestMethod(method);
+                SecurityContextHolder.setContext(securityContext);
             }
         } catch (Exception e) {
             throw new AuthException("令牌无效");

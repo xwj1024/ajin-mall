@@ -4,6 +4,7 @@ import ajin.mall.common.base.util.StringUtils;
 import ajin.mall.common.data.entity.SysLog;
 import ajin.mall.common.data.mapper.CommonMapper;
 import ajin.mall.sys.common.anno.RecordSysLog;
+import ajin.mall.sys.common.context.SecurityContext;
 import ajin.mall.sys.common.context.SecurityContextHolder;
 import ajin.mall.sys.system.service.SysLogService;
 import com.alibaba.fastjson.JSON;
@@ -59,11 +60,11 @@ public class SysLogAspect {
             String description = recordSysLog.value();
             sysLog.setDescription(description);
 
-            Object userId = SecurityContextHolder.get("userId");
-            sysLog.setUserId(userId == null ? null : Long.valueOf(String.valueOf(userId)));
-            sysLog.setRemoteIp(String.valueOf(SecurityContextHolder.get("remoteIp")));
-            sysLog.setRequestUri(String.valueOf(SecurityContextHolder.get("requestUri")));
-            sysLog.setRequestMethod(String.valueOf(SecurityContextHolder.get("requestMethod")));
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            sysLog.setUserId(securityContext.getUserId());
+            sysLog.setRemoteIp(securityContext.getRemoteIp());
+            sysLog.setRequestUri(securityContext.getRequestUri());
+            sysLog.setRequestMethod(securityContext.getRequestMethod());
 
             // 设置方法名称
             String className = pjp.getTarget().getClass().getName();
