@@ -17,5 +17,5 @@ public @interface OnlyRole {
 
     String[] value() default {};
 
-    Logical logical() default Logical.AND;
+    Logical logical() default Logical.OR;
 }

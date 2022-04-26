@@ -14,7 +14,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface OnlyPerm {
+
     String[] value() default {};
 
-    Logical logical() default Logical.AND;
+    Logical logical() default Logical.OR;
 }
