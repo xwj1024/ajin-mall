@@ -17,5 +17,5 @@ public @interface OnlyPerm {
 
     String[] value() default {};
 
-    Logical logical() default Logical.AND;
+    Logical logical() default Logical.OR;
 }
