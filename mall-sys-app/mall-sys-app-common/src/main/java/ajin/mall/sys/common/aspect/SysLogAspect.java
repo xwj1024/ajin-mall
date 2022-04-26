@@ -117,11 +117,10 @@ public class SysLogAspect {
         return result;
     }
 
-    private static final String SENSITIVE_FIELDS = "password,oldPassword,newPassword";
+    private static final String[] SENSITIVE_FIELDS = {"password", "oldPassword", "newPassword"};
 
     private void hideSensitiveInfo(Map map) {
-        String[] fields = SENSITIVE_FIELDS.split(",");
-        for (String field : fields) {
+        for (String field : SENSITIVE_FIELDS) {
             map.replace(field, "???");
         }
     }
