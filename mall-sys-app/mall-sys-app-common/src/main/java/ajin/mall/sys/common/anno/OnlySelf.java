@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface OnlySelf {
 
-    String value();
+    String form();
 
     String claim();
 }

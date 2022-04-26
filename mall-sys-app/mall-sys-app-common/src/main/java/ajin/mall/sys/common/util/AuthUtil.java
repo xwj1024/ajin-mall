@@ -114,7 +114,7 @@ public class AuthUtil {
             Object[] args = joinPoint.getArgs();
             EvaluationContext context = bindParam(method, args);
             // 根据spel表达式获取值
-            Expression expression = parser.parseExpression(onlySelf.value());
+            Expression expression = parser.parseExpression(onlySelf.form());
             Object key = expression.getValue(context);
 
             SecurityContext securityContext = SecurityContextHolder.getContext();
