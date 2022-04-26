@@ -62,7 +62,7 @@ public class AuthController extends BaseController {
         return new BaseResult<>(ResultCode.OK, "刷新成功");
     }
 
-    @OnlySelf(form = "#changeForm.username", claim = "username")
+    @OnlySelf(param = "#changeForm.username", claim = "username")
     @RecordSysLog("修改密码")
     @RepeatSubmit
     @ApiOperation("修改密码")
