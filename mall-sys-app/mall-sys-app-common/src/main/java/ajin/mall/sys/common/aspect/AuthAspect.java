@@ -3,6 +3,8 @@ package ajin.mall.sys.common.aspect;
 import ajin.mall.sys.common.anno.OnlyPerm;
 import ajin.mall.sys.common.anno.OnlyRole;
 import ajin.mall.sys.common.anno.OnlySelf;
+import ajin.mall.sys.common.context.SecurityContext;
+import ajin.mall.sys.common.context.SecurityContextHolder;
 import ajin.mall.sys.common.util.AuthUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -12,6 +14,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * 身份验证方面
@@ -26,6 +29,8 @@ public class AuthAspect {
     private static final String POINTCUT_SIGN = "@annotation(ajin.mall.sys.common.anno.OnlyRole)" +
             "||@annotation(ajin.mall.sys.common.anno.OnlyPerm)" +
             "||@annotation(ajin.mall.sys.common.anno.OnlySelf)";
+
+    private static final String ROOT_ROLE = "root";
 
     @Pointcut(POINTCUT_SIGN)
     public void pointcut() {
@@ -54,8 +59,14 @@ public class AuthAspect {
      * 对一个Method对象进行注解检查
      */
     public void checkMethodAnnotation(ProceedingJoinPoint joinPoint) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        List<String> roles = securityContext.getRoles();
+        if (roles != null && roles.contains(ROOT_ROLE)) {
+            return;
+        }
+        
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method          method    = signature.getMethod();
+        Method method = signature.getMethod();
 
         // 校验 @OnlyRole 注解
         OnlyRole onlyRole = method.getAnnotation(OnlyRole.class);

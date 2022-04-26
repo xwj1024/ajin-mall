@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface OnlyRole {
 
-    String[] value() default {"user", "manager", "admin", "root"};
+    String[] value() default {};
 
-    Logical logical() default Logical.OR;
+    Logical logical() default Logical.AND;
 }
