@@ -22,17 +22,17 @@ import javax.annotation.Resource;
  * @since 2021-05-07
  */
 @RestController
-@RequestMapping("/sysUser")
-@Api(tags = "系统用户")
+@RequestMapping("/user")
+@Api(tags = "用户")
 @CrossOrigin
-public class SysUserController {
+public class UserController {
 
     @Resource
     private UserService userService;
 
-    @RecordSysLog(value = "添加系统用户")
+    @RecordSysLog(value = "添加用户")
     @PostMapping
-    @ApiOperation("添加系统用户")
+    @ApiOperation("添加用户")
     public BaseResult<String> add(@Validated @RequestBody UserAddForm userAddForm) {
         userService.add(userAddForm);
         return new BaseResult<>(ResultCode.OK, "添加成功");

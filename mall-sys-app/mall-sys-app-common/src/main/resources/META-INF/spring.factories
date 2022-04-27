@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  ajin.mall.sys.common.controller.AllApiController,\
+  ajin.mall.sys.common.feign
