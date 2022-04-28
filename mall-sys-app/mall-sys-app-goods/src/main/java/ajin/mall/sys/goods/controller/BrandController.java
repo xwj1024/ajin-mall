@@ -6,6 +6,7 @@ import ajin.mall.common.base.result.BaseResult;
 import ajin.mall.common.base.result.ResultEnum;
 import ajin.mall.common.base.result.ResultPage;
 import ajin.mall.common.data.enums.TableInfo;
+import ajin.mall.sys.common.anno.OnlyPerm;
 import ajin.mall.sys.common.anno.OnlyRole;
 import ajin.mall.sys.common.anno.RecordSysLog;
 import ajin.mall.sys.goods.form.BrandAddForm;
@@ -74,7 +75,7 @@ public class BrandController {
         return new BaseResult<>(ResultEnum.GET_OK, result);
     }
 
-    @OnlyRole({"user", "manager", "admin"})
+    @OnlyPerm
     @PostMapping("/list")
     @ApiOperation("根据条件查询商品品牌")
     public BaseResult<ResultPage<BrandView>> list(@RequestBody BrandListForm brandListForm) {

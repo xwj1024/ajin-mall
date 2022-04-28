@@ -1,7 +1,5 @@
 package ajin.mall.sys.common.anno;
 
-import ajin.mall.sys.common.enums.Logical;
-
 import java.lang.annotation.*;
 
 /**
@@ -15,7 +13,4 @@ import java.lang.annotation.*;
 @Documented
 public @interface OnlyPerm {
 
-    String[] value() default {};
-
-    Logical logical() default Logical.OR;
 }

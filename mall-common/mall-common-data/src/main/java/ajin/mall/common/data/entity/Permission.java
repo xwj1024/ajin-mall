@@ -20,8 +20,7 @@ import java.io.Serializable;
 @TableName(value = "permission")
 public class Permission extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-
-
+    
     @TableField(value = "`name`")
     @ApiModelProperty(value = "名称")
     private String name;
@@ -38,8 +37,8 @@ public class Permission extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "方法")
     private String method;
 
-    @TableField(value = "description")
+    @TableField(value = "remark")
     @ApiModelProperty(value = "备注，描述")
-    private String description;
+    private String remark;
 
 }

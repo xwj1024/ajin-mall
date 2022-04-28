@@ -64,7 +64,7 @@ public class AuthAspect {
         if (roles != null && roles.contains(ROOT_ROLE)) {
             return;
         }
-        
+
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
 
@@ -77,7 +77,7 @@ public class AuthAspect {
         // 校验 @OnlyPerm 注解
         OnlyPerm onlyPerm = method.getAnnotation(OnlyPerm.class);
         if (onlyPerm != null) {
-            AuthUtil.checkPermission(onlyPerm);
+            AuthUtil.checkPermission();
         }
 
         // 校验 @OnlySelf 注解

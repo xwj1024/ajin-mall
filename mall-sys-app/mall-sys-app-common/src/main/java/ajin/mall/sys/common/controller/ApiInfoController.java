@@ -25,11 +25,12 @@ import java.util.*;
 @RequestMapping("/apiInfo")
 @Api(tags = "api信息")
 @CrossOrigin
-public class AllApiController {
+public class ApiInfoController {
 
     @Autowired
     private WebApplicationContext applicationContext;
 
+    // todo
     @GetMapping
     public Object get() throws ClassNotFoundException {
         ServletContext servletContext = applicationContext.getServletContext();
@@ -41,7 +42,7 @@ public class AllApiController {
         List<ApiInfo> list = new ArrayList();
 
         for (Map.Entry<RequestMappingInfo, HandlerMethod> map : mappingHandlerMethods.entrySet()) {
-            ApiInfo urlDesc = new ApiInfo();
+            ApiInfo apiInfo = new ApiInfo();
             RequestMappingInfo info = map.getKey();
             HandlerMethod method = map.getValue();
             PatternsRequestCondition patternsCondition = info.getPatternsCondition();
@@ -63,15 +64,15 @@ public class AllApiController {
                                 /* swagger注解 可以换成别的 */
                                 ApiOperation annotation = c.getAnnotation(ApiOperation.class);
                                 if (null != annotation) {
-//                                    urlDesc.setDesc(annotation.value());
+                                    apiInfo.setName(annotation.value());
                                 }
                             }
                         }
                 );
                 for (String url : patternsCondition.getPatterns()) {
-//                    urlDesc.setUrl(url);
+                    apiInfo.setPath(url);
                 }
-                list.add(urlDesc);
+                list.add(apiInfo);
             }
         }
         return list;

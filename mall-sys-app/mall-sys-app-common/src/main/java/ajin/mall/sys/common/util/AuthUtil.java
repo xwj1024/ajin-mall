@@ -2,7 +2,6 @@ package ajin.mall.sys.common.util;
 
 import ajin.mall.common.base.asserts.AuthAssert;
 import ajin.mall.common.base.exception.AuthException;
-import ajin.mall.sys.common.anno.OnlyPerm;
 import ajin.mall.sys.common.anno.OnlyRole;
 import ajin.mall.sys.common.anno.OnlySelf;
 import ajin.mall.sys.common.context.SecurityContext;
@@ -71,37 +70,13 @@ public class AuthUtil {
 
     /**
      * 根据注解传入参数鉴权
-     *
-     * @param onlyPerm 权限注解
      */
-    public static void checkPermission(OnlyPerm onlyPerm) {
-        if (onlyPerm.logical() == Logical.AND) {
-            checkPermissionAnd(onlyPerm.value());
-        } else {
-            checkPermissionOr(onlyPerm.value());
-        }
-    }
-
-    private static void checkPermissionAnd(String[] value) {
+    public static void checkPermission() {
         try {
             SecurityContext securityContext = SecurityContextHolder.getContext();
             List<String> permissions = securityContext.getPermissions();
-            AuthAssert.isTrue(new HashSet<>(permissions).containsAll(Arrays.asList(value)), null);
-        } catch (Exception e) {
-            throw new AuthException("无权限访问");
-        }
-    }
-
-    private static void checkPermissionOr(String[] value) {
-        try {
-            SecurityContext securityContext = SecurityContextHolder.getContext();
-            List<String> permissions = securityContext.getPermissions();
-            for (String permission : value) {
-                if (permissions.contains(permission)) {
-                    return;
-                }
-            }
-            throw new AuthException();
+            String requestInfo = securityContext.getRequestMethod() + securityContext.getRequestUri();
+            AuthAssert.isTrue(permissions.contains(requestInfo), null);
         } catch (Exception e) {
             throw new AuthException("无权限访问");
         }
