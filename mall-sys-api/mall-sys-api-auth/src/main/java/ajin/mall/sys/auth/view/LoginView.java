@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 public class LoginView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("accessToken")
+    @ApiModelProperty("访问令牌")
     private String accessToken;
 
-    @ApiModelProperty("refreshToken")
+    @ApiModelProperty("刷新令牌")
     private String refreshToken;
 
     @ApiModelProperty("用户id")

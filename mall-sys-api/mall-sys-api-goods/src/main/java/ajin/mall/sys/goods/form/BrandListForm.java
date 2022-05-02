@@ -24,6 +24,6 @@ public class BrandListForm extends PageForm implements Serializable {
     private String name;
 
     @ApiModelProperty("首字母")
-    private String initials;
+    private String initial;
 
 }

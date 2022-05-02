@@ -29,7 +29,7 @@ public class BrandView implements Serializable {
     private String image;
 
     @ApiModelProperty("首字母")
-    private String initials;
+    private String initial;
 
     @ApiModelProperty("排序")
     private Integer sort;

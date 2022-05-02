@@ -9,21 +9,21 @@
     </select>
 
     <select id="selectListByCondition" resultType="ajin.mall.sys.goods.view.BrandView">
-        select id, name, image, initials, sort
+        select id, name, image, initial, sort
         from brand
         <where>
             is_delete = 0
             <if test="keyword != null and keyword != ''">
                 and (name like concat('%', #{keyword}, '%')
-                        or
-                     initials like concat('%', #{keyword}, '%')
-                        )
+                or
+                initial like concat('%', #{keyword}, '%')
+                )
             </if>
             <if test="name != null and name != ''">
                 and name like concat('%', #{name}, '%')
             </if>
-            <if test="initials != null and initials != ''">
-                and initials like concat('%', #{initials}, '%')
+            <if test="initial != null and initial != ''">
+                and initial like concat('%', #{initial}, '%')
             </if>
         </where>
         order by
