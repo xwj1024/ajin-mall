@@ -70,7 +70,7 @@ public class ApiInfoController {
                         }
                 );
                 for (String url : patternsCondition.getPatterns()) {
-                    apiInfo.setPath(url);
+                    apiInfo.setPath(contextPath + url);
                 }
                 list.add(apiInfo);
             }
