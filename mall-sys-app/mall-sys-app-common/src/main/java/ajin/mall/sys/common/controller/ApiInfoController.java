@@ -47,9 +47,8 @@ public class ApiInfoController {
             HandlerMethod method = map.getValue();
             PatternsRequestCondition patternsCondition = info.getPatternsCondition();
             String className = method.getMethod().getDeclaringClass().getName();
-            /**
-             * 匹配包路径 根据自己的路径替换
-             */
+
+            // 匹配包路径 根据自己的路径替换
             if (className.contains("ajin.mall")) {
                 //获取类对象
                 Class clazz = Class.forName(method.getMethod().getDeclaringClass().getName());
