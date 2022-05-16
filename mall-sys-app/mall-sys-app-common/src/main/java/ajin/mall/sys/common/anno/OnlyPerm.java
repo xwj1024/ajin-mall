@@ -3,7 +3,7 @@ package ajin.mall.sys.common.anno;
 import java.lang.annotation.*;
 
 /**
- * 只允许
+ * 权限访问控制
  *
  * @author Ajin
  * @date 2022/04/18

@@ -5,7 +5,7 @@ import ajin.mall.sys.common.enums.Logical;
 import java.lang.annotation.*;
 
 /**
- * 只有角色
+ * 角色访问控制
  *
  * @author Ajin
  * @date 2022/04/18

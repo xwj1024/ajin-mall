@@ -3,7 +3,7 @@ package ajin.mall.sys.common.anno;
 import java.lang.annotation.*;
 
 /**
- * 只有自我
+ * 自己操作自己数据
  *
  * @author Ajin
  * @date 2022/04/22
