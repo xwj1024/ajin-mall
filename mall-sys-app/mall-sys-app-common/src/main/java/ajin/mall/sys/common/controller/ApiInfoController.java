@@ -30,19 +30,22 @@ public class ApiInfoController {
     @Autowired
     private WebApplicationContext applicationContext;
 
-    // todo
     @GetMapping
-    public Object get() throws ClassNotFoundException {
-        ServletContext servletContext = applicationContext.getServletContext();
-        String contextPath = servletContext.getContextPath();
-
+    public List<ApiInfo> get() throws ClassNotFoundException {
         RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         Map<RequestMappingInfo, HandlerMethod> mappingHandlerMethods = mapping.getHandlerMethods();
 
         List<ApiInfo> list = new ArrayList();
+        // 获取项目路径
+        ServletContext servletContext = applicationContext.getServletContext();
+        String contextPath = "";
+        if (servletContext != null) {
+            contextPath = servletContext.getContextPath();
+        }
 
         for (Map.Entry<RequestMappingInfo, HandlerMethod> map : mappingHandlerMethods.entrySet()) {
             ApiInfo apiInfo = new ApiInfo();
+
             RequestMappingInfo info = map.getKey();
             HandlerMethod method = map.getValue();
             PatternsRequestCondition patternsCondition = info.getPatternsCondition();
@@ -50,18 +53,17 @@ public class ApiInfoController {
 
             // 匹配包路径 根据自己的路径替换
             if (className.contains("ajin.mall")) {
-                //获取类对象
-                Class clazz = Class.forName(method.getMethod().getDeclaringClass().getName());
-                String metName = method.getMethod().getName();
-                /**
-                 * 因为单独获取一个类对象要指定参数，不适合批量使用，所以获取所有的方法然后根据name筛选
-                 */
+                // 获取类对象
+                Class<?> clazz = Class.forName(method.getMethod().getDeclaringClass().getName());
+                String methodName = method.getMethod().getName();
+
+                // 因为单独获取一个类对象要指定参数，不适合批量使用，所以获取所有的方法然后根据name筛选
                 Method[] clazzDeclaredMethods = clazz.getDeclaredMethods();
                 Arrays.stream(clazzDeclaredMethods).forEach(
-                        c -> {
-                            if (c.getName().equals(metName)) {
-                                /* swagger注解 可以换成别的 */
-                                ApiOperation annotation = c.getAnnotation(ApiOperation.class);
+                        m -> {
+                            if (m.getName().equals(methodName)) {
+                                // swagger注解 可以换成别的
+                                ApiOperation annotation = m.getAnnotation(ApiOperation.class);
                                 if (null != annotation) {
                                     apiInfo.setName(annotation.value());
                                 }
