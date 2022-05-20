@@ -23,7 +23,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/apiInfo")
-@Api(tags = "api信息")
+@Api(tags = "接口信息")
 @CrossOrigin
 public class ApiInfoController {
 
