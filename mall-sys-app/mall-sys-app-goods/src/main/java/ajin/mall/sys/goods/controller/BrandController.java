@@ -67,7 +67,7 @@ public class BrandController {
         return new BaseResult<>(ResultEnum.UPDATE_OK);
     }
 
-    @OnlyRole({"admin"})
+    @OnlyPerm
     @GetMapping("/{id}")
     @ApiOperation("根据id查询商品品牌")
     public BaseResult<BrandView> get(@PathVariable("id") Long id) {

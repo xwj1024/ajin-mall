@@ -76,6 +76,7 @@ public class AuthUtil {
             SecurityContext securityContext = SecurityContextHolder.getContext();
             List<String> permissions = securityContext.getPermissions();
             String requestInfo = securityContext.getRequestMethod() + securityContext.getRequestUri();
+            // todo 路径拼接怎么判断
             AuthAssert.isTrue(permissions.contains(requestInfo), null);
         } catch (Exception e) {
             throw new AuthException("无权限访问");
